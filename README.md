@@ -7,6 +7,10 @@ It offers:
 - actions to ease the struggle of managing animations
 - magic
 
+The main reason I did this was to improve my C++ and my knowledge about Game Engines and probably use it in production one sunny day. 
+
+This Engine is not considered to be stable at the moment.
+
 ### Version
 0.1
 
@@ -30,15 +34,59 @@ $ make <PLATFORM> && sudo make install
 Copies ./lib/libFayEngine.a to /usr/local/lib 
 And ./incude/* to /usr/local/include/FayEngine 
 
+
+### Code Example
+
+Every object has shared ownership (std::shared_ptr<>). Every Class has a typedef with 'Ptr' suffix
+
+In your main.cpp's main():
+```cpp
+int main() {
+    EngineHelper::getInstance()->Init(); // Inits SDL and it's library extensions
+    EngineHelper::getInstance()->setEnableVSync(true);    
+    
+    auto win = Window::create("My Window Title", Vec2Make(640,480));
+    auto scene = Scene::create();
+    win->presentScene(scene);
+    win->startLoop();
+    
+    return 0;
+}
+```
+
+Adding a Node to the Scene or other nodes:
+```cpp
+auto node = Node::create();
+scne->addChild();
+```
+
+Loading and displaying an image in scene with and position of x=100 y=100:
+```cpp
+auto node = Sprite::create("res/image.png"); // Load with filename (std::string)
+node->setPosition(Vec2Make(100,100)); // Vec2 is a struct with two float vars called x and y
+scne->addChild();
+```
+
+Rotating a Sprite by 180° within 1 second:
+```cpp
+auto node = Sprite::create("res/image.png"); // Load with filename (std::string)
+node->runAction(RotateAction::create(1.0, 180)); // (duration, degrees)
+scne->addChild();
+```
+
+Also See CallbackAction, FadeAlphaToAction, MoveByAction, RemoveFromParent, RotateAction, SequenceAction ...
+
+
 ### Development
 
 Want to contribute? Great!
 
 ### Todos
 
-- Write Tests
 - Cleanup Codebase
 - More cleanups
+- Comment Code better 
+- Write Tests
 - Implement RepeatAction & ColorizeAction
 - Implement DrawNode
 
