@@ -8,7 +8,7 @@
 
 #include "Texture.hpp"
 #include "EngineHelper.hpp"
-
+#include <memory>
 // Bits per pixel in created textures
 #define TEXTURE_BIT 24
 
@@ -99,6 +99,7 @@ bool Texture::init(TexturePtr source, Rect rect) {
     mTexture = source->mTexture;
     mSize = rect.size;
     mRenderOffset = rect.origin;
+    mSourceTexture = source;
     return true;
 }
 
@@ -115,9 +116,10 @@ bool Texture::init(SDL_Surface *surface) {
 
 
 Texture::~Texture() {
-    Logbuch("Destroyed texture");
-    SDL_DestroyTexture(mTexture);
-    mTexture = NULL;
+    if (mSourceTexture == nullptr) {
+        SDL_DestroyTexture(mTexture);
+        mTexture = NULL;
+    } else mSourceTexture.reset();
 }
 
 

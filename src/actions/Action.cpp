@@ -13,6 +13,5 @@ bool Action::init(){
     return true;
 }
 Action::~Action(){
-    Logbuch("DESTRUCT Action");
     target = NULL;
 };

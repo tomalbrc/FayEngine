@@ -20,18 +20,6 @@ class Texture;
 typedef std::shared_ptr<Texture> TexturePtr;
 
 class Texture {
-    SDL_Texture *mTexture = NULL;
-    std::shared_ptr<Texture> mBatchTexture;
-    Vec2 mRenderOffset = Vec2Null();
-    Vec2 mSize = Vec2Null();
-    
-    bool init();
-    bool init(std::string filename); // load image from path
-    bool init(Vec2 size, Color col);
-    bool init(TexturePtr source, Rect rect);
-    bool init(TexturePtr tex); // Passes ownership to EngineHelper
-    bool init(SDL_Surface *surface);
-protected:
 public:
     static TexturePtr create();
     static TexturePtr create(std::string filename);
@@ -46,5 +34,19 @@ public:
     Vec2 getRenderOffset();
     
     SDL_Texture* sdlTexture();
+    
+private:
+    TexturePtr mSourceTexture = NULL;
+    SDL_Texture *mTexture = NULL;
+    std::shared_ptr<Texture> mBatchTexture;
+    Vec2 mRenderOffset = Vec2Null();
+    Vec2 mSize = Vec2Null();
+    
+    bool init();
+    bool init(std::string filename); // load image from path
+    bool init(Vec2 size, Color col);
+    bool init(TexturePtr source, Rect rect);
+    bool init(TexturePtr tex); // Passes ownership to EngineHelper
+    bool init(SDL_Surface *surface);
 };
 #endif /* Texture_hpp */

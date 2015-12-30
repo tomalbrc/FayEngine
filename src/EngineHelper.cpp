@@ -11,12 +11,10 @@
 #include "Texture.hpp"
 
 EngineHelper::EngineHelper() {
-    
-    Logbuch("EngineHelper::Says(\"Hello!\");");
-    
+    Logbuch("EngineHelper::EngineHelper()");
 }
 EngineHelper::~EngineHelper() {
-    Logbuch("EngineHelper::Says(\"Bye-bye!\");");
+    Logbuch("EngineHelper::~EngineHelper");
 }
 
 EngineHelper* EngineHelper::getInstance() {
@@ -40,12 +38,12 @@ void EngineHelper::Init() {
     }
     
     if(TTF_Init()==-1) {
-        printf("TTF_Init: %s\n", TTF_GetError());
+        printf("TTF_Init Error: %s\n", TTF_GetError());
         exit(2);
     }
     
     if (IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG) == -1) {
-        printf("IMG_Init: %s\n", IMG_GetError());
+        printf("IMG_Init Error: %s\n", IMG_GetError());
         exit(2);
     }
 }
@@ -67,7 +65,6 @@ Vec2 EngineHelper::getDiplaySize() {
 
 
 void EngineHelper::cacheTexture(TexturePtr texture, std::string key) {
-    Logbuch("EngineHelper::cacheTexture KEY: " << key);
     textureCache[key] = texture;
 }
 void EngineHelper::cacheTextures(std::vector<TexturePtr> textures, std::vector<std::string> keys) {
@@ -87,17 +84,14 @@ void EngineHelper::removeTextureFromCache(TexturePtr tex) {
     }
 }
 TexturePtr EngineHelper::getTextureForKey(std::string key) {
-    Logbuch("EngineHelper::getTextureForKey: "<<key<<" "<< (textureCache[key].get() != nullptr ? "exists" : "no exist"));
     return textureCache[key];
 }
 void EngineHelper::cleanTextureCache() {
-    Logbuch("EngineHelper::cleanTextureCache");
     for(auto&& iterator = textureCache.begin(); iterator != textureCache.end(); iterator++)
         removeTextureForKey(iterator->first);
 }
 
 void EngineHelper::removeUnusedTextures() {
-    Logbuch("EngineHelper::removeUnusedTextures");
     for(auto&& iterator = textureCache.begin(); iterator != textureCache.end();) {
         if (iterator->second.use_count() == 1) Logbuch("REMOVED UNUSED TEXTURE NAMED "<<iterator->first), iterator = textureCache.erase(iterator);
         else ++iterator;
