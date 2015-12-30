@@ -11,10 +11,10 @@
 #include "Texture.hpp"
 
 EngineHelper::EngineHelper() {
-    Logbuch("EngineHelper::EngineHelper()");
+    FELog("EngineHelper::EngineHelper()");
 }
 EngineHelper::~EngineHelper() {
-    Logbuch("EngineHelper::~EngineHelper");
+    FELog("EngineHelper::~EngineHelper");
 }
 
 EngineHelper* EngineHelper::getInstance() {
@@ -93,7 +93,7 @@ void EngineHelper::cleanTextureCache() {
 
 void EngineHelper::removeUnusedTextures() {
     for(auto&& iterator = textureCache.begin(); iterator != textureCache.end();) {
-        if (iterator->second.use_count() == 1) Logbuch("REMOVED UNUSED TEXTURE NAMED "<<iterator->first), iterator = textureCache.erase(iterator);
+        if (iterator->second.use_count() == 1) FELog("REMOVED UNUSED TEXTURE NAMED "<<iterator->first), iterator = textureCache.erase(iterator);
         else ++iterator;
     }
 }

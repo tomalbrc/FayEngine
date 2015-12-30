@@ -23,7 +23,7 @@ Scene::Scene() {
 }
 
 Scene::~Scene() {
-    Logbuch("DESTROY SCENE.");
+    FELog("DESTROY SCENE.");
     //EngineHelper::getInstance()->removeUnusedTextures();
 }
 

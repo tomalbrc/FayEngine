@@ -23,7 +23,7 @@ Window *Window::create(std::string wname, Vec2 size, bool fullscreen) {
 bool Window::init(std::string wname, Vec2 size, bool fullscreen) {
     sdlWindow = SDL_CreateWindow(wname.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, size.x, size.y, fullscreen ? SDL_WINDOW_FULLSCREEN : 0); // Create window with title, position & sitze
     if (sdlWindow == nullptr) {
-        Logbuch("SDL_CreateWindow Error: " << SDL_GetError());
+        FELog("SDL_CreateWindow Error: " << SDL_GetError());
         SDL_Quit();
         return false;
     }
@@ -95,7 +95,7 @@ void Window::startLoop() {
         
         
         if (currentScene == nullptr || m_bShowNew) {
-            Logbuch("SCENE PTR COUNT: "<<currentScene.use_count());
+            FELog("SCENE PTR COUNT: "<<currentScene.use_count());
             currentScene = NULL;
             m_bShowNew = false;
             
@@ -118,7 +118,7 @@ void Window::handleEvents() {
                 SDL_DestroyWindow(sdlWindow);
                 SDL_DestroyRenderer(renderer);
                 running = false;
-                Logbuch("Event SDL_QUIT... Bye!");
+                FELog("Event SDL_QUIT... Bye!");
                 break;
             case SDL_KEYDOWN:
                 if (currentScene != nullptr) currentScene->keyDown(event.key);

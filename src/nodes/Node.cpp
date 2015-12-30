@@ -92,7 +92,7 @@ Node::~Node() {
     mParent.reset();
     actions.clear();
     for (auto&& c : children) {
-        Logbuch("["<<getName()<<"] Child ref count: "<<c.use_count());
+        FELog("["<<getName()<<"] Child ref count: "<<c.use_count());
     }
     children.clear();
 }
@@ -199,7 +199,7 @@ const NodeVector &Node::getChildren() {
     return children;
 }
 void Node::addChild(const NodePtr& node) {
-    Logbuch("Node::addChild node ref count: "<<node.use_count());
+    FELog("Node::addChild node ref count: "<<node.use_count());
     node->setParent(shared_from_this());
     node->willMoveToParent(shared_from_this());
     children.push_back(node);

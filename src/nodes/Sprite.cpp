@@ -57,7 +57,7 @@ bool Sprite::init(std::string filename) {
 }
 
 Sprite:: ~Sprite() {
-    Logbuch("DESTRUCT SPRITE (tex ref count: "<<mTexture.use_count()<<") "<<getName());
+    FELog("DESTRUCT SPRITE (tex ref count: "<<mTexture.use_count()<<") "<<getName());
     mTexture.reset();
 }
 
@@ -72,10 +72,10 @@ Vec2 Sprite::getSize() {
 
 void Sprite::setTexture(TexturePtr tex) {
     mTexture.reset();
-    Logbuch("Sprite::setTexture() texture ref count: "<<tex.use_count());
+    FELog("Sprite::setTexture() texture ref count: "<<tex.use_count());
     mTexture = tex;
     if (tex != nullptr) mSize = tex->getSize();
-    Logbuch("Sprite::setTexture() texture ref count: "<<tex.use_count());
+    FELog("Sprite::setTexture() texture ref count: "<<tex.use_count());
 }
 TexturePtr Sprite::getTexture() {
     return mTexture;

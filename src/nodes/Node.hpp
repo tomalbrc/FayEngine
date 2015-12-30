@@ -24,8 +24,8 @@
 
 #include "Action.hpp"
 
-#define Logbuch(x)  std::cout << "[LOGBUCHEINTRAG:] " << x << std::endl
-//#define Logbuch(x) 0
+#define Logbuch(x)  std::cout << "[LOGBUCHEINTRAG:] " << x << std::endl // Support for older versions
+#define FELog(x)  std::cout << "[FayEngine] " << x << std::endl // New Log macro
 
 struct Color {
     Uint32 r,g,b,a;

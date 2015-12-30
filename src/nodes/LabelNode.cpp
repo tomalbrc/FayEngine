@@ -66,7 +66,7 @@ void LabelNode::renderText() {
     t.reset();
     SDL_FreeSurface(s);
     
-    if (this->getTexture() == nullptr) Logbuch("LabelNode - Error: Texture is empty After new render" << SDL_GetError());
+    if (this->getTexture() == nullptr) FELog("LabelNode - Error: Texture is empty After new render" << SDL_GetError());
 }
 
 

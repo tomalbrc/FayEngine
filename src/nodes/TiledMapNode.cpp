@@ -28,7 +28,7 @@ bool TiledMapNode::init(const std::string &filepath) {
 
 TiledMapNode::~TiledMapNode() {
     for (auto&& c : getChildren()) {
-        Logbuch("~TiledMapNode CALLED:["<<getName()<<"] Child ref count: "<<c.use_count());
+        FELog("~TiledMapNode CALLED:["<<getName()<<"] Child ref count: "<<c.use_count());
     }
     layers.clear();
 }
@@ -47,9 +47,9 @@ void TiledMapNode::drawTiles() {
     Vec2 imageTileSize = Vec2Make((tileset.tileWidth), (tileset.tileHeight));
     Vec2 imageSize = Vec2Make(tileset.image.width, tileset.image.height);
     
-    Logbuch("First GID: " << tileset.firstgid);
-    Logbuch("Image Source: " << tileset.image.source);
-    Logbuch("tile-size: " << imageTileSize.x << " y:" << imageTileSize.y);
+    FELog("First GID: " << tileset.firstgid);
+    FELog("Image Source: " << tileset.image.source);
+    FELog("tile-size: " << imageTileSize.x << " y:" << imageTileSize.y);
     
     
     for (auto&& tileLayer : map->layerCollection) {
@@ -115,10 +115,10 @@ void TiledMapNode::getObjects() {
             
             if (objectGroup.name == "walls") {
                 walls.push_back(r);
-                Logbuch("Neue wall gesichert!");
+                FELog("Neue wall gesichert!");
             } else if (objectGroup.name == "spawns") {
                 mobSpawns.push_back(r);
-                Logbuch("Neuen Spawn gesichert!");
+                FELog("Neuen Spawn gesichert!");
             }
         }
     }
