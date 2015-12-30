@@ -8,10 +8,8 @@
 #include "FayEngine/FayEngine.h"
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Loading!\n";
-    
-    auto win = Window::create("Hello", Vec2Make(200, 200), false);
+
+    auto win = Window::create("Sprite & Action example", Vec2Make(200, 200), false);
     auto scene = Scene::create();
     
     auto s = Sprite::create("activity_indicator.png");
