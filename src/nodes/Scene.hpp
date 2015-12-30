@@ -27,6 +27,9 @@ public:
     static ScenePtr create();
     virtual ~Scene();
     
+    void setBackgroundColor(Color backgroundColor);
+    Color getBackgroundColor(void);
+    
     virtual void setWindow(Window *window);
     Window *getWindow(void);
     
@@ -40,6 +43,7 @@ protected:
     bool init();
     bool shouldBeRemoved = false;
 private:
+    Color mBackgroundColor;
     Window *window;
 };
 

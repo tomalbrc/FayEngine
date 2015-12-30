@@ -37,7 +37,7 @@ bool Window::init(std::string wname, Vec2 size, bool fullscreen) {
 }
 
 // hacky little C helper function
-Vec2 getMouseCoords() {
+inline Vec2 getMouseCoords() {
     int x,y;
     SDL_GetMouseState(&x, &y);
     return Vec2Make(x,y);
@@ -81,7 +81,6 @@ void Window::startLoop() {
         
         int frameTicks = SDL_GetTicks() - capTimer;
         if (frameTicks < SCREEN_TICKS_PER_FRAME) {
-            // Wait remaining time
             SDL_Delay(SCREEN_TICKS_PER_FRAME - frameTicks);
         }
         
@@ -95,19 +94,15 @@ void Window::startLoop() {
         
         
         if (currentScene == nullptr || m_bShowNew) {
-            FELog("SCENE PTR COUNT: "<<currentScene.use_count());
             currentScene = NULL;
             m_bShowNew = false;
             
-            // TODO: Implement scene background color
-            //SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
             newScene->setWindow(this);
             currentScene = newScene;
             newScene = NULL;
         }
     }
 }
-
 
 
 void Window::handleEvents() {

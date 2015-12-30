@@ -19,13 +19,19 @@ ScenePtr Scene::create() {
 
 
 Scene::Scene() {
-    
+    mBackgroundColor = ColorWhiteColor();
 }
 
 Scene::~Scene() {
-    FELog("DESTROY SCENE.");
-    //EngineHelper::getInstance()->removeUnusedTextures();
+    
 }
+
+
+
+void setBackgroundColor(Color backgroundColor);
+Color getBackgroundColor(void);
+
+
 
 void Scene::setWindow(Window *win) {
     window = win;
@@ -40,8 +46,9 @@ void Scene::setShowCursor(bool show) {
 
 
 void Scene::render() {
-    SDL_RenderClear(window->getRenderer());
+    SDL_RenderClear(getWindow()->getRenderer());
+    SDL_SetRenderDrawColor(getWindow()->getRenderer(), getBackgroundColor().r, getBackgroundColor().g, getBackgroundColor().b, getBackgroundColor().a);
     Node::render(getWindow()->getRenderer());
-    SDL_RenderPresent(window->getRenderer());
+    SDL_RenderPresent(getWindow()->getRenderer());
 }
 
