@@ -3,8 +3,8 @@
 //
 
 
-#ifndef HOMO
-#define HOMO
+#ifndef FayEngine_h
+#define FayEngine_h
 
 
 #include "SDL.h"
@@ -43,4 +43,4 @@
 #include "RotateAction.hpp"
 #include "ScaleToAction.hpp"
 
-#endif
+#endif /* FayEngine_h */

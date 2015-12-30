@@ -28,8 +28,12 @@ Scene::~Scene() {
 
 
 
-void setBackgroundColor(Color backgroundColor);
-Color getBackgroundColor(void);
+void Scene::setBackgroundColor(Color backgroundColor) {
+    mBackgroundColor = backgroundColor;
+}
+Color Scene::getBackgroundColor(void) {
+    return mBackgroundColor;
+}
 
 
 

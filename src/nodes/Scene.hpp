@@ -28,7 +28,7 @@ public:
     virtual ~Scene();
     
     void setBackgroundColor(Color backgroundColor);
-    Color getBackgroundColor(void);
+    Color getBackgroundColor();
     
     virtual void setWindow(Window *window);
     Window *getWindow(void);
