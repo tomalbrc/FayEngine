@@ -3,9 +3,12 @@
 FayEngine is a simple, SDL based, 2D Game Engine.
 It offers:
 
-- a Scene-Graph 
-- actions to ease the struggle of managing animations
-- magic
+- Hardware Acceleration through SDL
+- Scene-Graph 
+- Actions to ease the struggle of managing animations
+- LabelNode to display ttf fonts
+- ButtonNode with c++11 std::function and lambda callback fo UserInteraction
+- Node/Scene lifecycle notifications in subclasses
 
 The main reason I did this was to improve my C++ and my knowledge about Game Engines and probably use it in production one sunny day. 
 
@@ -101,7 +104,7 @@ Want to contribute? Great!
 - Comment Code better 
 - Write Tests
 - Implement RepeatAction & ColorizeAction
-- Implement DrawNode
+- Implement DrawNode for dynamic content drawing
 
 License
 ----
