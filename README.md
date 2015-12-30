@@ -77,6 +77,19 @@ scne->addChild();
 Also See CallbackAction, FadeAlphaToAction, MoveByAction, RemoveFromParent, RotateAction, SequenceAction ...
 
 
+
+The Texture object's create facroty method passes a shared pointer to the EngineHelper singleton class' textureCache in order to reduce redudant loading of resources:
+```cpp
+// Removes every texture whichs only reference is in the textureCache, thus Unused
+EngineHelper::getInstance()->removeUnusedTexture();
+EngineHelper::getInstance()->removeTextureFromCache(TexturePtr texture); // Removes given texture from cache, will get reloaded if needed
+```
+
+The EngineHelper also holds a reference to the SDL_Renderer
+```cpp
+EngineHelper::getInstance()->getRenderer();
+```
+
 ### Development
 
 Want to contribute? Great!
