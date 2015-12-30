@@ -360,6 +360,7 @@
 		9AFBB88D1C2E0D2E006ACF87 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DYLIB_CURRENT_VERSION = 0.1;
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include/SDL2,
 					/usr/local/include,
@@ -373,6 +374,7 @@
 		9AFBB88E1C2E0D2E006ACF87 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DYLIB_CURRENT_VERSION = 0.1;
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include/SDL2,
 					/usr/local/include,
