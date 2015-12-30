@@ -78,7 +78,7 @@ Also See CallbackAction, FadeAlphaToAction, MoveByAction, RemoveFromParent, Rota
 
 
 
-The Texture object's create facroty method passes a shared pointer to the EngineHelper singleton class' textureCache in order to reduce redudant loading of resources:
+The Texture object's static create() factory method passes a shared pointer to the EngineHelper singleton class' textureCache in order to reduce redudant loading of resources:
 ```cpp
 // Removes every texture whichs only reference is in the textureCache, thus Unused
 EngineHelper::getInstance()->removeUnusedTexture();
