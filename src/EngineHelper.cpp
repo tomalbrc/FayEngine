@@ -93,7 +93,7 @@ void EngineHelper::cleanTextureCache() {
 
 void EngineHelper::removeUnusedTextures() {
     for(auto&& iterator = textureCache.begin(); iterator != textureCache.end();) {
-        if (iterator->second.use_count() == 1) FELog("REMOVED UNUSED TEXTURE NAMED "<<iterator->first), iterator = textureCache.erase(iterator);
+        if (iterator->second.use_count() == 1) FELog("Removed unused Texture named: "<<iterator->first), iterator = textureCache.erase(iterator);
         else ++iterator;
     }
 }

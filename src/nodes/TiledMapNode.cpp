@@ -27,9 +27,6 @@ bool TiledMapNode::init(const std::string &filepath) {
 }
 
 TiledMapNode::~TiledMapNode() {
-    for (auto&& c : getChildren()) {
-        FELog("~TiledMapNode CALLED:["<<getName()<<"] Child ref count: "<<c.use_count());
-    }
     layers.clear();
 }
 
