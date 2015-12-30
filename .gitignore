@@ -1,2 +1,8 @@
+# ignore those
 .DS_Store
-
+*.a
+*.o
+*.zip
+include
+build
+lib
