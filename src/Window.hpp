@@ -15,10 +15,12 @@
 #include <stdio.h>
 #include <vector>
 #include <iostream>
+#include <memory>
 #include "Node.hpp"
 
 class Scene;
 class Window;
+typedef std::shared_ptr<Window> WindowPtr;
 
 class Window { // TODO: m prefix
     SDL_Window *sdlWindow = NULL;
@@ -31,7 +33,8 @@ class Window { // TODO: m prefix
     void update();
     void render();
 public:
-    static Window *create(std::string wname, Vec2 size, bool fullscreen);
+    static WindowPtr create(std::string wname, Vec2 size, bool fullscreen);
+    ~Window();
     
     // Gibt die momentan angezeigte Scene zurück
     ScenePtr getCurrentScene();

@@ -13,8 +13,12 @@
 #define SCREEN_FPS desiredFPS
 #define SCREEN_TICKS_PER_FRAME (1000/SCREEN_FPS)
 
-Window *Window::create(std::string wname, Vec2 size, bool fullscreen) {
-    auto o = new Window();
+Window::~Window() {
+    currentScene = NULL;
+}
+
+WindowPtr Window::create(std::string wname, Vec2 size, bool fullscreen) {
+    WindowPtr o(new Window());
     o->init(wname, size, fullscreen);
     return o;
 }
