@@ -17,10 +17,9 @@
 #include <sstream>
 #include <map>
 
-//#ifdef __linux__
 #include <algorithm>
 #include <functional>
-//#endif
+#include <memory>
 
 #include "Action.hpp"
 

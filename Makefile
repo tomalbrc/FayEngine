@@ -25,7 +25,7 @@ linux:
 mac:
 	$(CREATE_DIRS)
 	$(CLEAN_DIRS)
-	$(CC) -c $(SOURCES) $(IDIR) $(OTHER)
+	$(CC) -c $(OTHER) $(SOURCES) $(IDIR)
 	$(END)
 install:
 	mkdir -p /usr/local/include/FayEngine
