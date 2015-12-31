@@ -22,8 +22,5 @@ int main(int argc, const char * argv[]) {
     win->presentScene(scene);
     win->startLoop();
     
-    scene = NULL;
-    s = NULL;
-    
     return 0;
 }
