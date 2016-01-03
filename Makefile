@@ -25,7 +25,7 @@ default: $(LIB)
 
 install: all
 	@echo "lib Makefile - installing lib $(LIB) > $(LIBDEST)$(LIB)"
-	@install -m 444 $(LIB) $(LIBDEST)
+	@cp $(LIB) $(LIBDEST)
 	@echo "lib Makefile - installing header include/ > /usr/local/include/FayEngine"
 	@cp -R include/ /usr/local/include/FayEngine
 
@@ -38,7 +38,7 @@ clean:
 
 $(LIB): $(LIBOBJ)
 	@echo "lib Makefile - archiving $(LIB)"
-	@ar r $(LIB) $(LIBOBJ)
+	@ar rvs $(LIB) $(LIBOBJ)
 
 %.o: %.cpp
 	@echo "lib Makefile - compiling $<"

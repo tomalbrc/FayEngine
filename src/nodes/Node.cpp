@@ -124,11 +124,12 @@ void Node::removeAllActions() { // NOT TESTED
 
 
 void Node::update() {
+    if (shouldBeRemoved) return;
     for (auto&& i = children.begin(); i != children.end();) {
-        if ((*i)->shouldBeRemoved) (*i)->willMoveToParent(NULL), i = children.erase(i); // remove finished actions
-        else if (i != children.end()) {
-            (*i)->update(), ++i;
-        }
+        auto child = (*i);
+        
+        if (child->shouldBeRemoved) child->willMoveToParent(NULL), i = children.erase(i); // remove finished actions
+        else if (i != children.end()) child->update(), ++i;
     }
     for (auto&& i = actions.begin(); i != actions.end();) {
         if (i->second->target == nullptr || i->second->finished) i = actions.erase(i); // remove finished actions
@@ -234,7 +235,7 @@ void Node::setName(std::string n) {
 
 void Node::render(SDL_Renderer *renderer) { // render into scene / Surface
     for (auto&& s : children) {
-            s->render(renderer);
+        if (!s->shouldBeRemoved) s->render(renderer);
     }
 }
 
