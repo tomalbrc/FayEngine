@@ -102,13 +102,13 @@ public:
     void removeAction(ActionPtr action);
     void removeAction(const std::string& actionName);
     void removeAllActions();
+    bool hasActions();
     
     // update methode (für runActions)
     virtual void update();
     
     // Node Lifecycle
     virtual void willMoveToParent(NodePtr oldParent);
-    virtual void willRemoveFromParent(NodePtr oldParent);
     
     
     void setName(std::string n);

@@ -121,6 +121,10 @@ void Node::removeAction(const std::string &actionName) { // WORKS
 void Node::removeAllActions() { // NOT TESTED
     for (auto&& a : actions) a.second->finished = true;
 }
+bool Node::hasActions() {
+    return actions.size() > 0;
+}
+
 
 
 void Node::update() {
@@ -138,8 +142,9 @@ void Node::update() {
 }
 
 
-void Node::willMoveToParent(NodePtr oldParent) {}
-void Node::willRemoveFromParent(NodePtr oldParent) {}
+void Node::willMoveToParent(NodePtr newParent) {
+    mParent = newParent;
+}
 
 
 
