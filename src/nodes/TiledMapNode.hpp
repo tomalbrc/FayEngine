@@ -24,15 +24,14 @@ public:
     static TiledMapNodePtr create(const std::string &filepath);
     ~TiledMapNode();
     
-    RectVector walls;
-    RectVector mobSpawns;
-    
     // May return NULL if not found!
     SpritePtr getLayerNamed(std::string);
     
+    // May return NULL if not found!
+    tmxparser::TmxObjectGroup getObjectGroupNamed(std::string name);
+    
     // Gets raw TmxMap data
     tmxparser::TmxMap *getRawMap();
-    
     
 protected:
     bool init (const std::string &filepath);
@@ -40,7 +39,7 @@ private:
     void drawTiles();
     void getObjects();
     tmxparser::TmxMap *map;
-    std::map<std::string, SpriteWeakPtr> layers;
+    std::vector<SpriteWeakPtr> mTileLayer;
 };
 
 

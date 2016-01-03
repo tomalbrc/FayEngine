@@ -21,28 +21,41 @@ bool TiledMapNode::init(const std::string &filepath) {
     this->setTexture(Texture::create(Vec2Make(map->width * map->tileWidth,map->height * map->tileHeight), ColorMake(0xFF000000, 0x00FF0000, 0x0000FF00,  0x000000FF)));
     
     drawTiles();
-    getObjects();
     
     return true;
 }
 
 TiledMapNode::~TiledMapNode() {
-    layers.clear();
+    mTileLayer.clear();
+    map = NULL;
 }
 
 
 
+tmxparser::TmxObjectGroup TiledMapNode::getObjectGroupNamed(std::string name) {
+    tmxparser::TmxObjectGroup s;
+    for (auto&& layer : map->objectGroupCollection) {
+        if (layer.name == name) return layer;
+    }
+    return s;
+}
+
 SpritePtr TiledMapNode::getLayerNamed(std::string name) {
-    return layers[name].lock();
+    SpritePtr s = NULL;
+    for (auto&& layer : mTileLayer) {
+        if (layer.lock()->getName() == name) return layer.lock();
+    }
+    return s;
 }
 
 void TiledMapNode::drawTiles() {
+    if (map->tilesetCollection.size() == 0) return;
     tmxparser::TmxTileset tileset = map->tilesetCollection[0];
-    
     
     SDL_Surface *img = IMG_Load(("res/" + tileset.image.source).c_str());
     Vec2 imageTileSize = Vec2Make((tileset.tileWidth), (tileset.tileHeight));
     Vec2 imageSize = Vec2Make(tileset.image.width, tileset.image.height);
+    int tileSpacing = tileset.tileSpacingInImage;
     
     FELog("First GID: " << tileset.firstgid);
     FELog("Image Source: " << tileset.image.source);
@@ -61,7 +74,7 @@ void TiledMapNode::drawTiles() {
                 
                 if (tile.tilesetIndex != -1) {
                     // Draw tile!
-                    int numTilesX = imageSize.x / imageTileSize.x;
+                    int numTilesX = ceil(imageSize.x/(imageTileSize.x+tileSpacing));
                     
                     int startGID = tileset.firstgid;
                     int tileGID = tile.gid - startGID;
@@ -69,8 +82,8 @@ void TiledMapNode::drawTiles() {
                     float ypos = ((tileGID-xpos) / numTilesX);
                     
                     SDL_Rect sRect;
-                    sRect.x = xpos * imageTileSize.x;
-                    sRect.y = ypos * imageTileSize.y;
+                    sRect.x = xpos*imageTileSize.x + xpos*tileSpacing;
+                    sRect.y = ypos*imageTileSize.y + ypos*tileSpacing;
                     sRect.w = imageTileSize.x;
                     sRect.h = imageTileSize.y;
                     
@@ -87,7 +100,8 @@ void TiledMapNode::drawTiles() {
         }
         
         auto surSprite = Sprite::create(Texture::create(surface));
-        layers[tileLayer.name] = surSprite;
+        surSprite->setName(tileLayer.name);
+        mTileLayer.push_back(surSprite);
         this->addChild(surSprite);
         
         SDL_FreeSurface(surface);
@@ -95,35 +109,8 @@ void TiledMapNode::drawTiles() {
     SDL_FreeSurface(img);
 }
 
-
-// TODO: Remove this from the engine and paste into the actual game :P
-void TiledMapNode::getObjects() {
-    
-    // Iterate through all of the object groups.
-    for (int i = 0; i < map->objectGroupCollection.size(); ++i) {
-        // Get an object group.
-        tmxparser::TmxObjectGroup objectGroup = map->objectGroupCollection[i];
-        
-        // Iterate through all objects in the object group.
-        for (int j = 0; j < objectGroup.objects.size(); ++j) {
-            tmxparser::TmxObject object = objectGroup.objects[j];
-            
-            Rect r = RectMake(object.x, object.y, object.width, object.height);
-            
-            if (objectGroup.name == "walls") {
-                walls.push_back(r);
-                FELog("Neue wall gesichert!");
-            } else if (objectGroup.name == "spawns") {
-                mobSpawns.push_back(r);
-                FELog("Neuen Spawn gesichert!");
-            }
-        }
-    }
-}
-
 tmxparser::TmxMap *TiledMapNode::getRawMap() {
     return map;
 }
-
 
 
