@@ -1,38 +1,34 @@
 #
-# Makefile 
+# File:  Makefile (for library)
 #
 
 CC=g++
+CXXFLAGS = -std=c++11
+INCLUDE=-I/usr/local/include -I/usr/local/include/SDL2 -Isrc -Isrc/nodes -Isrc/actions
 
-SOURCES=./src/*.cpp ./src/actions/*.cpp ./src/nodes/*.cpp
-IDIR=-I/usr/local/include/SDL2 -I./src/nodes -I./src/actions -I./src
-OTHER=-std=c++11 -D_THREAD_SAFE
-OTHER_LINUX=-std=gnu++11 -D_REENTRANT
+LIB=lib/libFayEngine.a
+LIBDEST=/usr/local
 
-CREATE_DIRS=mkdir -p lib; mkdir -p include; mkdir -p build
-CLEAN_DIRS=rm -rf lib/*; rm -rf include/*
-MOVE_OUTPUT=mv *.o build/
-MAKE_LIB=ar rvs lib/libFayEngine.a build/*.o
-COPY_HEADERS=find src/ -name "*.h*" -exec cp {} include/ ";"
 
-END=$(MOVE_OUTPUT); $(MAKE_LIB); $(COPY_HEADERS);
+LIBSRC=$(wildcard src/*.cpp) $(wildcard src/*/*.cpp)
+LIBOBJ=$(LIBSRC:.cpp=.o)
 
-linux:
-	$(CREATE_DIRS)
-	$(CLEAN_DIRS)
-	$(CC) -c $(OTHER_LINUX) $(SOURCES) $(IDIR)
-	$(END)
-mac:
-	$(CREATE_DIRS)
-	$(CLEAN_DIRS)
-	$(CC) -c $(OTHER) $(SOURCES) $(IDIR)
-	$(END)
-install:
-	mkdir -p /usr/local/include/FayEngine
-	cp -R include/*.h* /usr/local/include/FayEngine/
-	cp lib/lib*.a /usr/local/lib
-	# "############################################################"
-	# "Installed to /usr/local/lib and /usr/local/include/FayEngine"
-	# "############################################################"
+all:
+	@echo lib Makefile - Making lib
+	@make default
+	
+default: $(LIB)
+	@echo "lib Makefile - Done ($(LIB))"
 
+install: all
+	@echo lib Makefile - installing $(LIB)
+	@install -m 444 $(LIB) $(LIBDEST)
+
+$(LIB): $(LIBOBJ)
+	@echo lib Makefile - archiving $(LIB)
+	@$(AR) r $(LIB) $(wildcard build/*.o)
+
+%.o: %.cpp
+	@echo lib Makefile - compiling $<
+	@$(CC) $(CXXFLAGS) $(INCLUDE) -c $< -o build/$(@F)
 
