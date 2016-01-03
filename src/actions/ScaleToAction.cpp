@@ -21,11 +21,13 @@ void ScaleToAction::update() {
     if (target == nullptr) return;
 
     Uint32 passedTime = SDL_GetTicks() - startTick;
-    
+    if (passedTime > duration) {
+        finished = true, target->setScale(mDestScale);
+        return;
+    }
+
     double a = mStartScale-((mStartScale - mDestScale)*(passedTime/duration));
     target->setScale(a);
-    
-    if (passedTime/duration >= 1) finished = true, target->setScale(mDestScale);
 }
 
 void ScaleToAction::start()  {

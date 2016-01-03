@@ -26,11 +26,12 @@ bool SpriteAnimationAction::init(double secondsPerFrame, std::vector< TexturePtr
 
 
 void SpriteAnimationAction::update() {
-    if (target == nullptr) return;
+    if (target == nullptr || finished) return;
     
     Uint32 passedTime = SDL_GetTicks() - startTick;
-    if (passedTime/duration >= 1) startTick = SDL_GetTicks();
-    passedTime = SDL_GetTicks() - startTick;
+    if ((passedTime)/duration >= 1.0) {
+        finished = true; return;
+    }
     
     double mark = 1.f/textures.size();
     int index = floor((passedTime/duration)/mark);

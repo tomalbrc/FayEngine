@@ -18,14 +18,14 @@ RotateToAction::RotateToAction(double pduration, int destRot) : Action() {
 }
 
 void RotateToAction::update() {
-    if (target == nullptr) return;
-
     Uint32 passedTime = SDL_GetTicks() - startTick;
+    if (passedTime > duration) {
+        finished = true, target->setZRotation(mDestRot);
+        return;
+    }
     
     double a = mStartRot-((mStartRot - mDestRot)*(passedTime/duration));
     target->setZRotation(a);
-    
-    if (passedTime/duration >= 1) finished = true,  target->setZRotation(mDestRot);
 }
 
 void RotateToAction::start()  {

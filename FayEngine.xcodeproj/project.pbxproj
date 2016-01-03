@@ -28,7 +28,6 @@
 		9A60C8191C31670900400D85 /* tmxparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C8031C31670900400D85 /* tmxparser.cpp */; settings = {ASSET_TAGS = (); }; };
 		9A60C81A1C31670900400D85 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C8051C31670900400D85 /* Window.cpp */; settings = {ASSET_TAGS = (); }; };
 		9A60C82C1C330AB200400D85 /* RepeatAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C82A1C330AB200400D85 /* RepeatAction.cpp */; settings = {ASSET_TAGS = (); }; };
-		9A60C82F1C330C0700400D85 /* TintToAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C82D1C330C0700400D85 /* TintToAction.cpp */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -87,8 +86,6 @@
 		9A60C8061C31670900400D85 /* Window.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Window.hpp; sourceTree = "<group>"; };
 		9A60C82A1C330AB200400D85 /* RepeatAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RepeatAction.cpp; sourceTree = "<group>"; };
 		9A60C82B1C330AB200400D85 /* RepeatAction.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RepeatAction.hpp; sourceTree = "<group>"; };
-		9A60C82D1C330C0700400D85 /* TintToAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TintToAction.cpp; sourceTree = "<group>"; };
-		9A60C82E1C330C0700400D85 /* TintToAction.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TintToAction.hpp; sourceTree = "<group>"; };
 		9AFBB8831C2E0D2E006ACF87 /* libFayEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFayEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -154,8 +151,6 @@
 				9A60C7F01C31670900400D85 /* WaitAction.hpp */,
 				9A60C82A1C330AB200400D85 /* RepeatAction.cpp */,
 				9A60C82B1C330AB200400D85 /* RepeatAction.hpp */,
-				9A60C82D1C330C0700400D85 /* TintToAction.cpp */,
-				9A60C82E1C330C0700400D85 /* TintToAction.hpp */,
 			);
 			path = actions;
 			sourceTree = "<group>";
@@ -260,7 +255,6 @@
 				9A60C80A1C31670900400D85 /* MoveByAction.cpp in Sources */,
 				9A60C80B1C31670900400D85 /* RemoveFromParent.cpp in Sources */,
 				9A60C8191C31670900400D85 /* tmxparser.cpp in Sources */,
-				9A60C82F1C330C0700400D85 /* TintToAction.cpp in Sources */,
 				9A60C8121C31670900400D85 /* ButtonNode.cpp in Sources */,
 				9A60C81A1C31670900400D85 /* Window.cpp in Sources */,
 				9A60C8091C31670900400D85 /* FadeAlphaToAction.cpp in Sources */,

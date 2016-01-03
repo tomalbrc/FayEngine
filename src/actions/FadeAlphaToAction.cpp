@@ -31,14 +31,12 @@ bool FadeAlphaToAction::init(double pduration, int dAlpha) {
 }
 
 void FadeAlphaToAction::update() {
-    if (target == nullptr) return;
-
     Uint32 passedTime = SDL_GetTicks() - startTick;
     
     int a = startAlpha-((startAlpha - alphaValue)*(passedTime/duration));
     target->setAlpha(NormalizeAlpha(a));
     
-    if (passedTime/duration >= 1) finished = true;
+    if (passedTime > duration) finished = true;
 }
 
 void FadeAlphaToAction::start()  {

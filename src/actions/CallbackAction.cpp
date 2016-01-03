@@ -20,8 +20,7 @@ bool CallbackAction::init(CallbackActionCallback callback) {
 }
 
 void CallbackAction::update() {
-    
-    if (SDL_GetTicks()-startTick > duration) {
+    if (SDL_GetTicks() - startTick > duration) {
         mCallback();
         finished = true;
     }

@@ -124,15 +124,15 @@ void Node::removeAllActions() { // NOT TESTED
 
 
 void Node::update() {
-    for (auto&& i = actions.begin(); i != actions.end();) {
-        if (i->second->target == nullptr || i->second->finished) i = actions.erase(i); // remove finished actions
-        else i->second->update(), ++i;
-    }
     for (auto&& i = children.begin(); i != children.end();) {
         if ((*i)->shouldBeRemoved) (*i)->willMoveToParent(NULL), i = children.erase(i); // remove finished actions
         else if (i != children.end()) {
             (*i)->update(), ++i;
         }
+    }
+    for (auto&& i = actions.begin(); i != actions.end();) {
+        if (i->second->target == nullptr || i->second->finished) i = actions.erase(i); // remove finished actions
+        else i->second->update(), ++i;
     }
 }
 

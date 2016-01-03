@@ -33,8 +33,6 @@ bool RemoveFromParentAction::init(double delay) {
 }
 
 void RemoveFromParentAction::update() {
-    if (target == nullptr) return;
-
     Uint32 passedTime = SDL_GetTicks() - startTick;
     if (passedTime/duration >= 1) finished = true, target->removeFromParent();
 }

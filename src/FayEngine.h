@@ -42,5 +42,6 @@
 #include "CallbackAction.hpp"
 #include "RotateAction.hpp"
 #include "ScaleToAction.hpp"
+#include "RepeatAction.hpp"
 
 #endif /* FayEngine_h */
