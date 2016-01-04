@@ -6,7 +6,7 @@ CC=g++
 CXXFLAGS = -std=c++11
 INCLUDE=-I/usr/local/include -I/usr/local/include/SDL2 -Isrc -Isrc/nodes -Isrc/actions
 
-LIB=lib/libFayEngine.a
+LIB=libFayEngine.a
 LIBDEST=/usr/local/lib/
 
 
@@ -25,7 +25,7 @@ default: $(LIB)
 
 install: all
 	@echo "lib Makefile - installing lib $(LIB) > $(LIBDEST)$(LIB)"
-	@cp $(LIB) $(LIBDEST)
+	@cp "lib/$(LIB)" "$(LIBDEST)"
 	@echo "lib Makefile - installing header include/ > /usr/local/include/FayEngine"
 	@cp -R include/ /usr/local/include/FayEngine
 
@@ -38,7 +38,7 @@ clean:
 
 $(LIB): $(LIBOBJ)
 	@echo "lib Makefile - archiving $(LIB)"
-	@ar rvs $(LIB) $(LIBOBJ)
+	@ar rvs lib/$(LIB) $(LIBOBJ)
 
 %.o: %.cpp
 	@echo "lib Makefile - compiling $<"
