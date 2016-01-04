@@ -7,7 +7,7 @@ CXXFLAGS = -std=c++11
 INCLUDE=-I/usr/local/include -I/usr/local/include/SDL2 -Isrc -Isrc/nodes -Isrc/actions
 
 LIB=lib/libFayEngine.a
-LIBDEST=/usr/local/
+LIBDEST=/usr/local/lib/
 
 
 LIBSRC=$(wildcard src/*.cpp) $(wildcard src/*/*.cpp)
