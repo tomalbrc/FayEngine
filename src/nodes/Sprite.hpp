@@ -17,14 +17,6 @@
 #include "Texture.hpp"
 #include "EngineHelper.hpp"
 
-enum Direction {
-    None,
-    Up,
-    Right,
-    Down,
-    Left,
-};
-
 class Sprite;
 typedef std::shared_ptr<Sprite> SpritePtr;
 typedef std::weak_ptr<Sprite> SpriteWeakPtr;

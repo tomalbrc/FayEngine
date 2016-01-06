@@ -110,7 +110,6 @@ public:
     // Node Lifecycle
     virtual void willMoveToParent(NodePtr oldParent);
     
-    
     void setName(std::string n);
     const std::string getName();
     

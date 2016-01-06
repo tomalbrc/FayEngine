@@ -60,18 +60,6 @@ TexturePtr Texture::create(SDL_Surface *surface) {
     return t;
 }
 
-TexturePtr Texture::create(TexturePtr texture) {
-    std::stringstream s; s.str("");
-    s << texture;
-    auto t = EngineHelper::getInstance()->getTextureForKey(s.str());
-    if (t == nullptr) {
-        EngineHelper::getInstance()->cacheTexture(texture, s.str());
-        return texture;
-    }
-    return t;
-}
-
-
 
 
 bool Texture::init() {
@@ -124,9 +112,6 @@ Texture::~Texture() {
 
 
 
-void Texture::setSize(Vec2 size) {
-    mSize = size;
-}
 
 Vec2 Texture::getSize() {
     return mSize;

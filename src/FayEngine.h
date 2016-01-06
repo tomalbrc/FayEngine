@@ -21,6 +21,9 @@
 #include <memory>
 #endif
 
+/**
+ * Makes a static create function and calls init on the object
+ */
 #define FE_create_FUNC(__TYPE__) static std::shared_ptr<__TYPE__> create() { std::shared_ptr<__TYPE__> n(new __TYPE__()); n->init(); return n; }
 
 #include "tmxparser.h"
