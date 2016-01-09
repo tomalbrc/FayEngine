@@ -10,6 +10,8 @@
 #include "SDL_ttf.h"
 #include "Texture.hpp"
 
+#include <fstream>
+
 EngineHelper::EngineHelper() {
     FELog("EngineHelper::EngineHelper()");
 }
@@ -87,8 +89,9 @@ TexturePtr EngineHelper::getTextureForKey(std::string key) {
     return textureCache[key];
 }
 void EngineHelper::cleanTextureCache() {
-    for(auto&& iterator = textureCache.begin(); iterator != textureCache.end(); iterator++)
-        removeTextureForKey(iterator->first);
+    for(auto&& iterator = textureCache.begin(); iterator != textureCache.end();) {
+        iterator = textureCache.erase(iterator);
+    }
 }
 
 void EngineHelper::removeUnusedTextures() {
@@ -98,3 +101,49 @@ void EngineHelper::removeUnusedTextures() {
     }
 }
 
+
+
+void EngineHelper::registerApp(std::string organizationName, std::string appName) {
+    basePath = SDL_GetPrefPath(organizationName.c_str(), appName.c_str());
+    FELog("Registered "<<appName<<", pref base path is: "<<basePath);
+}
+
+
+/**
+ * Saves an object for a key. The key is used as filename and '.bin' is appended. The location is SDL_GetPrefPath()
+ */
+void EngineHelper::save(std::string string, std::string key) {
+    auto path = (basePath + key + ".bin").c_str();
+    std::ofstream file (path, std::ofstream::binary);
+    file << string, file.close(); // close() not necessairy since ofstream will be handled automatically if out of scope
+}
+std::string EngineHelper::loadString(std::string key) {
+    std::ifstream file(basePath + key + ".bin", std::ifstream::binary);
+    std::string out;
+    file >> out;
+    return out;
+}
+
+void EngineHelper::save(double value, std::string key) {
+    auto path = (basePath + key + ".bin").c_str();
+    std::ofstream file (path, std::ofstream::binary);
+    file << value, file.close();
+}
+double EngineHelper::loadDouble(std::string key) {
+    std::ifstream file(basePath + key + ".bin", std::ifstream::binary);
+    std::string out;
+    file >> out;
+    return out.empty() ? 0.0 : std::stod(out);
+}
+
+void EngineHelper::save(int value, std::string key) {
+    auto path = (basePath + key + ".bin").c_str();
+    std::ofstream file (path, std::ofstream::binary);
+    file << value, file.close();
+}
+int EngineHelper::loadInt(std::string key) {
+    std::ifstream file(basePath + key + ".bin", std::ifstream::binary);
+    std::string out;
+    file >> out;
+    return out.empty() ? 0 : std::stoi(out);
+}

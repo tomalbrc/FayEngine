@@ -13,13 +13,13 @@ WaitActionPtr WaitAction::create(double dur) {
 }
 
 WaitAction::WaitAction(double dur) : Action() {
-    duration = dur*1000;
+    duration = dur*1000.0;
 }
 
 void WaitAction::update() {
     if (target == nullptr) return;
     
-    if (SDL_GetTicks()-startTick > duration)
+    if (SDL_GetTicks()-startTick >= duration)
         finished = true;
 }
 

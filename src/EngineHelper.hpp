@@ -108,9 +108,27 @@ public:
      */
     void removeUnusedTextures();
     
+    /**
+     * Registers an app in order to save via EngineHelper::save()
+     *
+     * @param organization name e.g. 'My Company'
+     * @param app name 'My App'
+     */
+    void registerApp(std::string organizationName, std::string appName);
     
+    /**
+     * Saves an object for a key. The key is used as filename and '.bin' is appended. The location is SDL_GetPrefPath()
+     */
+    void save(std::string string, std::string key);
+    std::string loadString(std::string key);
     
+    void save(double value, std::string key);
+    double loadDouble(std::string key);
+    
+    void save(int value, std::string key);
+    int loadInt(std::string key);
 private:
+    std::string basePath;
     EngineHelper();
     ~EngineHelper();
     SDL_Renderer *gameRenderer;

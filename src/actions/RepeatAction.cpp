@@ -25,8 +25,6 @@ RepeatAction::~RepeatAction() {
 void RepeatAction::update() {
     if (finished) return;
     
-    mTargetAction->update();
-    
     if (mTargetAction->finished) {
         mRepeatTimes--;
         if (mRepeatTimes <= 0 && mForever) {
@@ -34,8 +32,11 @@ void RepeatAction::update() {
             target->runAction(mTargetAction);
         } else if (mRepeatTimes <= 0) {
             finished = true;
+            return;
         }
     }
+    
+    mTargetAction->update();
 }
 
 void RepeatAction::start()  {

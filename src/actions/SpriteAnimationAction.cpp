@@ -12,13 +12,19 @@ SpriteAnimationAction::~SpriteAnimationAction() {
     textures.clear();
 }
 
-SpriteAnimationActionPtr SpriteAnimationAction::create(double secondsPerFrame, std::vector< TexturePtr > s) {
+SpriteAnimationActionPtr SpriteAnimationAction::create(double secondsPerFrame, std::vector< TexturePtr > textures) {
+    return create(secondsPerFrame, textures, true);
+}
+
+SpriteAnimationActionPtr SpriteAnimationAction::create(double secondsPerFrame, std::vector< TexturePtr > textures, bool shouldRestoreOriginal) {
     SpriteAnimationActionPtr p(new SpriteAnimationAction());
-    p->init(secondsPerFrame, s);
+    p->init(secondsPerFrame, textures, shouldRestoreOriginal);
     return p;
 }
 
-bool SpriteAnimationAction::init(double secondsPerFrame, std::vector< TexturePtr > s) {
+
+bool SpriteAnimationAction::init(double secondsPerFrame, std::vector< TexturePtr > s, bool shouldRestoreOriginal) {
+    mShouldRestoreOriginal = shouldRestoreOriginal;
     duration = secondsPerFrame*1000;
     textures = s;
     return true;
@@ -30,7 +36,9 @@ void SpriteAnimationAction::update() {
     
     Uint32 passedTime = SDL_GetTicks() - startTick;
     if ((passedTime)/duration >= 1.0) {
-        finished = true; return;
+        finished = true;
+        if (mShouldRestoreOriginal) ((Sprite*)target)->setTexture(mOriginalTexture);
+        return;
     }
     
     double mark = 1.f/textures.size();
@@ -39,6 +47,7 @@ void SpriteAnimationAction::update() {
 }
 
 void SpriteAnimationAction::start()  {
+    mOriginalTexture = ((Sprite *)target)->getTexture();
     startTick = SDL_GetTicks();
 }
 

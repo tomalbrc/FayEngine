@@ -29,21 +29,22 @@ SequenceAction::~SequenceAction() {
 void SequenceAction::update() {
     if (mActions.size() == 0 || target == nullptr) return;
     
-    mActions[currentIndex]->update();
-    
     if (mActions[currentIndex]->finished) {
         mActions.erase(std::remove(mActions.begin(), mActions.end(), mActions[currentIndex]), mActions.end());
         if (mActions.size()== 0) {
             finished = true;
             return;
         }
-        prepareCurrentAction();
+        else prepareCurrentAction();
     }
+    
+    mActions[currentIndex]->update();
 }
 
 void SequenceAction::start()  {
     startTick = SDL_GetTicks();
-    prepareCurrentAction();
+    if (mActions.size() > 0) prepareCurrentAction();
+    else finished = true;
 }
 
 void SequenceAction::prepareCurrentAction() {

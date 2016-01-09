@@ -36,7 +36,7 @@ extern Vec2 operator+(Vec2 lhs, const Vec2 rhs) { return Vec2Make(lhs.x + rhs.x,
 extern Vec2 operator-(Vec2 lhs, const Vec2 rhs) { return Vec2Make(lhs.x - rhs.x, lhs.y - rhs.y); }
 extern Vec2 operator-(const Vec2 rhs) { return Vec2Make(-rhs.x, -rhs.y); }
 extern Vec2 operator/(Vec2 lhs, const Vec2 rhs) { return Vec2Make(lhs.x / rhs.x, lhs.y / rhs.y); }
-extern Vec2 operator/(Vec2 lhs, const int rhs) { return Vec2Make(lhs.x / rhs, lhs.y / rhs); }
+extern Vec2 operator/(Vec2 lhs, const double rhs) { return Vec2Make(lhs.x / rhs, lhs.y / rhs); }
 extern Vec2 operator*(Vec2 lhs, const Vec2 rhs) { return Vec2Make(lhs.x * rhs.x, lhs.y * rhs.y); }
 extern Vec2 operator*(Vec2 lhs, const float rhs) { return Vec2Make((lhs.x * rhs), (lhs.y * rhs)); }
 
@@ -124,6 +124,10 @@ void Node::removeAllActions() { // NOT TESTED
 bool Node::hasActions() {
     return actions.size() > 0;
 }
+Action *Node::getAction(std::string actionName) {
+    return actions.find(actionName) == actions.end() ? NULL : actions[actionName].get();
+}
+
 
 
 
@@ -132,7 +136,7 @@ void Node::update() {
     for (auto&& i = children.begin(); i != children.end();) {
         auto child = (*i);
         
-        if (child->shouldBeRemoved) child->willMoveToParent(NULL), i = children.erase(i); // remove finished actions
+        if (child->shouldBeRemoved) child->willMoveToParent(NULL), child->shouldBeRemoved = false, i = children.erase(i); // remove finished actions
         else if (i != children.end()) child->update(), ++i;
     }
     for (auto&& i = actions.begin(); i != actions.end();) {

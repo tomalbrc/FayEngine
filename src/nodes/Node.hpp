@@ -60,7 +60,7 @@ extern Vec2 operator+(Vec2 lhs, const Vec2 rhs);
 extern Vec2 operator-(Vec2 lhs, const Vec2 rhs);
 extern Vec2 operator-(const Vec2 rhs);
 extern Vec2 operator/(Vec2 lhs, const Vec2 rhs);
-extern Vec2 operator/(Vec2 lhs, const int rhs);
+extern Vec2 operator/(Vec2 lhs, const double rhs);
 extern Vec2 operator*(Vec2 lhs, const Vec2 rhs);
 extern Vec2 operator*(Vec2 lhs, const float rhs);
 
@@ -102,6 +102,7 @@ public:
     void removeAction(ActionPtr action);
     void removeAction(const std::string& actionName);
     void removeAllActions();
+    Action *getAction(std::string actionName);
     bool hasActions();
     
     // update methode (für runActions)

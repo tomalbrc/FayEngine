@@ -24,15 +24,18 @@ typedef std::unique_ptr<SpriteAnimationAction> SpriteAnimationActionPtr;
 class Node;
 class SpriteAnimationAction : public Action {
 public:
-    static SpriteAnimationActionPtr create(double secondsPerFrame, std::vector< TexturePtr >);
+    static SpriteAnimationActionPtr create(double secondsPerFrame, std::vector< TexturePtr > textures, bool shouldRestoreOriginal);
+    static SpriteAnimationActionPtr create(double secondsPerFrame, std::vector< TexturePtr > textures);
     ~SpriteAnimationAction();
     
     void update();
     void start();
     
 protected:
-    bool init(double secondsPerFrame, std::vector< TexturePtr >);
+    bool init(double secondsPerFrame, std::vector< TexturePtr > textures, bool shouldRestoreOriginal);
 private:
+    TexturePtr mOriginalTexture;
+    bool mShouldRestoreOriginal = true;
     Sprite *targetSprite = NULL;
     std::vector< TexturePtr > textures;
 };

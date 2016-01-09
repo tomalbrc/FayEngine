@@ -23,14 +23,11 @@ bool MoveByAction::init(double pduration, Vec2 offset) {
 
 void MoveByAction::update() {
     Uint32 passedTime = SDL_GetTicks() - startTick;
-    if (passedTime >= duration) {
-        finished = true;
-        return;
-    }
     
     auto pos = targetStartPos + (moveValue*(passedTime/duration));
     target->setPosition(pos);
     
+    if (passedTime >= duration) finished = true, target->setPosition(targetStartPos+moveValue);
 }
 
 void MoveByAction::start()  {
