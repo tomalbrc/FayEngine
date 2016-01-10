@@ -10,76 +10,6 @@
 #include "Scene.hpp"
 
 
-extern Color ColorMake(Uint32 r, Uint32 g, Uint32 b, Uint32 a) {
-    Color c;
-    c.r = r, c.g = g, c.b = b, c.a = a;
-    return c;
-}
-extern Color ColorMake(Uint32 r, Uint32 g, Uint32 b) { return ColorMake(r, g, b, 255); }
-
-
-
-extern Vec2 Vec2Make(float x, float y) {
-    Vec2 p;
-    p.x = x;
-    p.y = y;
-    return p;
-}
-extern Vec2 Vec2Null() {
-    Vec2 p;
-    p.x = 0.f;
-    p.y = 0.f;
-    return p;
-}
-extern bool operator==(Vec2 lhs, const Vec2& rhs) { return (lhs.x == rhs.x && lhs.y == rhs.y); }
-extern Vec2 operator+(Vec2 lhs, const Vec2 rhs) { return Vec2Make(lhs.x + rhs.x, lhs.y + rhs.y); }
-extern Vec2 operator-(Vec2 lhs, const Vec2 rhs) { return Vec2Make(lhs.x - rhs.x, lhs.y - rhs.y); }
-extern Vec2 operator-(const Vec2 rhs) { return Vec2Make(-rhs.x, -rhs.y); }
-extern Vec2 operator/(Vec2 lhs, const Vec2 rhs) { return Vec2Make(lhs.x / rhs.x, lhs.y / rhs.y); }
-extern Vec2 operator/(Vec2 lhs, const double rhs) { return Vec2Make(lhs.x / rhs, lhs.y / rhs); }
-extern Vec2 operator*(Vec2 lhs, const Vec2 rhs) { return Vec2Make(lhs.x * rhs.x, lhs.y * rhs.y); }
-extern Vec2 operator*(Vec2 lhs, const float rhs) { return Vec2Make((lhs.x * rhs), (lhs.y * rhs)); }
-
-
-
-extern Rect RectMake(Vec2 origin, Vec2 size) {
-    return RectMake(origin.x, origin.y, size.x, size.y);
-}
-extern Rect RectMake(float x, float y, float w, float h) {
-    Rect p;
-    p.origin.x = x;
-    p.origin.y = y;
-    p.size.x = w;
-    p.size.y = h;
-    return p;
-}
-extern bool RectIsNull(Rect p) {
-    return (bool)(p.origin.x == 0 && p.origin.y == 0 && p.size.x == 0 && p.size.y == 0);
-}
-extern bool RectIntersectsVec2(Rect r, Vec2 v) {
-    double pointX = v.x;
-    double pointY = v.y;
-    if (pointX < (r.origin.x + r.size.x) && pointX > r.origin.x &&
-        pointY < (r.origin.y + r.size.y) && pointY > r.origin.y)
-        return true;
-    else
-        return false;
-}
-extern bool RectIntersectsRect(Rect rectA, Rect rectB) {
-    return !((rectA.origin.x + rectA.size.x) < rectB.origin.x ||
-             rectB.origin.x + rectB.size.x < rectA.origin.x ||
-             (rectA.origin.y+rectA.size.y) < rectB.origin.y ||
-             (rectB.origin.y+rectB.size.y) < rectA.origin.y);
-}
-
-
-
-
-
-
-
-
-
 bool Node::init() {
     children.clear();
     return true;
@@ -151,8 +81,8 @@ void Node::willMoveToParent(NodePtr newParent) {
 }
 
 
-
 void Node::setPosition(const Vec2 &pos) {
+    isTransformDirty = true;
     position = pos;
 }
 const Vec2 Node::getPosition() {
@@ -160,11 +90,12 @@ const Vec2 Node::getPosition() {
 }
 
 
-const int Node::getZRotation() {
-    return mZRotation;
-}
-void Node::setZRotation(const int &angle) {
+void Node::setZRotation(const double &angle) {
+    isTransformDirty = true;
     mZRotation = angle;
+}
+const double Node::getZRotation() {
+    return mZRotation;
 }
 
 
@@ -177,6 +108,7 @@ const int Node::getAlpha() {
 
 
 void Node::setScale(const double &scale) {
+    isTransformDirty = true;
     mScale = scale;
 }
 const double Node::getScale() {
@@ -184,21 +116,33 @@ const double Node::getScale() {
 }
 
 
-Vec2 Node::nodeToWindowPosition() {
-    Vec2 t = getPosition();
+void Node::setAnchorPoint(Vec2 ap) {
+    mAnchorPoint = ap;
+}
+Vec2 Node::getAnchorPoint() {
+    return mAnchorPoint;
+}
+
+
+AffineTransform Node::nodeToWorldTransform() {
+    AffineTransform t = nodeToParentTransform();
     for (auto p = NodeWeakPtr(this->getParent()); !p.expired(); p = NodeWeakPtr( p.lock()->getParent() ))
-        t = (t + p.lock()->getPosition());
+        t = AffineTransformMultiply(t, p.lock()->nodeToParentTransform());
     return t;
 }
-const Vec2 Node::convertToNodeSpace(const Vec2 &worldPoint) {
-    Vec2 t = this->getParent()->convertToWorldSpace(this->getPosition());
-    Vec2 ret = worldPoint-t;
+AffineTransform Node::worldToNodeTransform() {
+    return AffineTransformInverse(nodeToWorldTransform());
+}
+Vec2 Node::convertToNodeSpace(Vec2 worldPoint) {
+    Vec2 ret = Vec2ApplyAffineTransform(worldPoint, worldToNodeTransform());
     return ret;
 }
-const Vec2 Node::convertToWorldSpace(const Vec2 &nodePoint) {
-    Vec2 ret = nodePoint + nodeToWindowPosition();
-    return ret;
+Vec2 Node::convertToWorldSpace(Vec2 nodePoint) {
+    Vec2 res = Vec2ApplyAffineTransform(nodePoint, nodeToWorldTransform());
+    return res;
 }
+
+
 
 
 
@@ -243,6 +187,8 @@ void Node::setName(std::string n) {
 
 
 void Node::render(SDL_Renderer *renderer) { // render into scene / Surface
+    if (isTransformDirty) computeTransform();
+    
     for (auto&& s : children) {
         if (!s->shouldBeRemoved) s->render(renderer);
     }
@@ -270,4 +216,21 @@ void Node::mouseClickEnded(SDL_MouseButtonEvent event, Vec2 coords) {
 
 
 
+void Node::computeTransform() {
+    mTransform = AffineTransformIdentity();
+    
+    //if (Vec2Null() == getAnchorPoint()) mTransform = AffineTransformMultiply(mTransform, AffineTransformMakeTranslate(getAnchorPoint().x, getAnchorPoint().y));
+    
+    mTransform = AffineTransformMultiply(mTransform, AffineTransformMakeScale(getScale(), getScale()));
+    mTransform = AffineTransformMultiply(mTransform, AffineTransformMakeRotate(getZRotation()));
+    mTransform = AffineTransformMultiply(mTransform, AffineTransformMakeTranslate(getPosition().x, getPosition().y));
+    
+    //if (Vec2Null() == getAnchorPoint()) mTransform = AffineTransformMultiply(mTransform, AffineTransformMakeTranslate(-getAnchorPoint().x, -getAnchorPoint().y));
+    
+    isTransformDirty = false;
+}
 
+AffineTransform Node::nodeToParentTransform() {
+    if (isTransformDirty) computeTransform();
+    return mTransform;
+}

@@ -21,63 +21,8 @@
 #include <functional>
 #include <memory>
 
+#include "Types.hpp"
 #include "Action.hpp"
-
-#define Logbuch(x)  std::cout << "[LOGBUCHEINTRAG:] " << x << std::endl // Support for older versions
-#define FELog(x)  std::cout << "[FayEngine] " << x << std::endl // New Log macro
-
-struct Color {
-    Uint32 r,g,b,a;
-};
-extern Color ColorMake(Uint32 r, Uint32 g, Uint32 b, Uint32 a);
-extern Color ColorMake(Uint32 r, Uint32 g, Uint32 b);
-inline Color ColorBlackColor() { return ColorMake(0, 0, 0); }
-inline Color ColorWhiteColor() { return ColorMake(255, 255, 255); }
-inline Color ColorRedColor() { return ColorMake(255, 0, 0); }
-inline Color ColorBlueColor() { return ColorMake(0, 0, 255); }
-inline Color ColorGreenColor() { return ColorMake(0, 255, 0); }
-inline Color ColorCyanColor() { return ColorMake(0, 255, 255); } //
-inline Color ColorMagentaColor() { return ColorMake(255, 0, 255); }
-inline Color ColorYellowColor() { return ColorMake(255, 255, 0); }
-inline Color ColorPurpleColor() { return ColorMake(128, 0, 128); }
-inline Color ColorOrangeColor() { return ColorMake(255, 165, 0); }
-inline Color ColorGrayColor() { return ColorMake(128, 128, 128); }
-inline Color ColorLightGrayColor() { return ColorMake(211, 211, 211); }
-inline Color ColorDarkGrayColor() { return ColorMake(169, 169, 169); }
-
-
-
-struct Vec2 {
-    float x,y;
-};
-
-extern Vec2 Vec2Make(float x, float y);
-extern Vec2 Vec2Null();
-
-
-extern bool operator==(Vec2 lhs, const Vec2& rhs);
-extern Vec2 operator+(Vec2 lhs, const Vec2 rhs);
-extern Vec2 operator-(Vec2 lhs, const Vec2 rhs);
-extern Vec2 operator-(const Vec2 rhs);
-extern Vec2 operator/(Vec2 lhs, const Vec2 rhs);
-extern Vec2 operator/(Vec2 lhs, const double rhs);
-extern Vec2 operator*(Vec2 lhs, const Vec2 rhs);
-extern Vec2 operator*(Vec2 lhs, const float rhs);
-
-
-
-struct Rect {
-    Vec2 origin, size;
-};
-
-extern Rect RectMake(float x, float y, float w, float h);
-extern Rect RectMake(Vec2 origin, Vec2 size);
-extern Rect RectNull();
-
-extern bool RectIntersectsVec2(Rect r, Vec2 v);
-extern bool RectIntersectsRect(Rect rectA, Rect rectB);
-
-
 
 
 class Scene;
@@ -117,14 +62,17 @@ public:
     void setPosition(const Vec2 &pos);
     const Vec2 getPosition();
     
-    void setZRotation(const int &angle);
-    const int getZRotation();
+    void setZRotation(const double &angle);
+    const double getZRotation();
     
     void setAlpha(const int &a);
     const int getAlpha();
     
     void setScale(const double &scale);
     const double getScale();
+    
+    void setAnchorPoint(Vec2 ap);
+    Vec2 getAnchorPoint();
     
     void addChild(const NodePtr& node);
     const NodeVector &getChildren();
@@ -142,11 +90,13 @@ public:
     virtual void mouseClickEnded(SDL_MouseButtonEvent event, Vec2 coords);
     virtual void mouseClickBegan(SDL_MouseButtonEvent event, Vec2 coords);
     
-    const Vec2 convertToWorldSpace(const Vec2 &v); // Works reliable
-    const Vec2 convertToNodeSpace(const Vec2 &v); // Needs testing
+    Vec2 convertToWorldSpace(Vec2 v); // Works reliable
+    Vec2 convertToNodeSpace(Vec2 v); // Needs testing
+    
+    AffineTransform worldToNodeTransform();
+    AffineTransform nodeToWorldTransform();
     
     virtual void render(SDL_Renderer *renderer);
-    
     
 protected:
     bool init();
@@ -157,7 +107,7 @@ private:
     int mAlpha = 255;
     
     // Rotation auf der z Achse in Grad
-    int mZRotation = 0;
+    double mZRotation = 0.0;
     
     // Skalierung (Skaliert Größe)
     double mScale = 1.0;
@@ -177,9 +127,13 @@ private:
     // actions, performed in public
     ActionMap actions;
     
-    // fast selbsterklärend, die absolute position in der scene
-    Vec2 nodeToWindowPosition();
-
+    bool isTransformDirty = true;
+    AffineTransform mTransform;
+    void computeTransform();
+    AffineTransform nodeToParentTransform();
+    
+    Vec2 mAnchorPoint = Vec2Null();
+    
 };
 
 #endif /* Node_hpp */

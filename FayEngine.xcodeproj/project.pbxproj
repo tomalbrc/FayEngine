@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A34D5EA1C41552C00B48591 /* Types.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A34D5E91C41552C00B48591 /* Types.cpp */; settings = {ASSET_TAGS = (); }; };
 		9A60C8071C31670900400D85 /* Action.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C7DD1C31670900400D85 /* Action.cpp */; settings = {ASSET_TAGS = (); }; };
 		9A60C8081C31670900400D85 /* CallbackAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C7DF1C31670900400D85 /* CallbackAction.cpp */; settings = {ASSET_TAGS = (); }; };
 		9A60C8091C31670900400D85 /* FadeAlphaToAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C7E11C31670900400D85 /* FadeAlphaToAction.cpp */; settings = {ASSET_TAGS = (); }; };
@@ -43,6 +44,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9A2E2F4D1C413BB7002661EF /* Types.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Types.hpp; sourceTree = "<group>"; };
+		9A34D5E91C41552C00B48591 /* Types.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Types.cpp; sourceTree = "<group>"; };
 		9A60C7DD1C31670900400D85 /* Action.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Action.cpp; sourceTree = "<group>"; };
 		9A60C7DE1C31670900400D85 /* Action.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Action.hpp; sourceTree = "<group>"; };
 		9A60C7DF1C31670900400D85 /* CallbackAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CallbackAction.cpp; sourceTree = "<group>"; };
@@ -122,6 +125,8 @@
 				9A60C8041C31670900400D85 /* tmxparser.h */,
 				9A60C8051C31670900400D85 /* Window.cpp */,
 				9A60C8061C31670900400D85 /* Window.hpp */,
+				9A2E2F4D1C413BB7002661EF /* Types.hpp */,
+				9A34D5E91C41552C00B48591 /* Types.cpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -259,6 +264,7 @@
 				9A60C81A1C31670900400D85 /* Window.cpp in Sources */,
 				9A60C8091C31670900400D85 /* FadeAlphaToAction.cpp in Sources */,
 				9A60C82C1C330AB200400D85 /* RepeatAction.cpp in Sources */,
+				9A34D5EA1C41552C00B48591 /* Types.cpp in Sources */,
 				9A60C80F1C31670900400D85 /* SpriteAnimationAction.cpp in Sources */,
 				9A60C80C1C31670900400D85 /* RotateAction.cpp in Sources */,
 				9A60C8101C31670900400D85 /* WaitAction.cpp in Sources */,

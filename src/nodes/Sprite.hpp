@@ -38,9 +38,6 @@ public:
     void setTexture(TexturePtr tex);
     TexturePtr getTexture();
     
-    void setAnchorPoint(Vec2 ap);
-    Vec2 getAnchorPoint();
-    
     Rect getRect();
     Rect getBoundingBox();
     
@@ -48,7 +45,6 @@ public:
     
 private:
     Vec2 mSize = Vec2Null();
-    Vec2 mAnchorPoint = Vec2Null();
     TexturePtr mTexture = NULL;
 };
 
