@@ -13,9 +13,13 @@
 #include <math.h>
 #include "SDL.h"
 
-/* Log macros */
+/* macros */
 #define Logbuch(x)  std::cout << "[LOGBUCHEINTRAG:] " << x << std::endl // Support for older versions
 #define FELog(x)  std::cout << "[FayEngine] " << x << std::endl // New Log macro
+
+#define RadiansToDegrees(angleRadians) (angleRadians * 180.0 / M_PI)
+#define DegreesToRadians(angleDegrees) (angleDegrees * M_PI / 180.0)
+
 
 /*
  * Color and helper functions
@@ -39,6 +43,9 @@ inline Color ColorOrangeColor() { return ColorMake(255, 165, 0); }
 inline Color ColorGrayColor() { return ColorMake(128, 128, 128); }
 inline Color ColorLightGrayColor() { return ColorMake(211, 211, 211); }
 inline Color ColorDarkGrayColor() { return ColorMake(169, 169, 169); }
+
+inline bool operator!=(const Color& lhs, const Color& rhs) { return !(lhs.r == rhs.r && lhs.g == rhs.g && lhs.b == rhs.b && lhs.a == rhs.a); }
+inline bool operator==(const Color& lhs, const Color& rhs) { return (lhs.r == rhs.r && lhs.g == rhs.g && lhs.b == rhs.b && lhs.a == rhs.a); }
 
 
 

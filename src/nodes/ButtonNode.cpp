@@ -8,9 +8,6 @@
 
 #include "ButtonNode.hpp"
 
-inline bool operator!=(const Color& lhs, const Color& rhs) { return !(lhs.r == rhs.r && lhs.g == rhs.g && lhs.b == rhs.b && lhs.a == rhs.a); }
-inline bool operator==(const Color& lhs, const Color& rhs) { return (lhs.r == rhs.r && lhs.g == rhs.g && lhs.b == rhs.b && lhs.a == rhs.a); }
-
 ButtonNodePtr ButtonNode::create(std::string s) {
     ButtonNodePtr p(new ButtonNode());
     p->init(s);

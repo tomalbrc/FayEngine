@@ -107,6 +107,11 @@ const int Node::getAlpha() {
 }
 
 
+Vec2 Node::getSize() {
+    return mSize;
+}
+
+
 void Node::setScale(const double &scale) {
     isTransformDirty = true;
     mScale = scale;
@@ -187,8 +192,6 @@ void Node::setName(std::string n) {
 
 
 void Node::render(SDL_Renderer *renderer) { // render into scene / Surface
-    if (isTransformDirty) computeTransform();
-    
     for (auto&& s : children) {
         if (!s->shouldBeRemoved) s->render(renderer);
     }
@@ -219,13 +222,12 @@ void Node::mouseClickEnded(SDL_MouseButtonEvent event, Vec2 coords) {
 void Node::computeTransform() {
     mTransform = AffineTransformIdentity();
     
-    //if (Vec2Null() == getAnchorPoint()) mTransform = AffineTransformMultiply(mTransform, AffineTransformMakeTranslate(getAnchorPoint().x, getAnchorPoint().y));
+    auto anchorOffset = getAnchorPoint();
     
     mTransform = AffineTransformMultiply(mTransform, AffineTransformMakeScale(getScale(), getScale()));
+    mTransform = AffineTransformMultiply(mTransform, AffineTransformMakeTranslate(anchorOffset.x, anchorOffset.y));
     mTransform = AffineTransformMultiply(mTransform, AffineTransformMakeRotate(getZRotation()));
     mTransform = AffineTransformMultiply(mTransform, AffineTransformMakeTranslate(getPosition().x, getPosition().y));
-    
-    //if (Vec2Null() == getAnchorPoint()) mTransform = AffineTransformMultiply(mTransform, AffineTransformMakeTranslate(-getAnchorPoint().x, -getAnchorPoint().y));
     
     isTransformDirty = false;
 }

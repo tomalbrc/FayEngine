@@ -124,42 +124,8 @@ void Sprite::render(SDL_Renderer *renderer) { // render into scene / Surfac
         center.y = ddRect.h*getAnchorPoint().y;
         
         SDL_SetTextureAlphaMod(mTexture->sdlTexture(), getAlpha()); // temporarily apply Sprites alpha value
-        SDL_RenderCopyEx(renderer, mTexture->sdlTexture(), &ssRect, &ddRect, absRotation(this), &center, SDL_FLIP_NONE);
+        SDL_RenderCopyEx(renderer, mTexture->sdlTexture(), &ssRect, &ddRect, -RadiansToDegrees(absRotation(this)), &center, SDL_FLIP_NONE);
     }
     Node::render(renderer);
 }
 
-
-
-
-
-/*
- 
-
- 
- void Sprite::render(SDL_Renderer *renderer) { // render into scene / Surfac
- Node::render(renderer);
- 
- if (this->getTexture() != nullptr) { // Draw this sprite if the tex is set
- auto dRect = RectMake(getPosition(), getSize());
- auto sRect = RectMake(mTexture->getRenderOffset(), mTexture->getSize());
- 
- //auto t = AffineTransformMultiply(nodeToWorldTransform(), AffineTransformMakeRotate(-absRot(this)));
- dRect = RectApplyAffineTransform(dRect, nodeToWorldTransform());
- 
- 
- SDL_Rect ddRect;
- ddRect.x = dRect.origin.x, ddRect.y = dRect.origin.y, ddRect.w = dRect.size.x, ddRect.h = dRect.size.y;
- ddRect.x -= getAnchorPoint().x * ddRect.w;
- ddRect.y -= getAnchorPoint().y * ddRect.h;
- 
- SDL_Rect ssRect;
- ssRect.x = sRect.origin.x, ssRect.y = sRect.origin.y, ssRect.w = sRect.size.x, ssRect.h = sRect.size.y;
- 
- 
- SDL_SetTextureAlphaMod(mTexture->sdlTexture(), getAlpha()); // temporarily apply Sprites alpha value
- SDL_RenderCopyEx(renderer, mTexture->sdlTexture(), &ssRect, &ddRect, getZRotation(), NULL, SDL_FLIP_NONE);
- }
- 
- }
-*/

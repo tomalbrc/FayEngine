@@ -71,6 +71,9 @@ public:
     void setScale(const double &scale);
     const double getScale();
     
+    // void setSize(Vec2 size) doesnt exist (yet)
+    Vec2 getSize();
+    
     void setAnchorPoint(Vec2 ap);
     Vec2 getAnchorPoint();
     
@@ -123,6 +126,9 @@ private:
     
     // parent of this noded
     NodeWeakPtr mParent;
+    
+    // size, content-size
+    Vec2 mSize = Vec2Null();
     
     // actions, performed in public
     ActionMap actions;
