@@ -41,10 +41,10 @@ public:
     virtual void mouseMoved(SDL_MouseMotionEvent, Vec2 coords);
     
     
-protected:
+private:
     bool init(std::string text);
     bool init(std::string text, std::string fontpath, int fontSize, Color col);
-private:
+    
     Color mHoverColor = ColorBlackColor();
     Color mNormalColor = ColorWhiteColor();
     ButtonNodeCallback mCallback = NULL;
