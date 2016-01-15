@@ -22,6 +22,9 @@ class Node;
 class WaitAction;
 typedef std::unique_ptr<WaitAction> WaitActionPtr;
 
+/**
+ * Waits for a specified time
+ */
 class WaitAction : public Action {
 public:
     WaitAction(double dur);

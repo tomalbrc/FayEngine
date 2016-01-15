@@ -20,8 +20,11 @@
 
 class RemoveFromParentAction;
 typedef std::unique_ptr<RemoveFromParentAction> RemoveFromParentActionPtr;
-
 class Node;
+
+/**
+ * Removes the target Node from parent after a specified delay or immediately
+ */
 class RemoveFromParentAction : public Action {
 public:
     static RemoveFromParentActionPtr create();

@@ -21,8 +21,11 @@
 
 class ScaleToAction;
 typedef std::unique_ptr<ScaleToAction> ScaleToActionPtr;
-
 class Node;
+
+/**
+ * Scales the target Nodes by x in y duration
+ */
 class ScaleToAction : public Action {
     double mStartScale = 1.0;
     double mDestScale = 0.0;

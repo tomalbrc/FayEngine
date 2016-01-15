@@ -20,8 +20,11 @@
 
 class SpriteAnimationAction;
 typedef std::unique_ptr<SpriteAnimationAction> SpriteAnimationActionPtr;
-
 class Node;
+
+/**
+ * Animates a Sequence of Texture objects on the target Sprite
+ */
 class SpriteAnimationAction : public Action {
 public:
     static SpriteAnimationActionPtr create(double secondsPerFrame, std::vector< TexturePtr > textures, bool shouldRestoreOriginal);

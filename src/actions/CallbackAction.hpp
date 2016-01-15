@@ -32,7 +32,14 @@ class CallbackAction : public Action {
 public:
     static CallbackActionPtr create(CallbackActionCallback callback);
     
+    /**
+     * Re-implementation from base class Action
+     */
     virtual void update();
+    
+    /**
+     * Re-implementation from base class Action
+     */
     virtual void start();
     
 protected:

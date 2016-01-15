@@ -23,6 +23,10 @@ class MoveByAction;
 typedef std::unique_ptr<MoveByAction> MoveByActionPtr;
 
 class Node;
+
+/**
+ * Moves the target Node by a specified distance in a specified duration
+ */
 class MoveByAction : public Action {
 public:
     static MoveByActionPtr create(double duration, Vec2 offset);

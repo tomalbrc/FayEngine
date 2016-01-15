@@ -21,8 +21,11 @@
 
 class RotateToAction;
 typedef std::unique_ptr<RotateToAction> RotateToActionPtr;
-
 class Node;
+
+/**
+ * Rotates the target Nodes by x radians in y duration
+ */
 class RotateToAction : public Action {
 public:
     RotateToAction(double duration, int degree);

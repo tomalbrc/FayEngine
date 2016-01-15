@@ -40,17 +40,60 @@ typedef std::weak_ptr<Scene> SceneWeakPtr;
  */
 class Node : public std::enable_shared_from_this<Node> {
 public:
+    /**
+     * Creates a new Node object
+     *
+     * @return a shared_ptr to the new Node instance
+     */
     static NodePtr create();
+    
+    /**
+     * Deconstructor
+     */
     virtual ~Node();
     
-    // Alle methoden um Aktionen hunzuzufügen oder zu entfernen
-    // (mithilfe eines keys)
+    /**
+     * Run an action
+     *
+     * @param action    action to run
+     */
     void runAction(ActionPtr action);
+    
+    /**
+     * Run an Action for a specified key
+     *
+     * @param action    action to run
+     * @param forKey    key to run the Action for
+     */
     void runAction(ActionPtr action, const std::string& forKey);
+    
+    /**
+     * Removes a running action
+     *
+     * @param action    action to remove
+     */
     void removeAction(ActionPtr action);
+    
+    /**
+     * Removes a running action for a specified key
+     *
+     * @param actionName    key of the action to remove
+     */
     void removeAction(const std::string& actionName);
+    
+    /**
+     * Removes all running actions
+     */
     void removeAllActions();
+    
+    /**
+     * Get an action by key
+     *
+     * @param actionName    key of the action
+     */
     Action *getAction(std::string actionName);
+    
+    
     bool hasActions();
     
     // update methode (für runActions)

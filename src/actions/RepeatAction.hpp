@@ -22,6 +22,10 @@ class Node;
 class RepeatAction;
 typedef std::unique_ptr<RepeatAction> RepeatActionPtr;
 
+/**
+ * Repeats an action x times
+ * If times equals 0 the target Action runs forever
+ */
 class RepeatAction : public Action {
 public:
     RepeatAction(ActionPtr action, int times);

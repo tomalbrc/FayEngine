@@ -20,8 +20,11 @@
 
 class SequenceAction;
 typedef std::unique_ptr<SequenceAction> SequenceActionPtr;
-
 class Node;
+
+/**
+ * Performs a sequence of actions, one-by-one
+ */
 class SequenceAction : public Action {
 public:
     static SequenceActionPtr create(std::vector<ActionPtr> actions);

@@ -30,7 +30,14 @@ class FadeAlphaToAction : public Action {
 public:
     static FadeAlphaToActionPtr create(double duration, int destAlpha);
     
+    /**
+     * Re-implementation from base class Action
+     */
     virtual void update();
+    
+    /**
+     * Re-implementation from base class Action
+     */
     virtual void start();
     
 protected:
