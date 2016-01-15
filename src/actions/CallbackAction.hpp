@@ -9,8 +9,8 @@
 #ifndef CallbackAction_hpp
 #define CallbackAction_hpp
 
-#include <SDL.h>
-#include <SDL_image.h>
+#include "SDL.h"
+#include "SDL_image.h"
 #include <stdio.h>
 #include <vector>
 #include <iostream>
@@ -25,6 +25,9 @@ class Node;
 class CallbackAction;
 typedef std::unique_ptr<CallbackAction> CallbackActionPtr;
 
+/**
+ * Calls a callback function after a specified amount of time
+ */
 class CallbackAction : public Action {
 public:
     static CallbackActionPtr create(CallbackActionCallback callback);

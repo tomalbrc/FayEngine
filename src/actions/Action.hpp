@@ -20,6 +20,9 @@ class Node;
 class Action;
 typedef std::shared_ptr<Action> ActionPtr;
 
+/**
+ * Actions to alter properties of Nodes/Sprites
+ */
 class Action { // abstract
 public:
     bool finished = false;

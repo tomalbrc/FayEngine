@@ -5,12 +5,13 @@
 //  Created by Tom Albrecht on 12.12.15.
 //  Copyright © 2015 Tom Albrecht. All rights reserved.
 //
+/// @brief Helper class
 
 #ifndef EngineHelper_hpp
 #define EngineHelper_hpp
 
-#include <SDL.h>
-#include <SDL_image.h>
+#include "SDL.h"
+#include "SDL_image.h"
 #include <stdio.h>
 #include <vector>
 #include <iostream>
@@ -18,6 +19,11 @@
 
 #include "Texture.hpp"
 
+/**
+ * Helper Class
+ *
+ * Provides a Texture Cache and save(), load() functions and holds a reference to the renderer.\n\n\n
+ */
 class EngineHelper {
 public:
     /**
@@ -111,22 +117,50 @@ public:
     /**
      * Registers an app in order to save via EngineHelper::save()
      *
-     * @param organization name e.g. 'My Company'
-     * @param app name 'My App'
+     * @param organizationName  name e.g. 'My Company'
+     * @param appName           name e.g. 'My App'
      */
     void registerApp(std::string organizationName, std::string appName);
     
     /**
-     * Saves an object for a key. The key is used as filename and '.bin' is appended. The location is SDL_GetPrefPath()
+     * Saves a string for a key. The key is used as filename and '.bin' is appended. The location is SDL_GetPrefPath()
+     *
+     * @param string            string to save
+     * @param key               key to save the string for
      */
     void save(std::string string, std::string key);
+    
+    /**
+     * Loads a string for a specified key
+     */
     std::string loadString(std::string key);
     
+    /**
+     * Saves a double for a key. The key is used as filename and '.bin' is appended. The location is SDL_GetPrefPath()
+     *
+     * @param value             double to save
+     * @param key               key to save the double for
+     */
     void save(double value, std::string key);
+    
+    /**
+     * Loads a double for a specified key
+     */
     double loadDouble(std::string key);
     
+    /**
+     * Saves an int for a key. The key is used as filename and '.bin' is appended. The location is SDL_GetPrefPath()
+     *
+     * @param value             int to save
+     * @param key               key to save the int for
+     */
     void save(int value, std::string key);
+    
+    /**
+     * Loads an int for a specified key
+     */
     int loadInt(std::string key);
+    
 private:
     std::string basePath;
     EngineHelper();

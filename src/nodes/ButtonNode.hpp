@@ -9,9 +9,9 @@
 #ifndef ButtonNode_hpp
 #define ButtonNode_hpp
 
-#include <SDL.h>
-#include <SDL_image.h>
-#include <SDL_ttf.h>
+#include "SDL.h"
+#include "SDL_image.h"
+#include "SDL_ttf.h"
 #include <stdio.h>
 #include <vector>
 #include <iostream>
@@ -23,6 +23,9 @@ class ButtonNode;
 typedef std::function<void(ButtonNode*)> ButtonNodeCallback;
 typedef std::shared_ptr<ButtonNode> ButtonNodePtr;
 
+/**
+ * Clickable LabelNode
+ */
 class ButtonNode : public LabelNode {
 public:
     static ButtonNodePtr create(std::string text);

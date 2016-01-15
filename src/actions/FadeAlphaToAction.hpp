@@ -9,8 +9,8 @@
 #ifndef FadeAlphaToAction_hpp
 #define FadeAlphaToAction_hpp
 
-#include <SDL.h>
-#include <SDL_image.h>
+#include "SDL.h"
+#include "SDL_image.h"
 #include <stdio.h>
 #include <vector>
 #include <iostream>
@@ -21,8 +21,11 @@
 
 class FadeAlphaToAction;
 typedef std::unique_ptr<FadeAlphaToAction> FadeAlphaToActionPtr;
-
 class Node;
+
+/**
+ * Fades the alpha value of a Node to the desired value in a specified amount of time
+ */
 class FadeAlphaToAction : public Action {
 public:
     static FadeAlphaToActionPtr create(double duration, int destAlpha);

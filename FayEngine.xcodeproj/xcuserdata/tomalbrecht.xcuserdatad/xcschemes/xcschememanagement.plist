@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>FayEngine-iOS.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>FayEngine.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -12,6 +17,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>9AE2522C1C48016A00D6C01E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>9AFBB8821C2E0D2E006ACF87</key>
 		<dict>
 			<key>primary</key>

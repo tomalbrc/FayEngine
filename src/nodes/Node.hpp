@@ -9,8 +9,8 @@
 #ifndef Node_hpp
 #define Node_hpp
 
-#include <SDL.h>
-#include <SDL_image.h>
+#include "SDL.h"
+#include "SDL_image.h"
 #include <stdio.h>
 #include <vector>
 #include <iostream>
@@ -35,6 +35,9 @@ typedef std::map<std::string, ActionPtr> ActionMap;
 typedef std::shared_ptr<Scene> ScenePtr;
 typedef std::weak_ptr<Scene> SceneWeakPtr;
 
+/**
+ * Node Class
+ */
 class Node : public std::enable_shared_from_this<Node> {
 public:
     static NodePtr create();

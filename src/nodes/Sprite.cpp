@@ -8,11 +8,6 @@
 
 #include "Sprite.hpp"
 
-#ifndef M_PI // Windows
-#define M_PI 3.1415926535
-#endif
-
-
 SpritePtr Sprite::create() {
     SpritePtr ss(new Sprite());
     ss->init();

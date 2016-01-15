@@ -29,9 +29,86 @@
 		9A60C8191C31670900400D85 /* tmxparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C8031C31670900400D85 /* tmxparser.cpp */; settings = {ASSET_TAGS = (); }; };
 		9A60C81A1C31670900400D85 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C8051C31670900400D85 /* Window.cpp */; settings = {ASSET_TAGS = (); }; };
 		9A60C82C1C330AB200400D85 /* RepeatAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C82A1C330AB200400D85 /* RepeatAction.cpp */; settings = {ASSET_TAGS = (); }; };
+		9AE252361C48019F00D6C01E /* Action.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C7DD1C31670900400D85 /* Action.cpp */; };
+		9AE252371C48019F00D6C01E /* CallbackAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C7DF1C31670900400D85 /* CallbackAction.cpp */; };
+		9AE252381C48019F00D6C01E /* FadeAlphaToAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C7E11C31670900400D85 /* FadeAlphaToAction.cpp */; };
+		9AE252391C48019F00D6C01E /* MoveByAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C7E31C31670900400D85 /* MoveByAction.cpp */; };
+		9AE2523A1C48019F00D6C01E /* RemoveFromParent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C7E51C31670900400D85 /* RemoveFromParent.cpp */; };
+		9AE2523B1C48019F00D6C01E /* RotateAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C7E71C31670900400D85 /* RotateAction.cpp */; };
+		9AE2523C1C48019F00D6C01E /* ScaleToAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C7E91C31670900400D85 /* ScaleToAction.cpp */; };
+		9AE2523D1C48019F00D6C01E /* SequenceAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C7EB1C31670900400D85 /* SequenceAction.cpp */; };
+		9AE2523E1C48019F00D6C01E /* SpriteAnimationAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C7ED1C31670900400D85 /* SpriteAnimationAction.cpp */; };
+		9AE2523F1C48019F00D6C01E /* WaitAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C7EF1C31670900400D85 /* WaitAction.cpp */; };
+		9AE252401C48019F00D6C01E /* RepeatAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C82A1C330AB200400D85 /* RepeatAction.cpp */; };
+		9AE252411C48019F00D6C01E /* EngineHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C7F11C31670900400D85 /* EngineHelper.cpp */; };
+		9AE252421C48019F00D6C01E /* ButtonNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C7F51C31670900400D85 /* ButtonNode.cpp */; };
+		9AE252431C48019F00D6C01E /* LabelNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C7F71C31670900400D85 /* LabelNode.cpp */; };
+		9AE252441C48019F00D6C01E /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C7F91C31670900400D85 /* Node.cpp */; };
+		9AE252451C48019F00D6C01E /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C7FB1C31670900400D85 /* Scene.cpp */; };
+		9AE252461C48019F00D6C01E /* Sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C7FD1C31670900400D85 /* Sprite.cpp */; };
+		9AE252471C48019F00D6C01E /* TiledMapNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C7FF1C31670900400D85 /* TiledMapNode.cpp */; };
+		9AE252481C48019F00D6C01E /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C8011C31670900400D85 /* Texture.cpp */; };
+		9AE252491C48019F00D6C01E /* tmxparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C8031C31670900400D85 /* tmxparser.cpp */; };
+		9AE2524A1C48019F00D6C01E /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C8051C31670900400D85 /* Window.cpp */; };
+		9AE2524B1C48019F00D6C01E /* Types.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A34D5E91C41552C00B48591 /* Types.cpp */; };
+		9AE2524C1C48022600D6C01E /* Action.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C7DE1C31670900400D85 /* Action.hpp */; };
+		9AE2524D1C48022600D6C01E /* CallbackAction.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C7E01C31670900400D85 /* CallbackAction.hpp */; };
+		9AE2524E1C48022600D6C01E /* FadeAlphaToAction.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C7E21C31670900400D85 /* FadeAlphaToAction.hpp */; };
+		9AE2524F1C48022600D6C01E /* MoveByAction.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C7E41C31670900400D85 /* MoveByAction.hpp */; };
+		9AE252501C48022600D6C01E /* RemoveFromParent.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C7E61C31670900400D85 /* RemoveFromParent.hpp */; };
+		9AE252511C48022600D6C01E /* RotateAction.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C7E81C31670900400D85 /* RotateAction.hpp */; };
+		9AE252521C48022600D6C01E /* ScaleToAction.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C7EA1C31670900400D85 /* ScaleToAction.hpp */; };
+		9AE252531C48022600D6C01E /* SequenceAction.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C7EC1C31670900400D85 /* SequenceAction.hpp */; };
+		9AE252541C48022600D6C01E /* SpriteAnimationAction.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C7EE1C31670900400D85 /* SpriteAnimationAction.hpp */; };
+		9AE252551C48022600D6C01E /* WaitAction.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C7F01C31670900400D85 /* WaitAction.hpp */; };
+		9AE252561C48022600D6C01E /* RepeatAction.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C82B1C330AB200400D85 /* RepeatAction.hpp */; };
+		9AE252571C48022600D6C01E /* EngineHelper.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C7F21C31670900400D85 /* EngineHelper.hpp */; };
+		9AE252581C48022600D6C01E /* FayEngine.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C7F31C31670900400D85 /* FayEngine.h */; };
+		9AE252591C48022600D6C01E /* ButtonNode.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C7F61C31670900400D85 /* ButtonNode.hpp */; };
+		9AE2525A1C48022600D6C01E /* LabelNode.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C7F81C31670900400D85 /* LabelNode.hpp */; };
+		9AE2525B1C48022600D6C01E /* Node.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C7FA1C31670900400D85 /* Node.hpp */; };
+		9AE2525C1C48022600D6C01E /* Scene.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C7FC1C31670900400D85 /* Scene.hpp */; };
+		9AE2525D1C48022600D6C01E /* Sprite.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C7FE1C31670900400D85 /* Sprite.hpp */; };
+		9AE2525E1C48022600D6C01E /* TiledMapNode.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C8001C31670900400D85 /* TiledMapNode.hpp */; };
+		9AE2525F1C48022600D6C01E /* Texture.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C8021C31670900400D85 /* Texture.hpp */; };
+		9AE252601C48022600D6C01E /* tmxparser.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C8041C31670900400D85 /* tmxparser.h */; };
+		9AE252611C48022600D6C01E /* Window.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C8061C31670900400D85 /* Window.hpp */; };
+		9AE252621C48022600D6C01E /* Types.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A2E2F4D1C413BB7002661EF /* Types.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		9AE2522B1C48016A00D6C01E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				9AE2524C1C48022600D6C01E /* Action.hpp in CopyFiles */,
+				9AE2524D1C48022600D6C01E /* CallbackAction.hpp in CopyFiles */,
+				9AE2524E1C48022600D6C01E /* FadeAlphaToAction.hpp in CopyFiles */,
+				9AE2524F1C48022600D6C01E /* MoveByAction.hpp in CopyFiles */,
+				9AE252501C48022600D6C01E /* RemoveFromParent.hpp in CopyFiles */,
+				9AE252511C48022600D6C01E /* RotateAction.hpp in CopyFiles */,
+				9AE252521C48022600D6C01E /* ScaleToAction.hpp in CopyFiles */,
+				9AE252531C48022600D6C01E /* SequenceAction.hpp in CopyFiles */,
+				9AE252541C48022600D6C01E /* SpriteAnimationAction.hpp in CopyFiles */,
+				9AE252551C48022600D6C01E /* WaitAction.hpp in CopyFiles */,
+				9AE252561C48022600D6C01E /* RepeatAction.hpp in CopyFiles */,
+				9AE252571C48022600D6C01E /* EngineHelper.hpp in CopyFiles */,
+				9AE252581C48022600D6C01E /* FayEngine.h in CopyFiles */,
+				9AE252591C48022600D6C01E /* ButtonNode.hpp in CopyFiles */,
+				9AE2525A1C48022600D6C01E /* LabelNode.hpp in CopyFiles */,
+				9AE2525B1C48022600D6C01E /* Node.hpp in CopyFiles */,
+				9AE2525C1C48022600D6C01E /* Scene.hpp in CopyFiles */,
+				9AE2525D1C48022600D6C01E /* Sprite.hpp in CopyFiles */,
+				9AE2525E1C48022600D6C01E /* TiledMapNode.hpp in CopyFiles */,
+				9AE2525F1C48022600D6C01E /* Texture.hpp in CopyFiles */,
+				9AE252601C48022600D6C01E /* tmxparser.h in CopyFiles */,
+				9AE252611C48022600D6C01E /* Window.hpp in CopyFiles */,
+				9AE252621C48022600D6C01E /* Types.hpp in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9AFBB8811C2E0D2E006ACF87 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -89,10 +166,18 @@
 		9A60C8061C31670900400D85 /* Window.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Window.hpp; sourceTree = "<group>"; };
 		9A60C82A1C330AB200400D85 /* RepeatAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RepeatAction.cpp; sourceTree = "<group>"; };
 		9A60C82B1C330AB200400D85 /* RepeatAction.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RepeatAction.hpp; sourceTree = "<group>"; };
+		9AE2522D1C48016A00D6C01E /* libFayEngine-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libFayEngine-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AFBB8831C2E0D2E006ACF87 /* libFayEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFayEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		9AE2522A1C48016A00D6C01E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9AFBB8801C2E0D2E006ACF87 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -191,6 +276,7 @@
 			isa = PBXGroup;
 			children = (
 				9AFBB8831C2E0D2E006ACF87 /* libFayEngine.a */,
+				9AE2522D1C48016A00D6C01E /* libFayEngine-iOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -198,6 +284,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		9AE2522C1C48016A00D6C01E /* FayEngine-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9AE252331C48016A00D6C01E /* Build configuration list for PBXNativeTarget "FayEngine-iOS" */;
+			buildPhases = (
+				9AE252291C48016A00D6C01E /* Sources */,
+				9AE2522A1C48016A00D6C01E /* Frameworks */,
+				9AE2522B1C48016A00D6C01E /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "FayEngine-iOS";
+			productName = "FayEngine-iOS";
+			productReference = 9AE2522D1C48016A00D6C01E /* libFayEngine-iOS.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		9AFBB8821C2E0D2E006ACF87 /* FayEngine */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9AFBB88C1C2E0D2E006ACF87 /* Build configuration list for PBXNativeTarget "FayEngine" */;
@@ -224,6 +327,9 @@
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Tom Albrecht";
 				TargetAttributes = {
+					9AE2522C1C48016A00D6C01E = {
+						CreatedOnToolsVersion = 7.0;
+					};
 					9AFBB8821C2E0D2E006ACF87 = {
 						CreatedOnToolsVersion = 7.0;
 					};
@@ -242,11 +348,41 @@
 			projectRoot = "";
 			targets = (
 				9AFBB8821C2E0D2E006ACF87 /* FayEngine */,
+				9AE2522C1C48016A00D6C01E /* FayEngine-iOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		9AE252291C48016A00D6C01E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9AE252361C48019F00D6C01E /* Action.cpp in Sources */,
+				9AE252371C48019F00D6C01E /* CallbackAction.cpp in Sources */,
+				9AE252381C48019F00D6C01E /* FadeAlphaToAction.cpp in Sources */,
+				9AE252391C48019F00D6C01E /* MoveByAction.cpp in Sources */,
+				9AE2523A1C48019F00D6C01E /* RemoveFromParent.cpp in Sources */,
+				9AE2523B1C48019F00D6C01E /* RotateAction.cpp in Sources */,
+				9AE2523C1C48019F00D6C01E /* ScaleToAction.cpp in Sources */,
+				9AE2523D1C48019F00D6C01E /* SequenceAction.cpp in Sources */,
+				9AE2523E1C48019F00D6C01E /* SpriteAnimationAction.cpp in Sources */,
+				9AE2523F1C48019F00D6C01E /* WaitAction.cpp in Sources */,
+				9AE252401C48019F00D6C01E /* RepeatAction.cpp in Sources */,
+				9AE252411C48019F00D6C01E /* EngineHelper.cpp in Sources */,
+				9AE252421C48019F00D6C01E /* ButtonNode.cpp in Sources */,
+				9AE252431C48019F00D6C01E /* LabelNode.cpp in Sources */,
+				9AE252441C48019F00D6C01E /* Node.cpp in Sources */,
+				9AE252451C48019F00D6C01E /* Scene.cpp in Sources */,
+				9AE252461C48019F00D6C01E /* Sprite.cpp in Sources */,
+				9AE252471C48019F00D6C01E /* TiledMapNode.cpp in Sources */,
+				9AE252481C48019F00D6C01E /* Texture.cpp in Sources */,
+				9AE252491C48019F00D6C01E /* tmxparser.cpp in Sources */,
+				9AE2524A1C48019F00D6C01E /* Window.cpp in Sources */,
+				9AE2524B1C48019F00D6C01E /* Types.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9AFBB87F1C2E0D2E006ACF87 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -279,6 +415,36 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		9AE252341C48016A00D6C01E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include/SDL2,
+					/usr/local/include/FayEngine,
+					/usr/local/include,
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos9.0;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		9AE252351C48016A00D6C01E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include/SDL2,
+					/usr/local/include/FayEngine,
+					/usr/local/include,
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos9.0;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 		9AFBB88A1C2E0D2E006ACF87 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -360,6 +526,7 @@
 		9AFBB88D1C2E0D2E006ACF87 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				DYLIB_CURRENT_VERSION = 0.1;
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include/SDL2,
@@ -374,6 +541,7 @@
 		9AFBB88E1C2E0D2E006ACF87 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				DYLIB_CURRENT_VERSION = 0.1;
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include/SDL2,
@@ -388,6 +556,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		9AE252331C48016A00D6C01E /* Build configuration list for PBXNativeTarget "FayEngine-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9AE252341C48016A00D6C01E /* Debug */,
+				9AE252351C48016A00D6C01E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		9AFBB87E1C2E0D2E006ACF87 /* Build configuration list for PBXProject "FayEngine" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

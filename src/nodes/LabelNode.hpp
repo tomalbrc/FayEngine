@@ -9,9 +9,9 @@
 #ifndef LabelSprite_hpp
 #define LabelSprite_hpp
 
-#include <SDL.h>
-#include <SDL_image.h>
-#include <SDL_ttf.h>
+#include "SDL.h"
+#include "SDL_image.h"
+#include "SDL_ttf.h"
 #include <stdio.h>
 #include <vector>
 #include <iostream>
@@ -21,6 +21,9 @@
 class LabelNode;
 typedef std::shared_ptr<LabelNode> LabelNodePtr;
 
+/**
+ * Display a string using an TTF font
+ */
 class LabelNode : public Sprite {
 public:
     static LabelNodePtr create();

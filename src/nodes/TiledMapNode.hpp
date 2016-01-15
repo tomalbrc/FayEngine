@@ -7,8 +7,8 @@
 #ifndef _TiledMapNode
 #define _TiledMapNode 1
 
-#include <SDL.h>
-#include <SDL_image.h>
+#include "SDL.h"
+#include "SDL_image.h"
 #include "tmxparser.h"
 #include <stdio.h>
 #include <vector>
@@ -19,9 +19,21 @@ class TiledMapNode;
 typedef std::shared_ptr<TiledMapNode> TiledMapNodePtr;
 typedef std::vector< Rect > RectVector;
 
+/**
+ * Loads and Displays a tiled tmx map
+ */
 class TiledMapNode : public Sprite {
 public:
+    /**
+     * Creates a new TiledMapNode object
+     *
+     * @return a shared_ptr to the new TiledMapNode instance
+     */
     static TiledMapNodePtr create(const std::string &filepath);
+    
+    /**
+     * Deconstructor
+     */
     ~TiledMapNode();
     
     // May return NULL if not found!
@@ -30,7 +42,7 @@ public:
     // May return NULL if not found!
     tmxparser::TmxObjectGroup getObjectGroupNamed(std::string name);
     
-    // Gets raw TmxMap data
+    /** Gets raw TmxMap data from tmxparser */
     tmxparser::TmxMap *getRawMap();
     
 protected:
