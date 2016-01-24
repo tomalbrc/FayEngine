@@ -29,6 +29,8 @@
 		9A60C8191C31670900400D85 /* tmxparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C8031C31670900400D85 /* tmxparser.cpp */; settings = {ASSET_TAGS = (); }; };
 		9A60C81A1C31670900400D85 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C8051C31670900400D85 /* Window.cpp */; settings = {ASSET_TAGS = (); }; };
 		9A60C82C1C330AB200400D85 /* RepeatAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C82A1C330AB200400D85 /* RepeatAction.cpp */; settings = {ASSET_TAGS = (); }; };
+		9AB2EC751C4A865000F0CDF1 /* AudioEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AB2EC731C4A865000F0CDF1 /* AudioEngine.cpp */; settings = {ASSET_TAGS = (); }; };
+		9AB2EC761C4A865000F0CDF1 /* AudioEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AB2EC731C4A865000F0CDF1 /* AudioEngine.cpp */; settings = {ASSET_TAGS = (); }; };
 		9AE252361C48019F00D6C01E /* Action.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C7DD1C31670900400D85 /* Action.cpp */; };
 		9AE252371C48019F00D6C01E /* CallbackAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C7DF1C31670900400D85 /* CallbackAction.cpp */; };
 		9AE252381C48019F00D6C01E /* FadeAlphaToAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C7E11C31670900400D85 /* FadeAlphaToAction.cpp */; };
@@ -166,6 +168,8 @@
 		9A60C8061C31670900400D85 /* Window.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Window.hpp; sourceTree = "<group>"; };
 		9A60C82A1C330AB200400D85 /* RepeatAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RepeatAction.cpp; sourceTree = "<group>"; };
 		9A60C82B1C330AB200400D85 /* RepeatAction.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RepeatAction.hpp; sourceTree = "<group>"; };
+		9AB2EC731C4A865000F0CDF1 /* AudioEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioEngine.cpp; sourceTree = "<group>"; };
+		9AB2EC741C4A865000F0CDF1 /* AudioEngine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AudioEngine.hpp; sourceTree = "<group>"; };
 		9AE2522D1C48016A00D6C01E /* libFayEngine-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libFayEngine-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AFBB8831C2E0D2E006ACF87 /* libFayEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFayEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -210,8 +214,10 @@
 				9A60C8041C31670900400D85 /* tmxparser.h */,
 				9A60C8051C31670900400D85 /* Window.cpp */,
 				9A60C8061C31670900400D85 /* Window.hpp */,
-				9A2E2F4D1C413BB7002661EF /* Types.hpp */,
 				9A34D5E91C41552C00B48591 /* Types.cpp */,
+				9A2E2F4D1C413BB7002661EF /* Types.hpp */,
+				9AB2EC731C4A865000F0CDF1 /* AudioEngine.cpp */,
+				9AB2EC741C4A865000F0CDF1 /* AudioEngine.hpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -367,6 +373,7 @@
 				9AE2523C1C48019F00D6C01E /* ScaleToAction.cpp in Sources */,
 				9AE2523D1C48019F00D6C01E /* SequenceAction.cpp in Sources */,
 				9AE2523E1C48019F00D6C01E /* SpriteAnimationAction.cpp in Sources */,
+				9AB2EC761C4A865000F0CDF1 /* AudioEngine.cpp in Sources */,
 				9AE2523F1C48019F00D6C01E /* WaitAction.cpp in Sources */,
 				9AE252401C48019F00D6C01E /* RepeatAction.cpp in Sources */,
 				9AE252411C48019F00D6C01E /* EngineHelper.cpp in Sources */,
@@ -396,6 +403,7 @@
 				9A60C80A1C31670900400D85 /* MoveByAction.cpp in Sources */,
 				9A60C80B1C31670900400D85 /* RemoveFromParent.cpp in Sources */,
 				9A60C8191C31670900400D85 /* tmxparser.cpp in Sources */,
+				9AB2EC751C4A865000F0CDF1 /* AudioEngine.cpp in Sources */,
 				9A60C8121C31670900400D85 /* ButtonNode.cpp in Sources */,
 				9A60C81A1C31670900400D85 /* Window.cpp in Sources */,
 				9A60C8091C31670900400D85 /* FadeAlphaToAction.cpp in Sources */,

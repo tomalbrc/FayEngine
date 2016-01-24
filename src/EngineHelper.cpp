@@ -8,6 +8,7 @@
 
 #include "EngineHelper.hpp"
 #include "SDL_ttf.h"
+#include "SDL_mixer.h"
 #include "Texture.hpp"
 
 #include <fstream>
@@ -17,6 +18,10 @@ EngineHelper::EngineHelper() {
 }
 EngineHelper::~EngineHelper() {
     FELog("EngineHelper::~EngineHelper");
+    SDL_Quit();
+    TTF_Quit();
+    IMG_Quit();
+    Mix_Quit();
 }
 
 EngineHelper* EngineHelper::getInstance() {
@@ -39,13 +44,18 @@ void EngineHelper::Init() {
         exit(2);
     }
     
-    if(TTF_Init()==-1) {
+    if(TTF_Init() == -1) {
         printf("TTF_Init Error: %s\n", TTF_GetError());
         exit(2);
     }
     
     if (IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG) == -1) {
         printf("IMG_Init Error: %s\n", IMG_GetError());
+        exit(2);
+    }
+    
+    if (Mix_Init(MIX_INIT_MP3 | MIX_INIT_OGG) == -1) {
+        printf("Mix_Init Error: %s\n", Mix_GetError());
         exit(2);
     }
 }

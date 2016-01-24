@@ -28,7 +28,6 @@ bool Window::init(std::string wname, Vec2 size, bool fullscreen) {
     sdlWindow = SDL_CreateWindow(wname.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, size.x, size.y, fullscreen ? SDL_WINDOW_FULLSCREEN : 0); // Create window with title, position & sitze
     if (sdlWindow == nullptr) {
         FELog("SDL_CreateWindow Error: " << SDL_GetError());
-        SDL_Quit();
         return false;
     }
     
@@ -140,8 +139,7 @@ void Window::handleEvents() {
 }
 
 void Window::update() {
-    if (currentScene != nullptr) currentScene->update();
-    
+    if (currentScene != nullptr && !currentScene->isPaused()) currentScene->update();
 }
 void Window::render() {
     if (currentScene != nullptr) currentScene->render();

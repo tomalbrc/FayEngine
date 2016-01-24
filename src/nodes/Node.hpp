@@ -91,7 +91,7 @@ public:
      *
      * @param actionName    key of the action
      */
-    Action *getAction(std::string actionName);
+    ActionPtr getAction(std::string actionName);
     
     
     bool hasActions();

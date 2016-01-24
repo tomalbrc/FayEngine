@@ -49,10 +49,27 @@ void Scene::setShowCursor(bool show) {
 }
 
 
+
+void Scene::setPaused(bool flag) {
+    m_bPaused = flag;
+}
+
+bool Scene::isPaused() {
+    return m_bPaused;
+}
+
+
+
+void Scene::update() {
+    
+}
+
 void Scene::render() {
     SDL_RenderClear(getWindow()->getRenderer());
     SDL_SetRenderDrawColor(getWindow()->getRenderer(), getBackgroundColor().r, getBackgroundColor().g, getBackgroundColor().b, getBackgroundColor().a);
     Node::render(getWindow()->getRenderer());
     SDL_RenderPresent(getWindow()->getRenderer());
 }
+
+
 

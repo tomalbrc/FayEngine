@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include <math.h>
+#include <iostream>
 #include "SDL.h"
 
 /* macros */

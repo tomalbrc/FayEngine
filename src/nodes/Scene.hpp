@@ -79,12 +79,29 @@ public:
      */
     void setShowCursor(bool show);
     
+    /**
+     * Pause the Scene
+     */
+    void setPaused(bool flag);
+    
+    /**
+     * Returns true if the Scene is paused, false otherwise
+     */
+    bool isPaused();
+    
+    /**
+     * Re-implementation of Node::update()
+     */
+    virtual void update();
+    
+    
 protected:
     Scene();
     bool init();
     bool shouldBeRemoved = false;
 private:
     Color mBackgroundColor;
+    bool m_bPaused = false;
     Window *window;
 };
 

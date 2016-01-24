@@ -46,7 +46,7 @@ void Node::removeAction(ActionPtr action) { // NOT TESTED
     }
 }
 void Node::removeAction(const std::string &actionName) { // WORKS
-    actions[actionName] = std::move(actions[actionName]);
+    actions[actionName]->finished = true;
 }
 void Node::removeAllActions() { // NOT TESTED
     for (auto&& a : actions) a.second->finished = true;
@@ -54,8 +54,8 @@ void Node::removeAllActions() { // NOT TESTED
 bool Node::hasActions() {
     return actions.size() > 0;
 }
-Action *Node::getAction(std::string actionName) {
-    return actions.find(actionName) == actions.end() ? NULL : actions[actionName].get();
+ActionPtr Node::getAction(std::string actionName) {
+    return actions.find(actionName) == actions.end() ? NULL : actions[actionName];
 }
 
 
