@@ -46,7 +46,7 @@ void Node::removeAction(ActionPtr action) { // NOT TESTED
     }
 }
 void Node::removeAction(const std::string &actionName) { // WORKS
-    actions[actionName]->finished = true;
+    if (actions[actionName] != nullptr) actions[actionName]->finished = true;
 }
 void Node::removeAllActions() { // NOT TESTED
     for (auto&& a : actions) a.second->finished = true;
