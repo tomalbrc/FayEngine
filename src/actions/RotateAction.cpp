@@ -8,12 +8,12 @@
 
 #include "RotateAction.hpp"
 
-RotateToActionPtr RotateToAction::create(double pduration, int destRot) {
-    return RotateToActionPtr(new RotateToAction(pduration,destRot));
+RotateToActionPtr RotateToAction::create(double pduration, double radians) {
+    return RotateToActionPtr(new RotateToAction(pduration,radians));
 }
 
-RotateToAction::RotateToAction(double pduration, int destRot) : Action() {
-    mDestRot = destRot;
+RotateToAction::RotateToAction(double pduration, double radians) : Action() {
+    mDestRot = radians;
     duration = pduration*1000;
 }
 

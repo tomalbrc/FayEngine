@@ -27,7 +27,7 @@ int main(int argc, const char * argv[]) {
     auto s = Sprite::create();
     s->setAnchorPoint(Vec2Make(0.5, 0.5));
     s->setPosition(win->getSize()/2.0);
-    s->runAction(SpriteAnimationAction::create(0.5, textures));
+    s->runAction(RepeatAction::create(SpriteAnimationAction::create(0.5, textures), 0)); // 0=forever
     scene->addChild(s);
     
     win->presentScene(scene);

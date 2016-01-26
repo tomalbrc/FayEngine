@@ -114,8 +114,8 @@ public:
     void setAlpha(const int &a);
     const int getAlpha();
     
-    void setScale(const double &scale);
-    const double getScale();
+    void setScale(Vec2 scale);
+    const Vec2 getScale();
     
     // void setSize(Vec2 size) doesnt exist (yet)
     Vec2 getSize();
@@ -159,7 +159,7 @@ private:
     double mZRotation = 0.0;
     
     // Skalierung (Skaliert Größe)
-    double mScale = 1.0;
+    Vec2 mScale = Vec2Make(1.0, 1.0);
     
     // Position in parent node
     Vec2 position = Vec2Make(0,0);

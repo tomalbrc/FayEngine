@@ -76,6 +76,10 @@ public:
      */
     bool isRunning();
     
+    /**
+     * @return The current screen scale (1x, 2x (HiDPI), ...)
+     */
+    double screenScale();
     
 protected:
     bool init(std::string wname, Vec2 size, bool fullscreen);

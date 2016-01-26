@@ -91,14 +91,14 @@ Rect Sprite::getBoundingBox() {
 
 
 
-double absScale(Node *n) {
+inline Vec2 absScale(Node *n) {
     auto s = n->getScale();
     for (auto p = NodeWeakPtr(n->getParent()); !p.expired(); p = NodeWeakPtr( p.lock()->getParent() ))
-        s *= p.lock()->getScale();
+        s = s * p.lock()->getScale();
     return s;
 }
 
-double absRotation(Node *n) {
+inline double absRotation(Node *n) {
     auto s = n->getZRotation();
     for (auto p = NodeWeakPtr(n->getParent()); !p.expired(); p = NodeWeakPtr( p.lock()->getParent() ))
         s += p.lock()->getZRotation();

@@ -10,7 +10,7 @@
 #include "EngineHelper.hpp"
 #include <memory>
 // Bits per pixel in created textures
-#define TEXTURE_BIT 24
+#define TEXTURE_BIT 32
 
 TexturePtr Texture::create() {
     auto t = EngineHelper::getInstance()->getTextureForKey("empty");

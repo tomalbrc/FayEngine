@@ -19,18 +19,19 @@ RepeatAction::RepeatAction(ActionPtr action, int times) : Action() {
 }
 
 RepeatAction::~RepeatAction() {
-    mTargetAction = NULL;
+    mTargetAction.reset();
 }
 
 void RepeatAction::update() {
-    if (finished) return;
+    if (target == nullptr || finished) return;
     
     if (mTargetAction->finished) {
         mRepeatTimes--;
-        if (mRepeatTimes <= 0 && mForever) {
+        if (mForever) {
             mTargetAction->finished = false;
-            target->runAction(mTargetAction);
+            mTargetAction->start();
         } else if (mRepeatTimes <= 0) {
+            mTargetAction.reset();
             finished = true;
             return;
         }
@@ -40,7 +41,8 @@ void RepeatAction::update() {
 }
 
 void RepeatAction::start()  {
-    target->runAction(mTargetAction);
+    mTargetAction->target = target;
+    mTargetAction->start();
     startTick = SDL_GetTicks();
 }
 

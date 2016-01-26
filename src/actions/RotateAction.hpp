@@ -28,20 +28,18 @@ class Node;
  */
 class RotateToAction : public Action {
 public:
-    RotateToAction(double duration, int degree);
-    static RotateToActionPtr create(double duration, int degree);
+    RotateToAction(double duration, double radians);
+    static RotateToActionPtr create(double duration, double radians);
 
     
     void update();
     void start();
     
     
-    
-    
 private:
     Sprite *targetSprite = NULL;
-    int mDestRot = 255;
-    int mStartRot = 0;
+    double mDestRot = 255;
+    double mStartRot = 0;
 };
 
 #endif /* RotateAction_hpp */

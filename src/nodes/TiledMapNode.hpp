@@ -48,6 +48,7 @@ public:
 protected:
     bool init (const std::string &filepath);
 private:
+    std::string directory = ""; // path of directory the map is located in, in order to load images correctly
     void drawTiles();
     void getObjects();
     tmxparser::TmxMap *map;

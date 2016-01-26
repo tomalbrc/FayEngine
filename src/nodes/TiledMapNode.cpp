@@ -18,6 +18,9 @@ bool TiledMapNode::init(const std::string &filepath) {
     map = new tmxparser::TmxMap();
     parseFromFile(filepath.c_str(), map, "");
     
+    auto last_slash_idx = filepath.rfind('/');
+    if (last_slash_idx != std::string::npos) directory = filepath.substr(0, last_slash_idx) + "/";
+    
     this->setTexture(Texture::create(Vec2Make(map->width * map->tileWidth,map->height * map->tileHeight), ColorMake(0xFF000000, 0x00FF0000, 0x0000FF00,  0x000000FF)));
     
     drawTiles();
@@ -52,19 +55,18 @@ void TiledMapNode::drawTiles() {
     if (map->tilesetCollection.size() == 0) return;
     tmxparser::TmxTileset tileset = map->tilesetCollection[0];
     
-    SDL_Surface *img = IMG_Load(("res/" + tileset.image.source).c_str());
+    SDL_Surface *img = IMG_Load((directory + tileset.image.source).c_str());
     Vec2 imageTileSize = Vec2Make((tileset.tileWidth), (tileset.tileHeight));
     Vec2 imageSize = Vec2Make(tileset.image.width, tileset.image.height);
     int tileSpacing = tileset.tileSpacingInImage;
     
     FELog("First GID: " << tileset.firstgid);
-    FELog("Image Source: " << tileset.image.source);
+    FELog("Image Source: " << directory + tileset.image.source);
     FELog("tile-size: " << imageTileSize.x << " y:" << imageTileSize.y);
-    
     
     for (auto&& tileLayer : map->layerCollection) {
         
-        SDL_Surface *surface = SDL_CreateRGBSurface(0,map->width*map->tileWidth,map->height*map->tileHeight,24,0xFF000000, 0x00FF0000, 0x0000FF00, tileLayer.name == "ground" ? 0 : 0x000000FF);
+        SDL_Surface *surface = SDL_CreateRGBSurface(0,map->width*map->tileWidth,map->height*map->tileHeight,32,0xFF000000, 0x00FF0000, 0x0000FF00, 0x000000FF);
         
         int index = 0;
         for (int y = 0; y < tileLayer.height; ++y) {
@@ -103,7 +105,6 @@ void TiledMapNode::drawTiles() {
         surSprite->setName(tileLayer.name);
         mTileLayer.push_back(surSprite);
         this->addChild(surSprite);
-        
         SDL_FreeSurface(surface);
     }
     SDL_FreeSurface(img);

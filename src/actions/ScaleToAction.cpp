@@ -13,7 +13,7 @@ ScaleToActionPtr ScaleToAction::create(double pduration, double destScale) {
 }
 
 ScaleToAction::ScaleToAction(double pduration, double destScale) : Action() {
-    mDestScale = destScale;
+    mDestScale = Vec2Make(destScale, destScale);
     duration = pduration*1000;
 }
 
@@ -21,7 +21,7 @@ void ScaleToAction::update() {
     if (target == nullptr) return;
 
     Uint32 passedTime = SDL_GetTicks() - startTick;
-    double a = mStartScale-((mStartScale - mDestScale)*(passedTime/duration));
+    auto a = mStartScale-((mStartScale - mDestScale)*(passedTime/duration));
     target->setScale(a);
     
     if (passedTime >= duration) finished = true, target->setScale(mDestScale);

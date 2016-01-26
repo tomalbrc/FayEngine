@@ -27,8 +27,8 @@ class Node;
  * Scales the target Nodes by x in y duration
  */
 class ScaleToAction : public Action {
-    double mStartScale = 1.0;
-    double mDestScale = 0.0;
+    Vec2 mStartScale = Vec2Make(1.0, 1.0);
+    Vec2 mDestScale = Vec2Null();
 public:
     ScaleToAction(double duration, double destScale);
     static ScaleToActionPtr create(double duration, double destScale);

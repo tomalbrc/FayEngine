@@ -25,7 +25,7 @@ WindowPtr Window::create(std::string wname, Vec2 size, bool fullscreen) {
 
 
 bool Window::init(std::string wname, Vec2 size, bool fullscreen) {
-    sdlWindow = SDL_CreateWindow(wname.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, size.x, size.y, fullscreen ? SDL_WINDOW_FULLSCREEN : 0); // Create window with title, position & sitze
+    sdlWindow = SDL_CreateWindow(wname.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, size.x, size.y, (fullscreen ? SDL_WINDOW_FULLSCREEN : 0)); // Create window with title, position & sitze
     if (sdlWindow == nullptr) {
         FELog("SDL_CreateWindow Error: " << SDL_GetError());
         return false;
@@ -157,4 +157,14 @@ bool Window::isRunning() {
     return running;
 }
 
+
+double Window::screenScale() {
+    int x,y;
+    SDL_GetWindowSize(sdlWindow, &x, &y);
+    
+    int w,h;
+    SDL_GL_GetDrawableSize(sdlWindow, &w, &h);
+    
+    return w/double(x);
+}
 

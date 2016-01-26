@@ -39,21 +39,23 @@ void Node::runAction(ActionPtr action, const std::string &forKey) { // WORKS
 }
 
 void Node::removeAction(ActionPtr action) { // NOT TESTED
-    for(auto iterator = actions.begin(); iterator != actions.end(); iterator++) {
-        if (iterator->second == action) {
-            return;
-        }
+    action->finished = true;
+}
+
+void Node::removeAction(const std::string &actionName) { // WORKS
+    if (actions[actionName].get() != nullptr) {
+        actions[actionName]->finished = true;
     }
 }
-void Node::removeAction(const std::string &actionName) { // WORKS
-    if (actions[actionName] != nullptr) actions[actionName]->finished = true;
-}
+
 void Node::removeAllActions() { // NOT TESTED
-    for (auto&& a : actions) a.second->finished = true;
+    for (auto&& a : actions) if (a.second.get() != nullptr) a.second->finished = true;
 }
+
 bool Node::hasActions() {
     return actions.size() > 0;
 }
+
 ActionPtr Node::getAction(std::string actionName) {
     return actions.find(actionName) == actions.end() ? NULL : actions[actionName];
 }
@@ -70,7 +72,7 @@ void Node::update() {
         else if (i != children.end()) child->update(), ++i;
     }
     for (auto&& i = actions.begin(); i != actions.end();) {
-        if (i->second->target == nullptr || i->second->finished) i = actions.erase(i); // remove finished actions
+        if (i->second == nullptr || i->second->target == nullptr || i->second->finished) i = actions.erase(i); // remove finished actions
         else i->second->update(), ++i;
     }
 }
@@ -112,11 +114,11 @@ Vec2 Node::getSize() {
 }
 
 
-void Node::setScale(const double &scale) {
+void Node::setScale(Vec2 scale) {
     isTransformDirty = true;
     mScale = scale;
 }
-const double Node::getScale() {
+const Vec2 Node::getScale() {
     return mScale;
 }
 
@@ -224,7 +226,7 @@ void Node::computeTransform() {
     
     auto anchorOffset = getAnchorPoint();
     
-    mTransform = AffineTransformMultiply(mTransform, AffineTransformMakeScale(getScale(), getScale()));
+    mTransform = AffineTransformMultiply(mTransform, AffineTransformMakeScale(getScale().x, getScale().y));
     mTransform = AffineTransformMultiply(mTransform, AffineTransformMakeTranslate(anchorOffset.x, anchorOffset.y));
     mTransform = AffineTransformMultiply(mTransform, AffineTransformMakeRotate(getZRotation()));
     mTransform = AffineTransformMultiply(mTransform, AffineTransformMakeTranslate(getPosition().x, getPosition().y));

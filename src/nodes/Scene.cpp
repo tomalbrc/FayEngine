@@ -61,7 +61,7 @@ bool Scene::isPaused() {
 
 
 void Scene::update() {
-    
+    Node::update();
 }
 
 void Scene::render() {

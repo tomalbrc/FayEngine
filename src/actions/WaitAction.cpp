@@ -17,7 +17,7 @@ WaitAction::WaitAction(double dur) : Action() {
 }
 
 void WaitAction::update() {
-    if (target == nullptr) return;
+    if (target == nullptr || finished) return;
     
     if (SDL_GetTicks()-startTick >= duration)
         finished = true;
