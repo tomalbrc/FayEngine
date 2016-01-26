@@ -167,8 +167,8 @@ extern bool RectIsNull(Rect p) {
 extern bool RectIntersectsVec2(Rect r, Vec2 v) {
     double pointX = v.x;
     double pointY = v.y;
-    if (pointX < (r.origin.x + r.size.x) && pointX > r.origin.x &&
-        pointY < (r.origin.y + r.size.y) && pointY > r.origin.y)
+    if (pointX < (r.origin.x + r.size.x) && pointX >= r.origin.x &&
+        pointY < (r.origin.y + r.size.y) && pointY >= r.origin.y)
         return true;
     else
         return false;
