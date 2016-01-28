@@ -19,7 +19,7 @@
 #include "LabelNode.hpp"
 
 class ButtonNode;
-#define ButtonNodeLambda [](ButtonNode *sender)
+#define ButtonNodeLambda [this](ButtonNode *sender)
 typedef std::function<void(ButtonNode*)> ButtonNodeCallback;
 typedef std::shared_ptr<ButtonNode> ButtonNodePtr;
 

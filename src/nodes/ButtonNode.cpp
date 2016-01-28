@@ -44,17 +44,19 @@ ButtonNode::~ButtonNode() {
 
 
 void ButtonNode::mouseClickBegan(SDL_MouseButtonEvent event, Vec2 coords) {
-    if (RectIntersectsVec2(getBoundingBox(), convertToNodeSpace(coords))) {
+    auto bb = getBoundingBox();
+    bb.origin = bb.origin - Vec2Make(getSize().x*getAnchorPoint().x, getSize().y*getAnchorPoint().y);
+    if (RectIntersectsVec2(bb, convertToNodeSpace(coords))) {
         if (mCallback != nullptr) mCallback(this);
     }
 }
 
 void ButtonNode::mouseMoved(SDL_MouseMotionEvent, Vec2 coords) {
-    if (RectIntersectsVec2(getBoundingBox(), convertToNodeSpace(coords))) {
-        if (mHoverColor != getTextColor())
-            setTextColor(mHoverColor);
-    } else if (mNormalColor != getTextColor())
-        setTextColor(mNormalColor);
+    auto bb = getBoundingBox();
+    bb.origin = bb.origin - Vec2Make(getSize().x*getAnchorPoint().x, getSize().y*getAnchorPoint().y);
+    if (RectIntersectsVec2(bb, convertToNodeSpace(coords))) {
+        if (mHoverColor != getTextColor()) setTextColor(mHoverColor);
+    } else if (mNormalColor != getTextColor()) setTextColor(mNormalColor);
 }
 
 
