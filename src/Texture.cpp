@@ -63,7 +63,7 @@ TexturePtr Texture::create(SDL_Surface *surface) {
 
 
 bool Texture::init() {
-    SDL_Surface *mys = SDL_CreateRGBSurface(0,0,0,TEXTURE_BIT,0,0,0,255);
+    SDL_Surface *mys = SDL_CreateRGBSurface(0,0,0,TEXTURE_BIT,0,0,0,0);
     mTexture = SDL_CreateTextureFromSurface(EngineHelper::getInstance()->getRenderer(), mys);
     SDL_FreeSurface(mys);
     return true;
@@ -77,7 +77,8 @@ bool Texture::init(std::string filename) { // load image from path
     return true;
 }
 bool Texture::init(Vec2 size, Color col) {
-    SDL_Surface *mys = SDL_CreateRGBSurface(0, size.x, size.y, TEXTURE_BIT, col.r, col.g, col.b, col.a);
+    SDL_Surface *mys = SDL_CreateRGBSurface(0, size.x, size.y, TEXTURE_BIT, 0, 0, 0, 0);
+    SDL_FillRect(mys, NULL, SDL_MapRGBA(mys->format, col.r, col.g, col.b, col.a));
     mTexture = SDL_CreateTextureFromSurface(EngineHelper::getInstance()->getRenderer(), mys);
     mSize = size;
     SDL_FreeSurface(mys);

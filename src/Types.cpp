@@ -114,12 +114,12 @@ extern Rect RectApplyAffineTransform(Rect rect, AffineTransform transform) {
 /*
  * Color
  */
-extern Color ColorMake(Uint32 r, Uint32 g, Uint32 b, Uint32 a) {
+extern Color ColorMake(Uint8 r, Uint8 g, Uint8 b, Uint8 a) {
     Color c;
     c.r = r, c.g = g, c.b = b, c.a = a;
     return c;
 }
-extern Color ColorMake(Uint32 r, Uint32 g, Uint32 b) { return ColorMake(r, g, b, 255); }
+extern Color ColorMake(Uint8 r, Uint8 g, Uint8 b) { return ColorMake(r, g, b, 255); }
 
 
 
@@ -167,8 +167,8 @@ extern bool RectIsNull(Rect p) {
 extern bool RectIntersectsVec2(Rect r, Vec2 v) {
     double pointX = v.x;
     double pointY = v.y;
-    if (pointX < (r.origin.x + r.size.x) && pointX >= r.origin.x &&
-        pointY < (r.origin.y + r.size.y) && pointY >= r.origin.y)
+    if (pointX <= (r.origin.x + r.size.x) && pointX >= r.origin.x &&
+        pointY <= (r.origin.y + r.size.y) && pointY >= r.origin.y)
         return true;
     else
         return false;

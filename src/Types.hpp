@@ -27,16 +27,16 @@
  */
 struct Color {
     /** Red value */
-    Uint32 r;
+    Uint8 r;
     /** Green value */
-    Uint32 g;
+    Uint8 g;
     /** Blue value */
-    Uint32 b;
+    Uint8 b;
     /** Alpha value */
-    Uint32 a;
+    Uint8 a;
 };
-extern Color ColorMake(Uint32 r, Uint32 g, Uint32 b, Uint32 a);
-extern Color ColorMake(Uint32 r, Uint32 g, Uint32 b);
+extern Color ColorMake(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+extern Color ColorMake(Uint8 r, Uint8 g, Uint8 b);
 inline Color ColorBlackColor() { return ColorMake(0, 0, 0); }
 inline Color ColorWhiteColor() { return ColorMake(255, 255, 255); }
 inline Color ColorRedColor() { return ColorMake(255, 0, 0); }

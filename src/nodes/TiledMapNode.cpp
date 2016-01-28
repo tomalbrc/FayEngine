@@ -21,7 +21,7 @@ bool TiledMapNode::init(const std::string &filepath) {
     auto last_slash_idx = filepath.rfind('/');
     if (last_slash_idx != std::string::npos) directory = filepath.substr(0, last_slash_idx) + "/";
     
-    this->setTexture(Texture::create(Vec2Make(map->width * map->tileWidth,map->height * map->tileHeight), ColorMake(0xFF000000, 0x00FF0000, 0x0000FF00,  0x000000FF)));
+    this->setTexture(Texture::create(Vec2Make(map->width * map->tileWidth,map->height * map->tileHeight), ColorMake(0, 0, 0,  0)));
     
     drawTiles();
     
