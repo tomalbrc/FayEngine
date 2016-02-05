@@ -30,8 +30,8 @@ void SequenceAction::update() {
     if (mActions.size() == 0 || target == nullptr) return;
     
     if (mActions[currentIndex]->finished) {
-        mActions.erase(std::remove(mActions.begin(), mActions.end(), mActions[currentIndex]), mActions.end());
-        if (mActions.size()== 0) {
+        currentIndex++;
+        if (currentIndex == mActions.size()) {
             finished = true;
             return;
         }
@@ -43,8 +43,13 @@ void SequenceAction::update() {
 
 void SequenceAction::start()  {
     startTick = SDL_GetTicks();
+    currentIndex = 0;
     if (mActions.size() > 0) prepareCurrentAction();
     else finished = true;
+    
+    for (auto&& a : mActions) {
+        a->finished = false;
+    }
 }
 
 void SequenceAction::prepareCurrentAction() {

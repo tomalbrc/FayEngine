@@ -38,7 +38,8 @@ bool ButtonNode::init(std::string text, std::string fontpath, int fontSize, Colo
 }
 
 ButtonNode::~ButtonNode() {
-    mCallback = NULL;
+    mCallbackUp = NULL;
+    mCallbackDown = NULL;
 }
 
 
@@ -47,8 +48,17 @@ void ButtonNode::mouseClickBegan(SDL_MouseButtonEvent event, Vec2 coords) {
     auto bb = getBoundingBox();
     bb.origin = bb.origin - Vec2Make(getSize().x*getAnchorPoint().x, getSize().y*getAnchorPoint().y);
     if (RectIntersectsVec2(bb, convertToNodeSpace(coords))) {
-        if (mCallback != nullptr) mCallback(this);
+        if (mCallbackDown != nullptr) mCallbackDown(this);
     }
+}
+
+void ButtonNode::mouseClickEnded(SDL_MouseButtonEvent event, Vec2 coords) {
+    auto bb = getBoundingBox();
+    bb.origin = bb.origin - Vec2Make(getSize().x*getAnchorPoint().x, getSize().y*getAnchorPoint().y);
+    if (RectIntersectsVec2(bb, convertToNodeSpace(coords))) {
+        if (mCallbackUp != nullptr) mCallbackUp(this);
+    }
+    setTextColor(mNormalColor);
 }
 
 void ButtonNode::mouseMoved(SDL_MouseMotionEvent, Vec2 coords) {
@@ -61,10 +71,12 @@ void ButtonNode::mouseMoved(SDL_MouseMotionEvent, Vec2 coords) {
 
 
 
-void ButtonNode::setHandler(ButtonNodeCallback callback) {
-    mCallback = callback;
+void ButtonNode::setPressedHandler(ButtonNodeCallback callback) {
+    mCallbackDown = callback;
 }
-
+void ButtonNode::setReleasedHandler(ButtonNodeCallback callback) {
+    mCallbackUp = callback;
+}
 
 
 void ButtonNode::setHoverColor(Color hoverColor) {

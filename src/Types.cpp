@@ -125,12 +125,18 @@ extern Color ColorMake(Uint8 r, Uint8 g, Uint8 b) { return ColorMake(r, g, b, 25
 
 
 /*
- * Rect and Vec2
+ * Vec2, Vec3 and Rect
  */
 extern Vec2 Vec2Make(float x, float y) {
     Vec2 p;
     p.x = x;
     p.y = y;
+    return p;
+}
+extern Vec2 Vec2Make(float xy) {
+    Vec2 p;
+    p.x = xy;
+    p.y = xy;
     return p;
 }
 extern Vec2 Vec2Null() {
@@ -148,6 +154,29 @@ extern Vec2 operator/(Vec2 lhs, const double rhs) { return Vec2Make(lhs.x / rhs,
 extern Vec2 operator*(Vec2 lhs, const Vec2 rhs) { return Vec2Make(lhs.x * rhs.x, lhs.y * rhs.y); }
 extern Vec2 operator*(Vec2 lhs, const float rhs) { return Vec2Make((lhs.x * rhs), (lhs.y * rhs)); }
 
+
+
+extern Vec3 Vec3Make(float x, float y, float z) {
+    Vec3 p;
+    p.x = x;
+    p.y = y;
+    p.z = z;
+    return p;
+}
+extern Vec3 Vec3Make(float xyz) {
+    Vec3 p;
+    p.x = xyz;
+    p.y = xyz;
+    p.z = xyz;
+    return p;
+}
+extern Vec3 Vec3Null() {
+    Vec3 p;
+    p.x = 0.f;
+    p.y = 0.f;
+    p.z = 0.f;
+    return p;
+}
 
 
 extern Rect RectMake(Vec2 origin, Vec2 size) {
@@ -180,7 +209,17 @@ extern bool RectIntersectsRect(Rect rectA, Rect rectB) {
              (rectB.origin.y+rectB.size.y) < rectA.origin.y);
 }
 
+extern Rect RectInset(Rect r, float inset) {
+    return RectMake(r.origin.x+inset/2.0, r.origin.y+inset/2.0, r.size.x-inset, r.size.y-inset);
+}
 
+extern Rect RectOffset(Rect r, Vec2 offset) {
+    return RectMake(r.origin.x+offset.x, r.origin.y+offset.y, r.size.x, r.size.y);
+}
+
+
+
+extern Rect operator*(Rect lhs, const float rhs) { return RectMake((lhs.origin.x * rhs), (lhs.origin.y * rhs), (lhs.size.x * rhs), (lhs.size.y * rhs)); }
 
 
 

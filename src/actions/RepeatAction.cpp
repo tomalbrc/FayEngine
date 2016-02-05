@@ -23,7 +23,7 @@ RepeatAction::~RepeatAction() {
 }
 
 void RepeatAction::update() {
-    if (target == nullptr || finished) return;
+    if (target == nullptr) return;
     
     if (mTargetAction->finished) {
         mRepeatTimes--;

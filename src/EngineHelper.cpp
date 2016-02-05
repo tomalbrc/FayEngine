@@ -58,6 +58,11 @@ void EngineHelper::Init() {
         printf("Mix_Init Error: %s\n", Mix_GetError());
         exit(2);
     }
+    
+    // For ios/android
+    SDL_SetHint(SDL_HINT_ACCELEROMETER_AS_JOYSTICK, "1");
+    SDL_JoystickEventState(SDL_ENABLE);
+    SDL_JoystickOpen(0);
 }
 
 

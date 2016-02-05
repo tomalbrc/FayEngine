@@ -39,8 +39,11 @@ public:
     void setNormalColor(Color normalColor);
     Color getNormalColor();
     
-    void setHandler(ButtonNodeCallback callback);
+    void setPressedHandler(ButtonNodeCallback callback);
+    void setReleasedHandler(ButtonNodeCallback callback);
+    
     virtual void mouseClickBegan(SDL_MouseButtonEvent event, Vec2 coords);
+    virtual void mouseClickEnded(SDL_MouseButtonEvent event, Vec2 coords);
     virtual void mouseMoved(SDL_MouseMotionEvent, Vec2 coords);
     
     
@@ -50,7 +53,8 @@ private:
     
     Color mHoverColor = ColorBlackColor();
     Color mNormalColor = ColorWhiteColor();
-    ButtonNodeCallback mCallback = NULL;
+    ButtonNodeCallback mCallbackDown = NULL;
+    ButtonNodeCallback mCallbackUp = NULL;
 };
 
 #endif /* ButtonNode_hpp */

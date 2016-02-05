@@ -68,6 +68,8 @@ struct Vec2 {
 
 /** Creates a Vec2 with specified x and y values */
 extern Vec2 Vec2Make(float x, float y);
+/** Creates a Vec2 with xy as x and y values */
+extern Vec2 Vec2Make(float xy);
 /** Creates a Vec2 with x = 0 and y */
 extern Vec2 Vec2Null();
 
@@ -79,6 +81,29 @@ extern Vec2 operator/(Vec2 lhs, const Vec2 rhs);
 extern Vec2 operator/(Vec2 lhs, const double rhs);
 extern Vec2 operator*(Vec2 lhs, const Vec2 rhs);
 extern Vec2 operator*(Vec2 lhs, const float rhs);
+
+
+
+
+/**
+ * Vec3 with x, y and z values
+ */
+struct Vec3 {
+    /** x value */
+    float x;
+    /** y value */
+    float y;
+    /** z value */
+    float z;
+};
+
+/** Creates a Vec2 with specified x, y and z values */
+extern Vec3 Vec3Make(float x, float y, float z);
+/** Creates a Vec2 with xyz as x, y and z values */
+extern Vec3 Vec3Make(float xyz);
+/** Creates a Vec2 with x = 0, y = 0, z = 0 */
+extern Vec3 Vec3Null();
+
 
 
 
@@ -98,7 +123,10 @@ extern Rect RectNull();
 extern bool RectIntersectsVec2(Rect r, Vec2 v);
 extern bool RectIntersectsRect(Rect rectA, Rect rectB);
 
+extern Rect RectInset(Rect r, float inset);
+extern Rect RectOffset(Rect r, Vec2 offset);
 
+extern Rect operator*(Rect lhs, const float rhs) ;
 
 
 /**

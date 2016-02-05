@@ -24,8 +24,8 @@ WindowPtr Window::create(std::string wname, Vec2 size, bool fullscreen) {
 }
 
 
-bool Window::init(std::string wname, Vec2 size, bool fullscreen) {
-    sdlWindow = SDL_CreateWindow(wname.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, size.x, size.y, (fullscreen ? SDL_WINDOW_FULLSCREEN : 0)); // Create window with title, position & sitze
+bool Window::init(std::string wname, Vec2 size, bool fullscreen) {    
+    sdlWindow = SDL_CreateWindow(wname.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, size.x, size.y, (fullscreen ? SDL_WINDOW_FULLSCREEN : 0) | SDL_WINDOW_BORDERLESS | SDL_WINDOW_ALLOW_HIGHDPI); // Create window with title, position & sitze
     if (sdlWindow == nullptr) {
         FELog("SDL_CreateWindow Error: " << SDL_GetError());
         return false;
@@ -133,6 +133,19 @@ void Window::handleEvents() {
             case SDL_MOUSEBUTTONUP:
                 if (currentScene != nullptr) currentScene->mouseClickEnded(event.button, getMouseCoords());
                 break;
+            case SDL_JOYAXISMOTION: {
+                if (event.jaxis.axis == 0) accelData.x = event.jaxis.value;
+                if (event.jaxis.axis == 1) accelData.y = event.jaxis.value;
+                if (event.jaxis.axis == 2) {
+                    accelData.z = event.jaxis.value;
+                    if (currentScene != nullptr) currentScene->accelerometerMoved(accelData);
+                }
+                break;
+            }
+            case SDL_FINGERDOWN: {
+                if (currentScene != nullptr) currentScene->touchBegan(event.tfinger, Vec2Make(event.tfinger.x, event.tfinger.y)*getSize());
+                break;
+            }
             default: break;
         }
     }

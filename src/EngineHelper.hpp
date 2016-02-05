@@ -17,7 +17,7 @@
 #include <vector>
 #include <iostream>
 #include "tmxparser.h"
-
+#include "Window.hpp"
 #include "Texture.hpp"
 
 /**
@@ -161,6 +161,8 @@ public:
      * Loads an int for a specified key
      */
     int loadInt(std::string key);
+    
+    WindowPtr mainWindow;
     
 private:
     std::string basePath;

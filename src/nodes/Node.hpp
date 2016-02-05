@@ -131,13 +131,18 @@ public:
     void setParent(const NodePtr& n);
     ScenePtr getScene();
     
-    // eine virtuelle function nullsetzen heißt das jede
-    // derivierte klasse diese funktion implementieren !muss!
+    // Desktop functions
     virtual void keyDown(SDL_KeyboardEvent event);
     virtual void keyUp(SDL_KeyboardEvent event);
     virtual void mouseMoved(SDL_MouseMotionEvent, Vec2 coords);
     virtual void mouseClickEnded(SDL_MouseButtonEvent event, Vec2 coords);
     virtual void mouseClickBegan(SDL_MouseButtonEvent event, Vec2 coords);
+    
+    // Mobile functions
+    virtual void touchBegan(SDL_TouchFingerEvent finger, Vec2 coords);
+    virtual void touchEnded(SDL_TouchFingerEvent finger, Vec2 coords);
+    virtual void touchMoved(SDL_TouchFingerEvent finger, Vec2 coords);
+    virtual void accelerometerMoved(Vec3 accelerometerData);
     
     Vec2 convertToWorldSpace(Vec2 v); // Works reliable
     Vec2 convertToNodeSpace(Vec2 v); // Needs testing
@@ -149,7 +154,6 @@ public:
     
 protected:
     bool init();
-    // flag ob die Node beim nächsten rendern entfernt werden soll
     bool shouldBeRemoved = false;
 private:
     // Alpha wert

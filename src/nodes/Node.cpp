@@ -220,6 +220,19 @@ void Node::mouseClickEnded(SDL_MouseButtonEvent event, Vec2 coords) {
 }
 
 
+void Node::touchBegan(SDL_TouchFingerEvent finger, Vec2 coords) {
+    for (auto&& c : children) if (c != nullptr) c->touchBegan(finger, coords);
+}
+void Node::touchMoved(SDL_TouchFingerEvent finger, Vec2 coords) {
+    for (auto&& c : children) if (c != nullptr) c->touchMoved(finger, coords);
+}
+void Node::touchEnded(SDL_TouchFingerEvent finger, Vec2 coords) {
+    for (auto&& c : children) if (c != nullptr) c->touchEnded(finger, coords);
+}
+void Node::accelerometerMoved(Vec3 accelerometerData) {
+    for (auto&& c : children) if (c != nullptr) c->accelerometerMoved(accelerometerData);
+}
+
 
 void Node::computeTransform() {
     mTransform = AffineTransformIdentity();

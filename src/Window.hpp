@@ -81,6 +81,8 @@ public:
      */
     double screenScale();
     
+    
+    
 protected:
     bool init(std::string wname, Vec2 size, bool fullscreen);
 private:
@@ -94,6 +96,8 @@ private:
     void handleEvents();
     void update();
     void render();
+    
+    Vec3 accelData = Vec3Null();
 };
 
 #endif /* Window_hpp */

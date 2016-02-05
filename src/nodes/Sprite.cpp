@@ -80,7 +80,7 @@ TexturePtr Sprite::getTexture() {
 
 // Rect in parent coordinate system
 Rect Sprite::getRect() {
-    return RectMake(getPosition(), getSize());
+    return RectMake(getPosition() - (getAnchorPoint()*getSize()), getSize()*getScale());
 }
 
 // Rect in own coordinate system
@@ -109,6 +109,8 @@ void Sprite::render(SDL_Renderer *renderer) { // render into scene / Surfac
     if (this->getTexture() != nullptr) { // Draw this sprite if the tex is set
         auto sRect = RectMake(mTexture->getRenderOffset(), mTexture->getSize());
         auto dRect = RectMake(convertToWorldSpace(Vec2Null()), getSize()*absScale(this));
+        
+        dRect = dRect*EngineHelper::getInstance()->mainWindow->screenScale();
         
         SDL_Rect ddRect;
         ddRect.x = dRect.origin.x, ddRect.y = dRect.origin.y, ddRect.w = dRect.size.x, ddRect.h = dRect.size.y;
