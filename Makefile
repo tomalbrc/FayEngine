@@ -4,7 +4,7 @@
 
 CC=g++
 CXXFLAGS = -std=c++11
-INCLUDE=-I/usr/local/include -I/usr/local/include/SDL2 -Isrc -Isrc/nodes -Isrc/actions
+INCLUDE=-I/usr/local/include -I/usr/include/SDL2 -I/usr/local/include/SDL2 -Isrc -Isrc/nodes -Isrc/actions
 
 LIB=libFayEngine.a
 LIBDEST=/usr/local/lib/
