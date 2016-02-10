@@ -93,6 +93,8 @@ private:
     ScenePtr newScene = NULL;
     bool running = true;
     
+    NodePtr overlay;
+    
     void handleEvents();
     void update();
     void render();

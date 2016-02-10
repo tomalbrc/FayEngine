@@ -67,8 +67,9 @@ void Node::update() {
     if (shouldBeRemoved) return;
     for (auto&& i = children.begin(); i != children.end();) {
         auto child = (*i);
-        
-        if (child->shouldBeRemoved) child->willMoveToParent(NULL), child->shouldBeRemoved = false, i = children.erase(i); // remove finished actions
+        if (child == nullptr) {
+            i = children.erase(i);
+        } else if (child->shouldBeRemoved) child->willMoveToParent(NULL), child->shouldBeRemoved = false, i = children.erase(i); // remove finished actions
         else if (i != children.end()) child->update(), ++i;
     }
     for (auto&& i = actions.begin(); i != actions.end();) {
@@ -163,7 +164,11 @@ void Node::addChild(const NodePtr& node) {
 }
 void Node::removeFromParent() { // untested
     removeAllActions();
-    shouldBeRemoved = true;
+    if (getParent() != nullptr) getParent()->removeChild(this->shared_from_this()), mParent.reset();
+}
+
+void Node::removeChild(NodePtr node) {
+    node.reset();
 }
 
 

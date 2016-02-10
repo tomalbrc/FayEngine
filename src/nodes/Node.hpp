@@ -126,6 +126,7 @@ public:
     void addChild(const NodePtr& node);
     const NodeVector &getChildren();
     void removeFromParent();
+    void removeChild(NodePtr node);
     
     NodePtr getParent();
     void setParent(const NodePtr& n);

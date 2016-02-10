@@ -8,10 +8,18 @@
 
 #include "Window.hpp"
 #include "Scene.hpp"
+#include "Sprite.hpp"
+#include "SequenceAction.hpp"
+#include "WaitAction.hpp"
+#include "FadeAlphaToAction.hpp"
+#include "RemoveFromParent.hpp"
 #include "EngineHelper.hpp"
 
 #define SCREEN_FPS desiredFPS
 #define SCREEN_TICKS_PER_FRAME (1000/SCREEN_FPS)
+
+ static SpritePtr overlay;
+
 
 Window::~Window() {
     currentScene = NULL;
@@ -25,7 +33,7 @@ WindowPtr Window::create(std::string wname, Vec2 size, bool fullscreen) {
 
 
 bool Window::init(std::string wname, Vec2 size, bool fullscreen) {    
-    sdlWindow = SDL_CreateWindow(wname.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, size.x, size.y, (fullscreen ? SDL_WINDOW_FULLSCREEN : 0) | SDL_WINDOW_BORDERLESS | SDL_WINDOW_ALLOW_HIGHDPI); // Create window with title, position & sitze
+    sdlWindow = SDL_CreateWindow(wname.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, size.x, size.y, (fullscreen ? SDL_WINDOW_FULLSCREEN : 0) | SDL_WINDOW_ALLOW_HIGHDPI); // Create window with title, position & sitze
     if (sdlWindow == nullptr) {
         FELog("SDL_CreateWindow Error: " << SDL_GetError());
         return false;
@@ -96,13 +104,38 @@ void Window::startLoop() {
         framerate = 1000.0/(avgFPS/(double)countedTicks.size());
         
         
-        if (currentScene == nullptr || m_bShowNew) {
+        if (currentScene == nullptr) {
             currentScene = NULL;
             m_bShowNew = false;
             
             newScene->setWindow(this);
             currentScene = newScene;
             newScene = NULL;
+        } else if (m_bShowNew && overlay == nullptr) { // TODO: Add Transition between scenes
+            overlay = Sprite::create(Texture::create(getSize(), ColorWhiteColor()));
+            overlay->setAlpha(0);
+            currentScene->addChild(overlay);
+            
+            overlay->runAction(SequenceAction::create({
+                FadeAlphaToAction::create(0.25, 255),
+            }), "o");
+        } else if (m_bShowNew && overlay != nullptr && overlay->getAction("o") == nullptr) {
+            
+            currentScene.reset();
+            currentScene = newScene;
+            currentScene->setWindow(this);
+            newScene.reset();
+            
+            overlay->removeFromParent();
+            currentScene->addChild(overlay);
+            overlay->runAction(SequenceAction::create({
+                FadeAlphaToAction::create(0.25, 0),
+                RemoveFromParentAction::create(),
+            }), "o2");
+            
+            m_bShowNew = false;
+        } else if (!m_bShowNew && newScene == nullptr && overlay != nullptr && overlay->getAction("o2") == nullptr) {
+            overlay.reset();
         }
     }
 }

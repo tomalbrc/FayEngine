@@ -164,7 +164,7 @@
 		9A60C8021C31670900400D85 /* Texture.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Texture.hpp; sourceTree = "<group>"; };
 		9A60C8031C31670900400D85 /* tmxparser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tmxparser.cpp; sourceTree = "<group>"; };
 		9A60C8041C31670900400D85 /* tmxparser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tmxparser.h; sourceTree = "<group>"; };
-		9A60C8051C31670900400D85 /* Window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Window.cpp; sourceTree = "<group>"; };
+		9A60C8051C31670900400D85 /* Window.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Window.cpp; sourceTree = "<group>"; wrapsLines = 0; };
 		9A60C8061C31670900400D85 /* Window.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Window.hpp; sourceTree = "<group>"; };
 		9A60C82A1C330AB200400D85 /* RepeatAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RepeatAction.cpp; sourceTree = "<group>"; };
 		9A60C82B1C330AB200400D85 /* RepeatAction.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RepeatAction.hpp; sourceTree = "<group>"; };
