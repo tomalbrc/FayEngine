@@ -166,7 +166,12 @@ void Node::removeFromParent() { // untested
 
 void Node::removeChild(NodePtr node) {
     node->willMoveToParent(NULL);
-    node.reset();
+    for (auto&& c : children) {
+        if (node.get() == c.get()) {
+            c.reset();
+            break;
+        }
+    }
 }
 
 
