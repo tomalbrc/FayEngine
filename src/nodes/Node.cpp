@@ -64,12 +64,9 @@ ActionPtr Node::getAction(std::string actionName) {
 
 
 void Node::update() {
-    if (shouldBeRemoved) return;
     for (auto&& i = children.begin(); i != children.end();) {
         auto child = (*i);
-        if (child == nullptr) {
-            i = children.erase(i);
-        } else if (child->shouldBeRemoved) child->willMoveToParent(NULL), child->shouldBeRemoved = false, i = children.erase(i); // remove finished actions
+        if (child == nullptr) i = children.erase(i); // remove finished actions
         else if (i != children.end()) child->update(), ++i;
     }
     for (auto&& i = actions.begin(); i != actions.end();) {
@@ -168,6 +165,7 @@ void Node::removeFromParent() { // untested
 }
 
 void Node::removeChild(NodePtr node) {
+    node->willMoveToParent(NULL);
     node.reset();
 }
 
@@ -200,7 +198,7 @@ void Node::setName(std::string n) {
 
 void Node::render(SDL_Renderer *renderer) { // render into scene / Surface
     for (auto&& s : children) {
-        if (!s->shouldBeRemoved) s->render(renderer);
+        if (s != nullptr) s->render(renderer);
     }
 }
 
