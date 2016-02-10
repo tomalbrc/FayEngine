@@ -26,7 +26,7 @@ typedef std::shared_ptr<Window> WindowPtr;
  * Window containing a Scene.
  * The Window class handles interctions and redirects them to the currently presented Scene (if available)
  */
-class Window { // TODO: m prefix
+class Window : public std::enable_shared_from_this<Window> { // TODO: m prefix
 public:
     static WindowPtr create(std::string wname, Vec2 size, bool fullscreen);
     ~Window();

@@ -43,6 +43,7 @@ bool Window::init(std::string wname, Vec2 size, bool fullscreen) {
     SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
     
     EngineHelper::getInstance()->setRenderer(renderer);
+    EngineHelper::getInstance()->mainWindow = shared_from_this();
     
     return true;
 }
