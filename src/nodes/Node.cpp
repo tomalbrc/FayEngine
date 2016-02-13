@@ -241,6 +241,18 @@ void Node::accelerometerMoved(Vec3 accelerometerData) {
     for (auto&& c : children) if (c != nullptr) c->accelerometerMoved(accelerometerData);
 }
 
+void Node::controllerPushedButton(Sint32 controllerIndex, SDL_GameControllerButton button) {
+    for (auto&& c : children) if (c != nullptr) c->controllerPushedButton(controllerIndex, button);
+}
+void Node::controllerReleasedButton(Sint32 controllerIndex, SDL_GameControllerButton button) {
+    for (auto&& c : children) if (c != nullptr) c->controllerReleasedButton(controllerIndex, button);
+}
+void Node::controllerAxisMotion(Sint32 controllerIndex, SDL_GameControllerAxis axis, Sint16 value) {
+    for (auto&& c : children) if (c != nullptr) c->controllerAxisMotion(controllerIndex, axis, value);
+}
+
+
+
 
 void Node::computeTransform() {
     mTransform = AffineTransformIdentity();

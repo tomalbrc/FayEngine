@@ -91,6 +91,7 @@ void Window::startLoop() {
         update();
         render();
         
+        /*
         int frameTicks = SDL_GetTicks() - capTimer;
         if (frameTicks < SCREEN_TICKS_PER_FRAME) {
             SDL_Delay(SCREEN_TICKS_PER_FRAME - frameTicks);
@@ -103,6 +104,7 @@ void Window::startLoop() {
         int avgFPS = 0;
         for (int n : countedTicks) avgFPS += n;
         framerate = 1000.0/(avgFPS/(double)countedTicks.size());
+        */
         
         
         if (currentScene == nullptr) {
@@ -167,7 +169,7 @@ void Window::handleEvents() {
             case SDL_MOUSEBUTTONUP:
                 if (currentScene != nullptr) currentScene->mouseClickEnded(event.button, getMouseCoords());
                 break;
-            case SDL_JOYAXISMOTION: {
+            case SDL_JOYAXISMOTION: { // ACCELEROMETER SUPPORT // TODO: Change EngineHelper's init and this to check for SDL_JoystickDeviceAdded event
                 if (event.jaxis.axis == 0) accelData.x = event.jaxis.value;
                 if (event.jaxis.axis == 1) accelData.y = event.jaxis.value;
                 if (event.jaxis.axis == 2) {
@@ -180,6 +182,32 @@ void Window::handleEvents() {
                 if (currentScene != nullptr) currentScene->touchBegan(event.tfinger, Vec2Make(event.tfinger.x, event.tfinger.y)*getSize());
                 break;
             }
+            case SDL_FINGERMOTION: {
+                if (currentScene != nullptr) currentScene->touchMoved(event.tfinger, Vec2Make(event.tfinger.x, event.tfinger.y)*getSize());
+                break;
+            }
+            case SDL_FINGERUP: {
+                if (currentScene != nullptr) currentScene->touchEnded(event.tfinger, Vec2Make(event.tfinger.x, event.tfinger.y)*getSize());
+                break;
+            }
+            
+            case SDL_CONTROLLERDEVICEADDED:
+                SDL_GameControllerOpen(0);
+                break;
+            case SDL_CONTROLLERBUTTONDOWN: {
+                if (currentScene != nullptr) currentScene->controllerPushedButton(event.cdevice.which, (SDL_GameControllerButton)event.cbutton.button);
+                break;
+            }
+            case SDL_CONTROLLERBUTTONUP: {
+                if (currentScene != nullptr) currentScene->controllerReleasedButton(event.cdevice.which, (SDL_GameControllerButton)event.cbutton.button);
+                break;
+            }
+            case SDL_CONTROLLERAXISMOTION: {
+                if (currentScene != nullptr) currentScene->controllerAxisMotion(event.cdevice.which, (SDL_GameControllerAxis)event.caxis.axis, event.caxis.value);
+                break;
+            }
+            
+            
             default: break;
         }
     }

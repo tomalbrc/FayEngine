@@ -145,6 +145,12 @@ public:
     virtual void touchMoved(SDL_TouchFingerEvent finger, Vec2 coords);
     virtual void accelerometerMoved(Vec3 accelerometerData);
     
+    virtual void controllerPushedButton(Sint32 controllerIndex, SDL_GameControllerButton button);
+    virtual void controllerReleasedButton(Sint32 controllerIndex, SDL_GameControllerButton button);
+    virtual void controllerAxisMotion(Sint32 controllerIndex, SDL_GameControllerAxis axis, Sint16 value);
+    
+    
+    
     Vec2 convertToWorldSpace(Vec2 v); // Works reliable
     Vec2 convertToNodeSpace(Vec2 v); // Needs testing
     

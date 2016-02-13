@@ -22,6 +22,7 @@ EngineHelper::~EngineHelper() {
     TTF_Quit();
     IMG_Quit();
     Mix_Quit();
+    SDL_JoystickClose(0);
 }
 
 EngineHelper* EngineHelper::getInstance() {
