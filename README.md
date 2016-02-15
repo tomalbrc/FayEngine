@@ -1,5 +1,7 @@
 # FayEngine Documentation
 
+*Please note this document is out of date as of 15th Feb '16*
+
 FayEngine is a simple, SDL based, 2D Game Engine.
 It offers:
 
