@@ -34,11 +34,9 @@ public:
     void start();
     
     
-protected:
+private:
     bool init();
     bool init(double delay);
-private:
-    Sprite *targetSprite = NULL;
 };
 
 #endif /* RemoveFromParent_hpp */

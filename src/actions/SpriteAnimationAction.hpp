@@ -34,12 +34,10 @@ public:
     void update();
     void start();
     
-protected:
-    bool init(double secondsPerFrame, std::vector< TexturePtr > textures, bool shouldRestoreOriginal);
 private:
+    bool init(double secondsPerFrame, std::vector< TexturePtr > textures, bool shouldRestoreOriginal);
     TexturePtr mOriginalTexture;
     bool mShouldRestoreOriginal = true;
-    Sprite *targetSprite = NULL;
     std::vector< TexturePtr > textures;
 };
 

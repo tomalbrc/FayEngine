@@ -1,12 +1,12 @@
 //
-//  RotateAction.cpp
+//  RotateToAction.cpp
 //  PixelDead_SDL
 //
 //  Created by Tom Albrecht on 25.12.15.
 //  Copyright © 2015 Tom Albrecht. All rights reserved.
 //
 
-#include "RotateAction.hpp"
+#include "RotateToAction.hpp"
 
 RotateToActionPtr RotateToAction::create(double pduration, double radians) {
     return RotateToActionPtr(new RotateToAction(pduration,radians));

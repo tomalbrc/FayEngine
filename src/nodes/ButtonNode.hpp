@@ -51,8 +51,8 @@ private:
     bool init(std::string text);
     bool init(std::string text, std::string fontpath, int fontSize, Color col);
     
-    Color mHoverColor = ColorBlackColor();
-    Color mNormalColor = ColorWhiteColor();
+    Color mHoverColor = ColorWhiteColor();
+    Color mNormalColor = ColorBlackColor();
     ButtonNodeCallback mCallbackDown = NULL;
     ButtonNodeCallback mCallbackUp = NULL;
 };

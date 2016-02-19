@@ -19,7 +19,7 @@ ScenePtr Scene::create() {
 
 
 Scene::Scene() {
-    mBackgroundColor = ColorWhiteColor();
+    mBackgroundColor = ColorBlackColor();
 }
 
 Scene::~Scene() {
@@ -61,7 +61,7 @@ bool Scene::isPaused() {
 
 
 void Scene::update() {
-    Node::update();
+    if (!isPaused()) Node::update();
 }
 
 void Scene::render() {

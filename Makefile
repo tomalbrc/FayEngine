@@ -15,6 +15,8 @@ LIBHEADER=$(wildcard src/*.h*) $(wildcard src/*/*.h*)
 LIBOBJ=$(LIBSRC:.cpp=.o)
 
 all:
+	@mkdir -p lib
+	@mkdir -p include
 	@echo lib Makefile - Making lib
 	@make default
 	

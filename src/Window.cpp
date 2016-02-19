@@ -32,8 +32,12 @@ WindowPtr Window::create(std::string wname, Vec2 size, bool fullscreen) {
 }
 
 
-bool Window::init(std::string wname, Vec2 size, bool fullscreen) {    
-    sdlWindow = SDL_CreateWindow(wname.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, size.x, size.y, (fullscreen ? SDL_WINDOW_FULLSCREEN : 0) | SDL_WINDOW_ALLOW_HIGHDPI); // Create window with title, position & sitze
+bool Window::init(std::string wname, Vec2 size, bool fullscreen) {
+    bool borderless = false;
+#ifdef TARGET_OS_IOS
+    borderless = true;
+#endif
+    sdlWindow = SDL_CreateWindow(wname.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, size.x, size.y, (fullscreen ? SDL_WINDOW_FULLSCREEN : 0) | SDL_WINDOW_ALLOW_HIGHDPI | (borderless ? SDL_WINDOW_BORDERLESS : 0)); // Create window with title, position & sitze
     if (sdlWindow == nullptr) {
         FELog("SDL_CreateWindow Error: " << SDL_GetError());
         return false;
@@ -114,7 +118,12 @@ void Window::startLoop() {
             newScene->setWindow(this);
             currentScene = newScene;
             newScene = NULL;
-        } else if (m_bShowNew && overlay == nullptr) { // TODO: Add Transition between scenes
+            
+            FELog("Step0");
+        } else if ((m_bShowNew && (overlay.get() == nullptr || (overlay.get() != nullptr && overlay->getParent() == nullptr)))) { // TODO: Add Transition between scenes
+            FELog("Step1");
+            
+            overlay.reset();
             overlay = Sprite::create(Texture::create(getSize(), ColorWhiteColor()));
             overlay->setAlpha(0);
             currentScene->addChild(overlay);
@@ -122,7 +131,9 @@ void Window::startLoop() {
             overlay->runAction(SequenceAction::create({
                 FadeAlphaToAction::create(0.25, 255),
             }), "o");
-        } else if (m_bShowNew && overlay != nullptr && overlay->getAction("o") == nullptr) {
+            
+            m_bShowNew = false;
+        } else if (overlay.get() != nullptr && overlay->getAction("o") == nullptr && newScene != nullptr) {
             
             currentScene.reset();
             currentScene = newScene;
@@ -136,9 +147,9 @@ void Window::startLoop() {
                 RemoveFromParentAction::create(),
             }), "o2");
             
+            
             m_bShowNew = false;
-        } else if (!m_bShowNew && newScene == nullptr && overlay != nullptr && overlay->getAction("o2") == nullptr) {
-            overlay.reset();
+            FELog("Step2");
         }
     }
 }
@@ -214,7 +225,7 @@ void Window::handleEvents() {
 }
 
 void Window::update() {
-    if (currentScene != nullptr && !currentScene->isPaused()) currentScene->update();
+    if (currentScene != nullptr) currentScene->update();
 }
 void Window::render() {
     if (currentScene != nullptr) currentScene->render();

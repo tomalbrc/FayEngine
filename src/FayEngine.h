@@ -44,7 +44,8 @@
 #include "SequenceAction.hpp"
 #include "WaitAction.hpp"
 #include "CallbackAction.hpp"
-#include "RotateAction.hpp"
+#include "RotateToAction.hpp"
+#include "RotateByAction.hpp"
 #include "ScaleToAction.hpp"
 #include "RepeatAction.hpp"
 
