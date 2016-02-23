@@ -14,8 +14,14 @@
 #include <string>
 #include <vector>
 
+
+
 class AudioEngine {
 public:
+    AudioEngine();
+    
+    static AudioEngine *getInstance();
+    
     /**
      * Pauses Music
      */

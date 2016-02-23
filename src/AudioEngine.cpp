@@ -10,6 +10,15 @@
 
 #include "Types.hpp"
 
+AudioEngine::AudioEngine() {
+    Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 1024*4);
+}
+
+AudioEngine* AudioEngine::getInstance() {
+    static AudioEngine theInstance;
+    return &theInstance;
+}
+
 /**
  * Pauses Music
  */
@@ -29,7 +38,7 @@ void AudioEngine::playMusic() {
  * Plays Music from file
  */
 void AudioEngine::playMusic(std::string filepath) {
-    
+    playMusic(filepath, false);
 }
 
 /**
@@ -38,8 +47,12 @@ void AudioEngine::playMusic(std::string filepath) {
 void AudioEngine::playMusic(std::string filepath, bool repeat) {
     m_Music = Mix_LoadMUS(filepath.c_str());
     if (Mix_PlayingMusic() == 0) {
+        FELog("Playing \"" + filepath + "\"!");
+        FELog(SDL_GetError());
         // Play the music
         Mix_PlayMusic(m_Music, repeat ? -1 : 1);
+    } else {
+        FELog("Warning: Playing music already!");
     }
 }
 

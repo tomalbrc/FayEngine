@@ -78,7 +78,7 @@ void TiledMapNode::drawTiles() {
     
     for (auto&& tileLayer : map->layerCollection) {
         
-        SDL_Surface *surface = SDL_CreateRGBSurface(0,map->width*map->tileWidth,map->height*map->tileHeight,32,rmask,gmask,bmask,amask);
+        SDL_Surface *surface = SDL_CreateRGBSurface(0,map->width*map->tileWidth,map->height*map->tileHeight,32,img->format->Rmask,img->format->Gmask,img->format->Bmask,amask);
         
         int index = 0;
         for (int y = 0; y < tileLayer.height; ++y) {

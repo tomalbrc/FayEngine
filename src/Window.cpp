@@ -34,7 +34,7 @@ WindowPtr Window::create(std::string wname, Vec2 size, bool fullscreen) {
 
 bool Window::init(std::string wname, Vec2 size, bool fullscreen) {
     bool borderless = false;
-#ifdef TARGET_OS_IOS
+#if defined(TARGET_OS_IOS) && TARGET_OS_IOS == 1
     borderless = true;
 #endif
     sdlWindow = SDL_CreateWindow(wname.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, size.x, size.y, (fullscreen ? SDL_WINDOW_FULLSCREEN : 0) | SDL_WINDOW_ALLOW_HIGHDPI | (borderless ? SDL_WINDOW_BORDERLESS : 0)); // Create window with title, position & sitze
@@ -61,7 +61,7 @@ inline Vec2 getMouseCoords() {
 
 
 void Window::presentScene(ScenePtr pnewScene) {
-    if (currentScene) m_bShowNew = true, newScene = pnewScene;
+    if (currentScene != nullptr) m_bShowNew = true, newScene = pnewScene;
     else newScene = pnewScene;
     
 }
@@ -203,7 +203,8 @@ void Window::handleEvents() {
             }
             
             case SDL_CONTROLLERDEVICEADDED:
-                SDL_GameControllerOpen(0);
+                FELog("SDL_CONTROLLERDEVICEADDED");
+                SDL_GameControllerOpen(event.cdevice.which);
                 break;
             case SDL_CONTROLLERBUTTONDOWN: {
                 if (currentScene != nullptr) currentScene->controllerPushedButton(event.cdevice.which, (SDL_GameControllerButton)event.cbutton.button);

@@ -49,4 +49,6 @@
 #include "ScaleToAction.hpp"
 #include "RepeatAction.hpp"
 
+#include "AudioEngine.hpp"
+
 #endif /* FayEngine_h */
