@@ -45,15 +45,12 @@ void AudioEngine::playMusic(std::string filepath) {
  * Play Music from file and repeats forever
  */
 void AudioEngine::playMusic(std::string filepath, bool repeat) {
+    SDL_free(m_Music);
     m_Music = Mix_LoadMUS(filepath.c_str());
-    if (Mix_PlayingMusic() == 0) {
-        FELog("Playing \"" + filepath + "\"!");
-        FELog(SDL_GetError());
-        // Play the music
-        Mix_PlayMusic(m_Music, repeat ? -1 : 1);
-    } else {
-        FELog("Warning: Playing music already!");
-    }
+    if (Mix_PlayingMusic() == 0) FELog("Warning: Playing music already! Continuing...");
+    
+    FELog("Playing \"" + filepath + "\"!");
+    Mix_PlayMusic(m_Music, repeat ? -1 : 1);
 }
 
 /**

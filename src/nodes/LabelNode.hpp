@@ -29,7 +29,7 @@ public:
     static LabelNodePtr create();
     static LabelNodePtr create(std::string text, std::string fontpath, int fontSize);
     static LabelNodePtr create(std::string text, std::string fontpath, int fontSize, Color col);
-    
+    ~LabelNode();
     
     void setText(std::string text);
     std::string getText();

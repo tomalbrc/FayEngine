@@ -27,13 +27,11 @@ TiledMapNodePtr TiledMapNode::create(const std::string &filepath) {
 }
 
 bool TiledMapNode::init(const std::string &filepath) {
-    map = new tmxparser::TmxMap();
-    parseFromFile(filepath.c_str(), map, "");
+    map = tmxparser::TmxMap();
+    parseFromFile((SDL_GetBasePath() + filepath).c_str(), &map, "");
     
     auto last_slash_idx = filepath.rfind('/');
     if (last_slash_idx != std::string::npos) directory = filepath.substr(0, last_slash_idx) + "/";
-    
-    //this->setTexture(Texture::create(Vec2Make(map->width * map->tileWidth,map->height * map->tileHeight), ColorMake(0, 0, 0,  0)));
     
     drawTiles();
     
@@ -42,14 +40,13 @@ bool TiledMapNode::init(const std::string &filepath) {
 
 TiledMapNode::~TiledMapNode() {
     mTileLayer.clear();
-    map = NULL;
 }
 
 
 
 tmxparser::TmxObjectGroup TiledMapNode::getObjectGroupNamed(std::string name) {
     tmxparser::TmxObjectGroup s;
-    for (auto&& layer : map->objectGroupCollection) {
+    for (auto&& layer : map.objectGroupCollection) {
         if (layer.name == name) return layer;
     }
     return s;
@@ -64,10 +61,11 @@ SpritePtr TiledMapNode::getLayerNamed(std::string name) {
 }
 
 void TiledMapNode::drawTiles() {
-    if (map->tilesetCollection.size() == 0) return;
-    tmxparser::TmxTileset tileset = map->tilesetCollection[0];
+    if (map.tilesetCollection.size() == 0) return;
+    tmxparser::TmxTileset tileset = map.tilesetCollection[0];
     
     SDL_Surface *img = IMG_Load((directory + tileset.image.source).c_str());
+    SDL_SetSurfaceBlendMode(img, SDL_BLENDMODE_NONE);
     Vec2 imageTileSize = Vec2Make((tileset.tileWidth), (tileset.tileHeight));
     Vec2 imageSize = Vec2Make(tileset.image.width, tileset.image.height);
     int tileSpacing = tileset.tileSpacingInImage;
@@ -76,15 +74,15 @@ void TiledMapNode::drawTiles() {
     FELog("Image Source: " << directory + tileset.image.source);
     FELog("tile-size: " << imageTileSize.x << " y:" << imageTileSize.y);
     
-    for (auto&& tileLayer : map->layerCollection) {
+    for (auto&& tileLayer : map.layerCollection) {
         
-        SDL_Surface *surface = SDL_CreateRGBSurface(0,map->width*map->tileWidth,map->height*map->tileHeight,32,img->format->Rmask,img->format->Gmask,img->format->Bmask,amask);
-        
+        auto surface = SDL_CreateRGBSurface(0,map.width*map.tileWidth,map.height*map.tileHeight,32,img->format->Rmask,img->format->Gmask,img->format->Bmask,amask);
+
         int index = 0;
         for (int y = 0; y < tileLayer.height; ++y) {
             for (int x = 0; x < tileLayer.width; ++x) {
                 
-                tmxparser::TmxLayerTile tile = tileLayer.tiles[y*map->width+x];
+                auto tile = tileLayer.tiles[y*map.width+x];
                 
                 if (tile.tilesetIndex != -1) {
                     // Draw tile!
@@ -122,7 +120,7 @@ void TiledMapNode::drawTiles() {
     SDL_FreeSurface(img);
 }
 
-tmxparser::TmxMap *TiledMapNode::getRawMap() {
+tmxparser::TmxMap TiledMapNode::getRawMap() {
     return map;
 }
 

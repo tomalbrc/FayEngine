@@ -39,6 +39,10 @@ bool LabelNode::init(std::string text, std::string fontpath, int fontSize, Color
 }
 
 
+LabelNode::~LabelNode() {
+    TTF_CloseFont(mFont);
+}
+
 
 void LabelNode::setTextColor(Color col) {
     if (col.r == mTextColor.r && col.g == mTextColor.g && col.b == mTextColor.b && col.a == mTextColor.a) return;
@@ -63,7 +67,6 @@ void LabelNode::renderText() {
     EngineHelper::getInstance()->removeTextureFromCache(getTexture());
     auto t = Texture::create(s);
     this->setTexture(t);
-    t.reset();
     SDL_FreeSurface(s);
     
     if (this->getTexture() == nullptr) FELog("LabelNode - Error: Texture is empty After new render" << SDL_GetError());
@@ -83,7 +86,7 @@ string LabelNode::getText() {
 
 
 void LabelNode::setFontPath(std::string fp) {
-    if (mFont != nullptr) SDL_free(mFont), mFont = NULL;
+    TTF_CloseFont(mFont);
     if (fp != mFontPath) mFontPath = fp, mFont = TTF_OpenFont(fp.c_str(), mFontSize), renderText();
 }
 

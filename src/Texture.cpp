@@ -10,18 +10,18 @@
 #include "EngineHelper.hpp"
 #include <memory>
 // Bits per pixel in created textures
-#define TEXTURE_BIT 24
+#define TEXTURE_BIT 32
 
 #if SDL_BYTEORDER == SDL_BIG_ENDIAN
-Uint32 rmask = 0xff000000;
-Uint32 gmask = 0x00ff0000;
-Uint32 bmask = 0x0000ff00;
-Uint32 amask = 0x000000ff;
+#define rmask 0xff000000
+#define gmask 0x00ff0000
+#define bmask 0x0000ff00
+#define amask 0x000000ff
 #else
-Uint32 rmask = 0x000000ff;
-Uint32 gmask = 0x0000ff00;
-Uint32 bmask = 0x00ff0000;
-Uint32 amask = 0xff000000;
+#define rmask 0x000000ff
+#define gmask 0x0000ff00
+#define bmask 0x00ff0000
+#define amask 0xff000000
 #endif
 
 TexturePtr Texture::create() {
@@ -75,7 +75,7 @@ TexturePtr Texture::create(SDL_Surface *surface) {
 
 
 bool Texture::init() {
-    SDL_Surface *mys = SDL_CreateRGBSurface(0,0,0,TEXTURE_BIT,0,0,0,amask);
+    SDL_Surface *mys = SDL_CreateRGBSurface(0,0,0,TEXTURE_BIT,rmask, gmask, bmask, amask);
     mTexture = SDL_CreateTextureFromSurface(EngineHelper::getInstance()->getRenderer(), mys);
     SDL_FreeSurface(mys);
     return true;
@@ -89,7 +89,7 @@ bool Texture::init(std::string filename) { // load image from path
     return true;
 }
 bool Texture::init(Vec2 size, Color col) {
-    SDL_Surface *mys = SDL_CreateRGBSurface(0, size.x, size.y, TEXTURE_BIT, 0, 0, 0, amask);
+    SDL_Surface *mys = SDL_CreateRGBSurface(0, size.x, size.y, TEXTURE_BIT, rmask, gmask, bmask, amask);
     SDL_FillRect(mys, NULL, SDL_MapRGBA(mys->format, col.r, col.g, col.b, col.a));
     mTexture = SDL_CreateTextureFromSurface(EngineHelper::getInstance()->getRenderer(), mys);
     mSize = size;
@@ -112,7 +112,6 @@ bool Texture::init(SDL_Surface *surface) {
     mTexture = SDL_CreateTextureFromSurface(EngineHelper::getInstance()->getRenderer(), surface);
     int w,h; SDL_QueryTexture(mTexture, NULL, NULL, &w, &h);
     mSize = Vec2Make(w, h);
-    SDL_FreeSurface(surface);
     return true;
 }
 

@@ -39,8 +39,21 @@ public:
     void setNormalColor(Color normalColor);
     Color getNormalColor();
     
+    void setSelectedColor(Color selectedColor);
+    Color getSelectedColor();
+    
+    void setSelected(bool selected);
+    bool isSelected();
+    
+    void setHovered(bool hovered);
+    bool isHovered();
+    
     void setPressedHandler(ButtonNodeCallback callback);
+    ButtonNodeCallback getPressedHandler();
+    
     void setReleasedHandler(ButtonNodeCallback callback);
+    ButtonNodeCallback getReleasedHandler();
+    
     
     virtual void mouseClickBegan(SDL_MouseButtonEvent event, Vec2 coords);
     virtual void mouseClickEnded(SDL_MouseButtonEvent event, Vec2 coords);
@@ -51,10 +64,14 @@ private:
     bool init(std::string text);
     bool init(std::string text, std::string fontpath, int fontSize, Color col);
     
-    Color mHoverColor = ColorWhiteColor();
-    Color mNormalColor = ColorBlackColor();
-    ButtonNodeCallback mCallbackDown = NULL;
-    ButtonNodeCallback mCallbackUp = NULL;
+    bool m_hovered = false;
+    bool m_selected = false;
+    
+    Color m_HoverColor = ColorWhiteColor();
+    Color m_SelectedColor = ColorGrayColor();
+    Color m_NormalColor = ColorBlackColor();
+    ButtonNodeCallback m_CallbackDown = NULL;
+    ButtonNodeCallback m_CallbackUp = NULL;
 };
 
 #endif /* ButtonNode_hpp */

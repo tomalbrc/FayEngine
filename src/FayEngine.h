@@ -37,6 +37,9 @@
 #include "TiledMapNode.hpp"
 #include "ButtonNode.hpp"
 
+#include "Texture.hpp"
+#include "DrawTexture.hpp"
+
 #include "RemoveFromParent.hpp"
 #include "MoveByAction.hpp"
 #include "FadeAlphaToAction.hpp"
@@ -50,5 +53,7 @@
 #include "RepeatAction.hpp"
 
 #include "AudioEngine.hpp"
+
+#include "NetworkManager.hpp"
 
 #endif /* FayEngine_h */

@@ -95,10 +95,8 @@ public:
     
 private:
     TexturePtr mSourceTexture = NULL;
-    SDL_Texture *mTexture = NULL;
     std::shared_ptr<Texture> mBatchTexture;
     Vec2 mRenderOffset = Vec2Null();
-    Vec2 mSize = Vec2Null();
     
     bool init();
     bool init(std::string filename); // load image from path
@@ -106,5 +104,9 @@ private:
     bool init(TexturePtr source, Rect rect);
     bool init(TexturePtr tex); // Passes ownership to EngineHelper
     bool init(SDL_Surface *surface);
+    
+protected:
+    SDL_Texture *mTexture = NULL;
+    Vec2 mSize = Vec2Null();
 };
 #endif /* Texture_hpp */

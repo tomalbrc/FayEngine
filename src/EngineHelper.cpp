@@ -9,6 +9,7 @@
 #include "EngineHelper.hpp"
 #include "SDL_ttf.h"
 #include "SDL_mixer.h"
+#include "SDL_net.h"
 #include "Texture.hpp"
 
 #include <fstream>
@@ -17,6 +18,7 @@ EngineHelper::EngineHelper() {
     FELog("EngineHelper::EngineHelper()");
 }
 EngineHelper::~EngineHelper() {
+    cleanTextureCache();
     FELog("EngineHelper::~EngineHelper");
     SDL_Quit();
     TTF_Quit();
@@ -55,12 +57,18 @@ void EngineHelper::Init() {
         exit(2);
     }
     
+    if (SDLNet_Init() == -1) {
+        printf("SDLNet_Init Error: %s\n", SDLNet_GetError());
+        exit(2);
+    }
+    
     if (Mix_Init(MIX_INIT_MP3 | MIX_INIT_OGG) == -1) {
         printf("Mix_Init Error: %s\n", Mix_GetError());
         exit(2);
     }
     
     // For ios/android
+    // TODO: Add platform check
     SDL_SetHint(SDL_HINT_ACCELEROMETER_AS_JOYSTICK, "1");
     SDL_JoystickEventState(SDL_ENABLE);
     SDL_JoystickOpen(0);
@@ -106,6 +114,7 @@ TexturePtr EngineHelper::getTextureForKey(std::string key) {
 }
 void EngineHelper::cleanTextureCache() {
     for(auto&& iterator = textureCache.begin(); iterator != textureCache.end();) {
+        FELog("Cleaning up Texture named: "<<iterator->first<<"...");
         iterator = textureCache.erase(iterator);
     }
 }

@@ -163,13 +163,13 @@ protected:
     bool init();
     bool shouldBeRemoved = false;
 private:
-    // Alpha wert
+    // Alpha
     int mAlpha = 255;
     
-    // Rotation auf der z Achse in Grad
+    // Rotation on the z axis in degree
     double mZRotation = 0.0;
     
-    // Skalierung (Skaliert Größe)
+    // Scale
     Vec2 mScale = Vec2Make(1.0, 1.0);
     
     // Position in parent node

@@ -37,6 +37,8 @@ struct Color {
 };
 extern Color ColorMake(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 extern Color ColorMake(Uint8 r, Uint8 g, Uint8 b);
+inline Color ColorClearColor() { return ColorMake(0, 0, 0, 0); }
+inline Color ColorBrownColor() { return ColorMake(0x99, 0x66, 0x33); }
 inline Color ColorBlackColor() { return ColorMake(0, 0, 0); }
 inline Color ColorWhiteColor() { return ColorMake(255, 255, 255); }
 inline Color ColorRedColor() { return ColorMake(255, 0, 0); }

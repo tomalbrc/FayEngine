@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		9A34D5EA1C41552C00B48591 /* Types.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A34D5E91C41552C00B48591 /* Types.cpp */; };
+		9A5398C71C9169030094865C /* NetworkManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A5398C51C9169030094865C /* NetworkManager.cpp */; };
+		9A5398C81C9169030094865C /* NetworkManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A5398C51C9169030094865C /* NetworkManager.cpp */; };
+		9A5398C91C9169030094865C /* NetworkManager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9A5398C61C9169030094865C /* NetworkManager.hpp */; };
 		9A60C8071C31670900400D85 /* Action.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C7DD1C31670900400D85 /* Action.cpp */; };
 		9A60C8081C31670900400D85 /* CallbackAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C7DF1C31670900400D85 /* CallbackAction.cpp */; };
 		9A60C8091C31670900400D85 /* FadeAlphaToAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C7E11C31670900400D85 /* FadeAlphaToAction.cpp */; };
@@ -24,15 +27,42 @@
 		9A60C8141C31670900400D85 /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C7F91C31670900400D85 /* Node.cpp */; };
 		9A60C8151C31670900400D85 /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C7FB1C31670900400D85 /* Scene.cpp */; };
 		9A60C8161C31670900400D85 /* Sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C7FD1C31670900400D85 /* Sprite.cpp */; };
-		9A60C8171C31670900400D85 /* TiledMapNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C7FF1C31670900400D85 /* TiledMapNode.cpp */; };
 		9A60C8181C31670900400D85 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C8011C31670900400D85 /* Texture.cpp */; };
 		9A60C8191C31670900400D85 /* tmxparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C8031C31670900400D85 /* tmxparser.cpp */; };
 		9A60C81A1C31670900400D85 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C8051C31670900400D85 /* Window.cpp */; };
 		9A60C82C1C330AB200400D85 /* RepeatAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C82A1C330AB200400D85 /* RepeatAction.cpp */; };
+		9A7E46A81C8CE82A00578C86 /* DrawTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A7E46A61C8CE82A00578C86 /* DrawTexture.cpp */; };
+		9A7E46A91C8CE82A00578C86 /* DrawTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A7E46A61C8CE82A00578C86 /* DrawTexture.cpp */; };
+		9A7E46AA1C8CE82A00578C86 /* DrawTexture.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9A7E46A71C8CE82A00578C86 /* DrawTexture.hpp */; };
 		9A8F2BBC1C774DD4003A0AE3 /* RotateByAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A8F2BBA1C774DD4003A0AE3 /* RotateByAction.cpp */; };
 		9A8F2BBD1C774DD4003A0AE3 /* RotateByAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A8F2BBA1C774DD4003A0AE3 /* RotateByAction.cpp */; };
 		9AB2EC751C4A865000F0CDF1 /* AudioEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AB2EC731C4A865000F0CDF1 /* AudioEngine.cpp */; };
 		9AB2EC761C4A865000F0CDF1 /* AudioEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AB2EC731C4A865000F0CDF1 /* AudioEngine.cpp */; };
+		9AD5D7501C87C77D00226445 /* Action.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9A60C7DE1C31670900400D85 /* Action.hpp */; };
+		9AD5D7511C87C77D00226445 /* CallbackAction.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9A60C7E01C31670900400D85 /* CallbackAction.hpp */; };
+		9AD5D7521C87C77D00226445 /* FadeAlphaToAction.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9A60C7E21C31670900400D85 /* FadeAlphaToAction.hpp */; };
+		9AD5D7531C87C77D00226445 /* MoveByAction.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9A60C7E41C31670900400D85 /* MoveByAction.hpp */; };
+		9AD5D7541C87C77D00226445 /* RemoveFromParent.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9A60C7E61C31670900400D85 /* RemoveFromParent.hpp */; };
+		9AD5D7551C87C77D00226445 /* RotateToAction.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9A60C7E81C31670900400D85 /* RotateToAction.hpp */; };
+		9AD5D7561C87C77D00226445 /* RotateByAction.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9A8F2BBB1C774DD4003A0AE3 /* RotateByAction.hpp */; };
+		9AD5D7571C87C77D00226445 /* ScaleToAction.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9A60C7EA1C31670900400D85 /* ScaleToAction.hpp */; };
+		9AD5D7581C87C77D00226445 /* SequenceAction.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9A60C7EC1C31670900400D85 /* SequenceAction.hpp */; };
+		9AD5D7591C87C77D00226445 /* SpriteAnimationAction.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9A60C7EE1C31670900400D85 /* SpriteAnimationAction.hpp */; };
+		9AD5D75A1C87C77D00226445 /* WaitAction.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9A60C7F01C31670900400D85 /* WaitAction.hpp */; };
+		9AD5D75B1C87C77D00226445 /* RepeatAction.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9A60C82B1C330AB200400D85 /* RepeatAction.hpp */; };
+		9AD5D75C1C87C77D00226445 /* EngineHelper.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9A60C7F21C31670900400D85 /* EngineHelper.hpp */; };
+		9AD5D75D1C87C77D00226445 /* FayEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A60C7F31C31670900400D85 /* FayEngine.h */; };
+		9AD5D75E1C87C77D00226445 /* ButtonNode.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9A60C7F61C31670900400D85 /* ButtonNode.hpp */; };
+		9AD5D75F1C87C77D00226445 /* LabelNode.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9A60C7F81C31670900400D85 /* LabelNode.hpp */; };
+		9AD5D7601C87C77D00226445 /* Node.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9A60C7FA1C31670900400D85 /* Node.hpp */; };
+		9AD5D7611C87C77D00226445 /* Scene.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9A60C7FC1C31670900400D85 /* Scene.hpp */; };
+		9AD5D7621C87C77D00226445 /* Sprite.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9A60C7FE1C31670900400D85 /* Sprite.hpp */; };
+		9AD5D7631C87C77D00226445 /* TiledMapNode.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9AF380C11C7E097900851278 /* TiledMapNode.hpp */; };
+		9AD5D7641C87C77D00226445 /* Texture.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9A60C8021C31670900400D85 /* Texture.hpp */; };
+		9AD5D7651C87C77D00226445 /* tmxparser.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A60C8041C31670900400D85 /* tmxparser.h */; };
+		9AD5D7661C87C77D00226445 /* Window.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9A60C8061C31670900400D85 /* Window.hpp */; };
+		9AD5D7671C87C77D00226445 /* Types.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9A2E2F4D1C413BB7002661EF /* Types.hpp */; };
+		9AD5D7681C87C77D00226445 /* AudioEngine.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9AB2EC741C4A865000F0CDF1 /* AudioEngine.hpp */; };
 		9AE252361C48019F00D6C01E /* Action.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C7DD1C31670900400D85 /* Action.cpp */; };
 		9AE252371C48019F00D6C01E /* CallbackAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C7DF1C31670900400D85 /* CallbackAction.cpp */; };
 		9AE252381C48019F00D6C01E /* FadeAlphaToAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C7E11C31670900400D85 /* FadeAlphaToAction.cpp */; };
@@ -50,83 +80,19 @@
 		9AE252441C48019F00D6C01E /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C7F91C31670900400D85 /* Node.cpp */; };
 		9AE252451C48019F00D6C01E /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C7FB1C31670900400D85 /* Scene.cpp */; };
 		9AE252461C48019F00D6C01E /* Sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C7FD1C31670900400D85 /* Sprite.cpp */; };
-		9AE252471C48019F00D6C01E /* TiledMapNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C7FF1C31670900400D85 /* TiledMapNode.cpp */; };
 		9AE252481C48019F00D6C01E /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C8011C31670900400D85 /* Texture.cpp */; };
 		9AE252491C48019F00D6C01E /* tmxparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C8031C31670900400D85 /* tmxparser.cpp */; };
 		9AE2524A1C48019F00D6C01E /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A60C8051C31670900400D85 /* Window.cpp */; };
 		9AE2524B1C48019F00D6C01E /* Types.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A34D5E91C41552C00B48591 /* Types.cpp */; };
-		9AE2524C1C48022600D6C01E /* Action.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C7DE1C31670900400D85 /* Action.hpp */; };
-		9AE2524D1C48022600D6C01E /* CallbackAction.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C7E01C31670900400D85 /* CallbackAction.hpp */; };
-		9AE2524E1C48022600D6C01E /* FadeAlphaToAction.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C7E21C31670900400D85 /* FadeAlphaToAction.hpp */; };
-		9AE2524F1C48022600D6C01E /* MoveByAction.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C7E41C31670900400D85 /* MoveByAction.hpp */; };
-		9AE252501C48022600D6C01E /* RemoveFromParent.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C7E61C31670900400D85 /* RemoveFromParent.hpp */; };
-		9AE252511C48022600D6C01E /* RotateToAction.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C7E81C31670900400D85 /* RotateToAction.hpp */; };
-		9AE252521C48022600D6C01E /* ScaleToAction.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C7EA1C31670900400D85 /* ScaleToAction.hpp */; };
-		9AE252531C48022600D6C01E /* SequenceAction.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C7EC1C31670900400D85 /* SequenceAction.hpp */; };
-		9AE252541C48022600D6C01E /* SpriteAnimationAction.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C7EE1C31670900400D85 /* SpriteAnimationAction.hpp */; };
-		9AE252551C48022600D6C01E /* WaitAction.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C7F01C31670900400D85 /* WaitAction.hpp */; };
-		9AE252561C48022600D6C01E /* RepeatAction.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C82B1C330AB200400D85 /* RepeatAction.hpp */; };
-		9AE252571C48022600D6C01E /* EngineHelper.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C7F21C31670900400D85 /* EngineHelper.hpp */; };
-		9AE252581C48022600D6C01E /* FayEngine.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C7F31C31670900400D85 /* FayEngine.h */; };
-		9AE252591C48022600D6C01E /* ButtonNode.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C7F61C31670900400D85 /* ButtonNode.hpp */; };
-		9AE2525A1C48022600D6C01E /* LabelNode.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C7F81C31670900400D85 /* LabelNode.hpp */; };
-		9AE2525B1C48022600D6C01E /* Node.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C7FA1C31670900400D85 /* Node.hpp */; };
-		9AE2525C1C48022600D6C01E /* Scene.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C7FC1C31670900400D85 /* Scene.hpp */; };
-		9AE2525D1C48022600D6C01E /* Sprite.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C7FE1C31670900400D85 /* Sprite.hpp */; };
-		9AE2525E1C48022600D6C01E /* TiledMapNode.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C8001C31670900400D85 /* TiledMapNode.hpp */; };
-		9AE2525F1C48022600D6C01E /* Texture.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C8021C31670900400D85 /* Texture.hpp */; };
-		9AE252601C48022600D6C01E /* tmxparser.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C8041C31670900400D85 /* tmxparser.h */; };
-		9AE252611C48022600D6C01E /* Window.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A60C8061C31670900400D85 /* Window.hpp */; };
-		9AE252621C48022600D6C01E /* Types.hpp in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9A2E2F4D1C413BB7002661EF /* Types.hpp */; };
+		9AF380C31C7E097900851278 /* TiledMapNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AF380C21C7E097900851278 /* TiledMapNode.cpp */; };
+		9AF380C41C7E097900851278 /* TiledMapNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AF380C21C7E097900851278 /* TiledMapNode.cpp */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		9AE2522B1C48016A00D6C01E /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "include/$(PRODUCT_NAME)";
-			dstSubfolderSpec = 16;
-			files = (
-				9AE2524C1C48022600D6C01E /* Action.hpp in CopyFiles */,
-				9AE2524D1C48022600D6C01E /* CallbackAction.hpp in CopyFiles */,
-				9AE2524E1C48022600D6C01E /* FadeAlphaToAction.hpp in CopyFiles */,
-				9AE2524F1C48022600D6C01E /* MoveByAction.hpp in CopyFiles */,
-				9AE252501C48022600D6C01E /* RemoveFromParent.hpp in CopyFiles */,
-				9AE252511C48022600D6C01E /* RotateToAction.hpp in CopyFiles */,
-				9AE252521C48022600D6C01E /* ScaleToAction.hpp in CopyFiles */,
-				9AE252531C48022600D6C01E /* SequenceAction.hpp in CopyFiles */,
-				9AE252541C48022600D6C01E /* SpriteAnimationAction.hpp in CopyFiles */,
-				9AE252551C48022600D6C01E /* WaitAction.hpp in CopyFiles */,
-				9AE252561C48022600D6C01E /* RepeatAction.hpp in CopyFiles */,
-				9AE252571C48022600D6C01E /* EngineHelper.hpp in CopyFiles */,
-				9AE252581C48022600D6C01E /* FayEngine.h in CopyFiles */,
-				9AE252591C48022600D6C01E /* ButtonNode.hpp in CopyFiles */,
-				9AE2525A1C48022600D6C01E /* LabelNode.hpp in CopyFiles */,
-				9AE2525B1C48022600D6C01E /* Node.hpp in CopyFiles */,
-				9AE2525C1C48022600D6C01E /* Scene.hpp in CopyFiles */,
-				9AE2525D1C48022600D6C01E /* Sprite.hpp in CopyFiles */,
-				9AE2525E1C48022600D6C01E /* TiledMapNode.hpp in CopyFiles */,
-				9AE2525F1C48022600D6C01E /* Texture.hpp in CopyFiles */,
-				9AE252601C48022600D6C01E /* tmxparser.h in CopyFiles */,
-				9AE252611C48022600D6C01E /* Window.hpp in CopyFiles */,
-				9AE252621C48022600D6C01E /* Types.hpp in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9AFBB8811C2E0D2E006ACF87 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "include/$(PRODUCT_NAME)";
-			dstSubfolderSpec = 16;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		9A2E2F4D1C413BB7002661EF /* Types.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Types.hpp; sourceTree = "<group>"; };
 		9A34D5E91C41552C00B48591 /* Types.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Types.cpp; sourceTree = "<group>"; };
+		9A5398C51C9169030094865C /* NetworkManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkManager.cpp; sourceTree = "<group>"; };
+		9A5398C61C9169030094865C /* NetworkManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NetworkManager.hpp; sourceTree = "<group>"; };
 		9A60C7DD1C31670900400D85 /* Action.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Action.cpp; sourceTree = "<group>"; };
 		9A60C7DE1C31670900400D85 /* Action.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Action.hpp; sourceTree = "<group>"; };
 		9A60C7DF1C31670900400D85 /* CallbackAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CallbackAction.cpp; sourceTree = "<group>"; };
@@ -160,8 +126,6 @@
 		9A60C7FC1C31670900400D85 /* Scene.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Scene.hpp; sourceTree = "<group>"; };
 		9A60C7FD1C31670900400D85 /* Sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sprite.cpp; sourceTree = "<group>"; };
 		9A60C7FE1C31670900400D85 /* Sprite.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Sprite.hpp; sourceTree = "<group>"; };
-		9A60C7FF1C31670900400D85 /* TiledMapNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TiledMapNode.cpp; sourceTree = "<group>"; };
-		9A60C8001C31670900400D85 /* TiledMapNode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TiledMapNode.hpp; sourceTree = "<group>"; };
 		9A60C8011C31670900400D85 /* Texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Texture.cpp; sourceTree = "<group>"; };
 		9A60C8021C31670900400D85 /* Texture.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Texture.hpp; sourceTree = "<group>"; };
 		9A60C8031C31670900400D85 /* tmxparser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tmxparser.cpp; sourceTree = "<group>"; };
@@ -170,11 +134,15 @@
 		9A60C8061C31670900400D85 /* Window.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Window.hpp; sourceTree = "<group>"; };
 		9A60C82A1C330AB200400D85 /* RepeatAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RepeatAction.cpp; sourceTree = "<group>"; };
 		9A60C82B1C330AB200400D85 /* RepeatAction.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RepeatAction.hpp; sourceTree = "<group>"; };
+		9A7E46A61C8CE82A00578C86 /* DrawTexture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DrawTexture.cpp; sourceTree = "<group>"; };
+		9A7E46A71C8CE82A00578C86 /* DrawTexture.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DrawTexture.hpp; sourceTree = "<group>"; };
 		9A8F2BBA1C774DD4003A0AE3 /* RotateByAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RotateByAction.cpp; sourceTree = "<group>"; };
 		9A8F2BBB1C774DD4003A0AE3 /* RotateByAction.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RotateByAction.hpp; sourceTree = "<group>"; };
 		9AB2EC731C4A865000F0CDF1 /* AudioEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioEngine.cpp; sourceTree = "<group>"; };
 		9AB2EC741C4A865000F0CDF1 /* AudioEngine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AudioEngine.hpp; sourceTree = "<group>"; };
 		9AE2522D1C48016A00D6C01E /* libFayEngine-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libFayEngine-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9AF380C11C7E097900851278 /* TiledMapNode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TiledMapNode.hpp; sourceTree = "<group>"; };
+		9AF380C21C7E097900851278 /* TiledMapNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TiledMapNode.cpp; sourceTree = "<group>"; };
 		9AFBB8831C2E0D2E006ACF87 /* libFayEngine.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFayEngine.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -214,6 +182,8 @@
 				9A60C7F41C31670900400D85 /* nodes */,
 				9A60C8011C31670900400D85 /* Texture.cpp */,
 				9A60C8021C31670900400D85 /* Texture.hpp */,
+				9A7E46A61C8CE82A00578C86 /* DrawTexture.cpp */,
+				9A7E46A71C8CE82A00578C86 /* DrawTexture.hpp */,
 				9A60C8031C31670900400D85 /* tmxparser.cpp */,
 				9A60C8041C31670900400D85 /* tmxparser.h */,
 				9A60C8051C31670900400D85 /* Window.cpp */,
@@ -222,6 +192,8 @@
 				9A2E2F4D1C413BB7002661EF /* Types.hpp */,
 				9AB2EC731C4A865000F0CDF1 /* AudioEngine.cpp */,
 				9AB2EC741C4A865000F0CDF1 /* AudioEngine.hpp */,
+				9A5398C51C9169030094865C /* NetworkManager.cpp */,
+				9A5398C61C9169030094865C /* NetworkManager.hpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -270,8 +242,8 @@
 				9A60C7FC1C31670900400D85 /* Scene.hpp */,
 				9A60C7FD1C31670900400D85 /* Sprite.cpp */,
 				9A60C7FE1C31670900400D85 /* Sprite.hpp */,
-				9A60C7FF1C31670900400D85 /* TiledMapNode.cpp */,
-				9A60C8001C31670900400D85 /* TiledMapNode.hpp */,
+				9AF380C21C7E097900851278 /* TiledMapNode.cpp */,
+				9AF380C11C7E097900851278 /* TiledMapNode.hpp */,
 			);
 			path = nodes;
 			sourceTree = "<group>";
@@ -295,6 +267,43 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		9AD5D74F1C87C75B00226445 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9AD5D7501C87C77D00226445 /* Action.hpp in Headers */,
+				9AD5D7511C87C77D00226445 /* CallbackAction.hpp in Headers */,
+				9AD5D7521C87C77D00226445 /* FadeAlphaToAction.hpp in Headers */,
+				9AD5D7531C87C77D00226445 /* MoveByAction.hpp in Headers */,
+				9AD5D7541C87C77D00226445 /* RemoveFromParent.hpp in Headers */,
+				9AD5D7551C87C77D00226445 /* RotateToAction.hpp in Headers */,
+				9AD5D7561C87C77D00226445 /* RotateByAction.hpp in Headers */,
+				9AD5D7571C87C77D00226445 /* ScaleToAction.hpp in Headers */,
+				9AD5D7581C87C77D00226445 /* SequenceAction.hpp in Headers */,
+				9AD5D7591C87C77D00226445 /* SpriteAnimationAction.hpp in Headers */,
+				9AD5D75A1C87C77D00226445 /* WaitAction.hpp in Headers */,
+				9AD5D75B1C87C77D00226445 /* RepeatAction.hpp in Headers */,
+				9AD5D75C1C87C77D00226445 /* EngineHelper.hpp in Headers */,
+				9AD5D75D1C87C77D00226445 /* FayEngine.h in Headers */,
+				9AD5D75E1C87C77D00226445 /* ButtonNode.hpp in Headers */,
+				9AD5D75F1C87C77D00226445 /* LabelNode.hpp in Headers */,
+				9AD5D7601C87C77D00226445 /* Node.hpp in Headers */,
+				9A5398C91C9169030094865C /* NetworkManager.hpp in Headers */,
+				9AD5D7611C87C77D00226445 /* Scene.hpp in Headers */,
+				9AD5D7621C87C77D00226445 /* Sprite.hpp in Headers */,
+				9AD5D7631C87C77D00226445 /* TiledMapNode.hpp in Headers */,
+				9A7E46AA1C8CE82A00578C86 /* DrawTexture.hpp in Headers */,
+				9AD5D7641C87C77D00226445 /* Texture.hpp in Headers */,
+				9AD5D7651C87C77D00226445 /* tmxparser.h in Headers */,
+				9AD5D7661C87C77D00226445 /* Window.hpp in Headers */,
+				9AD5D7671C87C77D00226445 /* Types.hpp in Headers */,
+				9AD5D7681C87C77D00226445 /* AudioEngine.hpp in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		9AE2522C1C48016A00D6C01E /* FayEngine-iOS */ = {
 			isa = PBXNativeTarget;
@@ -302,7 +311,6 @@
 			buildPhases = (
 				9AE252291C48016A00D6C01E /* Sources */,
 				9AE2522A1C48016A00D6C01E /* Frameworks */,
-				9AE2522B1C48016A00D6C01E /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -319,7 +327,7 @@
 			buildPhases = (
 				9AFBB87F1C2E0D2E006ACF87 /* Sources */,
 				9AFBB8801C2E0D2E006ACF87 /* Frameworks */,
-				9AFBB8811C2E0D2E006ACF87 /* CopyFiles */,
+				9AD5D74F1C87C75B00226445 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -385,11 +393,13 @@
 				9AE252401C48019F00D6C01E /* RepeatAction.cpp in Sources */,
 				9AE252411C48019F00D6C01E /* EngineHelper.cpp in Sources */,
 				9AE252421C48019F00D6C01E /* ButtonNode.cpp in Sources */,
+				9AF380C41C7E097900851278 /* TiledMapNode.cpp in Sources */,
 				9AE252431C48019F00D6C01E /* LabelNode.cpp in Sources */,
 				9AE252441C48019F00D6C01E /* Node.cpp in Sources */,
 				9AE252451C48019F00D6C01E /* Scene.cpp in Sources */,
+				9A7E46A91C8CE82A00578C86 /* DrawTexture.cpp in Sources */,
+				9A5398C81C9169030094865C /* NetworkManager.cpp in Sources */,
 				9AE252461C48019F00D6C01E /* Sprite.cpp in Sources */,
-				9AE252471C48019F00D6C01E /* TiledMapNode.cpp in Sources */,
 				9AE252481C48019F00D6C01E /* Texture.cpp in Sources */,
 				9AE252491C48019F00D6C01E /* tmxparser.cpp in Sources */,
 				9AE2524A1C48019F00D6C01E /* Window.cpp in Sources */,
@@ -416,11 +426,13 @@
 				9A60C81A1C31670900400D85 /* Window.cpp in Sources */,
 				9A60C8091C31670900400D85 /* FadeAlphaToAction.cpp in Sources */,
 				9A60C82C1C330AB200400D85 /* RepeatAction.cpp in Sources */,
+				9AF380C31C7E097900851278 /* TiledMapNode.cpp in Sources */,
 				9A34D5EA1C41552C00B48591 /* Types.cpp in Sources */,
 				9A60C80F1C31670900400D85 /* SpriteAnimationAction.cpp in Sources */,
 				9A60C80C1C31670900400D85 /* RotateToAction.cpp in Sources */,
+				9A7E46A81C8CE82A00578C86 /* DrawTexture.cpp in Sources */,
+				9A5398C71C9169030094865C /* NetworkManager.cpp in Sources */,
 				9A60C8101C31670900400D85 /* WaitAction.cpp in Sources */,
-				9A60C8171C31670900400D85 /* TiledMapNode.cpp in Sources */,
 				9A60C8131C31670900400D85 /* LabelNode.cpp in Sources */,
 				9A60C8071C31670900400D85 /* Action.cpp in Sources */,
 				9A60C8181C31670900400D85 /* Texture.cpp in Sources */,
@@ -546,30 +558,26 @@
 		9AFBB88D1C2E0D2E006ACF87 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				DYLIB_CURRENT_VERSION = 0.1;
-				HEADER_SEARCH_PATHS = (
-					/usr/local/include/SDL2,
-					/usr/local/include,
-				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "/usr/local/include /usr/local/include/SDL2";
 			};
 			name = Debug;
 		};
 		9AFBB88E1C2E0D2E006ACF87 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				DYLIB_CURRENT_VERSION = 0.1;
-				HEADER_SEARCH_PATHS = (
-					/usr/local/include/SDL2,
-					/usr/local/include,
-				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "/usr/local/include /usr/local/include/SDL2";
 			};
 			name = Release;
 		};

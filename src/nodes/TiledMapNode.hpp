@@ -43,7 +43,7 @@ public:
     tmxparser::TmxObjectGroup getObjectGroupNamed(std::string name);
     
     /** Gets raw TmxMap data from tmxparser */
-    tmxparser::TmxMap *getRawMap();
+    tmxparser::TmxMap getRawMap();
     
 protected:
     bool init (const std::string &filepath);
@@ -51,7 +51,7 @@ private:
     std::string directory = ""; // path of directory the map is located in, in order to load images correctly
     void drawTiles();
     void getObjects();
-    tmxparser::TmxMap *map;
+    tmxparser::TmxMap map;
     std::vector<SpriteWeakPtr> mTileLayer;
 };
 

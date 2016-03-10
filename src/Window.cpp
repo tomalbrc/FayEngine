@@ -25,19 +25,30 @@ Window::~Window() {
     currentScene = NULL;
 }
 
+WindowPtr Window::create(std::string wname, Vec2 size) {
+    return create(wname, size, false);
+}
+
 WindowPtr Window::create(std::string wname, Vec2 size, bool fullscreen) {
+    return create(wname, size, false, false);
+}
+WindowPtr Window::create(std::string wname, Vec2 size, bool fullscreen, bool hidpi) {
     WindowPtr o(new Window());
-    o->init(wname, size, fullscreen);
+    o->init(wname, size, fullscreen, hidpi);
     return o;
 }
 
 
-bool Window::init(std::string wname, Vec2 size, bool fullscreen) {
-    bool borderless = false;
+
+
+bool Window::init(std::string wname, Vec2 size, bool fullscreen, bool hidpi) {
+    Uint32 flags = hidpi ? SDL_WINDOW_ALLOW_HIGHDPI : 0;
+    flags |= SDL_WINDOW_SHOWN;
 #if defined(TARGET_OS_IOS) && TARGET_OS_IOS == 1
-    borderless = true;
+    flags |= SDL_WINDOW_BORDERLESS;
 #endif
-    sdlWindow = SDL_CreateWindow(wname.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, size.x, size.y, (fullscreen ? SDL_WINDOW_FULLSCREEN : 0) | SDL_WINDOW_ALLOW_HIGHDPI | (borderless ? SDL_WINDOW_BORDERLESS : 0)); // Create window with title, position & sitze
+    if (fullscreen) flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
+    sdlWindow = SDL_CreateWindow(wname.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, size.x, size.y, flags); // Create window with title, position & sitze
     if (sdlWindow == nullptr) {
         FELog("SDL_CreateWindow Error: " << SDL_GetError());
         return false;
@@ -45,6 +56,7 @@ bool Window::init(std::string wname, Vec2 size, bool fullscreen) {
     
     renderer = SDL_CreateRenderer(sdlWindow, -1, SDL_RENDERER_ACCELERATED);
     SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
     
     EngineHelper::getInstance()->setRenderer(renderer);
     EngineHelper::getInstance()->mainWindow = shared_from_this();
