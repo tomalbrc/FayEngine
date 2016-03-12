@@ -133,8 +133,8 @@ public:
     ScenePtr getScene();
     
     // Desktop functions
-    virtual void keyDown(SDL_KeyboardEvent event);
-    virtual void keyUp(SDL_KeyboardEvent event);
+    virtual void keyDown(SDL_Keycode keycode);
+    virtual void keyUp(SDL_Keycode keycode);
     virtual void mouseMoved(SDL_MouseMotionEvent, Vec2 coords);
     virtual void mouseClickEnded(SDL_MouseButtonEvent event, Vec2 coords);
     virtual void mouseClickBegan(SDL_MouseButtonEvent event, Vec2 coords);

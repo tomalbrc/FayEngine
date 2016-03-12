@@ -33,7 +33,7 @@ void SequenceAction::update() {
         currentIndex++;
         if (currentIndex == mActions.size()) {
             finished = true;
-            return;
+            currentIndex--;
         }
         else prepareCurrentAction();
     }

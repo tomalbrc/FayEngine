@@ -178,10 +178,10 @@ void Window::handleEvents() {
                 FELog("Event SDL_QUIT... Bye!");
                 break;
             case SDL_KEYDOWN:
-                if (currentScene != nullptr) currentScene->keyDown(event.key);
+                if (currentScene != nullptr) currentScene->keyDown(event.key.keysym.sym);
                 break;
             case SDL_KEYUP:
-                if (currentScene != nullptr) currentScene->keyUp(event.key);
+                if (currentScene != nullptr) currentScene->keyUp(event.key.keysym.sym);
                 break;
             case SDL_MOUSEBUTTONDOWN:
                 if (currentScene != nullptr) currentScene->mouseClickBegan(event.button, getMouseCoords());

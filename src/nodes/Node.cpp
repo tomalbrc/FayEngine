@@ -211,10 +211,10 @@ void Node::render(SDL_Renderer *renderer) { // render into scene / Surface
 
 
 
-void Node::keyDown(SDL_KeyboardEvent event) {
+void Node::keyDown(SDL_Keycode event) {
     for (auto&& c : children) if (c != nullptr) c->keyDown(event);
 }
-void Node::keyUp(SDL_KeyboardEvent event) {
+void Node::keyUp(SDL_Keycode event) {
     for (auto&& c : children) if (c != nullptr) c->keyUp(event);
 }
 void Node::mouseClickBegan(SDL_MouseButtonEvent event, Vec2 coords) {
