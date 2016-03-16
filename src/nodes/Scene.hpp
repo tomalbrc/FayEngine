@@ -58,14 +58,14 @@ public:
      *
      * @param window new Window
      */
-    virtual void setWindow(Window *window);
+    virtual void setWindow(WindowPtr window);
     
     /**
      * The current window the scene is presented in
      *
      * @return current window
      */
-    Window *getWindow();
+    WindowPtr getWindow();
     
     /**
      * Re-implement the render function from Node
@@ -102,7 +102,7 @@ protected:
 private:
     Color mBackgroundColor;
     bool m_bPaused = false;
-    Window *window;
+    WindowPtr window;
 };
 
 #endif /* Scene_hpp */

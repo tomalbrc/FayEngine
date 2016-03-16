@@ -194,19 +194,19 @@ extern bool RectIsNull(Rect p) {
     return (bool)(p.origin.x == 0 && p.origin.y == 0 && p.size.x == 0 && p.size.y == 0);
 }
 extern bool RectIntersectsVec2(Rect r, Vec2 v) {
-    double pointX = v.x;
-    double pointY = v.y;
-    if (pointX <= (r.origin.x + r.size.x) && pointX >= r.origin.x &&
-        pointY <= (r.origin.y + r.size.y) && pointY >= r.origin.y)
+    auto pointX = v.x;
+    auto pointY = v.y;
+    if (pointX < (r.origin.x + r.size.x) && pointX > r.origin.x &&
+        pointY < (r.origin.y + r.size.y) && pointY > r.origin.y)
         return true;
     else
         return false;
 }
 extern bool RectIntersectsRect(Rect rectA, Rect rectB) {
     return !((rectA.origin.x + rectA.size.x) < rectB.origin.x ||
-             rectB.origin.x + rectB.size.x < rectA.origin.x ||
-             (rectA.origin.y+rectA.size.y) < rectB.origin.y ||
-             (rectB.origin.y+rectB.size.y) < rectA.origin.y);
+             (rectB.origin.x + rectB.size.x) < rectA.origin.x ||
+             (rectA.origin.y + rectA.size.y) < rectB.origin.y ||
+             (rectB.origin.y + rectB.size.y) < rectA.origin.y);
 }
 
 extern Rect RectInset(Rect r, float inset) {

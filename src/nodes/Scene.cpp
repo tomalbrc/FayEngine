@@ -37,10 +37,10 @@ Color Scene::getBackgroundColor(void) {
 
 
 
-void Scene::setWindow(Window *win) {
+void Scene::setWindow(WindowPtr win) {
     window = win;
 }
-Window* Scene::getWindow(void) {
+WindowPtr Scene::getWindow(void) {
     return window;
 }
 

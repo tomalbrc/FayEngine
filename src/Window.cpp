@@ -127,7 +127,7 @@ void Window::startLoop() {
             currentScene = NULL;
             m_bShowNew = false;
             
-            newScene->setWindow(this);
+            newScene->setWindow(this->shared_from_this());
             currentScene = newScene;
             newScene = NULL;
             
@@ -149,7 +149,7 @@ void Window::startLoop() {
             
             currentScene.reset();
             currentScene = newScene;
-            currentScene->setWindow(this);
+            currentScene->setWindow(this->shared_from_this());
             newScene.reset();
             
             overlay->removeFromParent();

@@ -50,7 +50,7 @@ void AudioEngine::playMusic(std::string filepath, bool repeat) {
     if (Mix_PlayingMusic() == 0) FELog("Warning: Playing music already! Continuing...");
     
     FELog("Playing \"" + filepath + "\"!");
-    Mix_PlayMusic(m_Music, repeat ? -1 : 1);
+    //Mix_PlayMusic(m_Music, repeat ? -1 : 1);
 }
 
 /**
