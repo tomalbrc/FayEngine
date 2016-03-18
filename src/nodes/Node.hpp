@@ -132,6 +132,9 @@ public:
     void setParent(const NodePtr& n);
     ScenePtr getScene();
     
+    int getTag();
+    void setTag(int tag);
+    
     // Desktop functions
     virtual void keyDown(SDL_Keycode keycode);
     virtual void keyUp(SDL_Keycode keycode);
@@ -163,6 +166,8 @@ protected:
     bool init();
     bool shouldBeRemoved = false;
 private:
+    int mTag = 0;
+    
     // Alpha
     int mAlpha = 255;
     

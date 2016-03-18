@@ -191,6 +191,15 @@ ScenePtr Node::getScene() {
 }
 
 
+int Node::getTag() {
+    return mTag;
+}
+
+void Node::setTag(int tag) {
+    mTag = tag;
+}
+
+
 const std::string Node::getName() {
     return name;
 }
