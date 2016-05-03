@@ -20,8 +20,7 @@
 #include "Sprite.hpp"
 
 class ScaleToAction;
-typedef std::unique_ptr<ScaleToAction> ScaleToActionPtr;
-class Node;
+FE_create_shared_Ptr(ScaleToAction);
 
 /**
  * Scales the target Nodes by x in y duration

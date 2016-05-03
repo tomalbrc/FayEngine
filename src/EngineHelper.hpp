@@ -23,7 +23,7 @@
 /**
  * Helper Class
  *
- * Provides a Texture Cache and save(), load() functions and holds a reference to the renderer.\n\n\n
+ * Provides a Texture Cache and save(), load() functions. Also holds a reference to the renderer and main window.
  */
 class EngineHelper {
 public:
@@ -68,7 +68,7 @@ public:
     Vec2 getDiplaySize();
     
     /**
-     * Cache a texture in an std::map
+     * Cache a texture in a Map
      *
      * @param	texture 	Texture to cache
      * @param	key         Key for the texture
@@ -123,6 +123,7 @@ public:
      */
     void registerApp(std::string organizationName, std::string appName);
     
+    
     /**
      * Saves a string for a key. The key is used as filename and '.bin' is appended. The location is SDL_GetPrefPath()
      *
@@ -162,14 +163,23 @@ public:
      */
     int loadInt(std::string key);
     
-    WindowPtr mainWindow;
+    /**
+     * Sets the main window for the Application
+     */
+    void setMainWindow(WindowPtr);
+    
+    /**
+     * Returns the current main window (if any) for the Application
+     */
+    WindowPtr getMainWindow();
     
 private:
-    std::string basePath;
+    WindowPtr m_mainWindow;
+    std::string m_basePath;
     EngineHelper();
     ~EngineHelper();
-    SDL_Renderer *gameRenderer;
-    std::map<std::string, TexturePtr> textureCache;
+    SDL_Renderer *m_gameRenderer;
+    std::map<std::string, TexturePtr> m_textureCache;
 };
 
 

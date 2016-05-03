@@ -10,27 +10,15 @@
 
 RemoveFromParentActionPtr RemoveFromParentAction::create() {
     RemoveFromParentActionPtr p(new RemoveFromParentAction());
-    p->init(0);
+    p->init();
     return p;
 }
-RemoveFromParentActionPtr RemoveFromParentAction::create(double delay) {
-    RemoveFromParentActionPtr p(new RemoveFromParentAction());
-    p->init(delay);
-    return p;
-}
-
 
 bool RemoveFromParentAction::init() {
-    return init(0);
+    duration = 0;
+    return true;
 }
 
-bool RemoveFromParentAction::init(double delay) {
-    if (Action::init()) {
-        duration = delay*1000;
-        return true;
-    }
-    return false;
-}
 
 void RemoveFromParentAction::update() {
     Uint32 passedTime = SDL_GetTicks() - startTick;

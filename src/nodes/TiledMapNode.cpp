@@ -28,7 +28,11 @@ TiledMapNodePtr TiledMapNode::create(const std::string &filepath) {
 
 bool TiledMapNode::init(const std::string &filepath) {
     map = tmxparser::TmxMap();
-    parseFromFile((SDL_GetBasePath() + filepath).c_str(), &map, "");
+    
+    char *path = SDL_GetBasePath();
+    auto string = (path + filepath);
+    parseFromFile(string, &map, "");
+    delete [] path;
     
     auto last_slash_idx = filepath.rfind('/');
     if (last_slash_idx != std::string::npos) directory = filepath.substr(0, last_slash_idx) + "/";

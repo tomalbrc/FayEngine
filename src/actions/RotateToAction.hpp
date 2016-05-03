@@ -19,8 +19,7 @@
 #include "Sprite.hpp"
 
 class RotateToAction;
-typedef std::unique_ptr<RotateToAction> RotateToActionPtr;
-class Node;
+FE_create_shared_Ptr(RotateToAction);
 
 /**
  * Rotates the target Nodes to x radians in y duration
@@ -29,15 +28,9 @@ class RotateToAction : public Action {
 public:
     RotateToAction(double duration, double radians);
     static RotateToActionPtr create(double duration, double radians);
-
     
     void update();
     void start();
-    
-    
-private:
-    double mDestRot = 255;
-    double mStartRot = 0;
 };
 
 #endif /* RotateToAction_hpp */

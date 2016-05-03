@@ -203,10 +203,8 @@ extern bool RectIntersectsVec2(Rect r, Vec2 v) {
         return false;
 }
 extern bool RectIntersectsRect(Rect rectA, Rect rectB) {
-    return !((rectA.origin.x + rectA.size.x) < rectB.origin.x ||
-             (rectB.origin.x + rectB.size.x) < rectA.origin.x ||
-             (rectA.origin.y + rectA.size.y) < rectB.origin.y ||
-             (rectB.origin.y + rectB.size.y) < rectA.origin.y);
+    return (rectA.origin.x < rectB.origin.x + rectB.size.x && rectA.origin.x + rectA.size.x > rectB.origin.x &&
+             rectA.origin.y < rectB.origin.y + rectB.size.y && rectA.origin.y + rectA.size.y > rectB.origin.y) ;
 }
 
 extern Rect RectInset(Rect r, float inset) {

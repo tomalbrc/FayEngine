@@ -27,13 +27,11 @@
 
 class Scene;
 class Node;
-typedef std::shared_ptr<Node> NodePtr;
-typedef std::weak_ptr<Node> NodeWeakPtr;
+FE_create_Ptr(Scene);
+FE_create_Ptr(Node);
 typedef std::vector<NodePtr> NodeVector;
 typedef std::map<std::string, ActionPtr> ActionMap;
 // redefinition :(
-typedef std::shared_ptr<Scene> ScenePtr;
-typedef std::weak_ptr<Scene> SceneWeakPtr;
 
 /**
  * Node Class
@@ -136,8 +134,8 @@ public:
     void setTag(int tag);
     
     // Desktop functions
-    virtual void keyDown(SDL_Keycode keycode);
-    virtual void keyUp(SDL_Keycode keycode);
+    virtual void keyDown(FEKeyCode key);
+    virtual void keyUp(FEKeyCode key);
     virtual void mouseMoved(SDL_MouseMotionEvent, Vec2 coords);
     virtual void mouseClickEnded(SDL_MouseButtonEvent event, Vec2 coords);
     virtual void mouseClickBegan(SDL_MouseButtonEvent event, Vec2 coords);
@@ -164,7 +162,6 @@ public:
     
 protected:
     bool init();
-    bool shouldBeRemoved = false;
 private:
     int mTag = 0;
     

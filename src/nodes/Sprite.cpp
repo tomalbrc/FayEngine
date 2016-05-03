@@ -110,7 +110,7 @@ void Sprite::render(SDL_Renderer *renderer) { // render into scene / Surfac
         auto sRect = RectMake(mTexture->getRenderOffset(), mTexture->getSize());
         auto dRect = RectMake(convertToWorldSpace(Vec2Null()), getSize()*absScale(this));
         
-        dRect = dRect*EngineHelper::getInstance()->mainWindow->screenScale();
+        dRect = dRect*EngineHelper::getInstance()->getMainWindow()->screenScale();
         
         SDL_Rect ddRect;
         ddRect.x = dRect.origin.x, ddRect.y = dRect.origin.y, ddRect.w = dRect.size.x, ddRect.h = dRect.size.y;

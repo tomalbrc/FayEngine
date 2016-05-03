@@ -57,7 +57,9 @@ bool Node::hasActions() {
 }
 
 ActionPtr Node::getAction(std::string actionName) {
-    return actions.find(actionName) == actions.end() ? NULL : actions[actionName];
+    if (actions.find(actionName) == actions.end()) return nullptr;
+    else if (!actions[actionName]->finished) return actions[actionName];
+    return nullptr;
 }
 
 
@@ -220,11 +222,11 @@ void Node::render(SDL_Renderer *renderer) { // render into scene / Surface
 
 
 
-void Node::keyDown(SDL_Keycode event) {
-    for (auto&& c : children) if (c != nullptr) c->keyDown(event);
+void Node::keyDown(FEKeyCode key) {
+    for (auto&& c : children) if (c != nullptr) c->keyDown(key);
 }
-void Node::keyUp(SDL_Keycode event) {
-    for (auto&& c : children) if (c != nullptr) c->keyUp(event);
+void Node::keyUp(FEKeyCode key) {
+    for (auto&& c : children) if (c != nullptr) c->keyUp(key);
 }
 void Node::mouseClickBegan(SDL_MouseButtonEvent event, Vec2 coords) {
     for (auto&& c : children) if (c != nullptr) c->mouseClickBegan(event, coords);

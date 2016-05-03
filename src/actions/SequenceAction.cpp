@@ -27,18 +27,15 @@ SequenceAction::~SequenceAction() {
 }
 
 void SequenceAction::update() {
-    if (mActions.size() == 0 || target == nullptr) return;
+    if (target == nullptr || finished) return;
     
     if (mActions[currentIndex]->finished) {
         currentIndex++;
         if (currentIndex == mActions.size()) {
             finished = true;
-            currentIndex--;
         }
         else prepareCurrentAction();
-    }
-    
-    mActions[currentIndex]->update();
+    } else mActions[currentIndex]->update();
 }
 
 void SequenceAction::start()  {

@@ -18,8 +18,7 @@
 #define SCREEN_FPS desiredFPS
 #define SCREEN_TICKS_PER_FRAME (1000/SCREEN_FPS)
 
- static SpritePtr overlay;
-
+static SpritePtr overlay;
 
 Window::~Window() {
     currentScene = NULL;
@@ -59,7 +58,7 @@ bool Window::init(std::string wname, Vec2 size, bool fullscreen, bool hidpi) {
     SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
     
     EngineHelper::getInstance()->setRenderer(renderer);
-    EngineHelper::getInstance()->mainWindow = shared_from_this();
+    EngineHelper::getInstance()->setMainWindow(shared_from_this());
     
     return true;
 }
@@ -106,7 +105,6 @@ void Window::startLoop() {
         handleEvents();
         update();
         render();
-        
         /*
         int frameTicks = SDL_GetTicks() - capTimer;
         if (frameTicks < SCREEN_TICKS_PER_FRAME) {
@@ -130,18 +128,14 @@ void Window::startLoop() {
             newScene->setWindow(this->shared_from_this());
             currentScene = newScene;
             newScene = NULL;
-            
-            FELog("Step0");
         } else if ((m_bShowNew && (overlay.get() == nullptr || (overlay.get() != nullptr && overlay->getParent() == nullptr)))) { // TODO: Add Transition between scenes
-            FELog("Step1");
-            
             overlay.reset();
             overlay = Sprite::create(Texture::create(getSize(), ColorWhiteColor()));
             overlay->setAlpha(0);
             currentScene->addChild(overlay);
             
             overlay->runAction(SequenceAction::create({
-                FadeAlphaToAction::create(0.25, 255),
+                FadeAlphaToAction::create(0.2, 255),
             }), "o");
             
             m_bShowNew = false;
@@ -155,13 +149,11 @@ void Window::startLoop() {
             overlay->removeFromParent();
             currentScene->addChild(overlay);
             overlay->runAction(SequenceAction::create({
-                FadeAlphaToAction::create(0.25, 0),
+                FadeAlphaToAction::create(0.2, 0),
                 RemoveFromParentAction::create(),
             }), "o2");
             
-            
             m_bShowNew = false;
-            FELog("Step2");
         }
     }
 }
@@ -178,10 +170,10 @@ void Window::handleEvents() {
                 FELog("Event SDL_QUIT... Bye!");
                 break;
             case SDL_KEYDOWN:
-                if (currentScene != nullptr) currentScene->keyDown(event.key.keysym.sym);
+                if (currentScene != nullptr) currentScene->keyDown(FEKeyCode(event.key.keysym.sym));
                 break;
             case SDL_KEYUP:
-                if (currentScene != nullptr) currentScene->keyUp(event.key.keysym.sym);
+                if (currentScene != nullptr) currentScene->keyUp(FEKeyCode(event.key.keysym.sym));
                 break;
             case SDL_MOUSEBUTTONDOWN:
                 if (currentScene != nullptr) currentScene->mouseClickBegan(event.button, getMouseCoords());

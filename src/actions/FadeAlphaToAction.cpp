@@ -25,24 +25,19 @@ FadeAlphaToActionPtr FadeAlphaToAction::create(double pduration, int dAlpha) {
 
 
 bool FadeAlphaToAction::init(double pduration, int dAlpha) {
-    alphaValue = dAlpha;
+    changeInValue = dAlpha;
     duration = pduration*1000;
     return true;
 }
 
 void FadeAlphaToAction::update() {
-    Uint32 passedTime = SDL_GetTicks() - startTick;
-    
-    int a = startAlpha-((startAlpha - alphaValue)*(passedTime/duration));
-    
-    target->setAlpha(NormalizeAlpha(a));
-    
-    if (passedTime >= duration) finished = true, target->setAlpha(alphaValue);
+    target->setAlpha(currentDoubleValue());
+    if (SDL_GetTicks()-startTick >= duration) finished = true, target->setAlpha(changeInValue+startValue);
 }
 
 void FadeAlphaToAction::start()  {
     startTick = SDL_GetTicks();
-    startAlpha = ((Sprite*)target)->getAlpha();
+    startValue = ((Sprite*)target)->getAlpha();
 }
 
 

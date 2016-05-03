@@ -18,8 +18,7 @@
 #include "EngineHelper.hpp"
 
 class Sprite;
-typedef std::shared_ptr<Sprite> SpritePtr;
-typedef std::weak_ptr<Sprite> SpriteWeakPtr;
+FE_create_Ptr(Sprite);
 
 /**
  * Sprite Class inherits from Node Class

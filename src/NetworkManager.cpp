@@ -8,9 +8,6 @@
 
 #include "NetworkManager.hpp"
 
-NetworkManager::NetworkManager() {
-    
-}
 
 NetworkManagerPtr NetworkManager::create() {
     return NetworkManagerPtr(new NetworkManager());

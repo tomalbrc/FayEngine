@@ -20,25 +20,19 @@
 #include "Node.hpp"
 
 class MoveByAction;
-typedef std::unique_ptr<MoveByAction> MoveByActionPtr;
-
-class Node;
+FE_create_shared_Ptr(MoveByAction);
 
 /**
  * Moves the target Node by a specified distance in a specified duration
  */
-class MoveByAction : public Action {
+class MoveByAction : public Action, public std::enable_shared_from_this<MoveByAction> {
 public:
     static MoveByActionPtr create(double duration, Vec2 offset);
     
     void update();
     void start();
-    
 protected:
     bool init(double duration, Vec2 offset);
-private:
-    Vec2 targetStartPos = Vec2Make(0,0);
-    Vec2 moveValue = Vec2Make(0,0);
 };
 
 #endif /* MoveByAction_hpp */

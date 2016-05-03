@@ -10,17 +10,12 @@
 #define Scene_hpp
 
 #include "SDL.h"
-#include "SDL_image.h"
-#include "SDL_ttf.h"
-#include <stdio.h>
-#include <vector>
-#include <iostream>
+#include "Types.hpp"
 #include "Node.hpp"
 #include "Window.hpp"
 
 class Scene;
-typedef std::shared_ptr<Scene> ScenePtr;
-typedef std::weak_ptr<Scene> SceneWeakPtr;
+FE_create_Ptr(Scene);
 
 /**
  * Scene Class

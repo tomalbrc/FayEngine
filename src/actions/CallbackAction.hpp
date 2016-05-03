@@ -10,11 +10,6 @@
 #define CallbackAction_hpp
 
 #include "SDL.h"
-#include "SDL_image.h"
-#include <stdio.h>
-#include <vector>
-#include <iostream>
-
 #include "Action.hpp"
 #include "Node.hpp"
 

@@ -14,23 +14,22 @@ MoveByActionPtr MoveByAction::create(double pduration, Vec2 offset) {
     return p;
 }
 
-
 bool MoveByAction::init(double pduration, Vec2 offset) {
-    moveValue = offset;
+    changeInVec2Value = offset;
     duration = pduration*1000;
     return true;
 }
 
 void MoveByAction::update() {
-    Uint32 passedTime = SDL_GetTicks() - startTick;
-    
-    auto pos = targetStartPos + (moveValue*(passedTime/duration));
-    target->setPosition(pos);
-    
-    if (passedTime >= duration) finished = true, target->setPosition(targetStartPos+moveValue);
+    auto popos = currentVec2Value();
+    target->setPosition(popos);
+    if (SDL_GetTicks()-startTick >= duration) finished = true, target->setPosition(changeInVec2Value+startVec2Value);
 }
 
 void MoveByAction::start()  {
     startTick = SDL_GetTicks();
-    targetStartPos = target->getPosition();
+    startVec2Value = target->getPosition();
 }
+
+
+

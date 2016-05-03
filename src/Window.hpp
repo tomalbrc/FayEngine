@@ -20,11 +20,12 @@
 
 class Scene;
 class Window;
-typedef std::shared_ptr<Window> WindowPtr;
+FE_create_Ptr(Window);
 
 /**
  * Window containing a Scene.
- * The Window class handles interctions and redirects them to the currently presented Scene (if available)
+ * The Window class handles interactions and redirects them to the currently presented Scene (if available).
+ * The Scene (and all other class deriving from Scene) will also call the appropriate function to it's children nodes.
  */
 class Window : public std::enable_shared_from_this<Window> { // TODO: m prefix // NAMING CONVENTION(S)  :~|
 public:

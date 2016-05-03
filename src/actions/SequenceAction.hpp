@@ -19,8 +19,7 @@
 #include "Sprite.hpp"
 
 class SequenceAction;
-typedef std::unique_ptr<SequenceAction> SequenceActionPtr;
-class Node;
+FE_create_shared_Ptr(SequenceAction);
 
 /**
  * Performs a sequence of actions, one-by-one

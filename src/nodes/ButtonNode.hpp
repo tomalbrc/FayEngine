@@ -20,8 +20,8 @@
 
 class ButtonNode;
 #define ButtonNodeLambda [this](ButtonNode *sender)
+FE_create_Ptr(ButtonNode);
 typedef std::function<void(ButtonNode*)> ButtonNodeCallback;
-typedef std::shared_ptr<ButtonNode> ButtonNodePtr;
 
 /**
  * Clickable LabelNode

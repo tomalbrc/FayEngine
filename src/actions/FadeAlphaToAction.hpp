@@ -11,17 +11,13 @@
 
 #include "SDL.h"
 #include "SDL_image.h"
-#include <stdio.h>
-#include <vector>
-#include <iostream>
 #include "tmxparser.h"
-
+#include "Types.hpp"
 #include "Action.hpp"
 #include "Sprite.hpp"
 
 class FadeAlphaToAction;
-typedef std::unique_ptr<FadeAlphaToAction> FadeAlphaToActionPtr;
-class Node;
+FE_create_shared_Ptr(FadeAlphaToAction);
 
 /**
  * Fades the alpha value of a Node to the desired value in a specified amount of time
@@ -42,9 +38,6 @@ public:
     
 protected:
     bool init(double duration, int destAlpha);
-private:
-    int startAlpha = 255;
-    int alphaValue = 0;
 };
 
 #endif /* FadeAlphaToAction_hpp */

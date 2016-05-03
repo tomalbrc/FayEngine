@@ -15,11 +15,10 @@
 #include "Types.hpp"
 
 class NetworkManager;
-typedef std::shared_ptr<NetworkManager> NetworkManagerPtr;
+FE_create_Ptr(NetworkManager);
 
 class NetworkManager {
     TCPsocket socket;
-    NetworkManager();
 public:
     static NetworkManagerPtr create();
     

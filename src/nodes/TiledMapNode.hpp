@@ -14,9 +14,10 @@
 #include <vector>
 #include <iostream>
 #include "Sprite.hpp"
+#include "Types.hpp"
 
 class TiledMapNode;
-typedef std::shared_ptr<TiledMapNode> TiledMapNodePtr;
+FE_create_Ptr(TiledMapNode);
 typedef std::vector< Rect > RectVector;
 
 /**

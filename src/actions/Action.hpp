@@ -11,19 +11,42 @@
 
 #include "SDL.h"
 #include "SDL_image.h"
-#include <stdio.h>
-#include <vector>
-#include <iostream>
-#include <memory>
+#include "Types.hpp"
+#include "EasingFunctions.hpp"
+
+enum AnimationCurve {
+    AnimationCurveLinear,
+    AnimationCurveQuadraticEaseIn,
+    AnimationCurveQuadraticEaseOut,
+    
+    AnimationCurveBounceEaseOut,
+    AnimationCurveBounceEaseIn,
+    AnimationCurveBounceEaseInOut,
+};
+inline double animationFunctionLinear(double time, double startValue, double changeInValue, double duration) {
+    return changeInValue*time/duration + startValue;
+}
+inline double animationFunctionQuadraticEaseIn(double time, double startValue, double changeInValue, double duration) {
+    time /= duration;
+    return changeInValue*time*time + startValue;
+}
+inline double animationFunctionQuadraticEaseOut(double time, double startValue, double changeInValue, double duration) {
+    time /= duration;
+    return -changeInValue * time*(time-2) + startValue;
+}
+
+
+
+
 
 class Node;
 class Action;
-typedef std::shared_ptr<Action> ActionPtr;
+FE_create_Ptr(Action);
 
 /**
- * Actions to alter properties of Nodes/Sprites
+ * Actions to alter properties of Nodes/Sprites, animated
  */
-class Action { // abstract
+class Action: public std::enable_shared_from_this<Action> { // abstract
 public:
     /**
      * true if duration is over
@@ -41,9 +64,9 @@ public:
     Node *target = NULL;
     
     /**
-     * Duration of the Action
+     * Duration of the Action in ms
      */
-    double duration = 0; // in ms
+    double duration = 0;
     
     /**
      * update() gets called every frame
@@ -55,9 +78,30 @@ public:
      */
     virtual void start() = 0;
     
+    /**
+     * Set an desired animation curve (function) for the action
+     */
+    void setAnimationCurve(AnimationCurve curve);
+
+    /**
+     * Returns the current set animation curve for the Action
+     */
+    AnimationCurve getAnimationCurve();
+    
 protected:
     bool init();
     Uint32 startTick;
+    
+    double startValue;
+    double changeInValue;
+    
+    Vec2 startVec2Value;
+    Vec2 changeInVec2Value;
+    
+    AnimationCurve m_animationCurve = AnimationCurveLinear; // Default value
+    
+    double currentDoubleValue();
+    Vec2 currentVec2Value();
 };
 
 

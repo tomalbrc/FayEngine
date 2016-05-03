@@ -28,5 +28,6 @@ void CallbackAction::update() {
 
 void CallbackAction::start()  {
     startTick = SDL_GetTicks();
+    duration = 0;
 }
 

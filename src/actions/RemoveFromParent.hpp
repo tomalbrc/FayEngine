@@ -19,8 +19,7 @@
 #include "Sprite.hpp"
 
 class RemoveFromParentAction;
-typedef std::unique_ptr<RemoveFromParentAction> RemoveFromParentActionPtr;
-class Node;
+FE_create_shared_Ptr(RemoveFromParentAction);
 
 /**
  * Removes the target Node from parent after a specified delay or immediately
@@ -28,15 +27,11 @@ class Node;
 class RemoveFromParentAction : public Action {
 public:
     static RemoveFromParentActionPtr create();
-    static RemoveFromParentActionPtr create(double delay);
     
     void update();
     void start();
-    
-    
 private:
     bool init();
-    bool init(double delay);
 };
 
 #endif /* RemoveFromParent_hpp */

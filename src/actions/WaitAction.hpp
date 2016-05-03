@@ -18,9 +18,8 @@
 #include "Action.hpp"
 #include "Sprite.hpp"
 
-class Node;
 class WaitAction;
-typedef std::unique_ptr<WaitAction> WaitActionPtr;
+FE_create_shared_Ptr(WaitAction);
 
 /**
  * Waits for a specified time

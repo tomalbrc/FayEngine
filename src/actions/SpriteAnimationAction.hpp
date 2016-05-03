@@ -19,8 +19,7 @@
 #include "Sprite.hpp"
 
 class SpriteAnimationAction;
-typedef std::unique_ptr<SpriteAnimationAction> SpriteAnimationActionPtr;
-class Node;
+FE_create_shared_Ptr(SpriteAnimationAction);
 
 /**
  * Animates a Sequence of Texture objects on the target Sprite

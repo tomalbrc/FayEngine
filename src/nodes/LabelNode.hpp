@@ -12,14 +12,11 @@
 #include "SDL.h"
 #include "SDL_image.h"
 #include "SDL_ttf.h"
-#include <stdio.h>
-#include <vector>
-#include <iostream>
-#include "tmxparser.h"
 #include "Sprite.hpp"
+#include "Types.hpp"
 
 class LabelNode;
-typedef std::shared_ptr<LabelNode> LabelNodePtr;
+FE_create_Ptr(LabelNode);
 
 /**
  * Display a string using an TTF font

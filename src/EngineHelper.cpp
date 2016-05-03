@@ -35,11 +35,20 @@ EngineHelper* EngineHelper::getInstance() {
 
 
 SDL_Renderer* EngineHelper::getRenderer() {
-    return gameRenderer;
+    return m_gameRenderer;
 }
 void EngineHelper::setRenderer(SDL_Renderer *r) {
-    gameRenderer = r;
+    m_gameRenderer = r;
 }
+
+
+WindowPtr EngineHelper::getMainWindow() {
+    return m_mainWindow;
+}
+void EngineHelper::setMainWindow(WindowPtr window) {
+    m_mainWindow = window;
+}
+
 
 void EngineHelper::Init() {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0){
@@ -91,7 +100,7 @@ Vec2 EngineHelper::getDiplaySize() {
 
 
 void EngineHelper::cacheTexture(TexturePtr texture, std::string key) {
-    textureCache[key] = texture;
+    m_textureCache[key] = texture;
 }
 void EngineHelper::cacheTextures(std::vector<TexturePtr> textures, std::vector<std::string> keys) {
     for (int i = 0; i < textures.size(); i++) {
@@ -99,10 +108,10 @@ void EngineHelper::cacheTextures(std::vector<TexturePtr> textures, std::vector<s
     }
 }
 void EngineHelper::removeTextureForKey(std::string key) {
-    textureCache.erase(key);
+    m_textureCache.erase(key);
 }
 void EngineHelper::removeTextureFromCache(TexturePtr tex) {
-    for (auto&& iterator = textureCache.begin(); iterator != textureCache.end(); ++iterator) {
+    for (auto&& iterator = m_textureCache.begin(); iterator != m_textureCache.end(); ++iterator) {
         if (iterator->second == tex)  {
             removeTextureForKey(iterator->first);
             break;
@@ -110,18 +119,18 @@ void EngineHelper::removeTextureFromCache(TexturePtr tex) {
     }
 }
 TexturePtr EngineHelper::getTextureForKey(std::string key) {
-    return textureCache[key];
+    return m_textureCache[key];
 }
 void EngineHelper::cleanTextureCache() {
-    for(auto&& iterator = textureCache.begin(); iterator != textureCache.end();) {
+    for(auto&& iterator = m_textureCache.begin(); iterator != m_textureCache.end();) {
         FELog("Cleaning up Texture named: "<<iterator->first<<"...");
-        iterator = textureCache.erase(iterator);
+        iterator = m_textureCache.erase(iterator);
     }
 }
 
 void EngineHelper::removeUnusedTextures() {
-    for(auto&& iterator = textureCache.begin(); iterator != textureCache.end();) {
-        if (iterator->second.use_count() == 1) FELog("Removed unused Texture named: "<<iterator->first), iterator = textureCache.erase(iterator);
+    for(auto&& iterator = m_textureCache.begin(); iterator != m_textureCache.end();) {
+        if (iterator->second.use_count() == 1) FELog("Removed unused Texture named: "<<iterator->first), iterator = m_textureCache.erase(iterator);
         else ++iterator;
     }
 }
@@ -129,8 +138,9 @@ void EngineHelper::removeUnusedTextures() {
 
 
 void EngineHelper::registerApp(std::string organizationName, std::string appName) {
-    basePath = SDL_GetPrefPath(organizationName.c_str(), appName.c_str());
-    FELog("Registered "<<appName<<", pref base path is: "<<basePath);
+    m_basePath = SDL_GetPrefPath(organizationName.c_str(), appName.c_str());
+    FELog("Registered Application: "<<appName<<", pref base path is: "<<m_basePath);
+    SDL_assert(m_basePath.empty());
 }
 
 
@@ -138,36 +148,39 @@ void EngineHelper::registerApp(std::string organizationName, std::string appName
  * Saves an object for a key. The key is used as filename and '.bin' is appended. The location is SDL_GetPrefPath()
  */
 void EngineHelper::save(std::string string, std::string key) {
-    auto path = (basePath + key + ".bin").c_str();
+    auto path = (m_basePath + key + ".bin").c_str();
     std::ofstream file (path, std::ofstream::binary);
-    file << string, file.close(); // close() not necessairy since ofstream will be handled automatically if out of scope
+    if (file.is_open()) file << string, file.close();
+    else SDL_assert(1);
 }
 std::string EngineHelper::loadString(std::string key) {
-    std::ifstream file(basePath + key + ".bin", std::ifstream::binary);
+    std::ifstream file(m_basePath + key + ".bin", std::ifstream::binary);
     std::string out;
     file >> out;
     return out;
 }
 
 void EngineHelper::save(double value, std::string key) {
-    auto path = (basePath + key + ".bin").c_str();
+    auto path = (m_basePath + key + ".bin").c_str();
     std::ofstream file (path, std::ofstream::binary);
-    file << value, file.close();
+    if (file.is_open()) file << value, file.close();
+    else SDL_assert(1);
 }
 double EngineHelper::loadDouble(std::string key) {
-    std::ifstream file(basePath + key + ".bin", std::ifstream::binary);
+    std::ifstream file(m_basePath + key + ".bin", std::ifstream::binary);
     std::string out;
     file >> out;
     return out.empty() ? 0.0 : std::stod(out);
 }
 
 void EngineHelper::save(int value, std::string key) {
-    auto path = (basePath + key + ".bin").c_str();
+    auto path = (m_basePath + key + ".bin").c_str();
     std::ofstream file (path, std::ofstream::binary);
-    file << value, file.close();
+    if (file.is_open()) file << value, file.close();
+    else SDL_assert(1);
 }
 int EngineHelper::loadInt(std::string key) {
-    std::ifstream file(basePath + key + ".bin", std::ifstream::binary);
+    std::ifstream file(m_basePath + key + ".bin", std::ifstream::binary);
     std::string out;
     file >> out;
     return out.empty() ? 0 : std::stoi(out);

@@ -17,7 +17,7 @@
 #include "Node.hpp"
 
 class Texture;
-typedef std::shared_ptr<Texture> TexturePtr;
+FE_create_Ptr(Texture);
 
 /**
  * This class allows to easily create SDL textures from image files or create new blank textures with a specified size and color
@@ -95,7 +95,7 @@ public:
     
 private:
     TexturePtr mSourceTexture = NULL;
-    std::shared_ptr<Texture> mBatchTexture;
+    TexturePtr mBatchTexture;
     Vec2 mRenderOffset = Vec2Null();
     
     bool init();

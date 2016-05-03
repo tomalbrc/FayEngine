@@ -11,9 +11,10 @@
 
 #include <stdio.h>
 #include "Texture.hpp"
+#include "Types.hpp"
 
 class DrawTexture;
-typedef std::shared_ptr<DrawTexture> DrawTexturePtr;
+FE_create_Ptr(DrawTexture);
 
 /**
  * Texture to draw! yea
