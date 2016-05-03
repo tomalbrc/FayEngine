@@ -1,6 +1,6 @@
 //
 //  RotateToAction.cpp
-//  PixelDead_SDL
+//  FayEngine
 //
 //  Created by Tom Albrecht on 25.12.15.
 //  Copyright © 2015 Tom Albrecht. All rights reserved.
@@ -26,3 +26,5 @@ void RotateToAction::start()  {
     startTick = SDL_GetTicks();
     startValue = target->getZRotation();
 }
+
+

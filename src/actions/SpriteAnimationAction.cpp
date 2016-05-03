@@ -1,6 +1,6 @@
 //
 //  SpriteAnimationAction.cpp
-//  PixelDead_SDL
+//  FayEngine
 //
 //  Created by Tom Albrecht on 20.12.15.
 //  Copyright © 2015 Tom Albrecht. All rights reserved.

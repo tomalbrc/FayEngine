@@ -1,6 +1,6 @@
 //
 //  FadeAlphaToAction.hpp
-//  PixelDead_SDL
+//  FayEngine
 //
 //  Created by Tom Albrecht on 09.12.15.
 //  Copyright © 2015 Tom Albrecht. All rights reserved.
@@ -23,6 +23,7 @@ FE_create_shared_Ptr(FadeAlphaToAction);
  * Fades the alpha value of a Node to the desired value in a specified amount of time
  */
 class FadeAlphaToAction : public Action {
+    int m_alpha;
 public:
     static FadeAlphaToActionPtr create(double duration, int destAlpha);
     

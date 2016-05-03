@@ -1,6 +1,6 @@
 //
 //  Action.cpp
-//  PixelDead_SDL
+//  FayEngine
 //
 //  Created by Tom Albrecht on 09.12.15.
 //  Copyright © 2015 Tom Albrecht. All rights reserved.
@@ -39,17 +39,17 @@ Vec2 Action::currentVec2Value() {
         }
             
             
-        case EasingFunctionQuadraticEaseIn: {
+        case EasingFunctionQuadEaseIn: {
             valX = animationQuadEaseIn(passedTime, startVec2Value.x, changeInVec2Value.x, duration);
             valY = animationQuadEaseIn(passedTime, startVec2Value.y, changeInVec2Value.y, duration);
             break;
         }
-        case EasingFunctionQuadraticEaseOut: {
+        case EasingFunctionQuadEaseOut: {
             valX = animationQuadEaseOut(passedTime, startVec2Value.x, changeInVec2Value.x, duration);
             valY = animationQuadEaseOut(passedTime, startVec2Value.y, changeInVec2Value.y, duration);
             break;
         }
-        case EasingFunctionQuadraticEaseInOut: {
+        case EasingFunctionQuadEaseInOut: {
             valX = animationQuadEaseInOut(passedTime, startVec2Value.x, changeInVec2Value.x, duration);
             valY = animationQuadEaseInOut(passedTime, startVec2Value.y, changeInVec2Value.y, duration);
             break;
@@ -71,6 +71,45 @@ Vec2 Action::currentVec2Value() {
             valY = animationBounceEaseInOut(passedTime, startVec2Value.y, changeInVec2Value.y, duration);
             break;
         }
+        
+        
+        
+        case EasingFunctionBackEaseOut: {
+            valX = animationBackEaseOut(passedTime, startVec2Value.x, changeInVec2Value.x, duration);
+            valY = animationBackEaseOut(passedTime, startVec2Value.y, changeInVec2Value.y, duration);
+            break;
+        }
+        case EasingFunctionBackEaseIn: {
+            valX = animationBackEaseIn(passedTime, startVec2Value.x, changeInVec2Value.x, duration);
+            valY = animationBackEaseIn(passedTime, startVec2Value.y, changeInVec2Value.y, duration);
+            break;
+        }
+        case EasingFunctionBackEaseInOut: {
+            valX = animationBackEaseInOut(passedTime, startVec2Value.x, changeInVec2Value.x, duration);
+            valY = animationBackEaseInOut(passedTime, startVec2Value.y, changeInVec2Value.y, duration);
+            break;
+        }
+        
+        
+        
+        case EasingFunctionElasticEaseOut: {
+            valX = animationElasticEaseOut(passedTime, startVec2Value.x, changeInVec2Value.x, duration);
+            valY = animationElasticEaseOut(passedTime, startVec2Value.y, changeInVec2Value.y, duration);
+            break;
+        }
+        case EasingFunctionElasticEaseIn: {
+            valX = animationElasticEaseIn(passedTime, startVec2Value.x, changeInVec2Value.x, duration);
+            valY = animationElasticEaseIn(passedTime, startVec2Value.y, changeInVec2Value.y, duration);
+            break;
+        }
+        case EasingFunctionElasticEaseInOut: {
+            valX = animationElasticEaseInOut(passedTime, startVec2Value.x, changeInVec2Value.x, duration);
+            valY = animationElasticEaseInOut(passedTime, startVec2Value.y, changeInVec2Value.y, duration);
+            break;
+        }
+        
+        
+            
         default: break;
     }
     return Vec2Make(valX,valY);
