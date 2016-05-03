@@ -12,31 +12,7 @@
 #include "SDL.h"
 #include "SDL_image.h"
 #include "Types.hpp"
-#include "EasingFunctions.hpp"
-
-enum AnimationCurve {
-    AnimationCurveLinear,
-    AnimationCurveQuadraticEaseIn,
-    AnimationCurveQuadraticEaseOut,
-    
-    AnimationCurveBounceEaseOut,
-    AnimationCurveBounceEaseIn,
-    AnimationCurveBounceEaseInOut,
-};
-inline double animationFunctionLinear(double time, double startValue, double changeInValue, double duration) {
-    return changeInValue*time/duration + startValue;
-}
-inline double animationFunctionQuadraticEaseIn(double time, double startValue, double changeInValue, double duration) {
-    time /= duration;
-    return changeInValue*time*time + startValue;
-}
-inline double animationFunctionQuadraticEaseOut(double time, double startValue, double changeInValue, double duration) {
-    time /= duration;
-    return -changeInValue * time*(time-2) + startValue;
-}
-
-
-
+#include "EasingFunctions.h"
 
 
 class Node;
@@ -79,14 +55,15 @@ public:
     virtual void start() = 0;
     
     /**
-     * Set an desired animation curve (function) for the action
+     * Set an desired animation function for the action.
+     * See EasingFunctions.h for Functions
      */
-    void setAnimationCurve(AnimationCurve curve);
+    void setEasingFunction(EasingFunction curve);
 
     /**
-     * Returns the current set animation curve for the Action
+     * Returns the current set animation function for the Action
      */
-    AnimationCurve getAnimationCurve();
+    EasingFunction getEasingFunction();
     
 protected:
     bool init();
@@ -98,7 +75,7 @@ protected:
     Vec2 startVec2Value;
     Vec2 changeInVec2Value;
     
-    AnimationCurve m_animationCurve = AnimationCurveLinear; // Default value
+    EasingFunction m_animationCurve = EasingFunctionLinear; // Default value
     
     double currentDoubleValue();
     Vec2 currentVec2Value();

@@ -17,10 +17,10 @@ Action::~Action(){
 };
 
 
-void Action::setAnimationCurve(AnimationCurve curve) {
+void Action::setEasingFunction(EasingFunction curve) {
     m_animationCurve = curve;
 }
-AnimationCurve Action::getAnimationCurve() {
+EasingFunction Action::getEasingFunction() {
     return m_animationCurve;
 }
 
@@ -32,34 +32,43 @@ Vec2 Action::currentVec2Value() {
     float valX = 0.f;
     float valY = 0.f;
     switch (m_animationCurve) {
-        case AnimationCurveLinear: {
-            valX = animationFunctionLinear(passedTime, startVec2Value.x, changeInVec2Value.x, duration);
-            valY = animationFunctionLinear(passedTime, startVec2Value.y, changeInVec2Value.y, duration);
+        case EasingFunctionLinear: {
+            valX = animationLinear(passedTime, startVec2Value.x, changeInVec2Value.x, duration);
+            valY = animationLinear(passedTime, startVec2Value.y, changeInVec2Value.y, duration);
             break;
         }
-        case AnimationCurveQuadraticEaseIn: {
-            valX = animationFunctionQuadraticEaseIn(passedTime, startVec2Value.x, changeInVec2Value.x, duration);
-            valY = animationFunctionQuadraticEaseIn(passedTime, startVec2Value.y, changeInVec2Value.y, duration);
+            
+            
+        case EasingFunctionQuadraticEaseIn: {
+            valX = animationQuadEaseIn(passedTime, startVec2Value.x, changeInVec2Value.x, duration);
+            valY = animationQuadEaseIn(passedTime, startVec2Value.y, changeInVec2Value.y, duration);
             break;
         }
-        case AnimationCurveQuadraticEaseOut: {
-            valX = animationFunctionQuadraticEaseOut(passedTime, startVec2Value.x, changeInVec2Value.x, duration);
-            valY = animationFunctionQuadraticEaseOut(passedTime, startVec2Value.y, changeInVec2Value.y, duration);
+        case EasingFunctionQuadraticEaseOut: {
+            valX = animationQuadEaseOut(passedTime, startVec2Value.x, changeInVec2Value.x, duration);
+            valY = animationQuadEaseOut(passedTime, startVec2Value.y, changeInVec2Value.y, duration);
             break;
         }
-        case AnimationCurveBounceEaseOut: {
-            valX = bounceEaseOut(passedTime, startVec2Value.x, changeInVec2Value.x, duration);
-            valY = bounceEaseOut(passedTime, startVec2Value.y, changeInVec2Value.y, duration);
+        case EasingFunctionQuadraticEaseInOut: {
+            valX = animationQuadEaseInOut(passedTime, startVec2Value.x, changeInVec2Value.x, duration);
+            valY = animationQuadEaseInOut(passedTime, startVec2Value.y, changeInVec2Value.y, duration);
             break;
         }
-        case AnimationCurveBounceEaseIn: {
-            valX = bounceEaseIn(passedTime, startVec2Value.x, changeInVec2Value.x, duration);
-            valY = bounceEaseIn(passedTime, startVec2Value.y, changeInVec2Value.y, duration);
+         
+            
+        case EasingFunctionBounceEaseOut: {
+            valX = animationBounceEaseOut(passedTime, startVec2Value.x, changeInVec2Value.x, duration);
+            valY = animationBounceEaseOut(passedTime, startVec2Value.y, changeInVec2Value.y, duration);
             break;
         }
-        case AnimationCurveBounceEaseInOut: {
-            valX = bounceEaseInOut(passedTime, startVec2Value.x, changeInVec2Value.x, duration);
-            valY = bounceEaseInOut(passedTime, startVec2Value.y, changeInVec2Value.y, duration);
+        case EasingFunctionBounceEaseIn: {
+            valX = animationBounceEaseIn(passedTime, startVec2Value.x, changeInVec2Value.x, duration);
+            valY = animationBounceEaseIn(passedTime, startVec2Value.y, changeInVec2Value.y, duration);
+            break;
+        }
+        case EasingFunctionBounceEaseInOut: {
+            valX = animationBounceEaseInOut(passedTime, startVec2Value.x, changeInVec2Value.x, duration);
+            valY = animationBounceEaseInOut(passedTime, startVec2Value.y, changeInVec2Value.y, duration);
             break;
         }
         default: break;
