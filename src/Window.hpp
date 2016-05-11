@@ -18,6 +18,21 @@
 #include <memory>
 #include "Node.hpp"
 
+struct SceneTransition {
+    double duration = 0.17;
+    Color color = ColorBlackColor();
+    EasingFunction startEasingFunction = EasingFunctionQuadEaseOut;
+    EasingFunction endEasingFunction = EasingFunctionQuadEaseIn;
+};
+inline SceneTransition SceneTransitionMake(double duration, Color col, EasingFunction startEasingFunction, EasingFunction endEasingFunction) {
+    SceneTransition transition;
+    transition.color = col;
+    transition.duration = duration;
+    transition.startEasingFunction = startEasingFunction;
+    transition.endEasingFunction = endEasingFunction;
+    return transition;
+}
+
 class Scene;
 class Window;
 FE_create_Ptr(Window);
@@ -40,9 +55,15 @@ public:
     ScenePtr getCurrentScene();
     
     /**
-     * Presents a new Scene. update() and other interaction functions will be called on the Scene.
+     * Presents a new Scene with a default SceneTransition struct. update() and other interaction functions will be called on the Scene.
      */
     void presentScene(ScenePtr newScene);
+    
+    /**
+     * Presents a new Scene. update() and other interaction functions will be called on the Scene.
+     */
+    void presentScene(ScenePtr newScene, SceneTransition transition);
+    
     
     /**
      * Current framerate
@@ -103,6 +124,8 @@ private:
     void render();
     
     Vec3 accelData = Vec3Null();
+    
+    SceneTransition m_nextTransition;
 };
 
 #endif /* Window_hpp */

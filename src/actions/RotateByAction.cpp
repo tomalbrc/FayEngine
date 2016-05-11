@@ -13,22 +13,19 @@ RotateByActionPtr RotateByAction::create(double pduration, double radians) {
 }
 
 RotateByAction::RotateByAction(double pduration, double radians) : Action() {
-    radValue = radians;
+    changeInValue = radians;
     duration = pduration*1000;
 }
 
 void RotateByAction::update() {
-    Uint32 passedTime = SDL_GetTicks() - startTick;
-    
-    auto singleStep = radValue / duration; // TODO: MAKE CODE
-    
-    //auto a = mStartRot-((mStartRot - mDestRot)*(passedTime/duration));
-    
-    target->setZRotation(singleStep);
-    
-    if (passedTime >= duration) finished = true;//, target->setZRotation(mDestRot);
+    if (finished) return;
+    target->setZRotation(currentDoubleValue());
+    if (SDL_GetTicks()-startTick > duration) finished = true, target->setZRotation(changeInValue+startValue);
 }
 
 void RotateByAction::start()  {
     startTick = SDL_GetTicks();
+    startValue = target->getZRotation();
 }
+
+

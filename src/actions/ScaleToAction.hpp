@@ -26,8 +26,7 @@ FE_create_shared_Ptr(ScaleToAction);
  * Scales the target Nodes by x in y duration
  */
 class ScaleToAction : public Action {
-    Vec2 mStartScale = Vec2Make(1.0, 1.0);
-    Vec2 mDestScale = Vec2Null();
+    Vec2 m_scale = Vec2Make(1.0, 1.0);
 public:
     ScaleToAction(double duration, double destScale);
     static ScaleToActionPtr create(double duration, double destScale);

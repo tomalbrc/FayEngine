@@ -25,9 +25,10 @@ FE_create_shared_Ptr(RotateToAction);
  * Rotates the target Nodes to x radians in y duration
  */
 class RotateToAction : public Action {
+    float m_radians;
 public:
-    RotateToAction(double duration, double radians);
-    static RotateToActionPtr create(double duration, double radians);
+    RotateToAction(double duration, float radians);
+    static RotateToActionPtr create(double duration, float radians);
     
     void update();
     void start();

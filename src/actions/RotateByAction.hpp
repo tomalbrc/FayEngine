@@ -31,9 +31,6 @@ public:
     
     void update();
     void start();
-    
-private:
-    double radValue = 0;
 };
 
 

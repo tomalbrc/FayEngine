@@ -13,21 +13,17 @@ ScaleToActionPtr ScaleToAction::create(double pduration, double destScale) {
 }
 
 ScaleToAction::ScaleToAction(double pduration, double destScale) : Action() {
-    mDestScale = Vec2Make(destScale, destScale);
+    m_scale = Vec2Make(destScale, destScale);
     duration = pduration*1000;
 }
 
 void ScaleToAction::update() {
-    if (target == nullptr) return;
-
-    Uint32 passedTime = SDL_GetTicks() - startTick;
-    auto a = mStartScale-((mStartScale - mDestScale)*(passedTime/duration));
-    target->setScale(a);
-    
-    if (passedTime >= duration) finished = true, target->setScale(mDestScale);
+    target->setScale(currentVec2Value());
+    if (SDL_GetTicks()-startTick > duration) finished = true, target->setScale(changeInVec2Value+startVec2Value);
 }
 
 void ScaleToAction::start()  {
     startTick = SDL_GetTicks();
-    mStartScale = target->getScale();
+    startVec2Value = target->getScale();
+    changeInVec2Value = m_scale - startVec2Value;
 }

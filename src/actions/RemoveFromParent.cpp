@@ -22,7 +22,7 @@ bool RemoveFromParentAction::init() {
 
 void RemoveFromParentAction::update() {
     Uint32 passedTime = SDL_GetTicks() - startTick;
-    if (passedTime/duration >= 1) finished = true, target->removeFromParent();
+    if (passedTime/duration > 1) finished = true, target->removeFromParent();
 }
 
 void RemoveFromParentAction::start()  {

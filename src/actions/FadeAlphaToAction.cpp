@@ -33,7 +33,7 @@ bool FadeAlphaToAction::init(double pduration, int dAlpha) {
 
 void FadeAlphaToAction::update() {
     target->setAlpha(currentDoubleValue());
-    if (SDL_GetTicks()-startTick >= duration) finished = true, target->setAlpha(changeInValue+startValue);
+    if (SDL_GetTicks()-startTick > duration) finished = true, target->setAlpha(changeInValue+startValue);
 }
 
 void FadeAlphaToAction::start()  {

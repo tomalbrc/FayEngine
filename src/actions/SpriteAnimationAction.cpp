@@ -33,7 +33,7 @@ bool SpriteAnimationAction::init(double secondsPerFrame, std::vector< TexturePtr
 
 void SpriteAnimationAction::update() {
     Uint32 passedTime = SDL_GetTicks() - startTick;
-    if ((passedTime)/duration >= 1.0) {
+    if ((passedTime)/duration > 1.0) {
         finished = true;
         if (mShouldRestoreOriginal && mOriginalTexture != nullptr) ((Sprite*)target)->setTexture(mOriginalTexture);
         return;

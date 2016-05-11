@@ -72,10 +72,16 @@ inline Vec2 getMouseCoords() {
 
 
 void Window::presentScene(ScenePtr pnewScene) {
+    SceneTransition trans;
+    presentScene(pnewScene, trans);
+}
+
+void Window::presentScene(ScenePtr pnewScene, SceneTransition transition) {
+    m_nextTransition = transition;
     if (currentScene != nullptr) m_bShowNew = true, newScene = pnewScene;
     else newScene = pnewScene;
-    
 }
+
 
 SDL_Renderer* Window::getRenderer() {
     return renderer;
@@ -130,12 +136,14 @@ void Window::startLoop() {
             newScene = NULL;
         } else if ((m_bShowNew && (overlay.get() == nullptr || (overlay.get() != nullptr && overlay->getParent() == nullptr)))) { // TODO: Add Transition between scenes
             overlay.reset();
-            overlay = Sprite::create(Texture::create(getSize(), ColorWhiteColor()));
+            overlay = Sprite::create(Texture::create(getSize(), m_nextTransition.color));
             overlay->setAlpha(0);
             currentScene->addChild(overlay);
             
+            auto fade = FadeAlphaToAction::create(m_nextTransition.duration, 255);
+            fade->setEasingFunction(m_nextTransition.startEasingFunction);
             overlay->runAction(SequenceAction::create({
-                FadeAlphaToAction::create(0.2, 255),
+                fade,
             }), "o");
             
             m_bShowNew = false;
@@ -148,8 +156,11 @@ void Window::startLoop() {
             
             overlay->removeFromParent();
             currentScene->addChild(overlay);
+            
+            auto fade = FadeAlphaToAction::create(m_nextTransition.duration, 0);
+            fade->setEasingFunction(m_nextTransition.endEasingFunction);
             overlay->runAction(SequenceAction::create({
-                FadeAlphaToAction::create(0.2, 0),
+                fade,
                 RemoveFromParentAction::create(),
             }), "o2");
             

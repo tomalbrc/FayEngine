@@ -169,7 +169,7 @@ private:
     int mAlpha = 255;
     
     // Rotation on the z axis in degree
-    double mZRotation = 0.0;
+    double mZRotation = DegreesToRadians(0.0);
     
     // Scale
     Vec2 mScale = Vec2Make(1.0, 1.0);

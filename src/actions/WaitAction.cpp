@@ -17,7 +17,7 @@ WaitAction::WaitAction(double dur) : Action() {
 }
 
 void WaitAction::update() {
-    if (SDL_GetTicks()-startTick >= duration)
+    if (SDL_GetTicks()-startTick > duration)
         finished = true;
 }
 
