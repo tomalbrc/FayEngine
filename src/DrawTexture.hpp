@@ -28,6 +28,7 @@ public:
     
     void fillRect(Rect rect, Color color);
     void drawLine(Vec2 p1, Vec2 p2, Color color);
+    void fillCircle(float radius, Vec2 origin, Color color);
     
     void apply(); // Apply everything
 };

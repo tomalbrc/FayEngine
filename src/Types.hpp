@@ -24,6 +24,16 @@
 
 
 /**
+ * Blend modes for Sprites
+ */
+typedef enum {
+    BlendModeNone,
+    BlendModeAlpha,
+    BlendModeAdd,
+    BlendModeMod, // AKA Multiply?
+} BlendMode;
+
+/**
  * Color with r g b and a values
  */
 struct Color {

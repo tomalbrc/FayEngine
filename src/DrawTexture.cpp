@@ -62,7 +62,7 @@ void DrawTexture::apply() {
     mTexture = SDL_CreateTextureFromSurface(EngineHelper::getInstance()->getRenderer(), m_bufferSurface);
 }
 
-void DrawTexture:: fillRect(Rect rect, Color col) {
+void DrawTexture::fillRect(Rect rect, Color col) {
     auto r = (SDL_Rect){(int)rect.origin.x,(int)rect.origin.y,(int)rect.size.x,(int)rect.size.y};
     SDL_FillRect(m_bufferSurface, &r, SDL_MapRGBA(m_bufferSurface->format, col.r, col.g, col.b, col.a));
 }
@@ -74,7 +74,13 @@ void dt_plot(Vec2 p, SDL_Surface *s, Color col) {
     }
 }
 
-void DrawTexture:: drawLine(Vec2 p1, Vec2 p2, Color color) {
+void DrawTexture::drawLine(Vec2 p1, Vec2 p2, Color color) {
+    if (p1.x > p2.x) {
+        auto b = p2;
+        p2 = p1;
+        p1 = b;
+    }
+    
     SDL_UnlockSurface(m_bufferSurface);
     float error = 0.f;
     auto deltax = p2.x - p1.x;
@@ -90,6 +96,15 @@ void DrawTexture:: drawLine(Vec2 p1, Vec2 p2, Color color) {
             error -= 1.0;
         }
     }
+    SDL_LockSurface(m_bufferSurface);
+}
+
+void DrawTexture::fillCircle(float radius, Vec2 origin, Color color) {
+    SDL_UnlockSurface(m_bufferSurface);
+    for(int y=-radius; y<=radius; y++)
+        for(int x=-radius; x<=radius; x++)
+            if(x*x+y*y <= radius*radius)
+                dt_plot(Vec2Make(origin.x+x, origin.y+y), m_bufferSurface, color);
     SDL_LockSurface(m_bufferSurface);
 }
 

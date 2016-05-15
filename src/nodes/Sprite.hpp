@@ -76,6 +76,21 @@ public:
     TexturePtr getTexture();
     
     /**
+     * The current blend mode of the Sprite
+     *
+     * @return the current blend mode of the sprite
+     */
+    BlendMode getBlendMode();
+    
+    /**
+     * Sets the blend mode for the Sprite.
+     * See Types.hpp for details
+     *
+     * @param new blend mode
+     */
+    void setBlendMode(BlendMode mode);
+    
+    /**
      * Rectangle relative to parent's coordinate space
      *
      * @return a Rect containg the origin and size
@@ -97,6 +112,7 @@ public:
 private:
     Vec2 mSize = Vec2Null();
     TexturePtr mTexture = NULL;
+    BlendMode m_blendMode = BlendModeAlpha;
 protected:
     bool init();
     bool init(TexturePtr texture);

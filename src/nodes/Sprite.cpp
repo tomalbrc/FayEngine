@@ -78,6 +78,18 @@ TexturePtr Sprite::getTexture() {
 }
 
 
+
+BlendMode Sprite::getBlendMode() {
+    return m_blendMode;
+}
+
+void Sprite::setBlendMode(BlendMode mode) {
+    m_blendMode = mode;
+}
+
+
+
+
 // Rect in parent coordinate system
 Rect Sprite::getRect() {
     return RectMake(getPosition() - (getAnchorPoint()*getSize()), getSize()*getScale());
@@ -124,6 +136,7 @@ void Sprite::render(SDL_Renderer *renderer) { // render into scene / Surfac
         center.x = ddRect.w*getAnchorPoint().x;
         center.y = ddRect.h*getAnchorPoint().y;
         
+        SDL_SetTextureBlendMode(mTexture->sdlTexture(), SDL_BlendMode(m_blendMode));
         SDL_SetTextureAlphaMod(mTexture->sdlTexture(), getAlpha()); // temporarily apply Sprites alpha value
         SDL_RenderCopyEx(renderer, mTexture->sdlTexture(), &ssRect, &ddRect, -RadiansToDegrees(absRotation(this)), &center, SDL_FLIP_NONE);
     }
