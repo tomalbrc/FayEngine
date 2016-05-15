@@ -25,6 +25,10 @@ typedef std::function<void(ButtonNode*)> ButtonNodeCallback;
 
 /**
  * Clickable LabelNode
+ * NOTE: Can only has either a texture or text set!
+ * Don't set normal hover or selected text color
+ * if you want your textures to show for the state.
+ * See setNormalTexture, setHoverTexture & setSelectedTexture
  */
 class ButtonNode : public LabelNode {
 public:

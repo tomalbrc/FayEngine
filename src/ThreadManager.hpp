@@ -28,8 +28,5 @@ public:
     void runThread(std::string threadName, std::function<void(void)> function, bool waitForThread);
 };
 
-static int TestThread(void *ptr) {
-    return ((ThreadManager*)ptr)->executeFunction();
-}
 
 #endif /* ThreadManager_hpp */

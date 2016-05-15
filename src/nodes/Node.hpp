@@ -133,21 +133,97 @@ public:
     int getTag();
     void setTag(int tag);
     
-    // Desktop functions
+    /**
+     * Keyboard key down
+     *
+     * @param key   the key that will be pressed
+     */
     virtual void keyDown(FEKeyCode key);
+    
+    /**
+     * Keyboard key up
+     *
+     * @param key   the key that will be pressed
+     */
     virtual void keyUp(FEKeyCode key);
-    virtual void mouseMoved(SDL_MouseMotionEvent, Vec2 coords);
+    
+    /**
+     * Mouse pointer moved
+     *
+     * @param event     SDL mouse event
+     * @param coords    coords in window
+     */
+    virtual void mouseMoved(SDL_MouseMotionEvent event, Vec2 coords);
+    
+    /**
+     * Mouse button click ended
+     *
+     * @param event     SDL mouse event
+     * @param coords    coords in window
+     */
     virtual void mouseClickEnded(SDL_MouseButtonEvent event, Vec2 coords);
+    
+    /**
+     * Mouse button click began
+     *
+     * @param event     SDL mouse event
+     * @param coords    coords in window
+     */
     virtual void mouseClickBegan(SDL_MouseButtonEvent event, Vec2 coords);
     
-    // Mobile functions
+    /**
+     * Touch Began input for mobile devices
+     *
+     * @param event     SDL finger event
+     * @param coords    coords in window
+     */
     virtual void touchBegan(SDL_TouchFingerEvent finger, Vec2 coords);
+    
+    /**
+     * Touch Ended input for mobile devices
+     *
+     * @param event     SDL finger event
+     * @param coords    coords in window
+     */
     virtual void touchEnded(SDL_TouchFingerEvent finger, Vec2 coords);
+    
+    /**
+     * Touch Moved input for mobile devices
+     *
+     * @param event     SDL finger event
+     * @param coords    coords in window
+     */
     virtual void touchMoved(SDL_TouchFingerEvent finger, Vec2 coords);
+    
+    /**
+     * Accelerometer data for mobile devices
+     */
     virtual void accelerometerMoved(Vec3 accelerometerData);
     
+    // TODO: tvOS controller support!
+    /**
+     * Controller pushed button
+     *
+     * @param controllerIndex   index of the controller that pushed the button
+     * @param button            button that was being pressed
+     */
     virtual void controllerPushedButton(Sint32 controllerIndex, SDL_GameControllerButton button);
+    
+    /**
+     * Controller released a button
+     *
+     * @param controllerIndex   index of the controller that pushed the button
+     * @param button            button that was being released
+     */
     virtual void controllerReleasedButton(Sint32 controllerIndex, SDL_GameControllerButton button);
+    
+    /**
+     * Controller axis value changed / has motion
+     *
+     * @param controllerIndex   index of the controller that changed an axis value
+     * @param axis              axis that was moved
+     * @param value             value somewhere between 32000 / -32000 (NOTE: Not sure about the range)
+     */
     virtual void controllerAxisMotion(Sint32 controllerIndex, SDL_GameControllerAxis axis, Sint16 value);
     
     

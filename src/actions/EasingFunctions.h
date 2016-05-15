@@ -74,8 +74,7 @@ inline float animationBackEaseOut(float t,float b , float c, float d) {
 }
 inline float animationBackEaseInOut(float t,float b , float c, float d) {
     float s = 1.70158f;
-    s*=(1.525f);
-    if ((t/=d/2) < 1) return c/2*(t*t*((s+1)*t - s)) + b;
+    if ((t/=d/2) < 1) return c/2*(t*t*(((s*=(1.525f))+1)*t - s)) + b;
     float postFix = t-=2;
     s*=(1.525f);
     return c/2*((postFix)*t*(((s)+1)*t + s) + 2) + b;
@@ -96,32 +95,25 @@ inline float animationLinear(float time, float startValue, float changeInValue, 
  * Quad Ease In, Out, InOut
  */
 inline float animationQuadEaseIn (float t,float b , float c, float d) {
-    t/=d;
-    return c*(t)*t + b;
+    return c*(t/=d)*t + b;
 }
 inline float animationQuadEaseOut(float t,float b , float c, float d) {
-    t/=d;
-    return -c *(t)*(t-2) + b;
+    return -c *(t/=d)*(t-2) + b;
 }
 
 inline float animationQuadEaseInOut(float t,float b , float c, float d) {
     if ((t/=d/2) < 1) return ((c/2)*(t*t)) + b;
-    auto mt = t-1;
-    return -c/2 * (((t-2)*mt) - 1) + b;
+    return -c/2 * (((t-2)*(--t)) - 1) + b;
 }
 
 
 
 inline float animationElasticEaseIn (float t,float b , float c, float d) {
-    auto tc = (t/d);
-    if (t==0) return b;
-    if (tc==1) return b+c;
-    t=tc;
+    if (t==0) return b;  if ((t/=d)==1) return b+c;
     float p=d*.3f;
     float a=c;
     float s=p/4;
-    t-=1;
-    float postFix =a*pow(2,10*t); // this is a fix, again, with post-increment operators
+    float postFix =a*pow(2,10*(t-=1)); // this is a fix, again, with post-increment operators
     return -(postFix * sin((t*d-s)*(2*M_PI)/p )) + b;
 }
 inline float animationElasticEaseOut(float t,float b , float c, float d) {

@@ -27,10 +27,10 @@
  * Blend modes for Sprites
  */
 typedef enum {
-    BlendModeNone,
-    BlendModeAlpha,
-    BlendModeAdd,
-    BlendModeMod, // AKA Multiply?
+    BlendModeNone = SDL_BLENDMODE_NONE,
+    BlendModeAlpha = SDL_BLENDMODE_BLEND,
+    BlendModeAdd = SDL_BLENDMODE_ADD,
+    BlendModeMod = SDL_BLENDMODE_MOD, // AKA Multiply?
 } BlendMode;
 
 /**

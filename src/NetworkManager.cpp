@@ -26,9 +26,7 @@ std::string NetworkManager::downloadString(std::string url) {
     std::string host = sub.substr(0, ccc);
     
     
-    
-    
-    std::cout << "sub: "<< sub <<  ", path: " << path  << " aaaand " << host << " ";
+    std::cout << "[NetworkManager] Path: " << path  << ", Host: " << host << " ";
     
     
     IPaddress ip;

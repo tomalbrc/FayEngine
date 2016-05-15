@@ -8,6 +8,11 @@
 
 #include "ThreadManager.hpp"
 
+static int TestThread(void *ptr) {
+    return ((ThreadManager*)ptr)->executeFunction();
+}
+
+
 ThreadManagerPtr ThreadManager::getInstance() {
     static ThreadManagerPtr instance = std::make_shared<ThreadManager>();
     return instance;
