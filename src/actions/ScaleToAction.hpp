@@ -9,15 +9,12 @@
 #ifndef ScaleToAction_hpp
 #define ScaleToAction_hpp
 
-#include "SDL.h"
-#include "SDL_image.h"
-#include <stdio.h>
 #include <vector>
 #include <iostream>
-#include "tmxparser.h"
-
 #include "Action.hpp"
 #include "Sprite.hpp"
+
+namespace FE {
 
 class ScaleToAction;
 FE_create_shared_Ptr(ScaleToAction);
@@ -35,4 +32,6 @@ public:
     virtual void start();
 };
 
+    
+}
 #endif /* ScaleToAction_hpp */

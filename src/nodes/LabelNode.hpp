@@ -15,6 +15,8 @@
 #include "Sprite.hpp"
 #include "Types.hpp"
 
+namespace FE {
+
 class LabelNode;
 FE_create_Ptr(LabelNode);
 
@@ -52,4 +54,5 @@ private:
     int mFontSize = 24;
 };
 
+} // namespace FE
 #endif /* LabelSprite_hpp */

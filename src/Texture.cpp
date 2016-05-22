@@ -24,6 +24,8 @@
 #define amask 0xff000000
 #endif
 
+namespace FE {
+
 TexturePtr Texture::create() {
     auto t = EngineHelper::getInstance()->getTextureForKey("empty");
     if (t == nullptr) {
@@ -136,3 +138,6 @@ Vec2 Texture::getRenderOffset() {
 SDL_Texture* Texture::sdlTexture() {
     return mTexture;
 }
+
+
+} // namespace FE

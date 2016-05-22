@@ -20,6 +20,8 @@
 #include "Window.hpp"
 #include "Texture.hpp"
 
+namespace FE {
+
 /**
  * Helper Class
  *
@@ -49,7 +51,7 @@ public:
     void setRenderer(SDL_Renderer *renderer);
     
     /**
-     * Initiates SDL, SDL_image and SDL_ttf
+     * virtual initiates SDL, SDL_image and SDL_ttf
      */
     void Init();
     
@@ -173,6 +175,7 @@ public:
      */
     WindowPtr getMainWindow();
     
+    
 private:
     WindowPtr m_mainWindow;
     std::string m_basePath;
@@ -182,5 +185,5 @@ private:
     std::map<std::string, TexturePtr> m_textureCache;
 };
 
-
+} // namespace FE
 #endif /* EngineHelper_hpp */

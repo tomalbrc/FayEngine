@@ -20,6 +20,8 @@
 #define amask  0xff000000
 #endif
 
+namespace FE {
+
 TiledMapNodePtr TiledMapNode::create(const std::string &filepath) {
     TiledMapNodePtr p(new TiledMapNode());
     p->init(filepath);
@@ -129,3 +131,4 @@ tmxparser::TmxMap TiledMapNode::getRawMap() {
 }
 
 
+} // namespace FE

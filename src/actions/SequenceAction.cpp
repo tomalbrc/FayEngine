@@ -8,6 +8,8 @@
 
 #include "SequenceAction.hpp"
 
+namespace FE {
+
 SequenceActionPtr SequenceAction::create(std::vector< ActionPtr > actions) {
     SequenceActionPtr p(new SequenceAction());
     p->init(std::move(actions));
@@ -54,3 +56,5 @@ void SequenceAction::prepareCurrentAction() {
     mActions[currentIndex]->start();
 }
 
+
+} // namespace FE

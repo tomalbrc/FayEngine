@@ -8,6 +8,8 @@
 
 #include "ScaleToAction.hpp"
 
+namespace FE {
+
 ScaleToActionPtr ScaleToAction::create(double pduration, double destScale) {
     return ScaleToActionPtr(new ScaleToAction(pduration,destScale));
 }
@@ -27,3 +29,6 @@ void ScaleToAction::start()  {
     startVec2Value = target->getScale();
     changeInVec2Value = m_scale - startVec2Value;
 }
+
+
+} // namespace FE

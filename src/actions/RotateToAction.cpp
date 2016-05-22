@@ -8,6 +8,8 @@
 
 #include "RotateToAction.hpp"
 
+namespace FE {
+
 RotateToActionPtr RotateToAction::create(double pduration, float radians) {
     return RotateToActionPtr(new RotateToAction(pduration,radians));
 }
@@ -28,4 +30,5 @@ void RotateToAction::start()  {
     changeInValue -= startValue;
 }
 
+} // namespace FE
 

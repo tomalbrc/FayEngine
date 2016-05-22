@@ -19,6 +19,8 @@
 #include "Action.hpp"
 #include "Node.hpp"
 
+namespace FE {
+
 class MoveByAction;
 FE_create_shared_Ptr(MoveByAction);
 
@@ -35,4 +37,5 @@ protected:
     bool init(double duration, Vec2 offset);
 };
 
+} // namespace FE
 #endif /* MoveByAction_hpp */

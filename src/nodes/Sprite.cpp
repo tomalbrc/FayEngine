@@ -8,6 +8,8 @@
 
 #include "Sprite.hpp"
 
+namespace FE {
+
 SpritePtr Sprite::create() {
     SpritePtr ss(new Sprite());
     ss->init();
@@ -143,3 +145,15 @@ void Sprite::render(SDL_Renderer *renderer) { // render into scene / Surfac
     Node::render(renderer);
 }
 
+
+
+
+void Sprite::setColor(Color color) {
+    m_color = color;
+}
+Color Sprite::getColor() {
+    return m_color;
+}
+
+    
+} // namespace FE

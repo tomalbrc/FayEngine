@@ -9,6 +9,8 @@
 #include "Scene.hpp"
 #include "Sprite.hpp"
 
+namespace FE {
+
 bool Scene::init() {
     return Node::init();
 }
@@ -72,4 +74,4 @@ void Scene::render() {
 }
 
 
-
+} // namespace FE

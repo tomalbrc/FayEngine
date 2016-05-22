@@ -9,14 +9,10 @@
 #ifndef SpriteAnimationAction_hpp
 #define SpriteAnimationAction_hpp
 
-#include "SDL.h"
-#include "SDL_image.h"
-#include <stdio.h>
-#include <vector>
-#include <iostream>
-
 #include "Action.hpp"
 #include "Sprite.hpp"
+
+namespace FE {
 
 class SpriteAnimationAction;
 FE_create_shared_Ptr(SpriteAnimationAction);
@@ -40,4 +36,5 @@ private:
     std::vector< TexturePtr > textures;
 };
 
+} // namespace FE
 #endif /* SpriteAnimationAction_hpp */

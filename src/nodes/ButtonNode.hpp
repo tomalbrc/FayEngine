@@ -18,6 +18,8 @@
 #include "tmxparser.h"
 #include "LabelNode.hpp"
 
+namespace FE {
+
 class ButtonNode;
 #define ButtonNodeLambda [this](ButtonNode *sender)
 FE_create_Ptr(ButtonNode);
@@ -25,16 +27,16 @@ typedef std::function<void(ButtonNode*)> ButtonNodeCallback;
 
 /**
  * Clickable LabelNode
- * NOTE: Can only has either a texture or text set!
- * Don't set normal hover or selected text color
- * if you want your textures to show for the state.
- * See setNormalTexture, setHoverTexture & setSelectedTexture
+ * NOTE: If there are textures for the states set,
+ * they wil be used instead of rendered text
  */
 class ButtonNode : public LabelNode {
 public:
-    static ButtonNodePtr create(std::string text);
+    static ButtonNodePtr create();
     static ButtonNodePtr create(std::string text, std::string fontpath, int fontSize);
     static ButtonNodePtr create(std::string text, std::string fontpath, int fontSize, Color col);
+    static ButtonNodePtr create(TexturePtr normalTexture);
+    static ButtonNodePtr create(TexturePtr normalTexture, TexturePtr selectedTexture);
     ~ButtonNode();
     
     void setHoverColor(Color hoverColor);
@@ -45,6 +47,17 @@ public:
     
     void setSelectedColor(Color selectedColor);
     Color getSelectedColor();
+    
+    
+    void setNormalTexture(TexturePtr texture);
+    TexturePtr getNormalTexture();
+    
+    void setHoverTexture(TexturePtr texture);
+    TexturePtr getHoverTexture();
+
+    void setSelectedTexture(TexturePtr texture);
+    TexturePtr getSelectedTexture();
+    
     
     void setSelected(bool selected);
     bool isSelected();
@@ -65,8 +78,10 @@ public:
     
     
 private:
-    bool init(std::string text);
+    bool init();
     bool init(std::string text, std::string fontpath, int fontSize, Color col);
+    bool init(TexturePtr normalTexture);
+    bool init(TexturePtr normalTexture, TexturePtr selectedTexture);
     
     bool m_hovered = false;
     bool m_selected = false;
@@ -74,8 +89,14 @@ private:
     Color m_HoverColor = ColorWhiteColor();
     Color m_SelectedColor = ColorGrayColor();
     Color m_NormalColor = ColorBlackColor();
+    
+    TexturePtr m_normalTexture;
+    TexturePtr m_hoverTexture;
+    TexturePtr m_selectTexture;
+    
     ButtonNodeCallback m_CallbackDown = NULL;
     ButtonNodeCallback m_CallbackUp = NULL;
 };
 
+} // namespace FE
 #endif /* ButtonNode_hpp */

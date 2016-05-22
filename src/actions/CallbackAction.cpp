@@ -8,6 +8,8 @@
 
 #include "CallbackAction.hpp"
 
+namespace FE {
+
 CallbackActionPtr CallbackAction::create(CallbackActionCallback callback) {
     CallbackActionPtr p(new CallbackAction());
     p->init(callback);
@@ -31,3 +33,5 @@ void CallbackAction::start()  {
     duration = 0;
 }
 
+    
+} // namespace FE

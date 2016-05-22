@@ -8,6 +8,8 @@
 
 #include "WaitAction.hpp"
 
+namespace FE {
+
 WaitActionPtr WaitAction::create(double dur) {
     return WaitActionPtr(new WaitAction(dur));
 }
@@ -25,3 +27,5 @@ void WaitAction::start()  {
     startTick = SDL_GetTicks();
 }
 
+    
+} // namespace FE

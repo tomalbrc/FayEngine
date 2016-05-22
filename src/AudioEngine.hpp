@@ -13,6 +13,8 @@
 #include "SDL_mixer.h"
 #include "Types.hpp"
 
+namespace FE {
+
 class AudioEngine;
 FE_create_Ptr(AudioEngine);
 
@@ -68,4 +70,5 @@ private:
     std::vector<Mix_Chunk> m_SoundEffects;
 };
 
+} // namespace FE
 #endif /* AudioEngine_hpp */

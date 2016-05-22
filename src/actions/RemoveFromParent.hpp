@@ -18,6 +18,8 @@
 #include "Action.hpp"
 #include "Sprite.hpp"
 
+namespace FE {
+
 class RemoveFromParentAction;
 FE_create_shared_Ptr(RemoveFromParentAction);
 
@@ -34,4 +36,5 @@ private:
     bool init();
 };
 
+} // namespace FE
 #endif /* RemoveFromParent_hpp */

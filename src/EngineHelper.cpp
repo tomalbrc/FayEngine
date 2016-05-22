@@ -11,20 +11,25 @@
 #include "SDL_mixer.h"
 #include "SDL_net.h"
 #include "Texture.hpp"
-
 #include <fstream>
+
+namespace FE {
 
 EngineHelper::EngineHelper() {
     FELog("EngineHelper::EngineHelper()");
 }
 EngineHelper::~EngineHelper() {
-    cleanTextureCache();
     FELog("EngineHelper::~EngineHelper");
+    SDL_JoystickClose(0);
+    cleanTextureCache();
+    
+    SDL_DestroyRenderer(m_gameRenderer);
+    SDL_DestroyWindow(SDL_GL_GetCurrentWindow());
+    
     SDL_Quit();
     TTF_Quit();
     IMG_Quit();
     Mix_Quit();
-    SDL_JoystickClose(0);
 }
 
 EngineHelper* EngineHelper::getInstance() {
@@ -140,7 +145,6 @@ void EngineHelper::removeUnusedTextures() {
 void EngineHelper::registerApp(std::string organizationName, std::string appName) {
     m_basePath = SDL_GetPrefPath(organizationName.c_str(), appName.c_str());
     FELog("Registered Application: "<<appName<<", pref base path is: "<<m_basePath);
-    SDL_assert(m_basePath.empty());
 }
 
 
@@ -187,3 +191,4 @@ int EngineHelper::loadInt(std::string key) {
 }
 
 
+} // namespace FE

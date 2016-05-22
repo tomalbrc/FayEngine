@@ -9,6 +9,7 @@
 #include "Node.hpp"
 #include "Scene.hpp"
 
+namespace FE {
 
 bool Node::init() {
     children.clear();
@@ -160,6 +161,11 @@ void Node::addChild(const NodePtr& node) {
     node->setParent(shared_from_this());
     node->willMoveToParent(shared_from_this());
     children.push_back(node);
+    auto c = children;
+    sort( c.begin( ), c.end( ), [ ]( const NodePtr& lhs, const NodePtr& rhs ) {
+        return (lhs == nullptr ? 0 : lhs->getZPosition()) < (rhs == nullptr ? 0 : rhs->getZPosition());
+    });
+    children = c;
 }
 void Node::removeFromParent() { // untested
     removeAllActions();
@@ -282,3 +288,18 @@ AffineTransform Node::nodeToParentTransform() {
     if (isTransformDirty) computeTransform();
     return mTransform;
 }
+
+
+
+
+
+void Node::setZPosition(float zpos) {
+    m_zPosition = zpos;
+}
+
+float Node::getZPosition() {
+    return m_zPosition;
+}
+
+
+} // namespace FE

@@ -8,6 +8,8 @@
 
 #include "FadeAlphaToAction.hpp"
 
+namespace FE {
+
 inline int NormalizeAlpha(int i) {
     if (i > 255)
         return 255;
@@ -43,3 +45,4 @@ void FadeAlphaToAction::start()  {
 }
 
 
+} // namespace FE

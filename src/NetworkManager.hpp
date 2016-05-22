@@ -14,6 +14,8 @@
 #include <string>
 #include "Types.hpp"
 
+namespace FE {
+
 class NetworkManager;
 FE_create_Ptr(NetworkManager);
 
@@ -25,4 +27,5 @@ public:
     std::string downloadString(std::string url);
 };
 
+} // namespace FE
 #endif /* NetworkManager_hpp */

@@ -8,6 +8,7 @@
 
 #include "NetworkManager.hpp"
 
+namespace FE {
 
 NetworkManagerPtr NetworkManager::create() {
     return NetworkManagerPtr(new NetworkManager());
@@ -63,3 +64,6 @@ std::string NetworkManager::downloadString(std::string url) {
     
     return myString;
 }
+    
+    
+} // namespace FE

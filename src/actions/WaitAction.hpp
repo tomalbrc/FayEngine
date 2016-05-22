@@ -9,14 +9,12 @@
 #ifndef WaitAction_hpp
 #define WaitAction_hpp
 
-#include "SDL.h"
-#include "SDL_image.h"
-#include <stdio.h>
 #include <vector>
 #include <iostream>
-
 #include "Action.hpp"
 #include "Sprite.hpp"
+
+namespace FE {
 
 class WaitAction;
 FE_create_shared_Ptr(WaitAction);
@@ -33,4 +31,6 @@ public:
     void start();
 };
 
+    
+} // namespace FE
 #endif /* WaitAction_hpp */

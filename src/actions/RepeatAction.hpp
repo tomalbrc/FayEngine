@@ -9,14 +9,10 @@
 #ifndef RepeatAction_hpp
 #define RepeatAction_hpp
 
-#include "SDL.h"
-#include "SDL_image.h"
-#include <stdio.h>
-#include <vector>
-#include <iostream>
-
 #include "Action.hpp"
 #include "Sprite.hpp"
+
+namespace FE {
 
 class Node;
 class RepeatAction;
@@ -40,5 +36,7 @@ private:
     ActionPtr mTargetAction = NULL;
 };
 
+    
+} // namespace FE
 #endif /* RepeatAction_hpp */
 

@@ -14,6 +14,7 @@
 #include "Types.hpp"
 #include "EasingFunctions.h"
 
+namespace FE {
 
 class Node;
 class Action;
@@ -58,12 +59,12 @@ public:
      * Set an desired animation function for the action.
      * See EasingFunctions.h for Functions
      */
-    void setEasingFunction(EasingFunction curve);
+    void setEasingFunction(FE::EasingFunction curve);
 
     /**
      * Returns the current set animation function for the Action
      */
-    EasingFunction getEasingFunction();
+    FE::EasingFunction getEasingFunction();
     
 protected:
     bool init();
@@ -75,11 +76,11 @@ protected:
     Vec2 startVec2Value;
     Vec2 changeInVec2Value;
     
-    EasingFunction m_animationCurve = EasingFunctionLinear; // Default value
+    FE::EasingFunction m_animationCurve = FE::EasingFunctionLinear; // Default value
     
     double currentDoubleValue();
     Vec2 currentVec2Value();
 };
 
-
+} // namespace FE
 #endif /* Action_hpp */

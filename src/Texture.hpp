@@ -16,6 +16,8 @@
 #include <iostream>
 #include "Node.hpp"
 
+namespace FE {
+
 class Texture;
 FE_create_Ptr(Texture);
 
@@ -109,4 +111,6 @@ protected:
     SDL_Texture *mTexture = NULL;
     Vec2 mSize = Vec2Null();
 };
+    
+} // namespace FE
 #endif /* Texture_hpp */

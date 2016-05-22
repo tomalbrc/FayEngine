@@ -8,6 +8,8 @@
 
 #include "MoveByAction.hpp"
 
+namespace FE {
+
 MoveByActionPtr MoveByAction::create(double pduration, Vec2 offset) {
     MoveByActionPtr p(new MoveByAction());
     p->init(pduration, offset);
@@ -30,6 +32,8 @@ void MoveByAction::start()  {
     startTick = SDL_GetTicks();
     startVec2Value = target->getPosition();
 }
+    
+} // namespace FE
 
 
 

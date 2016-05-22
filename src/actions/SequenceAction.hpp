@@ -9,14 +9,12 @@
 #ifndef SequenceAction_hpp
 #define SequenceAction_hpp
 
-#include "SDL.h"
-#include "SDL_image.h"
-#include <stdio.h>
 #include <vector>
 #include <iostream>
-
 #include "Action.hpp"
 #include "Sprite.hpp"
+
+namespace FE {
 
 class SequenceAction;
 FE_create_shared_Ptr(SequenceAction);
@@ -41,4 +39,5 @@ private:
     void prepareCurrentAction();
 };
 
+} // namespace FE
 #endif /* SequenceAction_hpp */

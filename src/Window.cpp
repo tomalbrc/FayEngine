@@ -18,6 +18,8 @@
 #define SCREEN_FPS desiredFPS
 #define SCREEN_TICKS_PER_FRAME (1000/SCREEN_FPS)
 
+namespace FE {
+
 static SpritePtr overlay;
 
 Window::~Window() {
@@ -138,6 +140,7 @@ void Window::startLoop() {
             overlay.reset();
             overlay = Sprite::create(Texture::create(getSize(), m_nextTransition.color));
             overlay->setAlpha(0);
+            overlay->setZPosition(__FLT_MAX__);
             currentScene->addChild(overlay);
             
             auto fade = FadeAlphaToAction::create(m_nextTransition.duration, 255);
@@ -175,8 +178,6 @@ void Window::handleEvents() {
     while(SDL_PollEvent(&event)) {
         switch (event.type) {
             case SDL_QUIT:
-                SDL_DestroyWindow(sdlWindow);
-                SDL_DestroyRenderer(renderer);
                 running = false;
                 FELog("Event SDL_QUIT... Bye!");
                 break;
@@ -248,6 +249,8 @@ void Window::render() {
 }
 
 void Window::quit() {
+    running = false;
+    
     SDL_DestroyWindow(sdlWindow);
     SDL_DestroyRenderer(renderer);
     
@@ -270,3 +273,5 @@ double Window::screenScale() {
     return w/double(x);
 }
 
+
+} // namespace FE

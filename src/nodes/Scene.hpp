@@ -14,6 +14,8 @@
 #include "Node.hpp"
 #include "Window.hpp"
 
+namespace FE {
+
 class Scene;
 FE_create_Ptr(Scene);
 
@@ -100,4 +102,5 @@ private:
     WindowPtr window;
 };
 
+} // namespace FE
 #endif /* Scene_hpp */

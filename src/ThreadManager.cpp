@@ -8,6 +8,8 @@
 
 #include "ThreadManager.hpp"
 
+namespace FE {
+
 static int TestThread(void *ptr) {
     return ((ThreadManager*)ptr)->executeFunction();
 }
@@ -38,4 +40,6 @@ int ThreadManager::executeFunction() {
     this->m_target();
     return 1;
 }
+    
+} // namespace FE
 

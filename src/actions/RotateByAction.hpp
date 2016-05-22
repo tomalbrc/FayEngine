@@ -9,14 +9,12 @@
 #ifndef RotateByAction_hpp
 #define RotateByAction_hpp
 
-#include "SDL.h"
-#include "SDL_image.h"
-#include <stdio.h>
 #include <vector>
 #include <iostream>
-
 #include "Action.hpp"
 #include "Sprite.hpp"
+
+namespace FE {
 
 class RotateByAction;
 FE_create_shared_Ptr(RotateByAction);
@@ -33,5 +31,5 @@ public:
     void start();
 };
 
-
+} // namespace FE
 #endif /* RotateByAction_hpp */

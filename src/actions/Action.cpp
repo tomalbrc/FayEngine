@@ -9,6 +9,8 @@
 #include "Action.hpp"
 #include "Node.hpp"
 
+namespace FE {
+
 bool Action::init(){
     return true;
 }
@@ -107,6 +109,23 @@ Vec2 Action::currentVec2Value() {
             valY = animationElasticEaseInOut(passedTime, startVec2Value.y, changeInVec2Value.y, duration);
             break;
         }
+            
+            
+        case EasingFunctionSineEaseOut: {
+            valX = animationSineEaseOut(passedTime, startVec2Value.x, changeInVec2Value.x, duration);
+            valY = animationSineEaseOut(passedTime, startVec2Value.y, changeInVec2Value.y, duration);
+            break;
+        }
+        case EasingFunctionSineEaseIn: {
+            valX = animationSineEaseIn(passedTime, startVec2Value.x, changeInVec2Value.x, duration);
+            valY = animationSineEaseIn(passedTime, startVec2Value.y, changeInVec2Value.y, duration);
+            break;
+        }
+        case EasingFunctionSineEaseInOut: {
+            valX = animationSineEaseInOut(passedTime, startVec2Value.x, changeInVec2Value.x, duration);
+            valY = animationSineEaseInOut(passedTime, startVec2Value.y, changeInVec2Value.y, duration);
+            break;
+        }
         
         
             
@@ -119,3 +138,7 @@ double Action::currentDoubleValue() {
     changeInVec2Value.x = changeInValue;
     return currentVec2Value().x;
 }
+
+
+
+} // namespace FE

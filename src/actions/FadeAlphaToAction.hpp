@@ -16,6 +16,8 @@
 #include "Action.hpp"
 #include "Sprite.hpp"
 
+namespace FE {
+
 class FadeAlphaToAction;
 FE_create_shared_Ptr(FadeAlphaToAction);
 
@@ -41,4 +43,5 @@ protected:
     bool init(double duration, int destAlpha);
 };
 
+} // namespace FE
 #endif /* FadeAlphaToAction_hpp */

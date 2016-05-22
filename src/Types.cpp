@@ -8,6 +8,8 @@
 
 #include "Types.hpp"
 
+namespace FE {
+
 /**
  *
  * Affine transformations
@@ -221,4 +223,4 @@ extern Rect operator*(Rect lhs, const float rhs) { return RectMake((lhs.origin.x
 
 
 
-
+} // namespace FE

@@ -8,6 +8,8 @@
 
 #include "RemoveFromParent.hpp"
 
+namespace FE {
+
 RemoveFromParentActionPtr RemoveFromParentAction::create() {
     RemoveFromParentActionPtr p(new RemoveFromParentAction());
     p->init();
@@ -28,4 +30,7 @@ void RemoveFromParentAction::update() {
 void RemoveFromParentAction::start()  {
     startTick = SDL_GetTicks();
 }
+    
+    
+} // namespace FE
 

@@ -24,6 +24,7 @@
 #include "Types.hpp"
 #include "Action.hpp"
 
+namespace FE {
 
 class Scene;
 class Node;
@@ -31,7 +32,7 @@ FE_create_Ptr(Scene);
 FE_create_Ptr(Node);
 typedef std::vector<NodePtr> NodeVector;
 typedef std::map<std::string, ActionPtr> ActionMap;
-// redefinition :(
+// redefvirtual inition :(
 
 /**
  * Node Class
@@ -236,6 +237,17 @@ public:
     
     virtual void render(SDL_Renderer *renderer);
     
+    
+    /**
+     * Sets the z-position in parent node
+     */
+    void setZPosition(float zpos);
+    
+    /**
+     * Returns the current z-position in parent node
+     */
+    float getZPosition();
+    
 protected:
     bool init();
 private:
@@ -275,6 +287,8 @@ private:
     
     Vec2 mAnchorPoint = Vec2Null();
     
+    float m_zPosition;
 };
 
+} // namespace FE
 #endif /* Node_hpp */

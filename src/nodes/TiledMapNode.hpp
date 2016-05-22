@@ -16,6 +16,8 @@
 #include "Sprite.hpp"
 #include "Types.hpp"
 
+namespace FE {
+
 class TiledMapNode;
 FE_create_Ptr(TiledMapNode);
 typedef std::vector< Rect > RectVector;
@@ -56,5 +58,5 @@ private:
     std::vector<SpriteWeakPtr> mTileLayer;
 };
 
-
+} // namespace FE
 #endif

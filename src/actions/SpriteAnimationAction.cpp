@@ -8,6 +8,8 @@
 
 #include "SpriteAnimationAction.hpp"
 
+namespace FE {
+
 SpriteAnimationAction::~SpriteAnimationAction() {
     textures.clear();
 }
@@ -35,7 +37,8 @@ void SpriteAnimationAction::update() {
     Uint32 passedTime = SDL_GetTicks() - startTick;
     if ((passedTime)/duration > 1.0) {
         finished = true;
-        if (mShouldRestoreOriginal && mOriginalTexture != nullptr) ((Sprite*)target)->setTexture(mOriginalTexture);
+        if (mShouldRestoreOriginal && mOriginalTexture != nullptr)
+            ((Sprite*)target)->setTexture(mOriginalTexture);
         return;
     }
     
@@ -49,3 +52,5 @@ void SpriteAnimationAction::start()  {
     startTick = SDL_GetTicks();
 }
 
+    
+} // namespace FE

@@ -13,6 +13,8 @@
 #include "Texture.hpp"
 #include "Types.hpp"
 
+namespace FE {
+
 class DrawTexture;
 FE_create_Ptr(DrawTexture);
 
@@ -34,8 +36,9 @@ public:
 };
 
 
-template <typename T> int sign(T val) {
+template <typename T> int sign(T val) { // TODO: Do something with this, this is not the right place for this func.
     return (T(0) < val) - (val < T(0));
 }
 
+} // namespace FE
 #endif /* DrawTexture_hpp */

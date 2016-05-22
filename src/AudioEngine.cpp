@@ -7,8 +7,9 @@
 //
 
 #include "AudioEngine.hpp"
-
 #include "Types.hpp"
+
+namespace FE {
 
 AudioEngine::AudioEngine() {
     Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 1024*4);
@@ -73,3 +74,6 @@ std::string getFileExtension(const std::string& filename) {
         return filename.substr(filename.find_last_of(".")+1);
     return "";
 }
+
+
+} // namespace FE

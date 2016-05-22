@@ -8,6 +8,8 @@
 
 #include "RotateByAction.hpp"
 
+namespace FE {
+
 RotateByActionPtr RotateByAction::create(double pduration, double radians) {
     return RotateByActionPtr(new RotateByAction(pduration,radians));
 }
@@ -29,3 +31,4 @@ void RotateByAction::start()  {
 }
 
 
+} // namespace FE

@@ -16,6 +16,8 @@
 #define CallbackActionLambda(x) [x]
 #define CallbackActionCallback std::function<void(void)>
 
+namespace FE {
+
 class Node;
 class CallbackAction;
 typedef std::unique_ptr<CallbackAction> CallbackActionPtr;
@@ -44,4 +46,5 @@ private:
 };
 
 
+} // namespace FE
 #endif /* CallbackAction_hpp */

@@ -13,6 +13,8 @@
 #include "SDL.h"
 #include "Types.hpp"
 
+namespace FE {
+
 class ThreadManager;
 FE_create_Ptr(ThreadManager);
 
@@ -28,5 +30,5 @@ public:
     void runThread(std::string threadName, std::function<void(void)> function, bool waitForThread);
 };
 
-
+} // namespace FE
 #endif /* ThreadManager_hpp */

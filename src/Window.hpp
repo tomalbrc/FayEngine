@@ -18,12 +18,15 @@
 #include <memory>
 #include "Node.hpp"
 
+namespace FE {
+
 struct SceneTransition {
     double duration = 0.17;
     Color color = ColorBlackColor();
     EasingFunction startEasingFunction = EasingFunctionQuadEaseOut;
     EasingFunction endEasingFunction = EasingFunctionQuadEaseIn;
 };
+
 inline SceneTransition SceneTransitionMake(double duration, Color col, EasingFunction startEasingFunction, EasingFunction endEasingFunction) {
     SceneTransition transition;
     transition.color = col;
@@ -128,4 +131,5 @@ private:
     SceneTransition m_nextTransition;
 };
 
+} // namespace FE
 #endif /* Window_hpp */

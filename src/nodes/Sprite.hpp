@@ -17,6 +17,8 @@
 #include "Texture.hpp"
 #include "EngineHelper.hpp"
 
+namespace FE {
+
 class Sprite;
 FE_create_Ptr(Sprite);
 
@@ -109,7 +111,21 @@ public:
      */
     virtual void render(SDL_Renderer *renderer);
     
+    /**
+     * Sets the color to use for color mod using Formula (via SDL):
+     * srcC = srcC * (color / 255)
+     *
+     * @param   Color   Alpha Channel is ignored
+     */
+    void setColor(Color color);
+    
+    /**
+     * Returns the current color used for color mod
+     */
+    Color getColor();
+    
 private:
+    Color m_color;
     Vec2 mSize = Vec2Null();
     TexturePtr mTexture = NULL;
     BlendMode m_blendMode = BlendModeAlpha;
@@ -121,5 +137,5 @@ protected:
 };
 
 
-
+} // namespace FE
 #endif

@@ -8,7 +8,7 @@
 
 #include "LabelNode.hpp"
 
-using namespace std;
+namespace FE {
 
 LabelNodePtr LabelNode::create() {
     LabelNodePtr p(new LabelNode());
@@ -78,7 +78,7 @@ void LabelNode::setText(std::string text) {
     mText = text;
     renderText();
 }
-string LabelNode::getText() {
+    std::string LabelNode::getText() {
     return mText;
 }
 
@@ -98,3 +98,5 @@ void LabelNode::setFontSize(int fs) {
 int LabelNode::getFontSize() {
     return mFontSize;
 }
+    
+} // namespace FE

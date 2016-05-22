@@ -46,6 +46,7 @@
 #include "RotateByAction.hpp"
 #include "ScaleToAction.hpp"
 #include "RepeatAction.hpp"
+#include "JumpByAction.hpp"
 
 #include "AudioEngine.hpp"
 

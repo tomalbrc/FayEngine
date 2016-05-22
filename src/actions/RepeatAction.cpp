@@ -8,6 +8,8 @@
 
 #include "RepeatAction.hpp"
 
+namespace FE {
+
 RepeatActionPtr RepeatAction::create(ActionPtr action, int times) {
     return RepeatActionPtr(new RepeatAction(action,times));
 }
@@ -46,3 +48,5 @@ void RepeatAction::start()  {
     startTick = SDL_GetTicks();
 }
 
+
+} // namespace FE

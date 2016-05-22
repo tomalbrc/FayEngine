@@ -29,6 +29,7 @@
 #define amask 0xff000000
 #endif
 
+namespace FE {
 
 DrawTexture::~DrawTexture() {
     SDL_FreeSurface(m_bufferSurface);
@@ -108,3 +109,5 @@ void DrawTexture::fillCircle(float radius, Vec2 origin, Color color) {
     SDL_LockSurface(m_bufferSurface);
 }
 
+    
+} // namespace FE
