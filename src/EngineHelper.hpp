@@ -5,7 +5,6 @@
 //  Created by Tom Albrecht on 12.12.15.
 //  Copyright © 2015 Tom Albrecht. All rights reserved.
 //
-/// @brief Helper class
 
 #ifndef EngineHelper_hpp
 #define EngineHelper_hpp
@@ -14,17 +13,17 @@
 #include "SDL_image.h"
 #include "SDL_mixer.h"
 #include <stdio.h>
-#include <vectolkr>
+#include <vector>
 #include <iostream>
 #include "tmxparser.h"
 #include "Window.hpp"
 #include "Texture.hpp"
 
+
 FE_NAMESPACE_BEGIN
 
 /**
- * Helper Class
- *
+ * Helper Class. Like the CCDirector in cocos2d
  * Provides a Texture Cache and save(), load() functions. Also holds a reference to the renderer and main window.
  */
 class EngineHelper {
@@ -122,12 +121,12 @@ public:
      * The filtering mode is checked when a texture is created and also affects copied textures
      * See Types.hpp for available FilteringModes
      */
-    void setGlobalFilteringMode(FilteringMode mode);
+    //void setGlobalFilteringMode(FilteringMode mode);
     
     /**
      * Returns the current filtering mode for the (main-)renderer
      */
-    FilteringMode getGlobalFilteringMode();
+    //FilteringMode getGlobalFilteringMode();
     
     /**
      * Registers an app in order to save via EngineHelper::save()

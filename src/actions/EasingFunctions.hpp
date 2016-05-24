@@ -10,6 +10,7 @@
 #define EasingFunctions_hpp
 
 #include <stdio.h>
+#include "Types.hpp"
 
 FE_NAMESPACE_BEGIN
 
