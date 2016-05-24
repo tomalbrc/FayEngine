@@ -16,7 +16,7 @@
 #include <iostream>
 #include "Node.hpp"
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 class Texture;
 FE_create_Ptr(Texture);

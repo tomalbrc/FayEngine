@@ -19,7 +19,7 @@
 #include "Action.hpp"
 #include "Node.hpp"
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 class MoveByAction;
 FE_create_shared_Ptr(MoveByAction);

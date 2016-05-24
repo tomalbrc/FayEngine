@@ -14,13 +14,13 @@
 #include "SDL_image.h"
 #include "SDL_mixer.h"
 #include <stdio.h>
-#include <vector>
+#include <vectolkr>
 #include <iostream>
 #include "tmxparser.h"
 #include "Window.hpp"
 #include "Texture.hpp"
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 /**
  * Helper Class
@@ -116,6 +116,18 @@ public:
      * Removes every unused texture (whose shared_ptr's use_count equals 1) from the cache
      */
     void removeUnusedTextures();
+    
+    /**
+     * Sets the filtering mode for the renderer.
+     * The filtering mode is checked when a texture is created and also affects copied textures
+     * See Types.hpp for available FilteringModes
+     */
+    void setGlobalFilteringMode(FilteringMode mode);
+    
+    /**
+     * Returns the current filtering mode for the (main-)renderer
+     */
+    FilteringMode getGlobalFilteringMode();
     
     /**
      * Registers an app in order to save via EngineHelper::save()

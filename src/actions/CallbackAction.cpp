@@ -8,7 +8,7 @@
 
 #include "CallbackAction.hpp"
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 CallbackActionPtr CallbackAction::create(CallbackActionCallback callback) {
     CallbackActionPtr p(new CallbackAction());

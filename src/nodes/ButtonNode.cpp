@@ -8,7 +8,7 @@
 
 #include "ButtonNode.hpp"
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 ButtonNodePtr ButtonNode::create(std::string text, std::string fontpath, int fontSize) {
     ButtonNodePtr p(new ButtonNode());

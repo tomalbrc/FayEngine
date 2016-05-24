@@ -8,7 +8,7 @@
 
 #include "LabelNode.hpp"
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 LabelNodePtr LabelNode::create() {
     LabelNodePtr p(new LabelNode());

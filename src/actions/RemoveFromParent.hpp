@@ -18,7 +18,7 @@
 #include "Action.hpp"
 #include "Sprite.hpp"
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 class RemoveFromParentAction;
 FE_create_shared_Ptr(RemoveFromParentAction);

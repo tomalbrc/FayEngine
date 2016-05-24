@@ -8,7 +8,7 @@
 
 #include "MoveByAction.hpp"
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 MoveByActionPtr MoveByAction::create(double pduration, Vec2 offset) {
     MoveByActionPtr p(new MoveByAction());

@@ -9,7 +9,7 @@
 #include "AudioEngine.hpp"
 #include "Types.hpp"
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 AudioEngine::AudioEngine() {
     Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 1024*4);

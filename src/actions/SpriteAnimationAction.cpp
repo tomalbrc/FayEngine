@@ -8,7 +8,7 @@
 
 #include "SpriteAnimationAction.hpp"
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 SpriteAnimationAction::~SpriteAnimationAction() {
     textures.clear();

@@ -14,7 +14,7 @@
 #include <string>
 #include "Types.hpp"
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 class NetworkManager;
 FE_create_Ptr(NetworkManager);

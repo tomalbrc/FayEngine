@@ -17,7 +17,7 @@
 #include "Texture.hpp"
 #include "EngineHelper.hpp"
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 class Sprite;
 FE_create_Ptr(Sprite);

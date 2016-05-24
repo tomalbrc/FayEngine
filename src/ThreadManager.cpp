@@ -8,7 +8,7 @@
 
 #include "ThreadManager.hpp"
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 static int TestThread(void *ptr) {
     return ((ThreadManager*)ptr)->executeFunction();

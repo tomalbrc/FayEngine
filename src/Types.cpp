@@ -8,14 +8,12 @@
 
 #include "Types.hpp"
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 /**
- *
  * Affine transformations
- *
  */
-extern AffineTransform AffineTransformIdentity() {
+AffineTransform AffineTransformIdentity() {
     AffineTransform t;
     t.m11 = 1, t.m12 = 0, t.m13 = 0;
     t.m21 = 0, t.m22 = 1, t.m23 = 0;
@@ -23,7 +21,7 @@ extern AffineTransform AffineTransformIdentity() {
     return t;
 }
 
-extern AffineTransform AffineTransformMakeScale(float x, float y) {
+AffineTransform AffineTransformMakeScale(float x, float y) {
     AffineTransform t;
     t.m11 = x, t.m12 = 0, t.m13 = 0;
     t.m21 = 0, t.m22 = y, t.m23 = 0;
@@ -31,7 +29,7 @@ extern AffineTransform AffineTransformMakeScale(float x, float y) {
     return t;
 }
 
-extern AffineTransform AffineTransformMakeTranslate(float x, float y) {
+AffineTransform AffineTransformMakeTranslate(float x, float y) {
     AffineTransform t;
     t.m11 = 1, t.m12 = 0, t.m13 = x;
     t.m21 = 0, t.m22 = 1, t.m23 = y;
@@ -39,7 +37,7 @@ extern AffineTransform AffineTransformMakeTranslate(float x, float y) {
     return t;
 }
 
-extern AffineTransform AffineTransformMakeRotate(float value) {
+AffineTransform AffineTransformMakeRotate(float value) {
     AffineTransform t; // Clockwise rotation matrix
     t.m11 = cosf(value),     t.m12 = sinf(value),     t.m13 = 0;
     t.m21 = -sinf(value),    t.m22 = cosf(value),     t.m23 = 0;
@@ -48,7 +46,7 @@ extern AffineTransform AffineTransformMakeRotate(float value) {
 }
 
 
-extern AffineTransform AffineTransformMultiply(AffineTransform a, AffineTransform b) {
+AffineTransform AffineTransformMultiply(AffineTransform a, AffineTransform b) {
     AffineTransform res;
     auto a00 = a.m11, a01 = a.m12, a02 = a.m13;
     auto a10 = a.m21, a11 = a.m22, a12 = a.m23;
@@ -73,7 +71,7 @@ extern AffineTransform AffineTransformMultiply(AffineTransform a, AffineTransfor
     return res;
 }
 
-extern AffineTransform AffineTransformInverse(AffineTransform transform) {
+ AffineTransform AffineTransformInverse(AffineTransform transform) {
     // computes the inverse of a matrix m
     auto m = transform;
     double det =m.m11 * (m.m22 * m.m33 - m.m32 * m.m23) -
@@ -97,12 +95,12 @@ extern AffineTransform AffineTransformInverse(AffineTransform transform) {
     return minv;
 }
 
-extern Vec2 Vec2ApplyAffineTransform(Vec2 vec, AffineTransform transform) {
+Vec2 Vec2ApplyAffineTransform(Vec2 vec, AffineTransform transform) {
     auto x = vec.x*transform.m11 + vec.y*transform.m12 + transform.m13;
     auto y = vec.x*transform.m21 + vec.y*transform.m22 + transform.m23;
     return Vec2Make(x, y);
 }
-extern Rect RectApplyAffineTransform(Rect rect, AffineTransform transform) {
+Rect RectApplyAffineTransform(Rect rect, AffineTransform transform) {
     auto x = rect.origin.x*transform.m11 + rect.origin.y*transform.m12 + transform.m13;
     auto y = rect.origin.x*transform.m21 + rect.origin.y*transform.m22 + transform.m23;
     auto p = (rect.origin.x+rect.size.x)*transform.m11 + (rect.origin.y+rect.size.y)*transform.m12 + transform.m13;
@@ -116,12 +114,12 @@ extern Rect RectApplyAffineTransform(Rect rect, AffineTransform transform) {
 /*
  * Color
  */
-extern Color ColorMake(Uint8 r, Uint8 g, Uint8 b, Uint8 a) {
+Color ColorMake(Uint8 r, Uint8 g, Uint8 b, Uint8 a) {
     Color c;
     c.r = r, c.g = g, c.b = b, c.a = a;
     return c;
 }
-extern Color ColorMake(Uint8 r, Uint8 g, Uint8 b) { return ColorMake(r, g, b, 255); }
+Color ColorMake(Uint8 r, Uint8 g, Uint8 b) { return ColorMake(r, g, b, 255); }
 
 
 
@@ -129,50 +127,50 @@ extern Color ColorMake(Uint8 r, Uint8 g, Uint8 b) { return ColorMake(r, g, b, 25
 /*
  * Vec2, Vec3 and Rect
  */
-extern Vec2 Vec2Make(float x, float y) {
+Vec2 Vec2Make(float x, float y) {
     Vec2 p;
     p.x = x;
     p.y = y;
     return p;
 }
-extern Vec2 Vec2Make(float xy) {
+Vec2 Vec2Make(float xy) {
     Vec2 p;
     p.x = xy;
     p.y = xy;
     return p;
 }
-extern Vec2 Vec2Null() {
+Vec2 Vec2Null() {
     Vec2 p;
     p.x = 0.f;
     p.y = 0.f;
     return p;
 }
-extern bool operator==(Vec2 lhs, const Vec2& rhs) { return (lhs.x == rhs.x && lhs.y == rhs.y); }
-extern Vec2 operator+(Vec2 lhs, const Vec2 rhs) { return Vec2Make(lhs.x + rhs.x, lhs.y + rhs.y); }
-extern Vec2 operator-(Vec2 lhs, const Vec2 rhs) { return Vec2Make(lhs.x - rhs.x, lhs.y - rhs.y); }
-extern Vec2 operator-(const Vec2 rhs) { return Vec2Make(-rhs.x, -rhs.y); }
-extern Vec2 operator/(Vec2 lhs, const Vec2 rhs) { return Vec2Make(lhs.x / rhs.x, lhs.y / rhs.y); }
-extern Vec2 operator/(Vec2 lhs, const double rhs) { return Vec2Make(lhs.x / rhs, lhs.y / rhs); }
-extern Vec2 operator*(Vec2 lhs, const Vec2 rhs) { return Vec2Make(lhs.x * rhs.x, lhs.y * rhs.y); }
-extern Vec2 operator*(Vec2 lhs, const float rhs) { return Vec2Make((lhs.x * rhs), (lhs.y * rhs)); }
+bool operator==(Vec2 lhs, const Vec2& rhs) { return (lhs.x == rhs.x && lhs.y == rhs.y); }
+Vec2 operator+(Vec2 lhs, const Vec2 rhs) { return Vec2Make(lhs.x + rhs.x, lhs.y + rhs.y); }
+Vec2 operator-(Vec2 lhs, const Vec2 rhs) { return Vec2Make(lhs.x - rhs.x, lhs.y - rhs.y); }
+Vec2 operator-(const Vec2 rhs) { return Vec2Make(-rhs.x, -rhs.y); }
+Vec2 operator/(Vec2 lhs, const Vec2 rhs) { return Vec2Make(lhs.x / rhs.x, lhs.y / rhs.y); }
+Vec2 operator/(Vec2 lhs, const double rhs) { return Vec2Make(lhs.x / rhs, lhs.y / rhs); }
+Vec2 operator*(Vec2 lhs, const Vec2 rhs) { return Vec2Make(lhs.x * rhs.x, lhs.y * rhs.y); }
+Vec2 operator*(Vec2 lhs, const float rhs) { return Vec2Make((lhs.x * rhs), (lhs.y * rhs)); }
 
 
 
-extern Vec3 Vec3Make(float x, float y, float z) {
+Vec3 Vec3Make(float x, float y, float z) {
     Vec3 p;
     p.x = x;
     p.y = y;
     p.z = z;
     return p;
 }
-extern Vec3 Vec3Make(float xyz) {
+Vec3 Vec3Make(float xyz) {
     Vec3 p;
     p.x = xyz;
     p.y = xyz;
     p.z = xyz;
     return p;
 }
-extern Vec3 Vec3Null() {
+Vec3 Vec3Null() {
     Vec3 p;
     p.x = 0.f;
     p.y = 0.f;
@@ -181,10 +179,10 @@ extern Vec3 Vec3Null() {
 }
 
 
-extern Rect RectMake(Vec2 origin, Vec2 size) {
+Rect RectMake(Vec2 origin, Vec2 size) {
     return RectMake(origin.x, origin.y, size.x, size.y);
 }
-extern Rect RectMake(float x, float y, float w, float h) {
+Rect RectMake(float x, float y, float w, float h) {
     Rect p;
     p.origin.x = x;
     p.origin.y = y;
@@ -192,10 +190,10 @@ extern Rect RectMake(float x, float y, float w, float h) {
     p.size.y = h;
     return p;
 }
-extern bool RectIsNull(Rect p) {
+bool RectIsNull(Rect p) {
     return (bool)(p.origin.x == 0 && p.origin.y == 0 && p.size.x == 0 && p.size.y == 0);
 }
-extern bool RectIntersectsVec2(Rect r, Vec2 v) {
+bool RectIntersectsVec2(Rect r, Vec2 v) {
     auto pointX = v.x;
     auto pointY = v.y;
     if (pointX < (r.origin.x + r.size.x) && pointX > r.origin.x &&
@@ -204,22 +202,22 @@ extern bool RectIntersectsVec2(Rect r, Vec2 v) {
     else
         return false;
 }
-extern bool RectIntersectsRect(Rect rectA, Rect rectB) {
+bool RectIntersectsRect(Rect rectA, Rect rectB) {
     return (rectA.origin.x < rectB.origin.x + rectB.size.x && rectA.origin.x + rectA.size.x > rectB.origin.x &&
              rectA.origin.y < rectB.origin.y + rectB.size.y && rectA.origin.y + rectA.size.y > rectB.origin.y) ;
 }
 
-extern Rect RectInset(Rect r, float inset) {
+Rect RectInset(Rect r, float inset) {
     return RectMake(r.origin.x+inset/2.0, r.origin.y+inset/2.0, r.size.x-inset, r.size.y-inset);
 }
 
-extern Rect RectOffset(Rect r, Vec2 offset) {
+Rect RectOffset(Rect r, Vec2 offset) {
     return RectMake(r.origin.x+offset.x, r.origin.y+offset.y, r.size.x, r.size.y);
 }
 
 
 
-extern Rect operator*(Rect lhs, const float rhs) { return RectMake((lhs.origin.x * rhs), (lhs.origin.y * rhs), (lhs.size.x * rhs), (lhs.size.y * rhs)); }
+Rect operator*(Rect lhs, const float rhs) { return RectMake((lhs.origin.x * rhs), (lhs.origin.y * rhs), (lhs.size.x * rhs), (lhs.size.y * rhs)); }
 
 
 

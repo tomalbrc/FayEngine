@@ -14,7 +14,7 @@
 #include "Node.hpp"
 #include "Window.hpp"
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 class Scene;
 FE_create_Ptr(Scene);

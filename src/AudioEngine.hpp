@@ -13,7 +13,7 @@
 #include "SDL_mixer.h"
 #include "Types.hpp"
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 class AudioEngine;
 FE_create_Ptr(AudioEngine);

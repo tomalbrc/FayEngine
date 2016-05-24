@@ -29,7 +29,7 @@
 #define amask 0xff000000
 #endif
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 DrawTexture::~DrawTexture() {
     SDL_FreeSurface(m_bufferSurface);

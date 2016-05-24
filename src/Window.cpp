@@ -18,7 +18,7 @@
 #define SCREEN_FPS desiredFPS
 #define SCREEN_TICKS_PER_FRAME (1000/SCREEN_FPS)
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 static SpritePtr overlay;
 

@@ -12,7 +12,7 @@
 #include "Action.hpp"
 #include "Sprite.hpp"
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 class JumpByAction;
 FE_create_Ptr(JumpByAction);

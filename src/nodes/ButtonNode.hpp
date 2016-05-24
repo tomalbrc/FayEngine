@@ -18,7 +18,7 @@
 #include "tmxparser.h"
 #include "LabelNode.hpp"
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 class ButtonNode;
 #define ButtonNodeLambda [this](ButtonNode *sender)

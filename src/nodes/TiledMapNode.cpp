@@ -20,7 +20,7 @@
 #define amask  0xff000000
 #endif
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 TiledMapNodePtr TiledMapNode::create(const std::string &filepath) {
     TiledMapNodePtr p(new TiledMapNode());

@@ -8,7 +8,7 @@
 
 #include "JumpByAction.hpp"
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 JumpByActionPtr JumpByAction::create(double pduration, Vec2 position, float height, int jumps) {
     return JumpByActionPtr(new JumpByAction(pduration,position, height, jumps));

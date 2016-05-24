@@ -12,9 +12,9 @@
 #include "SDL.h"
 #include "SDL_image.h"
 #include "Types.hpp"
-#include "EasingFunctions.h"
+#include "EasingFunctions.hpp"
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 class Node;
 class Action;

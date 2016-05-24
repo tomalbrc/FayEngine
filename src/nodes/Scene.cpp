@@ -9,7 +9,7 @@
 #include "Scene.hpp"
 #include "Sprite.hpp"
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 bool Scene::init() {
     return Node::init();

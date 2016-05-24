@@ -8,7 +8,7 @@
 
 #include "RemoveFromParent.hpp"
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 RemoveFromParentActionPtr RemoveFromParentAction::create() {
     RemoveFromParentActionPtr p(new RemoveFromParentAction());

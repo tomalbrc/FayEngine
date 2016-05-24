@@ -8,7 +8,7 @@
 
 #include "NetworkManager.hpp"
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 NetworkManagerPtr NetworkManager::create() {
     return NetworkManagerPtr(new NetworkManager());

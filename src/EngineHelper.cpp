@@ -13,7 +13,7 @@
 #include "Texture.hpp"
 #include <fstream>
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 EngineHelper::EngineHelper() {
     FELog("EngineHelper::EngineHelper()");

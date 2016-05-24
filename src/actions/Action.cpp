@@ -9,7 +9,7 @@
 #include "Action.hpp"
 #include "Node.hpp"
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 bool Action::init(){
     return true;

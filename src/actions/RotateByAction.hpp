@@ -14,7 +14,7 @@
 #include "Action.hpp"
 #include "Sprite.hpp"
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 class RotateByAction;
 FE_create_shared_Ptr(RotateByAction);

@@ -18,7 +18,7 @@
 #include <memory>
 #include "Node.hpp"
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 struct SceneTransition {
     double duration = 0.17;

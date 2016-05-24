@@ -16,7 +16,7 @@
 #define CallbackActionLambda(x) [x]
 #define CallbackActionCallback std::function<void(void)>
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 class Node;
 class CallbackAction;

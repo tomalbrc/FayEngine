@@ -8,7 +8,7 @@
 
 #include "WaitAction.hpp"
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 WaitActionPtr WaitAction::create(double dur) {
     return WaitActionPtr(new WaitAction(dur));

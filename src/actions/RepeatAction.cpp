@@ -8,7 +8,7 @@
 
 #include "RepeatAction.hpp"
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 RepeatActionPtr RepeatAction::create(ActionPtr action, int times) {
     return RepeatActionPtr(new RepeatAction(action,times));

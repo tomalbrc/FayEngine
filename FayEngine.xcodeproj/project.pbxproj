@@ -14,6 +14,8 @@
 		9A53492F1CEBD9CC0054436E /* JumpByAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A53492D1CEBD9CC0054436E /* JumpByAction.cpp */; };
 		9A5349301CEBD9CC0054436E /* JumpByAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A53492D1CEBD9CC0054436E /* JumpByAction.cpp */; };
 		9A5349311CEBD9CC0054436E /* JumpByAction.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9A53492E1CEBD9CC0054436E /* JumpByAction.hpp */; };
+		9A5349351CF345590054436E /* EasingFunctions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A5349341CF345590054436E /* EasingFunctions.cpp */; };
+		9A5349361CF345590054436E /* EasingFunctions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A5349341CF345590054436E /* EasingFunctions.cpp */; };
 		9A5398C71C9169030094865C /* NetworkManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A5398C51C9169030094865C /* NetworkManager.cpp */; };
 		9A5398C81C9169030094865C /* NetworkManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A5398C51C9169030094865C /* NetworkManager.cpp */; };
 		9A5398C91C9169030094865C /* NetworkManager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9A5398C61C9169030094865C /* NetworkManager.hpp */; };
@@ -44,7 +46,7 @@
 		9A8F2BBD1C774DD4003A0AE3 /* RotateByAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A8F2BBA1C774DD4003A0AE3 /* RotateByAction.cpp */; };
 		9AB2EC751C4A865000F0CDF1 /* AudioEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AB2EC731C4A865000F0CDF1 /* AudioEngine.cpp */; };
 		9AB2EC761C4A865000F0CDF1 /* AudioEngine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AB2EC731C4A865000F0CDF1 /* AudioEngine.cpp */; };
-		9AB48A3F1CD933710097C416 /* EasingFunctions.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AB48A3C1CD933710097C416 /* EasingFunctions.h */; };
+		9AB48A3F1CD933710097C416 /* EasingFunctions.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9AB48A3C1CD933710097C416 /* EasingFunctions.hpp */; };
 		9AD5D7501C87C77D00226445 /* Action.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9A60C7DE1C31670900400D85 /* Action.hpp */; };
 		9AD5D7511C87C77D00226445 /* CallbackAction.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9A60C7E01C31670900400D85 /* CallbackAction.hpp */; };
 		9AD5D7521C87C77D00226445 /* FadeAlphaToAction.hpp in Headers */ = {isa = PBXBuildFile; fileRef = 9A60C7E21C31670900400D85 /* FadeAlphaToAction.hpp */; };
@@ -102,6 +104,7 @@
 		9A34D5E91C41552C00B48591 /* Types.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Types.cpp; sourceTree = "<group>"; };
 		9A53492D1CEBD9CC0054436E /* JumpByAction.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = JumpByAction.cpp; sourceTree = "<group>"; };
 		9A53492E1CEBD9CC0054436E /* JumpByAction.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = JumpByAction.hpp; sourceTree = "<group>"; };
+		9A5349341CF345590054436E /* EasingFunctions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = EasingFunctions.cpp; sourceTree = "<group>"; };
 		9A5398C51C9169030094865C /* NetworkManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkManager.cpp; sourceTree = "<group>"; };
 		9A5398C61C9169030094865C /* NetworkManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = NetworkManager.hpp; sourceTree = "<group>"; };
 		9A60C7DD1C31670900400D85 /* Action.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; lineEnding = 0; path = Action.cpp; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.cpp; };
@@ -151,7 +154,7 @@
 		9A8F2BBB1C774DD4003A0AE3 /* RotateByAction.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RotateByAction.hpp; sourceTree = "<group>"; };
 		9AB2EC731C4A865000F0CDF1 /* AudioEngine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioEngine.cpp; sourceTree = "<group>"; };
 		9AB2EC741C4A865000F0CDF1 /* AudioEngine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AudioEngine.hpp; sourceTree = "<group>"; };
-		9AB48A3C1CD933710097C416 /* EasingFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EasingFunctions.h; sourceTree = "<group>"; };
+		9AB48A3C1CD933710097C416 /* EasingFunctions.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = EasingFunctions.hpp; sourceTree = "<group>"; };
 		9AE2522D1C48016A00D6C01E /* libFayEngine-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libFayEngine-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AF380C11C7E097900851278 /* TiledMapNode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = TiledMapNode.hpp; sourceTree = "<group>"; };
 		9AF380C21C7E097900851278 /* TiledMapNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TiledMapNode.cpp; sourceTree = "<group>"; };
@@ -215,7 +218,8 @@
 		9A60C7DC1C31670900400D85 /* actions */ = {
 			isa = PBXGroup;
 			children = (
-				9AB48A3C1CD933710097C416 /* EasingFunctions.h */,
+				9AB48A3C1CD933710097C416 /* EasingFunctions.hpp */,
+				9A5349341CF345590054436E /* EasingFunctions.cpp */,
 				9A60C7DD1C31670900400D85 /* Action.cpp */,
 				9A60C7DE1C31670900400D85 /* Action.hpp */,
 				9A60C7DF1C31670900400D85 /* CallbackAction.cpp */,
@@ -308,7 +312,7 @@
 				9AD5D75E1C87C77D00226445 /* ButtonNode.hpp in Headers */,
 				9AD5D75F1C87C77D00226445 /* LabelNode.hpp in Headers */,
 				9AD5D7601C87C77D00226445 /* Node.hpp in Headers */,
-				9AB48A3F1CD933710097C416 /* EasingFunctions.h in Headers */,
+				9AB48A3F1CD933710097C416 /* EasingFunctions.hpp in Headers */,
 				9A5398C91C9169030094865C /* NetworkManager.hpp in Headers */,
 				9AD5D7611C87C77D00226445 /* Scene.hpp in Headers */,
 				9AD5D7621C87C77D00226445 /* Sprite.hpp in Headers */,
@@ -402,6 +406,7 @@
 				9AE252361C48019F00D6C01E /* Action.cpp in Sources */,
 				9AE252371C48019F00D6C01E /* CallbackAction.cpp in Sources */,
 				9AE252381C48019F00D6C01E /* FadeAlphaToAction.cpp in Sources */,
+				9A5349361CF345590054436E /* EasingFunctions.cpp in Sources */,
 				9A8F2BBD1C774DD4003A0AE3 /* RotateByAction.cpp in Sources */,
 				9AE252391C48019F00D6C01E /* MoveByAction.cpp in Sources */,
 				9AE2523A1C48019F00D6C01E /* RemoveFromParent.cpp in Sources */,
@@ -437,6 +442,7 @@
 				9A60C8081C31670900400D85 /* CallbackAction.cpp in Sources */,
 				9A60C8141C31670900400D85 /* Node.cpp in Sources */,
 				9A60C8161C31670900400D85 /* Sprite.cpp in Sources */,
+				9A5349351CF345590054436E /* EasingFunctions.cpp in Sources */,
 				9A8F2BBC1C774DD4003A0AE3 /* RotateByAction.cpp in Sources */,
 				9A60C80D1C31670900400D85 /* ScaleToAction.cpp in Sources */,
 				9A60C8151C31670900400D85 /* Scene.cpp in Sources */,

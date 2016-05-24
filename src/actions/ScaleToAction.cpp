@@ -8,7 +8,7 @@
 
 #include "ScaleToAction.hpp"
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 ScaleToActionPtr ScaleToAction::create(double pduration, double destScale) {
     return ScaleToActionPtr(new ScaleToAction(pduration,destScale));

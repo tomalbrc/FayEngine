@@ -24,7 +24,7 @@
 #define amask 0xff000000
 #endif
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 TexturePtr Texture::create() {
     auto t = EngineHelper::getInstance()->getTextureForKey("empty");

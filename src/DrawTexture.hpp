@@ -13,7 +13,7 @@
 #include "Texture.hpp"
 #include "Types.hpp"
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 class DrawTexture;
 FE_create_Ptr(DrawTexture);

@@ -13,7 +13,7 @@
 #include "SDL.h"
 #include "Types.hpp"
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 class ThreadManager;
 FE_create_Ptr(ThreadManager);

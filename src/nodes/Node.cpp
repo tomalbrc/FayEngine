@@ -9,7 +9,7 @@
 #include "Node.hpp"
 #include "Scene.hpp"
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 bool Node::init() {
     children.clear();

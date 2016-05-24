@@ -15,7 +15,7 @@
 #include "Sprite.hpp"
 #include "Types.hpp"
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 class LabelNode;
 FE_create_Ptr(LabelNode);

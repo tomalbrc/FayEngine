@@ -20,7 +20,14 @@
  */
 
 /**
- * Makes a static create function and calls init on the object
+ * Namespace macro, to fix Xcode's annoying auto indentation
+ */
+#define FE_NAMESPACE_BEGIN namespace FE {
+#define FE_NAMESPACE_END }
+
+/**
+ * A static create function which calls init on the object.
+ * Mainly for the use in Scene subclasses
  */
 #define FE_create_FUNC(T) static std::shared_ptr<T> create() { std::shared_ptr<T> n(new T()); n->init(); return n; }
 
@@ -45,7 +52,7 @@
 /**
  * Begin FE namespace
  */
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 /**
  * Blend modes for Sprites
@@ -72,24 +79,24 @@ struct Color {
 };
 extern Color ColorMake(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 extern Color ColorMake(Uint8 r, Uint8 g, Uint8 b);
-inline Color ColorClearColor() { return ColorMake(0, 0, 0, 0); }
-inline Color ColorBrownColor() { return ColorMake(0x99, 0x66, 0x33); }
-inline Color ColorBlackColor() { return ColorMake(0, 0, 0); }
-inline Color ColorWhiteColor() { return ColorMake(255, 255, 255); }
-inline Color ColorRedColor() { return ColorMake(255, 0, 0); }
-inline Color ColorBlueColor() { return ColorMake(0, 0, 255); }
-inline Color ColorGreenColor() { return ColorMake(0, 255, 0); }
-inline Color ColorCyanColor() { return ColorMake(0, 255, 255); } //
-inline Color ColorMagentaColor() { return ColorMake(255, 0, 255); }
-inline Color ColorYellowColor() { return ColorMake(255, 255, 0); }
-inline Color ColorPurpleColor() { return ColorMake(128, 0, 128); }
-inline Color ColorOrangeColor() { return ColorMake(255, 165, 0); }
-inline Color ColorGrayColor() { return ColorMake(128, 128, 128); }
-inline Color ColorLightGrayColor() { return ColorMake(211, 211, 211); }
-inline Color ColorDarkGrayColor() { return ColorMake(169, 169, 169); }
+extern Color ColorClearColor() { return ColorMake(0, 0, 0, 0); }
+extern Color ColorBrownColor() { return ColorMake(0x99, 0x66, 0x33); }
+extern Color ColorBlackColor() { return ColorMake(0, 0, 0); }
+extern Color ColorWhiteColor() { return ColorMake(255, 255, 255); }
+extern Color ColorRedColor() { return ColorMake(255, 0, 0); }
+extern Color ColorBlueColor() { return ColorMake(0, 0, 255); }
+extern Color ColorGreenColor() { return ColorMake(0, 255, 0); }
+extern Color ColorCyanColor() { return ColorMake(0, 255, 255); } //
+extern Color ColorMagentaColor() { return ColorMake(255, 0, 255); }
+extern Color ColorYellowColor() { return ColorMake(255, 255, 0); }
+extern Color ColorPurpleColor() { return ColorMake(128, 0, 128); }
+extern Color ColorOrangeColor() { return ColorMake(255, 165, 0); }
+extern Color ColorGrayColor() { return ColorMake(128, 128, 128); }
+extern Color ColorLightGrayColor() { return ColorMake(211, 211, 211); }
+extern Color ColorDarkGrayColor() { return ColorMake(169, 169, 169); }
 
-inline bool operator!=(const Color& lhs, const Color& rhs) { return !(lhs.r == rhs.r && lhs.g == rhs.g && lhs.b == rhs.b && lhs.a == rhs.a); }
-inline bool operator==(const Color& lhs, const Color& rhs) { return (lhs.r == rhs.r && lhs.g == rhs.g && lhs.b == rhs.b && lhs.a == rhs.a); }
+extern bool operator!=(const Color& lhs, const Color& rhs) { return !(lhs.r == rhs.r && lhs.g == rhs.g && lhs.b == rhs.b && lhs.a == rhs.a); }
+extern bool operator==(const Color& lhs, const Color& rhs) { return (lhs.r == rhs.r && lhs.g == rhs.g && lhs.b == rhs.b && lhs.a == rhs.a); }
 
 
 
@@ -110,6 +117,9 @@ extern Vec2 Vec2Make(float xy);
 /** Creates a Vec2 with x = 0 and y */
 extern Vec2 Vec2Null();
 
+/**
+ * Some Vec2 operator to make your (and my) life easier
+ */
 extern bool operator==(Vec2 lhs, const Vec2& rhs);
 extern Vec2 operator+(Vec2 lhs, const Vec2 rhs);
 extern Vec2 operator-(Vec2 lhs, const Vec2 rhs);
@@ -134,11 +144,17 @@ struct Vec3 {
     float z;
 };
 
-/** Creates a Vec2 with specified x, y and z values */
+/**
+ * Creates a Vec2 with specified x, y and z values 
+ */
 extern Vec3 Vec3Make(float x, float y, float z);
-/** Creates a Vec2 with xyz as x, y and z values */
+/** 
+ * Creates a Vec2 with xyz as x, y and z values 
+ */
 extern Vec3 Vec3Make(float xyz);
-/** Creates a Vec2 with x = 0, y = 0, z = 0 */
+/**
+ * Creates a Vec2 with x = 0, y = 0, z = 0 
+ */
 extern Vec3 Vec3Null();
 
 
@@ -153,7 +169,15 @@ struct Rect {
     /** Vec2 cointaing the size */
     Vec2 size;
 };
+    
+/**
+ * Returns a new Rect with specified x,y,w,h
+ */
 extern Rect RectMake(float x, float y, float w, float h);
+    
+/**
+ * Returns a new Rect with specified x,y,w,h
+ */
 extern Rect RectMake(Vec2 origin, Vec2 size);
 extern Rect RectNull();
 

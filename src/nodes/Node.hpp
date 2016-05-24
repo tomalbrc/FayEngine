@@ -24,7 +24,7 @@
 #include "Types.hpp"
 #include "Action.hpp"
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 class Scene;
 class Node;

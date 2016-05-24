@@ -8,7 +8,7 @@
 
 #include "RotateByAction.hpp"
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 RotateByActionPtr RotateByAction::create(double pduration, double radians) {
     return RotateByActionPtr(new RotateByAction(pduration,radians));

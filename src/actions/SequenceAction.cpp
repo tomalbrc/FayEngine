@@ -8,7 +8,7 @@
 
 #include "SequenceAction.hpp"
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 SequenceActionPtr SequenceAction::create(std::vector< ActionPtr > actions) {
     SequenceActionPtr p(new SequenceAction());

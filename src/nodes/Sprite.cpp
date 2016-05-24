@@ -8,7 +8,7 @@
 
 #include "Sprite.hpp"
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 SpritePtr Sprite::create() {
     SpritePtr ss(new Sprite());

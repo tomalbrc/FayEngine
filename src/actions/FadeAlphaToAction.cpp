@@ -8,7 +8,7 @@
 
 #include "FadeAlphaToAction.hpp"
 
-namespace FE {
+FE_NAMESPACE_BEGIN
 
 inline int NormalizeAlpha(int i) {
     if (i > 255)
