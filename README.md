@@ -1,6 +1,8 @@
 # FayEngine Documentation
 
-http://fayengine.bplaced.net/
+* [Documentation](http://fayengine.bplaced.net/annotated.html) for FayEngine
+
+
 
 License
 ----
