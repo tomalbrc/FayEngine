@@ -36,5 +36,5 @@ private:
     std::vector< TexturePtr > textures;
 };
 
-} // namespace FE
+FE_NAMESPACE_END
 #endif /* SpriteAnimationAction_hpp */

@@ -112,5 +112,5 @@ protected:
     Vec2 mSize = Vec2Null();
 };
     
-} // namespace FE
+FE_NAMESPACE_END
 #endif /* Texture_hpp */

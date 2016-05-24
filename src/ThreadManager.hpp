@@ -30,5 +30,5 @@ public:
     void runThread(std::string threadName, std::function<void(void)> function, bool waitForThread);
 };
 
-} // namespace FE
+FE_NAMESPACE_END
 #endif /* ThreadManager_hpp */

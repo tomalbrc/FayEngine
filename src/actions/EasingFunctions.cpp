@@ -139,4 +139,4 @@ float animationSineEaseInOut(float t,float b , float c, float d) {
 }
 
 
-} // namespace FE
+FE_NAMESPACE_END

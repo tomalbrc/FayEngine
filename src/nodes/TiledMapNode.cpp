@@ -131,4 +131,4 @@ tmxparser::TmxMap TiledMapNode::getRawMap() {
 }
 
 
-} // namespace FE
+FE_NAMESPACE_END

@@ -98,5 +98,5 @@ private:
     ButtonNodeCallback m_CallbackUp = NULL;
 };
 
-} // namespace FE
+FE_NAMESPACE_END
 #endif /* ButtonNode_hpp */

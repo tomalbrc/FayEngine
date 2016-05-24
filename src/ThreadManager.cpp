@@ -41,5 +41,5 @@ int ThreadManager::executeFunction() {
     return 1;
 }
     
-} // namespace FE
+FE_NAMESPACE_END
 

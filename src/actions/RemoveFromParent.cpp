@@ -32,5 +32,5 @@ void RemoveFromParentAction::start()  {
 }
     
     
-} // namespace FE
+FE_NAMESPACE_END
 

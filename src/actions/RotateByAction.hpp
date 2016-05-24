@@ -31,5 +31,5 @@ public:
     void start();
 };
 
-} // namespace FE
+FE_NAMESPACE_END
 #endif /* RotateByAction_hpp */

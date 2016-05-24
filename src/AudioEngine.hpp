@@ -70,5 +70,5 @@ private:
     std::vector<Mix_Chunk> m_SoundEffects;
 };
 
-} // namespace FE
+FE_NAMESPACE_END
 #endif /* AudioEngine_hpp */

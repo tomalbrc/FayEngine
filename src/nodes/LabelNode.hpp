@@ -54,5 +54,5 @@ private:
     int mFontSize = 24;
 };
 
-} // namespace FE
+FE_NAMESPACE_END
 #endif /* LabelSprite_hpp */

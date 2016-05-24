@@ -32,5 +32,5 @@ public:
 };
 
     
-} // namespace FE
+FE_NAMESPACE_END
 #endif /* WaitAction_hpp */

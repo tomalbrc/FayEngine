@@ -99,4 +99,4 @@ int LabelNode::getFontSize() {
     return mFontSize;
 }
     
-} // namespace FE
+FE_NAMESPACE_END

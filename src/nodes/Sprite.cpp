@@ -156,4 +156,4 @@ Color Sprite::getColor() {
 }
 
     
-} // namespace FE
+FE_NAMESPACE_END

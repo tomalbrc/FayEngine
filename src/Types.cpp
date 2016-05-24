@@ -221,4 +221,4 @@ Rect operator*(Rect lhs, const float rhs) { return RectMake((lhs.origin.x * rhs)
 
 
 
-} // namespace FE
+FE_NAMESPACE_END

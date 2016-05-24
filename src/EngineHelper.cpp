@@ -191,4 +191,4 @@ int EngineHelper::loadInt(std::string key) {
 }
 
 
-} // namespace FE
+FE_NAMESPACE_END

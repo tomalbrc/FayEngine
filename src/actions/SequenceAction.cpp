@@ -57,4 +57,4 @@ void SequenceAction::prepareCurrentAction() {
 }
 
 
-} // namespace FE
+FE_NAMESPACE_END

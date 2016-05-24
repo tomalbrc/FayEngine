@@ -36,5 +36,5 @@ private:
     bool init();
 };
 
-} // namespace FE
+FE_NAMESPACE_END
 #endif /* RemoveFromParent_hpp */

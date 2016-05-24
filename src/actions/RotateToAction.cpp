@@ -30,5 +30,5 @@ void RotateToAction::start()  {
     changeInValue -= startValue;
 }
 
-} // namespace FE
+FE_NAMESPACE_END
 

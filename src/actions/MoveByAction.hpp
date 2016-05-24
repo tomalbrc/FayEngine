@@ -37,5 +37,5 @@ protected:
     bool init(double duration, Vec2 offset);
 };
 
-} // namespace FE
+FE_NAMESPACE_END
 #endif /* MoveByAction_hpp */

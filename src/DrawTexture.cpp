@@ -110,4 +110,4 @@ void DrawTexture::fillCircle(float radius, Vec2 origin, Color color) {
 }
 
     
-} // namespace FE
+FE_NAMESPACE_END

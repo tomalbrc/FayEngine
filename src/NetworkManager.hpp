@@ -27,5 +27,5 @@ public:
     std::string downloadString(std::string url);
 };
 
-} // namespace FE
+FE_NAMESPACE_END
 #endif /* NetworkManager_hpp */

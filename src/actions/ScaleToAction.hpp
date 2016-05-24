@@ -33,5 +33,5 @@ public:
 };
 
     
-}
+FE_NAMESPACE_END
 #endif /* ScaleToAction_hpp */

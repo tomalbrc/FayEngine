@@ -74,4 +74,4 @@ void Scene::render() {
 }
 
 
-} // namespace FE
+FE_NAMESPACE_END

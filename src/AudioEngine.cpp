@@ -76,4 +76,4 @@ std::string getFileExtension(const std::string& filename) {
 }
 
 
-} // namespace FE
+FE_NAMESPACE_END

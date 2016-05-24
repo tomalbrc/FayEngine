@@ -40,5 +40,5 @@ template <typename T> int sign(T val) { // TODO: Do something with this, this is
     return (T(0) < val) - (val < T(0));
 }
 
-} // namespace FE
+FE_NAMESPACE_END
 #endif /* DrawTexture_hpp */

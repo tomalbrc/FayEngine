@@ -46,5 +46,5 @@ private:
 };
 
 
-} // namespace FE
+FE_NAMESPACE_END
 #endif /* CallbackAction_hpp */

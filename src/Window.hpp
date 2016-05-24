@@ -131,5 +131,5 @@ private:
     SceneTransition m_nextTransition;
 };
 
-} // namespace FE
+FE_NAMESPACE_END
 #endif /* Window_hpp */

@@ -140,4 +140,4 @@ SDL_Texture* Texture::sdlTexture() {
 }
 
 
-} // namespace FE
+FE_NAMESPACE_END

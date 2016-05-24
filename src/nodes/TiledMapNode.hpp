@@ -58,5 +58,5 @@ private:
     std::vector<SpriteWeakPtr> mTileLayer;
 };
 
-} // namespace FE
+FE_NAMESPACE_END
 #endif

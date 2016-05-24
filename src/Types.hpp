@@ -345,5 +345,5 @@ typedef enum {
 } FEKeyCode;
 
 
-} // namespace FE
+FE_NAMESPACE_END
 #endif /* AffineTransform_h */

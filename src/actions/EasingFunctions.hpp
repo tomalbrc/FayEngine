@@ -78,5 +78,5 @@ extern float animationSineEaseIn (float t,float b , float c, float d);
 extern float animationSineEaseOut(float t,float b , float c, float d);
 extern float animationSineEaseInOut(float t,float b , float c, float d);
 
-} // namespace FE
+FE_NAMESPACE_END
 #endif /* EasingFunctions_hpp */

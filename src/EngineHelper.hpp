@@ -197,5 +197,5 @@ private:
     std::map<std::string, TexturePtr> m_textureCache;
 };
 
-} // namespace FE
+FE_NAMESPACE_END
 #endif /* EngineHelper_hpp */

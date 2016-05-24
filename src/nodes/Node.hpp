@@ -290,5 +290,5 @@ private:
     float m_zPosition;
 };
 
-} // namespace FE
+FE_NAMESPACE_END
 #endif /* Node_hpp */

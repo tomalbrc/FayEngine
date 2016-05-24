@@ -102,5 +102,5 @@ private:
     WindowPtr window;
 };
 
-} // namespace FE
+FE_NAMESPACE_END
 #endif /* Scene_hpp */

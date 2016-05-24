@@ -33,7 +33,7 @@ void MoveByAction::start()  {
     startVec2Value = target->getPosition();
 }
     
-} // namespace FE
+FE_NAMESPACE_END
 
 
 

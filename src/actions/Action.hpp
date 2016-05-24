@@ -82,5 +82,5 @@ protected:
     Vec2 currentVec2Value();
 };
 
-} // namespace FE
+FE_NAMESPACE_END
 #endif /* Action_hpp */

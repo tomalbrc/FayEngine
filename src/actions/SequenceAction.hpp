@@ -39,5 +39,5 @@ private:
     void prepareCurrentAction();
 };
 
-} // namespace FE
+FE_NAMESPACE_END
 #endif /* SequenceAction_hpp */

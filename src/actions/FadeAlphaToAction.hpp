@@ -43,5 +43,5 @@ protected:
     bool init(double duration, int destAlpha);
 };
 
-} // namespace FE
+FE_NAMESPACE_END
 #endif /* FadeAlphaToAction_hpp */

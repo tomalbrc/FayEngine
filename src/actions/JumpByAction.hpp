@@ -29,5 +29,5 @@ public:
     void start();
 };
 
-} // namespace FE
+FE_NAMESPACE_END
 #endif /* JumpByAction_hpp */
