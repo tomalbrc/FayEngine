@@ -9,7 +9,6 @@
 #ifndef DrawTexture_hpp
 #define DrawTexture_hpp
 
-#include <stdio.h>
 #include "Texture.hpp"
 #include "Types.hpp"
 

@@ -62,7 +62,7 @@ public:
      *
      * @return current window
      */
-    WindowPtr getWindow();
+    virtual WindowPtr getWindow();
     
     /**
      * Re-implement the render function from Node
@@ -74,17 +74,8 @@ public:
      *
      * @param flag to set wether to show or hide the cursor
      */
-    void setShowCursor(bool show);
+    virtual void setShowCursor(bool show);
     
-    /**
-     * Pause the Scene
-     */
-    void setPaused(bool flag);
-    
-    /**
-     * Returns true if the Scene is paused, false otherwise
-     */
-    bool isPaused();
     
     /**
      * Re-implementation of Node::update()
@@ -92,13 +83,33 @@ public:
     virtual void update();
     
     
+    
+    /**
+     * iOS, Android and WinRT related
+     */
+    virtual void applicationWillEnterForeground();
+    
+    /**
+     * iOS, Android and WinRT related
+     */
+    virtual void applicationDidEnterForeground();
+    
+    /**
+     * iOS, Android and WinRT related
+     */
+    virtual void applicationWillEnterBackground();
+    
+    /**
+     * iOS, Android and WinRT related
+     */
+    virtual void applicationDidEnterBackground();
+    
 protected:
     Scene();
     bool init();
     bool shouldBeRemoved = false;
 private:
     Color mBackgroundColor;
-    bool m_bPaused = false;
     WindowPtr window;
 };
 

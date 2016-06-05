@@ -20,8 +20,9 @@ RotateToAction::RotateToAction(double pduration, float radians) : Action() {
 }
 
 void RotateToAction::update() {
+    if (finished) return;
     target->setZRotation(currentDoubleValue());
-    if (SDL_GetTicks() - startTick > duration) finished = true, target->setZRotation(changeInValue);
+    if (SDL_GetTicks() - startTick > duration) finished = true, target->setZRotation(changeInValue+startValue);
 }
 
 void RotateToAction::start()  {

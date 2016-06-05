@@ -6,8 +6,8 @@
 //  Copyright © 2016 Tom Albrecht. All rights reserved.
 //
 
-#ifndef AffineTransform_h
-#define AffineTransform_h
+#ifndef Types_hpp
+#define Types_hpp
 
 #include <stdio.h>
 #include <math.h>
@@ -16,8 +16,20 @@
 #include "SDL.h"
 
 /**
- * Some helper macros
+ * Explode a string. Why isn't this in std?
  */
+inline const std::vector<std::string> explode(const std::string& s, const char& c) {
+    std::string buff{""};
+    std::vector<std::string> v;
+    
+    for(auto n:s) {
+        if(n != c) buff+=n; else
+            if(n == c && buff != "") { v.push_back(buff); buff = ""; }
+    }
+    if(buff != "") v.push_back(buff);
+    
+    return v;
+}
 
 /**
  * Namespace macro, to fix Xcode's annoying auto indentation
@@ -31,7 +43,7 @@
  */
 #define FE_create_FUNC(T) static std::shared_ptr<T> create() { std::shared_ptr<T> n(new T()); n->init(); return n; }
 
-/*
+/**
  * Usage: FE_create_Ptr(ClassName) ClassNamePtr;
  */
 #define FE_create_shared_Ptr(T) typedef std::shared_ptr<T> T ## Ptr // creates an std::shared_ptr only
@@ -44,7 +56,7 @@
 #define FELog(x)  std::cout << "[FayEngine] " << x << std::endl // Log macro
 
 /**
- * Some math stuff with PI ( hardcoded :/ )
+ * Some deg to rad calculation and vice versa
  */
 #define RadiansToDegrees(angleRadians) (angleRadians * 180.0 / 3.1415926535)
 #define DegreesToRadians(angleDegrees) (angleDegrees * 3.1415926535 / 180.0)
@@ -54,15 +66,48 @@
  */
 FE_NAMESPACE_BEGIN
 
+typedef enum {
+    /**
+     * Default. No anti-aliasing
+     */
+    FilteringModeNearest = 0,
+    /**
+     * Linear scaling. Supported by OpenGL and Direct3D.
+     */
+    FilteringModeLinear = 1,
+    /**
+     * Anisotropic scaling. Only supported by Direct3D
+     */
+    FilteringModeAnisotropic = 2, // Supported by Direct3D
+}
+/**
+ * Filtering modes for the renderer. See EngineHelper setGlobalFilteringMode and getGlobalFilteringMode
+ */
+FilteringMode;
+
+
+typedef enum {
+    /**
+     * No blending
+     */
+    BlendModeNone = SDL_BLENDMODE_NONE,
+    /**
+     * Blend alpha
+     */
+    BlendModeAlpha = SDL_BLENDMODE_BLEND,
+    /**
+     * Add
+     */
+    BlendModeAdd = SDL_BLENDMODE_ADD,
+    /**
+     * Mod (multiply)
+     */
+    BlendModeMod = SDL_BLENDMODE_MOD,
+}
 /**
  * Blend modes for Sprites
  */
-typedef enum {
-    BlendModeNone = SDL_BLENDMODE_NONE,
-    BlendModeAlpha = SDL_BLENDMODE_BLEND,
-    BlendModeAdd = SDL_BLENDMODE_ADD,
-    BlendModeMod = SDL_BLENDMODE_MOD, // AKA Multiply?
-} BlendMode;
+BlendMode;
 
 /**
  * Color with r g b and a values
@@ -79,24 +124,24 @@ struct Color {
 };
 extern Color ColorMake(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 extern Color ColorMake(Uint8 r, Uint8 g, Uint8 b);
-extern Color ColorClearColor() { return ColorMake(0, 0, 0, 0); }
-extern Color ColorBrownColor() { return ColorMake(0x99, 0x66, 0x33); }
-extern Color ColorBlackColor() { return ColorMake(0, 0, 0); }
-extern Color ColorWhiteColor() { return ColorMake(255, 255, 255); }
-extern Color ColorRedColor() { return ColorMake(255, 0, 0); }
-extern Color ColorBlueColor() { return ColorMake(0, 0, 255); }
-extern Color ColorGreenColor() { return ColorMake(0, 255, 0); }
-extern Color ColorCyanColor() { return ColorMake(0, 255, 255); } //
-extern Color ColorMagentaColor() { return ColorMake(255, 0, 255); }
-extern Color ColorYellowColor() { return ColorMake(255, 255, 0); }
-extern Color ColorPurpleColor() { return ColorMake(128, 0, 128); }
-extern Color ColorOrangeColor() { return ColorMake(255, 165, 0); }
-extern Color ColorGrayColor() { return ColorMake(128, 128, 128); }
-extern Color ColorLightGrayColor() { return ColorMake(211, 211, 211); }
-extern Color ColorDarkGrayColor() { return ColorMake(169, 169, 169); }
+inline Color ColorClearColor() { return ColorMake(0, 0, 0, 0); }
+inline Color ColorBrownColor() { return ColorMake(0x99, 0x66, 0x33); }
+inline Color ColorBlackColor() { return ColorMake(0, 0, 0); }
+inline Color ColorWhiteColor() { return ColorMake(255, 255, 255); }
+inline Color ColorRedColor() { return ColorMake(255, 0, 0); }
+inline Color ColorBlueColor() { return ColorMake(0, 0, 255); }
+inline Color ColorGreenColor() { return ColorMake(0, 255, 0); }
+inline Color ColorCyanColor() { return ColorMake(0, 255, 255); } //
+inline Color ColorMagentaColor() { return ColorMake(255, 0, 255); }
+inline Color ColorYellowColor() { return ColorMake(255, 255, 0); }
+inline Color ColorPurpleColor() { return ColorMake(128, 0, 128); }
+inline Color ColorOrangeColor() { return ColorMake(255, 165, 0); }
+inline Color ColorGrayColor() { return ColorMake(128, 128, 128); }
+inline Color ColorLightGrayColor() { return ColorMake(211, 211, 211); }
+inline Color ColorDarkGrayColor() { return ColorMake(169, 169, 169); }
 
-extern bool operator!=(const Color& lhs, const Color& rhs) { return !(lhs.r == rhs.r && lhs.g == rhs.g && lhs.b == rhs.b && lhs.a == rhs.a); }
-extern bool operator==(const Color& lhs, const Color& rhs) { return (lhs.r == rhs.r && lhs.g == rhs.g && lhs.b == rhs.b && lhs.a == rhs.a); }
+inline bool operator!=(const Color& lhs, const Color& rhs) { return !(lhs.r == rhs.r && lhs.g == rhs.g && lhs.b == rhs.b && lhs.a == rhs.a); }
+inline bool operator==(const Color& lhs, const Color& rhs) { return (lhs.r == rhs.r && lhs.g == rhs.g && lhs.b == rhs.b && lhs.a == rhs.a); }
 
 
 
@@ -187,7 +232,8 @@ extern bool RectIntersectsRect(Rect rectA, Rect rectB);
 extern Rect RectInset(Rect r, float inset);
 extern Rect RectOffset(Rect r, Vec2 offset);
 
-/* TODO
+// TODO: do
+/*
 extern Rect RectGetMinX(Rect r);
 extern Rect RectGetMidX(Rect r);
 extern Rect RectGetMaxX(Rect r);
@@ -346,4 +392,4 @@ typedef enum {
 
 
 FE_NAMESPACE_END
-#endif /* AffineTransform_h */
+#endif /* Types_hpp */

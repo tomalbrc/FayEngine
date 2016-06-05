@@ -92,46 +92,156 @@ public:
      */
     ActionPtr getAction(std::string actionName);
     
-    
+    /**
+     * Returns true if the node has any active actions
+     */
     bool hasActions();
     
-    // update methode (für runActions)
+    /**
+     * Update method. Called every frame.
+     */
     virtual void update();
     
-    // Node Lifecycle
-    virtual void willMoveToParent(NodePtr oldParent);
+    /**
+     * Gets called when the node is about to move to a new parent.
+     *
+     * @param newParent     the parent the node will be moved to
+     */
+    virtual void willMoveToParent(NodePtr newParent);
     
-    void setName(std::string n);
-    const std::string getName();
+    /**
+     * Sets the name of the node
+     *
+     * @param name  new name for the node
+     */
+    virtual void setName(std::string name);
     
-    void setPosition(const Vec2 &pos);
-    const Vec2 getPosition();
+    /**
+     * Returns the current name of the node
+     */
+    virtual const std::string getName();
     
+    /**
+     * Gives the node a new position relative to it's parents coordinate system
+     *
+     * @param pos   new position
+     */
+    virtual void setPosition(const Vec2 &pos);
+    
+    /**
+     * Returns the current position relative to the parent coordinate system
+     */
+    virtual const Vec2 getPosition();
+    
+    /**
+     * Sets a new rotation on the z-axis. In Radians
+     *
+     * @param angle     angle in radians
+     */
     void setZRotation(const double &angle);
+    
+    /**
+     * Returns the current rotation on the z-axis of the node. In radians
+     */
     const double getZRotation();
     
+    /**
+     * Sets a new alpha, ranges from 0 to 255
+     *
+     * @param a new alpha value
+     */
     void setAlpha(const int &a);
+    
+    /**
+     * Returns the current alpha value. Ranges between 0 and 255
+     */
     const int getAlpha();
     
+    /**
+     * Sets a new scale for the node. Default is {1.0, 1.0}
+     *
+     * @param scale     new scale
+     */
     void setScale(Vec2 scale);
+    
+    /**
+     * Returns the current scale of the node as a Vec2
+     */
     const Vec2 getScale();
     
-    // void setSize(Vec2 size) doesnt exist (yet)
+    /**
+     * Returns the current size of the node. For Sprites
+     */
     Vec2 getSize();
     
+    /**
+     * Sets a new anchor point. Default is {0,0}
+     *
+     * {0,0}--{1,0}
+     *   |      |
+     *   |      |
+     * {0,1}--{1,1}
+     *
+     * @param ap    new anchor point
+     */
     void setAnchorPoint(Vec2 ap);
+    
+    /**
+     * Returns the current anchor point. See setAnchorPoint(Vec2) for a short explanation.
+     * Defaults to {0,0}
+     */
     Vec2 getAnchorPoint();
     
+    /**
+     * Adds a new child to the node; willMoveToParent and setParent will be called on the passed node
+     *
+     * @param Node to add
+     */
     void addChild(const NodePtr& node);
+    
+    /**
+     * Returns all children in an std::vector<NodePtr>
+     */
     const NodeVector &getChildren();
+    
+    /**
+     * Removes the node from it's parent
+     */
     void removeFromParent();
+    
+    /**
+     * Removes a child node from the node
+     *
+     * @param node  Node to remove
+     */
     void removeChild(NodePtr node);
     
+    /**
+     * Returns the parent of the node, NULL if the node doesn't have a parent
+     */
     NodePtr getParent();
+    
+    /**
+     *
+     * Sets the new parent of the node
+     */
     void setParent(const NodePtr& n);
+    
+    /**
+     * Returns the current Scene the node is in. Returns NULL when none of the nodes in the graph is on the Scene
+     */
     ScenePtr getScene();
     
-    int getTag();
+    /**
+     * Returns the tag of the node. int
+     */
+    virtual int getTag();
+    
+    /**
+     * Sets a new tag for the node.
+     *
+     * @param tag   new tag
+     */
     void setTag(int tag);
     
     /**
@@ -198,6 +308,8 @@ public:
     
     /**
      * Accelerometer data for mobile devices
+     *
+     * @param accelerometerData a Vec3 containing x,y and z data from the accelerometer. Ranges between -1.0 and 1.0
      */
     virtual void accelerometerMoved(Vec3 accelerometerData);
     
@@ -223,30 +335,48 @@ public:
      *
      * @param controllerIndex   index of the controller that changed an axis value
      * @param axis              axis that was moved
-     * @param value             value somewhere between 32000 / -32000 (NOTE: Not sure about the range)
+     * @param value             Ranges between -1.0 and 1.0
      */
-    virtual void controllerAxisMotion(Sint32 controllerIndex, SDL_GameControllerAxis axis, Sint16 value);
+    virtual void controllerAxisMotion(Sint32 controllerIndex, SDL_GameControllerAxis axis, float value);
     
+    /**
+     * Converts a position from node-space to world-space.
+     *
+     * @param position  position in node-space
+     */
+    Vec2 convertToWorldSpace(Vec2 position);
     
+    /**
+     * Convert a position from world-space to node-space
+     */
+    Vec2 convertToNodeSpace(Vec2 position);
     
-    Vec2 convertToWorldSpace(Vec2 v); // Works reliable
-    Vec2 convertToNodeSpace(Vec2 v); // Needs testing
-    
+    /**
+     * Transformation of the world to the node
+     */
     AffineTransform worldToNodeTransform();
+    
+    /**
+     * Transformation of the node to the world
+     */
     AffineTransform nodeToWorldTransform();
     
+    /**
+     * Renders the content. Walks through scene graph
+     */
     virtual void render(SDL_Renderer *renderer);
-    
     
     /**
      * Sets the z-position in parent node
+     *
+     * @param zpos  new z-Position
      */
-    void setZPosition(float zpos);
+    virtual void setZPosition(float zpos);
     
     /**
      * Returns the current z-position in parent node
      */
-    float getZPosition();
+    virtual float getZPosition();
     
 protected:
     bool init();
@@ -287,7 +417,9 @@ private:
     
     Vec2 mAnchorPoint = Vec2Null();
     
-    float m_zPosition;
+    bool hasDirtyZPos = true;
+    
+    float m_zPosition = 0.f;
 };
 
 FE_NAMESPACE_END

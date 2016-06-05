@@ -111,7 +111,7 @@ Rect RectApplyAffineTransform(Rect rect, AffineTransform transform) {
 
 
 
-/*
+/**
  * Color
  */
 Color ColorMake(Uint8 r, Uint8 g, Uint8 b, Uint8 a) {
@@ -124,7 +124,8 @@ Color ColorMake(Uint8 r, Uint8 g, Uint8 b) { return ColorMake(r, g, b, 255); }
 
 
 
-/*
+
+/**
  * Vec2, Vec3 and Rect
  */
 Vec2 Vec2Make(float x, float y) {
@@ -218,7 +219,6 @@ Rect RectOffset(Rect r, Vec2 offset) {
 
 
 Rect operator*(Rect lhs, const float rhs) { return RectMake((lhs.origin.x * rhs), (lhs.origin.y * rhs), (lhs.size.x * rhs), (lhs.size.y * rhs)); }
-
 
 
 FE_NAMESPACE_END

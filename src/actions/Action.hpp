@@ -70,8 +70,8 @@ protected:
     bool init();
     Uint32 startTick;
     
-    double startValue;
-    double changeInValue;
+    double startValue = 0;
+    double changeInValue = 0;
     
     Vec2 startVec2Value;
     Vec2 changeInVec2Value;

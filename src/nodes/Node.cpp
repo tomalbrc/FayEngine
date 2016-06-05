@@ -8,6 +8,7 @@
 
 #include "Node.hpp"
 #include "Scene.hpp"
+#include "ThreadManager.hpp"
 
 FE_NAMESPACE_BEGIN
 
@@ -67,15 +68,24 @@ ActionPtr Node::getAction(std::string actionName) {
 
 
 void Node::update() {
+    for (auto&& i = actions.begin(); i != actions.end();) {
+        if (i->second == nullptr || i->second->finished) i = actions.erase(i); // remove finished actions
+        else i->second->update(), ++i;
+    }
     for (auto&& i = children.begin(); i != children.end();) {
-        auto child = (*i);
+        auto child = *i;
         if (child == nullptr) i = children.erase(i); // remove finished actions
         else if (i != children.end()) child->update(), ++i;
     }
-    for (auto&& i = actions.begin(); i != actions.end();) {
-        if (i->second == nullptr || i->second->target == nullptr || i->second->finished) i = actions.erase(i); // remove finished actions
-        else i->second->update(), ++i;
+    // this feels Inefficient :(
+    /*
+    if (0 && hasDirtyZPos) {
+        std::sort(children.begin( ), children.end( ), [ ]( const NodePtr& lhs, const NodePtr& rhs ) {
+            return (lhs == nullptr ? 0 : lhs->getZPosition()) < (rhs == nullptr ? 0 : rhs->getZPosition());
+        });
+        hasDirtyZPos = false;
     }
+     */
 }
 
 
@@ -158,14 +168,10 @@ const NodeVector &Node::getChildren() {
     return children;
 }
 void Node::addChild(const NodePtr& node) {
+    hasDirtyZPos = true;
     node->setParent(shared_from_this());
     node->willMoveToParent(shared_from_this());
     children.push_back(node);
-    auto c = children;
-    sort( c.begin( ), c.end( ), [ ]( const NodePtr& lhs, const NodePtr& rhs ) {
-        return (lhs == nullptr ? 0 : lhs->getZPosition()) < (rhs == nullptr ? 0 : rhs->getZPosition());
-    });
-    children = c;
 }
 void Node::removeFromParent() { // untested
     removeAllActions();
@@ -219,9 +225,26 @@ void Node::setName(std::string n) {
 
 
 void Node::render(SDL_Renderer *renderer) { // render into scene / Surface
+    auto childrenClone = children;
+    
+    
+    while (childrenClone.size() > 0) {
+        float biggest = -__FLT_MAX__;
+        auto io = std::vector<NodePtr>::iterator();
+        for (auto&& i = childrenClone.begin(); i != childrenClone.end();) {
+            if ((*i)->getZPosition() > biggest) {
+                biggest = (*i)->getZPosition();
+                io = i;
+            }
+        }
+        (*io)->render(renderer);
+        childrenClone.erase(io);
+    }
+    /*
     for (auto&& s : children) {
         if (s != nullptr) s->render(renderer);
     }
+     */
 }
 
 
@@ -264,7 +287,7 @@ void Node::controllerPushedButton(Sint32 controllerIndex, SDL_GameControllerButt
 void Node::controllerReleasedButton(Sint32 controllerIndex, SDL_GameControllerButton button) {
     for (auto&& c : children) if (c != nullptr) c->controllerReleasedButton(controllerIndex, button);
 }
-void Node::controllerAxisMotion(Sint32 controllerIndex, SDL_GameControllerAxis axis, Sint16 value) {
+void Node::controllerAxisMotion(Sint32 controllerIndex, SDL_GameControllerAxis axis, float value) {
     for (auto&& c : children) if (c != nullptr) c->controllerAxisMotion(controllerIndex, axis, value);
 }
 
@@ -294,6 +317,9 @@ AffineTransform Node::nodeToParentTransform() {
 
 
 void Node::setZPosition(float zpos) {
+    if (getParent() != nullptr && m_zPosition != zpos) {
+        getParent()->hasDirtyZPos = true;
+    }
     m_zPosition = zpos;
 }
 

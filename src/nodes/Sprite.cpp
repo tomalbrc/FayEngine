@@ -138,6 +138,7 @@ void Sprite::render(SDL_Renderer *renderer) { // render into scene / Surfac
         center.x = ddRect.w*getAnchorPoint().x;
         center.y = ddRect.h*getAnchorPoint().y;
         
+        SDL_SetTextureColorMod(mTexture->sdlTexture(), m_color.r, m_color.g, m_color.b);
         SDL_SetTextureBlendMode(mTexture->sdlTexture(), SDL_BlendMode(m_blendMode));
         SDL_SetTextureAlphaMod(mTexture->sdlTexture(), getAlpha()); // temporarily apply Sprites alpha value
         SDL_RenderCopyEx(renderer, mTexture->sdlTexture(), &ssRect, &ddRect, -RadiansToDegrees(absRotation(this)), &center, SDL_FLIP_NONE);

@@ -18,13 +18,14 @@
 #include "tmxparser.h"
 #include "Window.hpp"
 #include "Texture.hpp"
-
+#include "Types.hpp"
 
 FE_NAMESPACE_BEGIN
 
 /**
  * Helper Class. Like the CCDirector in cocos2d
- * Provides a Texture Cache and save(), load() functions. Also holds a reference to the renderer and main window.
+ * Provides a Texture Cache and save(), load() functions. Also holds a reference to SDL's 
+ * renderer and a main window.
  */
 class EngineHelper {
 public:
@@ -121,12 +122,12 @@ public:
      * The filtering mode is checked when a texture is created and also affects copied textures
      * See Types.hpp for available FilteringModes
      */
-    //void setGlobalFilteringMode(FilteringMode mode);
+    void setGlobalFilteringMode(FilteringMode mode);
     
     /**
      * Returns the current filtering mode for the (main-)renderer
      */
-    //FilteringMode getGlobalFilteringMode();
+    FilteringMode getGlobalFilteringMode();
     
     /**
      * Registers an app in order to save via EngineHelper::save()
@@ -186,14 +187,16 @@ public:
      */
     WindowPtr getMainWindow();
     
-    
 private:
     WindowPtr m_mainWindow;
     std::string m_basePath;
+    FilteringMode m_filteringMode = FilteringModeNearest;
     EngineHelper();
     ~EngineHelper();
     SDL_Renderer *m_gameRenderer;
     std::map<std::string, TexturePtr> m_textureCache;
+    
+    bool m_initiated = false;
 };
 
 FE_NAMESPACE_END

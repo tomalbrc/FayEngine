@@ -24,6 +24,8 @@
 
 #include "tmxparser.h"
 
+#include "Types.hpp"
+
 #include "Window.hpp"
 #include "Node.hpp"
 #include "Scene.hpp"

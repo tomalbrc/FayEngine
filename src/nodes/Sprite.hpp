@@ -125,7 +125,7 @@ public:
     Color getColor();
     
 private:
-    Color m_color;
+    Color m_color = ColorMake(255, 255, 255, 255);
     Vec2 mSize = Vec2Null();
     TexturePtr mTexture = NULL;
     BlendMode m_blendMode = BlendModeAlpha;

@@ -108,8 +108,6 @@ public:
      */
     double screenScale();
     
-    
-    
 protected:
     bool init(std::string wname, Vec2 size, bool fullscreen, bool hidpi);
 private:
@@ -119,8 +117,6 @@ private:
     ScenePtr currentScene = NULL;
     ScenePtr newScene = NULL;
     bool running = true;
-    
-    NodePtr overlay;
     
     void handleEvents();
     void update();

@@ -18,9 +18,12 @@
 #define SCREEN_FPS desiredFPS
 #define SCREEN_TICKS_PER_FRAME (1000/SCREEN_FPS)
 
+#define CONTROLLER_AXIS_INPUT_RANGE 32767.0
+
 FE_NAMESPACE_BEGIN
 
-static SpritePtr overlay;
+static bool FEWindowBackgrounded = false;
+static SpritePtr FEWindowOverlay;
 
 Window::~Window() {
     currentScene = NULL;
@@ -41,8 +44,41 @@ WindowPtr Window::create(std::string wname, Vec2 size, bool fullscreen, bool hid
 
 
 
-
+int EventFilter(void* userData, SDL_Event *event) {
+        Window *win = (Window* )userData;
+        
+        switch (event->type) {
+            case SDL_APP_WILLENTERBACKGROUND: {
+                FEWindowBackgrounded = true;
+                FELog("Will enter background " << event->type);
+                if (win != NULL && win->getCurrentScene() != nullptr) win->getCurrentScene()->applicationWillEnterBackground();
+                return 0;
+                break;
+            }
+            case SDL_APP_WILLENTERFOREGROUND: {
+                FEWindowBackgrounded = false;
+                FELog("Will enter foreground");
+                if (win != NULL && win->getCurrentScene() != nullptr) win->getCurrentScene()->applicationWillEnterForeground();
+                return 0;
+                break;
+            }
+            case SDL_APP_DIDENTERFOREGROUND: {
+                if (win != NULL && win->getCurrentScene() != nullptr) win->getCurrentScene()->applicationDidEnterForeground();
+                return 0;
+                break;
+            }
+            case SDL_APP_DIDENTERBACKGROUND: {
+                if (win != NULL && win->getCurrentScene() != nullptr) win->getCurrentScene()->applicationDidEnterBackground();
+                return 0;
+                break;
+            }
+            default: break;
+        }
+    return 1;
+}
 bool Window::init(std::string wname, Vec2 size, bool fullscreen, bool hidpi) {
+    FE::EngineHelper::getInstance()->Init();
+    
     Uint32 flags = hidpi ? SDL_WINDOW_ALLOW_HIGHDPI : 0;
     flags |= SDL_WINDOW_SHOWN;
 #if defined(TARGET_OS_IOS) && TARGET_OS_IOS == 1
@@ -59,8 +95,12 @@ bool Window::init(std::string wname, Vec2 size, bool fullscreen, bool hidpi) {
     SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
     SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
     
+    SDL_SetEventFilter(EventFilter, this);
+    
     EngineHelper::getInstance()->setRenderer(renderer);
     EngineHelper::getInstance()->setMainWindow(shared_from_this());
+    
+    SDL_GameControllerOpen(0);
     
     return true;
 }
@@ -111,8 +151,7 @@ void Window::startLoop() {
         capTimer = SDL_GetTicks();
         
         handleEvents();
-        update();
-        render();
+        if (!FEWindowBackgrounded) update(), render();
         /*
         int frameTicks = SDL_GetTicks() - capTimer;
         if (frameTicks < SCREEN_TICKS_PER_FRAME) {
@@ -136,33 +175,33 @@ void Window::startLoop() {
             newScene->setWindow(this->shared_from_this());
             currentScene = newScene;
             newScene = NULL;
-        } else if ((m_bShowNew && (overlay.get() == nullptr || (overlay.get() != nullptr && overlay->getParent() == nullptr)))) { // TODO: Add Transition between scenes
-            overlay.reset();
-            overlay = Sprite::create(Texture::create(getSize(), m_nextTransition.color));
-            overlay->setAlpha(0);
-            overlay->setZPosition(__FLT_MAX__);
-            currentScene->addChild(overlay);
+        } else if ((m_bShowNew && (FEWindowOverlay.get() == nullptr || (FEWindowOverlay.get() != nullptr && FEWindowOverlay->getParent() == nullptr)))) { // TODO: Add Transition between scenes
+            FEWindowOverlay.reset();
+            FEWindowOverlay = Sprite::create(Texture::create(getSize(), m_nextTransition.color));
+            FEWindowOverlay->setAlpha(0);
+            FEWindowOverlay->setZPosition(__FLT_MAX__);
+            currentScene->addChild(FEWindowOverlay);
             
             auto fade = FadeAlphaToAction::create(m_nextTransition.duration, 255);
             fade->setEasingFunction(m_nextTransition.startEasingFunction);
-            overlay->runAction(SequenceAction::create({
+            FEWindowOverlay->runAction(SequenceAction::create({
                 fade,
             }), "o");
             
             m_bShowNew = false;
-        } else if (overlay.get() != nullptr && overlay->getAction("o") == nullptr && newScene != nullptr) {
+        } else if (FEWindowOverlay.get() != nullptr && FEWindowOverlay->getAction("o") == nullptr && newScene != nullptr) {
             
             currentScene.reset();
             currentScene = newScene;
             currentScene->setWindow(this->shared_from_this());
             newScene.reset();
             
-            overlay->removeFromParent();
-            currentScene->addChild(overlay);
+            FEWindowOverlay->removeFromParent();
+            currentScene->addChild(FEWindowOverlay);
             
             auto fade = FadeAlphaToAction::create(m_nextTransition.duration, 0);
             fade->setEasingFunction(m_nextTransition.endEasingFunction);
-            overlay->runAction(SequenceAction::create({
+            FEWindowOverlay->runAction(SequenceAction::create({
                 fade,
                 RemoveFromParentAction::create(),
             }), "o2");
@@ -197,12 +236,10 @@ void Window::handleEvents() {
                 if (currentScene != nullptr) currentScene->mouseClickEnded(event.button, getMouseCoords());
                 break;
             case SDL_JOYAXISMOTION: { // ACCELEROMETER SUPPORT // TODO: Change EngineHelper's init and this to check for SDL_JoystickDeviceAdded event
-                if (event.jaxis.axis == 0) accelData.x = event.jaxis.value;
-                if (event.jaxis.axis == 1) accelData.y = event.jaxis.value;
-                if (event.jaxis.axis == 2) {
-                    accelData.z = event.jaxis.value;
-                    if (currentScene != nullptr) currentScene->accelerometerMoved(accelData);
-                }
+                if (event.jaxis.axis == 0) accelData.x = event.jaxis.value / CONTROLLER_AXIS_INPUT_RANGE;
+                if (event.jaxis.axis == 1) accelData.y = event.jaxis.value / CONTROLLER_AXIS_INPUT_RANGE;
+                if (event.jaxis.axis == 2) accelData.z = event.jaxis.value / CONTROLLER_AXIS_INPUT_RANGE;
+                if (currentScene != nullptr) currentScene->accelerometerMoved(accelData);
                 break;
             }
             case SDL_FINGERDOWN: {
@@ -231,7 +268,7 @@ void Window::handleEvents() {
                 break;
             }
             case SDL_CONTROLLERAXISMOTION: {
-                if (currentScene != nullptr) currentScene->controllerAxisMotion(event.cdevice.which, (SDL_GameControllerAxis)event.caxis.axis, event.caxis.value);
+                if (currentScene != nullptr) currentScene->controllerAxisMotion(event.cdevice.which, (SDL_GameControllerAxis)event.caxis.axis, event.caxis.value/CONTROLLER_AXIS_INPUT_RANGE);
                 break;
             }
             

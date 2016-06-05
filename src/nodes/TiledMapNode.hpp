@@ -39,13 +39,27 @@ public:
      */
     ~TiledMapNode();
     
-    // May return NULL if not found!
+    /**
+     * Returns all tile layers in a vector (as std::weak_ptr<Sprites>)
+     */
+    std::vector<SpriteWeakPtr> getAllLayers();
+    
+    /// May return NULL if not found!
     SpritePtr getLayerNamed(std::string);
     
-    // May return NULL if not found!
+    std::vector<tmxparser::TmxObjectGroup> getAllObjectGroups();
+    
+    /// May return NULL if not found!
     tmxparser::TmxObjectGroup getObjectGroupNamed(std::string name);
     
-    /** Gets raw TmxMap data from tmxparser */
+    /**
+     * Sets the anchorPoint of all layers
+     */
+    virtual void setAnchorPoint(FE::Vec2 ap);
+    
+    /**
+     * Gets raw TmxMap data from tmxparser 
+     */
     tmxparser::TmxMap getRawMap();
     
 protected:

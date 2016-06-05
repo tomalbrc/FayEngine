@@ -52,18 +52,10 @@ void Scene::setShowCursor(bool show) {
 
 
 
-void Scene::setPaused(bool flag) {
-    m_bPaused = flag;
-}
-
-bool Scene::isPaused() {
-    return m_bPaused;
-}
-
 
 
 void Scene::update() {
-    if (!isPaused()) Node::update();
+    Node::update();
 }
 
 void Scene::render() {
@@ -72,6 +64,28 @@ void Scene::render() {
     Node::render(getWindow()->getRenderer());
     SDL_RenderPresent(getWindow()->getRenderer());
 }
+
+
+
+
+
+void Scene::applicationWillEnterForeground() {
+    
+}
+
+void Scene::applicationDidEnterForeground() {
+    
+}
+
+void Scene::applicationWillEnterBackground() {
+    
+}
+
+void Scene::applicationDidEnterBackground() {
+    
+}
+
+
 
 
 FE_NAMESPACE_END

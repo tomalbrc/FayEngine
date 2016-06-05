@@ -11,7 +11,9 @@
 #include "SDL_mixer.h"
 #include "SDL_net.h"
 #include "Texture.hpp"
+#include "Types.hpp" 
 #include <fstream>
+
 
 FE_NAMESPACE_BEGIN
 
@@ -56,6 +58,9 @@ void EngineHelper::setMainWindow(WindowPtr window) {
 
 
 void EngineHelper::Init() {
+    if (m_initiated) return;
+    m_initiated = true;
+    
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0){
         std::cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
         exit(2);
@@ -139,6 +144,25 @@ void EngineHelper::removeUnusedTextures() {
         else ++iterator;
     }
 }
+
+
+/**
+ * Sets the filtering mode for the renderer.
+ * The filtering mode is checked when a texture is created and also affects copied textures
+ * See Types.hpp for available FilteringModes
+ */
+void EngineHelper::setGlobalFilteringMode(FilteringMode mode) {
+    m_filteringMode = mode;
+    SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, std::to_string(mode).c_str());
+}
+
+/**
+ * Returns the current filtering mode for the (main-)renderer
+ */
+FilteringMode EngineHelper::getGlobalFilteringMode() {
+    return m_filteringMode;
+}
+
 
 
 

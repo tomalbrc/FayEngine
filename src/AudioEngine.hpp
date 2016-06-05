@@ -10,6 +10,7 @@
 #define AudioEngine_hpp
 
 #include <stdio.h>
+#include <map>
 #include "SDL_mixer.h"
 #include "Types.hpp"
 
@@ -21,6 +22,7 @@ FE_create_Ptr(AudioEngine);
 class AudioEngine {
 public:
     AudioEngine();
+    ~AudioEngine();
     
     static AudioEnginePtr getInstance();
     
@@ -64,10 +66,10 @@ public:
      * @param filepath Path to the sound-effect file
      */
     void playEffect(std::string filepath);
-    
+
 private:
     Mix_Music *m_Music = NULL;
-    std::vector<Mix_Chunk> m_SoundEffects;
+    std::map<std::string, Mix_Chunk*> m_SoundEffects;
 };
 
 FE_NAMESPACE_END

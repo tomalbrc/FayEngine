@@ -7,12 +7,19 @@
 //
 
 #include "AudioEngine.hpp"
-#include "Types.hpp"
 
 FE_NAMESPACE_BEGIN
 
+
+AudioEngine:: ~AudioEngine() {
+    Mix_FreeMusic(m_Music);
+    for (auto&& c: m_SoundEffects) {
+        Mix_FreeChunk(c.second);
+    }
+}
+
 AudioEngine::AudioEngine() {
-    Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 1024*4);
+    Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 8, 1024);
 }
 
 AudioEnginePtr AudioEngine::getInstance() {
@@ -60,12 +67,19 @@ void AudioEngine::playMusic(std::string filepath, bool repeat) {
 void AudioEngine::playEffect(std::string filepath) {
     playEffect(filepath, 0.5f);
 }
+
 void AudioEngine::playEffect(std::string filepath, float volume) {
-    auto chunk = Mix_LoadWAV(filepath.c_str());
-    SDL_assert_always(chunk != nullptr);
+    Mix_Chunk *chunk;
+    if (m_SoundEffects[filepath] != NULL) {
+        chunk = m_SoundEffects[filepath];
+    } else {
+        chunk = Mix_LoadWAV(filepath.c_str());
+        m_SoundEffects[filepath] = chunk;
+    }
     Mix_VolumeChunk(chunk, MIX_MAX_VOLUME*volume);
-    auto usedChannel = Mix_PlayChannel(-1, chunk, 0);
+    auto usedChannel = Mix_PlayChannel(0, chunk, 0);
     FELog("AudioEngine::playEffect() - Used Channel: " << std::to_string(usedChannel));
+    
 }
 
 

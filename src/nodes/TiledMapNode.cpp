@@ -131,4 +131,19 @@ tmxparser::TmxMap TiledMapNode::getRawMap() {
 }
 
 
+std::vector<SpriteWeakPtr> TiledMapNode::getAllLayers() {
+    return mTileLayer;
+}
+
+std::vector<tmxparser::TmxObjectGroup> TiledMapNode::getAllObjectGroups() {
+    return map.objectGroupCollection;
+}
+
+void TiledMapNode::setAnchorPoint(FE::Vec2 ap) {
+    Sprite::setAnchorPoint(ap);
+    
+    for (auto&& l: getAllLayers()) l.lock()->setAnchorPoint(ap);
+}
+
+
 FE_NAMESPACE_END
