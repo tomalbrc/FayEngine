@@ -19,7 +19,7 @@ AudioEngine:: ~AudioEngine() {
 }
 
 AudioEngine::AudioEngine() {
-    Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 8, 1024);
+    Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 1024);
 }
 
 AudioEnginePtr AudioEngine::getInstance() {
@@ -31,7 +31,7 @@ AudioEnginePtr AudioEngine::getInstance() {
  * Pauses Music
  */
 void AudioEngine::pauseMusic() {
-    Mix_PauseMusic();
+    if (Mix_PlayingMusic()) Mix_PauseMusic();
 }
 
 /**
@@ -39,11 +39,11 @@ void AudioEngine::pauseMusic() {
  */
 void AudioEngine::playMusic() {
     // Only resume if there's music
-    if (Mix_PausedMusic() == 1) Mix_ResumeMusic();
+    if (Mix_PausedMusic()) Mix_ResumeMusic();
 }
 
 /**
- * Plays Music from file
+ * Plays Music from file without fade effect
  */
 void AudioEngine::playMusic(std::string filepath) {
     playMusic(filepath, false);
@@ -53,12 +53,16 @@ void AudioEngine::playMusic(std::string filepath) {
  * Play Music from file and repeats forever
  */
 void AudioEngine::playMusic(std::string filepath, bool repeat) {
+    playMusic(filepath, repeat, 0);
+}
+
+void AudioEngine::playMusic(std::string filepath, bool repeat, int fadeInDuration) {
     Mix_FreeMusic(m_Music);
     m_Music = Mix_LoadMUS(filepath.c_str());
-    if (Mix_PlayingMusic() == 0) FELog("Warning: Playing music already! Continuing...");
+    if (Mix_PlayingMusic()) FELog("Warning: Music is already being played! Stopping & Playing new file...");
     
     FELog("Playing \"" + filepath + "\"!");
-    Mix_PlayMusic(m_Music, repeat ? -1 : 1);
+    Mix_FadeInMusic(m_Music, repeat ? -1 : 1, fadeInDuration);
 }
 
 /**
@@ -77,9 +81,7 @@ void AudioEngine::playEffect(std::string filepath, float volume) {
         m_SoundEffects[filepath] = chunk;
     }
     Mix_VolumeChunk(chunk, MIX_MAX_VOLUME*volume);
-    auto usedChannel = Mix_PlayChannel(0, chunk, 0);
-    FELog("AudioEngine::playEffect() - Used Channel: " << std::to_string(usedChannel));
-    
+    /*auto usedChannel = */Mix_PlayChannel(0, chunk, 0);
 }
 
 

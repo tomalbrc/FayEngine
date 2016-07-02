@@ -25,6 +25,7 @@ void WaitAction::update() {
 
 void WaitAction::start()  {
     startTick = SDL_GetTicks();
+    finished = false;
 }
 
     

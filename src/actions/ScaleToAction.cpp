@@ -28,6 +28,7 @@ void ScaleToAction::start()  {
     startTick = SDL_GetTicks();
     startVec2Value = target->getScale();
     changeInVec2Value = m_scale - startVec2Value;
+    finished = false;
 }
 
 

@@ -66,7 +66,11 @@ ActionPtr Node::getAction(std::string actionName) {
 
 
 
-
+inline void sort(std::vector<NodePtr>& children) {
+    std::sort(children.begin( ), children.end( ), [ ]( const NodePtr& lhs, const NodePtr& rhs ) {
+        return (lhs == nullptr ? 0 : lhs->getZPosition()) < (rhs == nullptr ? 0 : rhs->getZPosition());
+    });
+}
 void Node::update() {
     for (auto&& i = actions.begin(); i != actions.end();) {
         if (i->second == nullptr || i->second->finished) i = actions.erase(i); // remove finished actions
@@ -77,15 +81,9 @@ void Node::update() {
         if (child == nullptr) i = children.erase(i); // remove finished actions
         else if (i != children.end()) child->update(), ++i;
     }
+    
     // this feels Inefficient :(
-    /*
-    if (0 && hasDirtyZPos) {
-        std::sort(children.begin( ), children.end( ), [ ]( const NodePtr& lhs, const NodePtr& rhs ) {
-            return (lhs == nullptr ? 0 : lhs->getZPosition()) < (rhs == nullptr ? 0 : rhs->getZPosition());
-        });
-        hasDirtyZPos = false;
-    }
-     */
+    if (hasDirtyZPos) sort(children), hasDirtyZPos = false;
 }
 
 
@@ -227,24 +225,9 @@ void Node::setName(std::string n) {
 void Node::render(SDL_Renderer *renderer) { // render into scene / Surface
     auto childrenClone = children;
     
-    
-    while (childrenClone.size() > 0) {
-        float biggest = -__FLT_MAX__;
-        auto io = std::vector<NodePtr>::iterator();
-        for (auto&& i = childrenClone.begin(); i != childrenClone.end();) {
-            if ((*i)->getZPosition() > biggest) {
-                biggest = (*i)->getZPosition();
-                io = i;
-            }
-        }
-        (*io)->render(renderer);
-        childrenClone.erase(io);
-    }
-    /*
     for (auto&& s : children) {
         if (s != nullptr) s->render(renderer);
     }
-     */
 }
 
 
@@ -317,9 +300,7 @@ AffineTransform Node::nodeToParentTransform() {
 
 
 void Node::setZPosition(float zpos) {
-    if (getParent() != nullptr && m_zPosition != zpos) {
-        getParent()->hasDirtyZPos = true;
-    }
+    if (getParent() != nullptr && m_zPosition != zpos) getParent()->hasDirtyZPos = true;
     m_zPosition = zpos;
 }
 

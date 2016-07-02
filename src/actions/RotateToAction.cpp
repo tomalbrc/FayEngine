@@ -29,6 +29,7 @@ void RotateToAction::start()  {
     startTick = SDL_GetTicks();
     startValue = target->getZRotation();
     changeInValue -= startValue;
+    finished = false;
 }
 
 FE_NAMESPACE_END

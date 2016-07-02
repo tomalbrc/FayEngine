@@ -37,11 +37,18 @@ public:
     void playMusic();
 
     /**
-     * Plays Music from file
+     * Plays Music from file without fade effect. Replaces the current playing music with the one from the file
      *
      * @param filepath Path to the music file
      */
     void playMusic(std::string filepath);
+    
+    /**
+     * Plays music from file and fades that in with a set duration of time (See fadeInDuration param) and repeats if wanted
+     *
+     * @param fadeInDuration    Duration in ms to fade in effect to complete
+     */
+    void playMusic(std::string filepath, bool repeat, int fadeInDuration);
     
     /**
      * Play Music from file with a flag wether to repaet forver or play once

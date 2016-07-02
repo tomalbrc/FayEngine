@@ -42,6 +42,8 @@ void FadeAlphaToAction::start()  {
     startTick = SDL_GetTicks();
     startValue = ((Sprite*)target)->getAlpha();
     changeInValue = m_alpha - startValue;
+    finished = false;
+
 }
 
 

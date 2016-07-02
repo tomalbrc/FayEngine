@@ -31,8 +31,10 @@ void MoveByAction::update() {
 void MoveByAction::start()  {
     startTick = SDL_GetTicks();
     startVec2Value = target->getPosition();
+    finished = false;
+
 }
-    
+
 FE_NAMESPACE_END
 
 

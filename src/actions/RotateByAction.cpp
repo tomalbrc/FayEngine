@@ -28,6 +28,7 @@ void RotateByAction::update() {
 void RotateByAction::start()  {
     startTick = SDL_GetTicks();
     startValue = target->getZRotation();
+    finished = false;
 }
 
 

@@ -50,6 +50,7 @@ void JumpByAction::start()  {
     startTick = SDL_GetTicks();
     startVec2Value = target->getPosition();
     m_previousPos = startVec2Value;
+    finished = false;
 }
 
 

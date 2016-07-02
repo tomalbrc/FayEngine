@@ -46,6 +46,7 @@ void RepeatAction::start()  {
     mTargetAction->target = target;
     mTargetAction->start();
     startTick = SDL_GetTicks();
+    finished = false;
 }
 
 
