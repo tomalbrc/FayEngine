@@ -477,6 +477,7 @@
 		9AE252341C48016A00D6C01E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LIBRARY = "compiler-default";
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include/SDL2,
 					/usr/local/include/FayEngine,
@@ -493,6 +494,7 @@
 		9AE252351C48016A00D6C01E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LIBRARY = "compiler-default";
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include/SDL2,
 					/usr/local/include/FayEngine,

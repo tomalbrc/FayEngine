@@ -45,13 +45,13 @@ void Node::removeAction(ActionPtr action) { // NOT TESTED
 }
 
 void Node::removeAction(const std::string &actionName) { // WORKS
-    if (actions[actionName].get() != nullptr) {
+    if (actions[actionName] != nullptr) {
         actions[actionName]->finished = true;
     }
 }
 
 void Node::removeAllActions() { // NOT TESTED
-    for (auto&& a : actions) if (a.second.get() != nullptr) a.second->finished = true;
+    for (auto&& a : actions) if (a.second != nullptr) a.second->finished = true;
 }
 
 bool Node::hasActions() {
@@ -59,9 +59,11 @@ bool Node::hasActions() {
 }
 
 ActionPtr Node::getAction(std::string actionName) {
-    if (actions.find(actionName) == actions.end()) return nullptr;
-    else if (!actions[actionName]->finished) return actions[actionName];
-    return nullptr;
+   if (actions[actionName] != nullptr && !actions[actionName]->finished) {
+        FELog(actions[actionName]);
+        return actions[actionName];
+    }
+    else return nullptr;
 }
 
 

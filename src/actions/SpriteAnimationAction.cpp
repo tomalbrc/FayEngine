@@ -44,8 +44,8 @@ void SpriteAnimationAction::update() {
     
     double mark = 1.f/textures.size();
     int index = floor((passedTime/duration)/mark);
-    if (index < textures.size()) ((Sprite*)this->target)->setTexture(textures[index]), FELog("Ran texture");
-    if (textures.size() > 1) FELog("Size of Textures size of: "<<textures.size()<<", idx: "<<index);
+    if (index < textures.size()) ((Sprite*)this->target)->setTexture(textures[index]);//, FELog("Ran texture");
+    //if (textures.size() > 1) FELog("Size of Textures size of: "<<textures.size()<<", idx: "<<index);
 }
 
 void SpriteAnimationAction::start()  {

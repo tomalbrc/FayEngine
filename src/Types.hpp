@@ -32,6 +32,12 @@ inline const std::vector<std::string> explode(const std::string& s, const char& 
 }
 
 /**
+ * Localization. Only available on iOS at the moment
+ */
+#define FELocalizedString(stringDescriptor, alternative) NSLocalizedString
+
+
+/**
  * Namespace macro, to fix Xcode's annoying auto indentation
  */
 #define FE_NAMESPACE_BEGIN namespace FE {
