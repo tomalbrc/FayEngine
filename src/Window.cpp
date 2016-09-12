@@ -18,7 +18,7 @@
 #define SCREEN_FPS desiredFPS
 #define SCREEN_TICKS_PER_FRAME (1000/SCREEN_FPS)
 
-#define CONTROLLER_AXIS_INPUT_RANGE 32767.0
+#define CONTROLLER_AXIS_INPUT_RANGE 32767.f
 
 FE_NAMESPACE_BEGIN
 
@@ -63,11 +63,13 @@ int EventFilter(void* userData, SDL_Event *event) {
                 break;
             }
             case SDL_APP_DIDENTERFOREGROUND: {
+                FEWindowBackgrounded = false;
                 if (win != NULL && win->getCurrentScene() != nullptr) win->getCurrentScene()->applicationDidEnterForeground();
                 return 0;
                 break;
             }
             case SDL_APP_DIDENTERBACKGROUND: {
+                FEWindowBackgrounded = true;
                 if (win != NULL && win->getCurrentScene() != nullptr) win->getCurrentScene()->applicationDidEnterBackground();
                 return 0;
                 break;
@@ -236,9 +238,9 @@ void Window::handleEvents() {
                 if (currentScene != nullptr) currentScene->mouseClickEnded(event.button, getMouseCoords());
                 break;
             case SDL_JOYAXISMOTION: { // ACCELEROMETER SUPPORT // TODO: Change EngineHelper's init and this to check for SDL_JoystickDeviceAdded event
-                if (event.jaxis.axis == 0) accelData.x = event.jaxis.value / CONTROLLER_AXIS_INPUT_RANGE;
-                if (event.jaxis.axis == 1) accelData.y = event.jaxis.value / CONTROLLER_AXIS_INPUT_RANGE;
-                if (event.jaxis.axis == 2) accelData.z = event.jaxis.value / CONTROLLER_AXIS_INPUT_RANGE;
+                if (event.jaxis.axis == 0) accelData.x = event.jaxis.value / CONTROLLER_AXIS_INPUT_RANGE * 5.f;
+                if (event.jaxis.axis == 1) accelData.y = event.jaxis.value / CONTROLLER_AXIS_INPUT_RANGE * 5.f;
+                if (event.jaxis.axis == 2) accelData.z = event.jaxis.value / CONTROLLER_AXIS_INPUT_RANGE * 5.f;
                 if (currentScene != nullptr) currentScene->accelerometerMoved(accelData);
                 break;
             }
@@ -256,7 +258,7 @@ void Window::handleEvents() {
             }
             
             case SDL_CONTROLLERDEVICEADDED:
-                FELog("SDL_CONTROLLERDEVICEADDED");
+                FELog("CONTROLLERDEVICEADDED");
                 SDL_GameControllerOpen(event.cdevice.which);
                 break;
             case SDL_CONTROLLERBUTTONDOWN: {

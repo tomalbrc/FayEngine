@@ -8,13 +8,23 @@
 
 #include "NetworkManager.hpp"
 
+#include <iostream>
+#include <string>
+#include <sstream>
+#include <algorithm>
+#include <iterator>
+// THERES POSSIBLE LEAK
 FE_NAMESPACE_BEGIN
+
+NetworkManager::~NetworkManager() {
+    
+}
 
 NetworkManagerPtr NetworkManager::create() {
     return NetworkManagerPtr(new NetworkManager());
 }
 
-std::string NetworkManager::downloadString(std::string url) {
+std::string NetworkManager::downloadString(HTTPRequestType requestType, std::map<std::string, std::string> headers, std::string url) {
     std::string original = url;
     
     std::string prot = "://";
@@ -26,12 +36,16 @@ std::string NetworkManager::downloadString(std::string url) {
     
     std::string host = sub.substr(0, ccc);
     
+    auto secure = original.substr(0, s) == "https";
+    
+    FELog(secure);
+    
     
     std::cout << "[NetworkManager] Path: " << path  << ", Host: " << host << " ";
     
-    
     IPaddress ip;
-    if (SDLNet_ResolveHost(&ip, host.c_str(), 80) == -1) {
+    if (SDLNet_ResolveHost(&ip, (host).c_str(), secure?443:80) == -1) {
+        FELog("SDLNet_ResolveHost Failed! " << SDLNet_GetError());
         FELog("SDLNet_ResolveHost Failed! " << SDLNet_GetError());
         return "";
     }
@@ -43,10 +57,14 @@ std::string NetworkManager::downloadString(std::string url) {
     }
     
     char buffer[1024*2]; // 1 KB * 1024 // 1MB
-    std::strcpy(buffer, ("GET "+path+" HTTP/1.1\r\n").c_str());
-    std::strcat(buffer, ("Host: "+host+"\r\n").c_str());
-    // TODO: 
-    std::strcat(buffer, ("Connection: close\r\n")); // this is more of a hack :(
+    std::strcpy(buffer, ((requestType == HTTPRequestType::GetRequest ? std::string("GET") : std::string("POST"))+" "+path+" HTTP/1.1\r\n").c_str());
+    
+    headers.insert({"Host",""+host});
+    headers.insert({"Connection","close"});
+    for (auto&& header: headers) {
+        std::strcat(buffer, (header.first+": "+header.second+"\r\n").c_str());
+    }
+    
     std::strcat(buffer, "\r\n");
     
     std::string myString = "";
@@ -60,10 +78,8 @@ std::string NetworkManager::downloadString(std::string url) {
         memset(&buffer[0], 0, sizeof(buffer));
     }
     
-    // C++ is still a weird but buttiful thing
-    
     return myString;
 }
-    
-    
+
+
 FE_NAMESPACE_END

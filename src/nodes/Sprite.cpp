@@ -105,24 +105,15 @@ Rect Sprite::getBoundingBox() {
 
 
 
-inline Vec2 absScale(Node *n) {
-    auto s = n->getScale();
-    for (auto p = NodeWeakPtr(n->getParent()); !p.expired(); p = NodeWeakPtr( p.lock()->getParent() ))
-        s = s * p.lock()->getScale();
-    return s;
-}
-
-inline double absRotation(Node *n) {
-    auto s = n->getZRotation();
-    for (auto p = NodeWeakPtr(n->getParent()); !p.expired(); p = NodeWeakPtr( p.lock()->getParent() ))
-        s += p.lock()->getZRotation();
-    return s;
-}
-
 void Sprite::render(SDL_Renderer *renderer) { // render into scene / Surfac
     if (this->getTexture() != nullptr) { // Draw this sprite if the tex is set
+        auto absRot = getZRotation();
+        auto absScale = getScale();
+        for (auto p = getParent(); p.get() != NULL; p = p->getParent() )
+            absScale = absScale * p->getScale(), absRot += p->getZRotation();
+        
         auto sRect = RectMake(mTexture->getRenderOffset(), mTexture->getSize());
-        auto dRect = RectMake(convertToWorldSpace(Vec2Null()), getSize()*absScale(this));
+        auto dRect = RectMake(convertToWorldSpace(Vec2Null()), getSize()*absScale);
         
         dRect = dRect*EngineHelper::getInstance()->getMainWindow()->screenScale();
         
@@ -141,7 +132,7 @@ void Sprite::render(SDL_Renderer *renderer) { // render into scene / Surfac
         SDL_SetTextureColorMod(mTexture->sdlTexture(), m_color.r, m_color.g, m_color.b);
         SDL_SetTextureBlendMode(mTexture->sdlTexture(), SDL_BlendMode(m_blendMode));
         SDL_SetTextureAlphaMod(mTexture->sdlTexture(), getAlpha()); // temporarily apply Sprites alpha value
-        SDL_RenderCopyEx(renderer, mTexture->sdlTexture(), &ssRect, &ddRect, -RadiansToDegrees(absRotation(this)), &center, SDL_FLIP_NONE);
+        SDL_RenderCopyEx(renderer, mTexture->sdlTexture(), &ssRect, &ddRect, -RadiansToDegrees(absRot), &center, SDL_FLIP_NONE);
     }
     Node::render(renderer);
 }

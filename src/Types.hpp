@@ -13,6 +13,7 @@
 #include <math.h>
 #include <iostream>
 #include <vector>
+#include <memory>
 #include "SDL.h"
 
 /**

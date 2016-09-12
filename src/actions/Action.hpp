@@ -23,7 +23,7 @@ FE_create_Ptr(Action);
 /**
  * Actions to alter properties of Nodes/Sprites, animated
  */
-class Action: public std::enable_shared_from_this<Action> { // abstract
+class Action { // abstract
 public:
     /**
      * true if duration is over

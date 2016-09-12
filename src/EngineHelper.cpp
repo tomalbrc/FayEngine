@@ -28,10 +28,10 @@ EngineHelper::~EngineHelper() {
     SDL_DestroyRenderer(m_gameRenderer);
     SDL_DestroyWindow(SDL_GL_GetCurrentWindow());
     
-    SDL_Quit();
     TTF_Quit();
     IMG_Quit();
     Mix_Quit();
+    SDL_Quit();
 }
 
 EngineHelper* EngineHelper::getInstance() {

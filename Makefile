@@ -2,8 +2,8 @@
 # File:  Makefile (for library)
 #
 
-CC=g++
-CXXFLAGS = -std=c++11
+CC=c++
+CXXFLAGS=-std=c++0x
 INCLUDE=-I/usr/local/include -I/usr/include/SDL2 -I/usr/local/include/SDL2 -Isrc -Isrc/nodes -Isrc/actions
 
 LIB=libFayEngine.a
