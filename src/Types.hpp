@@ -73,6 +73,16 @@ inline const std::vector<std::string> explode(const std::string& s, const char& 
  */
 FE_NAMESPACE_BEGIN
 
+/**
+ * Used for mobile devices' screen orientations.
+ */
+typedef enum {
+    DeviceOrientationPortrait,
+    DeviceOrientationUpsideDown,
+    DeviceOrientationLandscapeLeft,
+    DeviceOrientationLandscapeRight,
+} DeviceOrientation;
+
 typedef enum {
     /**
      * Default. No anti-aliasing

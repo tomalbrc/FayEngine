@@ -11,7 +11,6 @@
 
 #include "SDL.h"
 #include "SDL_image.h"
-#include "SDL_ttf.h"
 #include <stdio.h>
 #include <vector>
 #include <iostream>
@@ -111,20 +110,22 @@ public:
 protected:
     bool init(std::string wname, Vec2 size, bool fullscreen, bool hidpi);
 private:
-    bool m_bShowNew = false;
-    SDL_Window *sdlWindow = NULL;
-    SDL_Renderer *renderer = NULL;
-    ScenePtr currentScene = NULL;
-    ScenePtr newScene = NULL;
-    bool running = true;
+    bool m_showNew = false;
+    SDL_Window *m_sdlWindow = NULL;
+    SDL_Renderer *m_renderer = NULL;
+    ScenePtr m_currentScene = NULL;
+    ScenePtr m_newScene = NULL;
+    bool m_running = true;
     
     void handleEvents();
     void update();
     void render();
     
-    Vec3 accelData = Vec3Null();
+    Vec3 m_accelData = Vec3Null();
     
     SceneTransition m_nextTransition;
+    
+    float m_screenScale = -1.f;
 };
 
 FE_NAMESPACE_END

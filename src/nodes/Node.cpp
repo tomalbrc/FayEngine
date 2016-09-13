@@ -8,7 +8,7 @@
 
 #include "Node.hpp"
 #include "Scene.hpp"
-#include "ThreadManager.hpp"
+#include "EngineHelper.hpp"
 
 FE_NAMESPACE_BEGIN
 
@@ -58,7 +58,7 @@ bool Node::hasActions() {
     return actions.size() > 0;
 }
 
-ActionPtr Node::getAction(std::string actionName) {
+const ActionPtr Node::getAction(std::string actionName) {
    if (actions[actionName] != nullptr && !actions[actionName]->finished) {
         FELog(actions[actionName]);
         return actions[actionName];
@@ -120,11 +120,6 @@ const int Node::getAlpha() {
 }
 
 
-Vec2 Node::getSize() {
-    return mSize;
-}
-
-
 void Node::setScale(Vec2 scale) {
     isTransformDirty = true;
     mScale = scale;
@@ -137,15 +132,15 @@ const Vec2 Node::getScale() {
 void Node::setAnchorPoint(Vec2 ap) {
     mAnchorPoint = ap;
 }
-Vec2 Node::getAnchorPoint() {
+const Vec2 Node::getAnchorPoint() {
     return mAnchorPoint;
 }
 
 
 AffineTransform Node::nodeToWorldTransform() {
     AffineTransform t = nodeToParentTransform();
-    for (auto p = NodeWeakPtr(this->getParent()); !p.expired(); p = NodeWeakPtr( p.lock()->getParent() ))
-        t = AffineTransformMultiply(t, p.lock()->nodeToParentTransform());
+    for (auto p = getParent(); p != nullptr; p = p->getParent())
+        t = AffineTransformMultiply(t, p->nodeToParentTransform());
     return t;
 }
 AffineTransform Node::worldToNodeTransform() {
@@ -189,23 +184,22 @@ void Node::removeChild(NodePtr node) {
 }
 
 
-NodePtr Node::getParent() {
-    return mParent.lock();
+const NodePtr Node::getParent() {
+    return mParent;
 }
 void Node::setParent(const NodePtr& n) {
-    mParent.reset();
+    if (mParent != nullptr) mParent.reset();
     mParent = n;
 }
 
 
-ScenePtr Node::getScene() {
-    auto p = getParent();
-    for (; p->getParent()!=NULL; p = p->getParent());
-    return std::static_pointer_cast<Scene>(p);
+const ScenePtr Node::getScene() {
+    // Ugh, not sure about this
+    return EngineHelper::getInstance()->getMainWindow()->getCurrentScene();
 }
 
 
-int Node::getTag() {
+const int Node::getTag() {
     return mTag;
 }
 
@@ -306,7 +300,7 @@ void Node::setZPosition(float zpos) {
     m_zPosition = zpos;
 }
 
-float Node::getZPosition() {
+const float Node::getZPosition() {
     return m_zPosition;
 }
 

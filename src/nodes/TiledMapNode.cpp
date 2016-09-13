@@ -139,11 +139,15 @@ std::vector<tmxparser::TmxObjectGroup> TiledMapNode::getAllObjectGroups() {
     return map.objectGroupCollection;
 }
 
-void TiledMapNode::setAnchorPoint(FE::Vec2 ap) {
-    Sprite::setAnchorPoint(ap);
-    
-    for (auto&& l: getAllLayers()) l.lock()->setAnchorPoint(ap);
+
+const Vec2 TiledMapNode::getSize() {
+    return Vec2Make(map.width*map.tileWidth, map.height*map.tileHeight);
 }
+
+const Vec2 TiledMapNode::getPosition() {
+    return (Node::getPosition() - Node::getPosition()*getAnchorPoint());
+}
+
 
 
 FE_NAMESPACE_END

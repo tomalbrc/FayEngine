@@ -56,7 +56,7 @@ public:
      *
      * @param action    action to run
      */
-    void runAction(ActionPtr action);
+    virtual void runAction(ActionPtr action);
     
     /**
      * Run an Action for a specified key
@@ -64,38 +64,38 @@ public:
      * @param action    action to run
      * @param forKey    key to run the Action for
      */
-    void runAction(ActionPtr action, const std::string& forKey);
+    virtual void runAction(ActionPtr action, const std::string& forKey);
     
     /**
      * Removes a running action
      *
      * @param action    action to remove
      */
-    void removeAction(ActionPtr action);
+    virtual void removeAction(ActionPtr action);
     
     /**
      * Removes a running action for a specified key
      *
      * @param actionName    key of the action to remove
      */
-    void removeAction(const std::string& actionName);
+    virtual void removeAction(const std::string& actionName);
     
     /**
      * Removes all running actions
      */
-    void removeAllActions();
+    virtual void removeAllActions();
     
     /**
      * Get an action by key
      *
      * @param actionName    key of the action
      */
-    ActionPtr getAction(std::string actionName);
+    virtual const ActionPtr getAction(std::string actionName);
     
     /**
      * Returns true if the node has any active actions
      */
-    bool hasActions();
+    virtual bool hasActions();
     
     /**
      * Update method. Called every frame.
@@ -138,41 +138,36 @@ public:
      *
      * @param angle     angle in radians
      */
-    void setZRotation(const double &angle);
+    virtual void setZRotation(const double &angle);
     
     /**
      * Returns the current rotation on the z-axis of the node. In radians
      */
-    const double getZRotation();
+    virtual const double getZRotation();
     
     /**
      * Sets a new alpha, ranges from 0 to 255
      *
      * @param a new alpha value
      */
-    void setAlpha(const int &a);
+    virtual void setAlpha(const int &a);
     
     /**
      * Returns the current alpha value. Ranges between 0 and 255
      */
-    const int getAlpha();
+    virtual const int getAlpha();
     
     /**
      * Sets a new scale for the node. Default is {1.0, 1.0}
      *
      * @param scale     new scale
      */
-    void setScale(Vec2 scale);
+    virtual void setScale(Vec2 scale);
     
     /**
      * Returns the current scale of the node as a Vec2
      */
-    const Vec2 getScale();
-    
-    /**
-     * Returns the current size of the node. For Sprites
-     */
-    Vec2 getSize();
+    virtual const Vec2 getScale();
     
     /**
      * Sets a new anchor point. Default is {0,0}
@@ -184,58 +179,58 @@ public:
      *
      * @param ap    new anchor point
      */
-    void setAnchorPoint(Vec2 ap);
+    virtual void setAnchorPoint(Vec2 ap);
     
     /**
      * Returns the current anchor point. See setAnchorPoint(Vec2) for a short explanation.
      * Defaults to {0,0}
      */
-    Vec2 getAnchorPoint();
+    virtual const Vec2 getAnchorPoint();
     
     /**
      * Adds a new child to the node; willMoveToParent and setParent will be called on the passed node
      *
      * @param Node to add
      */
-    void addChild(const NodePtr& node);
+    virtual void addChild(const NodePtr& node);
     
     /**
      * Returns all children in an std::vector<NodePtr>
      */
-    const NodeVector &getChildren();
+    virtual const NodeVector &getChildren();
     
     /**
      * Removes the node from it's parent
      */
-    void removeFromParent();
+    virtual void removeFromParent();
     
     /**
      * Removes a child node from the node
      *
      * @param node  Node to remove
      */
-    void removeChild(NodePtr node);
+    virtual void removeChild(NodePtr node);
     
     /**
      * Returns the parent of the node, NULL if the node doesn't have a parent
      */
-    NodePtr getParent();
+    virtual const NodePtr getParent();
     
     /**
      *
      * Sets the new parent of the node
      */
-    void setParent(const NodePtr& n);
+    virtual void setParent(const NodePtr& n);
     
     /**
      * Returns the current Scene the node is in. Returns NULL when none of the nodes in the graph is on the Scene
      */
-    ScenePtr getScene();
+    virtual const ScenePtr getScene();
     
     /**
      * Returns the tag of the node. int
      */
-    virtual int getTag();
+    virtual const int getTag();
     
     /**
      * Sets a new tag for the node.
@@ -376,7 +371,7 @@ public:
     /**
      * Returns the current z-position in parent node
      */
-    virtual float getZPosition();
+    virtual const float getZPosition();
     
 protected:
     bool init();
@@ -402,10 +397,8 @@ private:
     std::string name = "";
     
     // parent of this noded
-    NodeWeakPtr mParent;
+    NodePtr mParent;
     
-    // size, content-size
-    Vec2 mSize = Vec2Null();
     
     // actions, performed in public
     ActionMap actions;

@@ -69,6 +69,10 @@ void Scene::render() {
 
 
 
+void Scene::orientationChange(DeviceOrientation newOrientation) {
+    
+}
+
 void Scene::applicationWillEnterForeground() {
     
 }

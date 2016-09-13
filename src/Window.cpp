@@ -26,7 +26,7 @@ static bool FEWindowBackgrounded = false;
 static SpritePtr FEWindowOverlay;
 
 Window::~Window() {
-    currentScene = NULL;
+    m_currentScene = NULL;
 }
 
 WindowPtr Window::create(std::string wname, Vec2 size) {
@@ -87,19 +87,19 @@ bool Window::init(std::string wname, Vec2 size, bool fullscreen, bool hidpi) {
     flags |= SDL_WINDOW_BORDERLESS;
 #endif
     if (fullscreen) flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
-    sdlWindow = SDL_CreateWindow(wname.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, size.x, size.y, flags); // Create window with title, position & sitze
-    if (sdlWindow == nullptr) {
+    m_sdlWindow = SDL_CreateWindow(wname.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, size.x, size.y, flags); // Create window with title, position & sitze
+    if (m_sdlWindow == nullptr) {
         FELog("SDL_CreateWindow Error: " << SDL_GetError());
         return false;
     }
     
-    renderer = SDL_CreateRenderer(sdlWindow, -1, SDL_RENDERER_ACCELERATED);
-    SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
-    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+    m_renderer = SDL_CreateRenderer(m_sdlWindow, -1, SDL_RENDERER_ACCELERATED);
+    SDL_SetRenderDrawColor(m_renderer, 0x00, 0x00, 0x00, 0xFF);
+    SDL_SetRenderDrawBlendMode(m_renderer, SDL_BLENDMODE_BLEND);
     
     SDL_SetEventFilter(EventFilter, this);
     
-    EngineHelper::getInstance()->setRenderer(renderer);
+    EngineHelper::getInstance()->setRenderer(m_renderer);
     EngineHelper::getInstance()->setMainWindow(shared_from_this());
     
     SDL_GameControllerOpen(0);
@@ -122,25 +122,25 @@ void Window::presentScene(ScenePtr pnewScene) {
 
 void Window::presentScene(ScenePtr pnewScene, SceneTransition transition) {
     m_nextTransition = transition;
-    if (currentScene != nullptr) m_bShowNew = true, newScene = pnewScene;
-    else newScene = pnewScene;
+    if (m_currentScene != nullptr) m_showNew = true, m_newScene = pnewScene;
+    else m_newScene = pnewScene;
 }
 
 
 SDL_Renderer* Window::getRenderer() {
-    return renderer;
+    return m_renderer;
 }
 
 Vec2 Window::getSize() {
     int w,h;
-    SDL_GetWindowSize(sdlWindow, &w, &h);
+    SDL_GetWindowSize(m_sdlWindow, &w, &h);
     return Vec2Make(w,h);
 }
 
 
 
 ScenePtr Window::getCurrentScene() {
-    return currentScene;
+    return m_currentScene;
 }
 
 
@@ -170,19 +170,19 @@ void Window::startLoop() {
         */
         
         
-        if (currentScene == nullptr) {
-            currentScene = NULL;
-            m_bShowNew = false;
+        if (m_currentScene == nullptr) {
+            m_currentScene = NULL;
+            m_showNew = false;
             
-            newScene->setWindow(this->shared_from_this());
-            currentScene = newScene;
-            newScene = NULL;
-        } else if ((m_bShowNew && (FEWindowOverlay.get() == nullptr || (FEWindowOverlay.get() != nullptr && FEWindowOverlay->getParent() == nullptr)))) { // TODO: Add Transition between scenes
+            m_newScene->setWindow(this->shared_from_this());
+            m_currentScene = m_newScene;
+            m_newScene = NULL;
+        } else if ((m_showNew && (FEWindowOverlay.get() == nullptr || (FEWindowOverlay.get() != nullptr && FEWindowOverlay->getParent() == nullptr)))) { // TODO: Add Transition between scenes
             FEWindowOverlay.reset();
             FEWindowOverlay = Sprite::create(Texture::create(getSize(), m_nextTransition.color));
             FEWindowOverlay->setAlpha(0);
             FEWindowOverlay->setZPosition(__FLT_MAX__);
-            currentScene->addChild(FEWindowOverlay);
+            m_currentScene->addChild(FEWindowOverlay);
             
             auto fade = FadeAlphaToAction::create(m_nextTransition.duration, 255);
             fade->setEasingFunction(m_nextTransition.startEasingFunction);
@@ -190,16 +190,16 @@ void Window::startLoop() {
                 fade,
             }), "o");
             
-            m_bShowNew = false;
-        } else if (FEWindowOverlay.get() != nullptr && FEWindowOverlay->getAction("o") == nullptr && newScene != nullptr) {
+            m_showNew = false;
+        } else if (FEWindowOverlay.get() != nullptr && FEWindowOverlay->getAction("o") == nullptr && m_newScene != nullptr) {
             
-            currentScene.reset();
-            currentScene = newScene;
-            currentScene->setWindow(this->shared_from_this());
-            newScene.reset();
+            m_currentScene.reset();
+            m_currentScene = m_newScene;
+            m_currentScene->setWindow(this->shared_from_this());
+            m_newScene.reset();
             
             FEWindowOverlay->removeFromParent();
-            currentScene->addChild(FEWindowOverlay);
+            m_currentScene->addChild(FEWindowOverlay);
             
             auto fade = FadeAlphaToAction::create(m_nextTransition.duration, 0);
             fade->setEasingFunction(m_nextTransition.endEasingFunction);
@@ -208,7 +208,7 @@ void Window::startLoop() {
                 RemoveFromParentAction::create(),
             }), "o2");
             
-            m_bShowNew = false;
+            m_showNew = false;
         }
     }
 }
@@ -219,58 +219,62 @@ void Window::handleEvents() {
     while(SDL_PollEvent(&event)) {
         switch (event.type) {
             case SDL_QUIT:
-                running = false;
+                m_running = false;
                 FELog("Event SDL_QUIT... Bye!");
                 break;
             case SDL_KEYDOWN:
-                if (currentScene != nullptr) currentScene->keyDown(FEKeyCode(event.key.keysym.sym));
+                if (m_currentScene != nullptr) m_currentScene->keyDown(FEKeyCode(event.key.keysym.sym));
                 break;
             case SDL_KEYUP:
-                if (currentScene != nullptr) currentScene->keyUp(FEKeyCode(event.key.keysym.sym));
+                if (m_currentScene != nullptr) m_currentScene->keyUp(FEKeyCode(event.key.keysym.sym));
                 break;
             case SDL_MOUSEBUTTONDOWN:
-                if (currentScene != nullptr) currentScene->mouseClickBegan(event.button, getMouseCoords());
+                if (m_currentScene != nullptr) m_currentScene->mouseClickBegan(event.button, getMouseCoords());
                 break;
             case SDL_MOUSEMOTION:
-                if (currentScene != nullptr) currentScene->mouseMoved(event.motion, getMouseCoords());
+                if (m_currentScene != nullptr) m_currentScene->mouseMoved(event.motion, getMouseCoords());
                 break;
             case SDL_MOUSEBUTTONUP:
-                if (currentScene != nullptr) currentScene->mouseClickEnded(event.button, getMouseCoords());
+                if (m_currentScene != nullptr) m_currentScene->mouseClickEnded(event.button, getMouseCoords());
                 break;
             case SDL_JOYAXISMOTION: { // ACCELEROMETER SUPPORT // TODO: Change EngineHelper's init and this to check for SDL_JoystickDeviceAdded event
-                if (event.jaxis.axis == 0) accelData.x = event.jaxis.value / CONTROLLER_AXIS_INPUT_RANGE * 5.f;
-                if (event.jaxis.axis == 1) accelData.y = event.jaxis.value / CONTROLLER_AXIS_INPUT_RANGE * 5.f;
-                if (event.jaxis.axis == 2) accelData.z = event.jaxis.value / CONTROLLER_AXIS_INPUT_RANGE * 5.f;
-                if (currentScene != nullptr) currentScene->accelerometerMoved(accelData);
+                if (event.jaxis.axis == 0) m_accelData.x = event.jaxis.value / CONTROLLER_AXIS_INPUT_RANGE * 5.f;
+                if (event.jaxis.axis == 1) m_accelData.y = event.jaxis.value / CONTROLLER_AXIS_INPUT_RANGE * 5.f;
+                if (event.jaxis.axis == 2) m_accelData.z = event.jaxis.value / CONTROLLER_AXIS_INPUT_RANGE * 5.f;
+                if (m_currentScene != nullptr) m_currentScene->accelerometerMoved(m_accelData);
                 break;
             }
             case SDL_FINGERDOWN: {
-                if (currentScene != nullptr) currentScene->touchBegan(event.tfinger, Vec2Make(event.tfinger.x, event.tfinger.y)*getSize());
+                if (m_currentScene != nullptr) m_currentScene->touchBegan(event.tfinger, Vec2Make(event.tfinger.x, event.tfinger.y)*getSize());
                 break;
             }
             case SDL_FINGERMOTION: {
-                if (currentScene != nullptr) currentScene->touchMoved(event.tfinger, Vec2Make(event.tfinger.x, event.tfinger.y)*getSize());
+                if (m_currentScene != nullptr) m_currentScene->touchMoved(event.tfinger, Vec2Make(event.tfinger.x, event.tfinger.y)*getSize());
                 break;
             }
             case SDL_FINGERUP: {
-                if (currentScene != nullptr) currentScene->touchEnded(event.tfinger, Vec2Make(event.tfinger.x, event.tfinger.y)*getSize());
+                if (m_currentScene != nullptr) m_currentScene->touchEnded(event.tfinger, Vec2Make(event.tfinger.x, event.tfinger.y)*getSize());
                 break;
             }
             
             case SDL_CONTROLLERDEVICEADDED:
-                FELog("CONTROLLERDEVICEADDED");
+                FELog("CONTROLLER DEVICE ADDED");
                 SDL_GameControllerOpen(event.cdevice.which);
                 break;
             case SDL_CONTROLLERBUTTONDOWN: {
-                if (currentScene != nullptr) currentScene->controllerPushedButton(event.cdevice.which, (SDL_GameControllerButton)event.cbutton.button);
+                if (m_currentScene != nullptr) m_currentScene->controllerPushedButton(event.cdevice.which, (SDL_GameControllerButton)event.cbutton.button);
                 break;
             }
             case SDL_CONTROLLERBUTTONUP: {
-                if (currentScene != nullptr) currentScene->controllerReleasedButton(event.cdevice.which, (SDL_GameControllerButton)event.cbutton.button);
+                if (m_currentScene != nullptr) m_currentScene->controllerReleasedButton(event.cdevice.which, (SDL_GameControllerButton)event.cbutton.button);
                 break;
             }
             case SDL_CONTROLLERAXISMOTION: {
-                if (currentScene != nullptr) currentScene->controllerAxisMotion(event.cdevice.which, (SDL_GameControllerAxis)event.caxis.axis, event.caxis.value/CONTROLLER_AXIS_INPUT_RANGE);
+                if (m_currentScene != nullptr) m_currentScene->controllerAxisMotion(event.cdevice.which, (SDL_GameControllerAxis)event.caxis.axis, event.caxis.value/CONTROLLER_AXIS_INPUT_RANGE);
+                break;
+            }
+            case SDL_WINDOWEVENT: {
+                if (event.window.event == SDL_WINDOWEVENT_SIZE_CHANGED && m_currentScene != nullptr) m_currentScene->orientationChange(DeviceOrientationPortrait), FELog("Window data: "<<event.window.data1<<", "<<event.window.data2);
                 break;
             }
             
@@ -281,35 +285,38 @@ void Window::handleEvents() {
 }
 
 void Window::update() {
-    if (currentScene != nullptr) currentScene->update();
+    if (m_currentScene != nullptr) m_currentScene->update();
 }
 void Window::render() {
-    if (currentScene != nullptr) currentScene->render();
+    if (m_currentScene != nullptr) m_currentScene->render();
 }
 
 void Window::quit() {
-    running = false;
+    m_running = false;
     
-    SDL_DestroyWindow(sdlWindow);
-    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(m_sdlWindow);
+    SDL_DestroyRenderer(m_renderer);
     
     SDL_Quit();
-    exit(0);
 }
 
 bool Window::isRunning() {
-    return running;
+    return m_running;
 }
 
 
 double Window::screenScale() {
-    int x,y;
-    SDL_GetWindowSize(sdlWindow, &x, &y);
-    
-    int w,h;
-    SDL_GL_GetDrawableSize(sdlWindow, &w, &h);
-    
-    return w/double(x);
+    if (m_screenScale == -1.f) {
+        int x,y;
+        SDL_GetWindowSize(m_sdlWindow, &x, &y);
+        
+        int w,h;
+        SDL_GL_GetDrawableSize(m_sdlWindow, &w, &h);
+        
+        m_screenScale = w/double(x);
+    }
+
+    return m_screenScale;
 }
 
 

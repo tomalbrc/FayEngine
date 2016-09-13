@@ -7,6 +7,7 @@
 //
 
 #include "Sprite.hpp"
+#include "Scene.hpp"
 
 FE_NAMESPACE_BEGIN
 
@@ -109,8 +110,9 @@ void Sprite::render(SDL_Renderer *renderer) { // render into scene / Surfac
     if (this->getTexture() != nullptr) { // Draw this sprite if the tex is set
         auto absRot = getZRotation();
         auto absScale = getScale();
-        for (auto p = getParent(); p.get() != NULL; p = p->getParent() )
+        for (auto p = getParent(); p.get() != NULL; p = p->getParent()) {
             absScale = absScale * p->getScale(), absRot += p->getZRotation();
+        }
         
         auto sRect = RectMake(mTexture->getRenderOffset(), mTexture->getSize());
         auto dRect = RectMake(convertToWorldSpace(Vec2Null()), getSize()*absScale);
@@ -122,17 +124,24 @@ void Sprite::render(SDL_Renderer *renderer) { // render into scene / Surfac
         ddRect.x -= getAnchorPoint().x * ddRect.w;
         ddRect.y -= getAnchorPoint().y * ddRect.h;
         
-        SDL_Rect ssRect;
-        ssRect.x = sRect.origin.x, ssRect.y = sRect.origin.y, ssRect.w = sRect.size.x, ssRect.h = sRect.size.y;
+        // Culling // UPDATE: Probably not neccesary as the GPU already culls triangles and a texture are 2 tris (guesstimated)
+        //auto s = this->getScene()->getWindow()->getSize()*(EngineHelper::getInstance()->getMainWindow()->screenScale());
+        //if (RectIntersectsRect(RectMake(ddRect.x, ddRect.y, ddRect.w, ddRect.h), RectMake(Vec2Null(), s))) {
+            
+            SDL_Rect ssRect;
+            ssRect.x = sRect.origin.x, ssRect.y = sRect.origin.y, ssRect.w = sRect.size.x, ssRect.h = sRect.size.y;
+            
+            SDL_Point center;
+            center.x = ddRect.w*getAnchorPoint().x;
+            center.y = ddRect.h*getAnchorPoint().y;
         
-        SDL_Point center;
-        center.x = ddRect.w*getAnchorPoint().x;
-        center.y = ddRect.h*getAnchorPoint().y;
+        // Apply sprite properties to SDL_Texture
+            SDL_SetTextureColorMod(mTexture->sdlTexture(), m_color.r, m_color.g, m_color.b);
+            SDL_SetTextureBlendMode(mTexture->sdlTexture(), SDL_BlendMode(m_blendMode));
+            SDL_SetTextureAlphaMod(mTexture->sdlTexture(), getAlpha());
         
-        SDL_SetTextureColorMod(mTexture->sdlTexture(), m_color.r, m_color.g, m_color.b);
-        SDL_SetTextureBlendMode(mTexture->sdlTexture(), SDL_BlendMode(m_blendMode));
-        SDL_SetTextureAlphaMod(mTexture->sdlTexture(), getAlpha()); // temporarily apply Sprites alpha value
-        SDL_RenderCopyEx(renderer, mTexture->sdlTexture(), &ssRect, &ddRect, -RadiansToDegrees(absRot), &center, SDL_FLIP_NONE);
+            SDL_RenderCopyEx(renderer, mTexture->sdlTexture(), &ssRect, &ddRect, -RadiansToDegrees(absRot), &center, SDL_FLIP_NONE);
+        //}
     }
     Node::render(renderer);
 }

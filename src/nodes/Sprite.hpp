@@ -63,26 +63,26 @@ public:
     /**
      *  @return the current size of the Texture
      */
-    Vec2 getSize();
+    virtual Vec2 getSize();
     
     /**
      * Gives the Sprite a new Texture 
      *
      * @param new Texture
      */
-    void setTexture(TexturePtr tex);
+    virtual void setTexture(TexturePtr tex);
     
     /**
      * @return the current Texture of the Sprite
      */
-    TexturePtr getTexture();
+    virtual TexturePtr getTexture();
     
     /**
      * The current blend mode of the Sprite
      *
      * @return the current blend mode of the sprite
      */
-    BlendMode getBlendMode();
+    virtual BlendMode getBlendMode();
     
     /**
      * Sets the blend mode for the Sprite.
@@ -90,7 +90,7 @@ public:
      *
      * @param new blend mode
      */
-    void setBlendMode(BlendMode mode);
+    virtual void setBlendMode(BlendMode mode);
     
     /**
      * Rectangle relative to parent's coordinate space
@@ -117,12 +117,12 @@ public:
      *
      * @param   Color   Alpha Channel is ignored
      */
-    void setColor(Color color);
+    virtual void setColor(Color color);
     
     /**
      * Returns the current color used for color mod
      */
-    Color getColor();
+    virtual Color getColor();
     
 private:
     Color m_color = ColorMake(255, 255, 255, 255);

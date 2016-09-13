@@ -31,8 +31,8 @@
 #include "Scene.hpp"
 #include "Sprite.hpp"
 #include "LabelNode.hpp"
-#include "TiledMapNode.hpp"
 #include "ButtonNode.hpp"
+#include "TiledMapNode.hpp"
 
 #include "Texture.hpp"
 #include "DrawTexture.hpp"

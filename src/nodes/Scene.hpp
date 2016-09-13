@@ -83,6 +83,12 @@ public:
     virtual void update();
     
     
+    /**
+     * Mobile device related. Gets called when the device orientation is changed.
+     * Check Types.hpp for supported 'DeviceOrientation's
+     */
+    virtual void orientationChange(DeviceOrientation newOrientation);
+    
     
     /**
      * iOS, Android and WinRT related

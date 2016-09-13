@@ -20,12 +20,11 @@ FE_NAMESPACE_BEGIN
 
 class TiledMapNode;
 FE_create_Ptr(TiledMapNode);
-typedef std::vector< Rect > RectVector;
 
 /**
  * Loads and Displays a tiled tmx map
  */
-class TiledMapNode : public Sprite {
+class TiledMapNode : public Node {
 public:
     /**
      * Creates a new TiledMapNode object
@@ -53,14 +52,19 @@ public:
     tmxparser::TmxObjectGroup getObjectGroupNamed(std::string name);
     
     /**
-     * Sets the anchorPoint of all layers
-     */
-    virtual void setAnchorPoint(FE::Vec2 ap);
-    
-    /**
      * Gets raw TmxMap data from tmxparser 
      */
     tmxparser::TmxMap getRawMap();
+    
+    /**
+     * Size of the whole map (horizontal tile count * tile size, vertical tile count * tile size)
+     */
+    virtual const Vec2 getSize();
+    
+    /**
+     * Position, taking the anchorPoint into account
+     */
+    virtual const Vec2 getPosition();
     
 protected:
     bool init (const std::string &filepath);
