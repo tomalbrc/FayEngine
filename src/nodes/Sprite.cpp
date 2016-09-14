@@ -124,7 +124,8 @@ void Sprite::render(SDL_Renderer *renderer) { // render into scene / Surfac
         ddRect.x -= getAnchorPoint().x * ddRect.w;
         ddRect.y -= getAnchorPoint().y * ddRect.h;
         
-        // Culling // UPDATE: Probably not neccesary as the GPU already culls triangles and a texture are 2 tris (guesstimated)
+        // Culling // UPDATE: Probably not neccesary as the GPU already culls triangles and a texture are 2 tris (guesstimated (assuming tris is short for triangles)
+        // Also, there's a problem with rotation not taken into account :O
         //auto s = this->getScene()->getWindow()->getSize()*(EngineHelper::getInstance()->getMainWindow()->screenScale());
         //if (RectIntersectsRect(RectMake(ddRect.x, ddRect.y, ddRect.w, ddRect.h), RectMake(Vec2Null(), s))) {
             
