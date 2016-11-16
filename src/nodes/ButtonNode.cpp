@@ -163,6 +163,7 @@ Color ButtonNode:: getNormalColor() {
 
 void ButtonNode::setNormalTexture(TexturePtr texture) {
     m_normalTexture = texture;
+    setTexture(texture); // TODO
 }
 
 TexturePtr ButtonNode::getNormalTexture() {

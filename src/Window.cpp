@@ -123,7 +123,7 @@ void Window::presentScene(ScenePtr pnewScene) {
 void Window::presentScene(ScenePtr pnewScene, SceneTransition transition) {
     m_nextTransition = transition;
     if (m_currentScene != nullptr) m_showNew = true, m_newScene = pnewScene;
-    else m_newScene = pnewScene;
+    else m_newScene = pnewScene, m_currentScene = pnewScene, pnewScene->setWindow(shared_from_this()); // looks shitty
 }
 
 
@@ -294,10 +294,9 @@ void Window::render() {
 void Window::quit() {
     m_running = false;
     
-    SDL_DestroyWindow(m_sdlWindow);
-    SDL_DestroyRenderer(m_renderer);
-    
-    SDL_Quit();
+    // TODO: Check
+    //SDL_DestroyWindow(m_sdlWindow);
+    //SDL_DestroyRenderer(m_renderer);
 }
 
 bool Window::isRunning() {
