@@ -75,29 +75,52 @@ void dt_plot(Vec2 p, SDL_Surface *s, Color col) {
     }
 }
 
+
+
 void DrawTexture::drawLine(Vec2 p1, Vec2 p2, Color color) {
-    if (p1.x > p2.x) {
-        auto b = p2;
-        p2 = p1;
-        p1 = b;
-    }
-    
-    SDL_UnlockSurface(m_bufferSurface);
-    float error = 0.f;
-    auto deltax = p2.x - p1.x;
-    auto deltay = p2.y - p1.y;
-    auto deltaerr = fabs(deltay / deltax);    // Assume deltax != 0 (line is not vertical),
-    auto y = p1.y;
-    for (auto x = p1.x; x < p2.x; x++) {
-        dt_plot(Vec2Make(x, y), m_bufferSurface, color);
-        error += deltaerr;
-        while (error >= 0.5) {
-            dt_plot(Vec2Make(x, y), m_bufferSurface, color);
-            y += sign(p2.y - p1.y);
-            error -= 1.0;
-        }
-    }
-    SDL_LockSurface(m_bufferSurface);
+	// Bresenham's line algorithm
+	auto x1 = p1.x;
+	auto y1 = p1.y;
+	auto x2 = p2.x;
+	auto y2 = p2.y;
+	
+	SDL_UnlockSurface(m_bufferSurface);
+	
+	const bool steep = (fabs(y2 - y1) > fabs(x2 - x1));
+	if( steep) {
+		std::swap(x1, y1);
+		std::swap(x2, y2);
+	}
+ 
+	if(x1 > x2) {
+		std::swap(x1, x2);
+		std::swap(y1, y2);
+	}
+ 
+	const float dx = x2 - x1;
+	const float dy = fabs(y2 - y1);
+ 
+	float error = dx / 2.0f;
+	const int ystep = (y1 < y2) ? 1 : -1;
+	int y = (int)y1;
+ 
+	const int maxX = (int)x2;
+ 
+	for(int x=(int)x1; x<maxX; x++) {
+		if(steep) {
+			dt_plot(Vec2Make(y, x), m_bufferSurface, color);
+		}
+		else {
+			dt_plot(Vec2Make(x, y), m_bufferSurface, color);
+		}
+ 
+		error -= dy;
+		if(error < 0) {
+			y += ystep;
+			error += dx;
+		}
+	}
+	SDL_LockSurface(m_bufferSurface);
 }
 
 void DrawTexture::fillCircle(float radius, Vec2 origin, Color color) {
