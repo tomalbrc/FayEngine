@@ -26,7 +26,7 @@ static bool FEWindowBackgrounded = false;
 static SpritePtr FEWindowOverlay;
 
 Window::~Window() {
-    m_currentScene = NULL;
+    m_currentScene.reset();
 }
 
 WindowPtr Window::create(std::string wname, Vec2 size) {

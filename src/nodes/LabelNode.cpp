@@ -55,8 +55,11 @@ Color LabelNode::getTextColor() {
 
 
 void LabelNode::renderText() {
-    if (mFont == nullptr || mText.empty()) return;
-    
+    if (mFont == nullptr || mText.empty()) {
+	 setTexture(NULL);
+	 return;
+    }
+
     SDL_Color c;
     c.r = mTextColor.r;
     c.g = mTextColor.g;

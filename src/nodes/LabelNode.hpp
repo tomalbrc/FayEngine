@@ -25,23 +25,49 @@ FE_create_Ptr(LabelNode);
  */
 class LabelNode : public Sprite {
 public:
+    /**
+     * Create an empty label node, not font or text set
+     */
     static LabelNodePtr create();
+
+	/**
+	 * Returns a new LabelNode with text, font and fontsize. Color is white by default
+	 *
+	 * @param text	Text to display
+	 * @param fontpath	Path to the font file used to display the text
+	 * @param	fontSize	Size of the text
+	 */
     static LabelNodePtr create(std::string text, std::string fontpath, int fontSize);
+
+	/**
+	 * See above.
+	 *
+	 * @param col color of the text
+	 */
     static LabelNodePtr create(std::string text, std::string fontpath, int fontSize, Color col);
+
     ~LabelNode();
-    
+
+	/**
+	 * Set new text
+	 *
+	 * @param text	New Text to display
+	 */
     void setText(std::string text);
-    std::string getText();
     
+	/**
+	 * Returns the current text of the LabelNode
+	 */
+    std::string getText();
+
     void setTextColor(Color col);
     Color getTextColor();
-    
+
     void setFontPath(std::string fp);
-    
+
     void setFontSize(int fs);
     int getFontSize();
-    
-    
+
 protected:
     bool init();
     bool init(std::string text, std::string fontpath, int fontSize, Color col);
