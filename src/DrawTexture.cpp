@@ -30,6 +30,15 @@
 
 FE_NAMESPACE_BEGIN
 
+void dt_plot(Vec2 p, SDL_Surface *s, Color col) {
+    if ((p.x < 0 || p.y < 0) || (p.x > s->w || p.y > s->h)) return;
+    unsigned char* pixels = (unsigned char*)s->pixels;
+    for (int c = 0; c < 4; c++) {
+        pixels[int(4 * (p.y * s->w + p.x) + c)] = c == 0 ? col.b : c == 1 ? col.g : c == 2 ? col.r : col.a;
+    }
+}
+
+
 DrawTexture::~DrawTexture() {
     SDL_FreeSurface(m_bufferSurface);
     SDL_DestroyTexture(mTexture);
@@ -67,12 +76,19 @@ void DrawTexture::fillRect(Rect rect, Color col) {
     SDL_FillRect(m_bufferSurface, &r, SDL_MapRGBA(m_bufferSurface->format, col.r, col.g, col.b, col.a));
 }
 
-void dt_plot(Vec2 p, SDL_Surface *s, Color col) {
-    if ((p.x < 0 || p.y < 0) || (p.x > s->w || p.y > s->h)) return;
-    unsigned char* pixels = (unsigned char*)s->pixels;
-    for (int c = 0; c < 4; c++) {
-        pixels[int(4 * (p.y * s->w + p.x) + c)] = c == 0 ? col.b : c == 1 ? col.g : c == 2 ? col.r : col.a;
-    }
+void DrawTexture::fillEllipse(Rect rect, Color col) {
+	auto origin = rect.origin + rect.size/2.0;
+	auto width = rect.size.x/2.0;
+	auto height = rect.size.y/2.0;
+
+	for(int y=-height; y<=height; y++) {
+		for(int x=-width; x<=width; x++) {
+			double dx = (double)x / (double)width;
+			double dy = (double)y / (double)height;
+			if(dx*dx+dy*dy <= 1)
+				dt_plot(Vec2Make(origin.x+x, origin.y+y), m_bufferSurface, col);
+		}
+	}
 }
 
 

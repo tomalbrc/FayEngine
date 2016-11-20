@@ -46,6 +46,14 @@ public:
     void fillRect(Rect rect, Color color);
 
     /**
+     * Fills an ellipse within a given rectangle with a color
+     *
+     * @param rect	Rectangle to use
+     * @param	col	Color to use
+     */
+    void fillEllipse(Rect rect, Color col);
+
+    /**
      * Draws a 1 pixel thick line from point 1 to point 2 using a specified color
      *
      * @param p1	Starting point to draw the line from
