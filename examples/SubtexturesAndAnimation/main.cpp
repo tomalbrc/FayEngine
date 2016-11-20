@@ -6,6 +6,8 @@
 
 #include "MyScene.hpp"
 
+using namespace FE;
+
 int main(int argc, const char * argv[]) {
     EngineHelper::getInstance()->Init();
     

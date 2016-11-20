@@ -7,13 +7,13 @@
 
 #include "FayEngine/FayEngine.h"
 
-class MyScene : public Scene {
+class MyScene : public FE::Scene {
 public:
     FE_create_FUNC(MyScene);
     bool init();
-    virtual void mouseMoved(SDL_MouseMotionEvent, Vec2 coords);
+    virtual void mouseMoved(SDL_MouseMotionEvent, FE::Vec2 coords);
     
-    SpritePtr sprite = NULL;
+    FE::SpritePtr sprite = NULL;
 };
 
 #endif /* MyScene_hpp */

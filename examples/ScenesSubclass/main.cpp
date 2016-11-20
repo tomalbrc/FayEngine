@@ -9,6 +9,8 @@
 
 #include "MyScene.hpp"
 
+using namespace FE;
+
 int main(int argc, const char * argv[]) {
     auto win = Window::create("Scene example", Vec2Make(400, 400), false);
     

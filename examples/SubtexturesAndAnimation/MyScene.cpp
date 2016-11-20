@@ -4,6 +4,8 @@
 
 #include "MyScene.hpp"
 
+using namespace FE;
+
 // little c helper func
 std::string particleString(int i) {
     std::string s = "";
@@ -16,11 +18,11 @@ bool MyScene::init() {
     return true;
 }
 
-void MyScene::setWindow(Window *window) {
+void MyScene::setWindow(WindowPtr window) {
     Scene::setWindow(window);
     
     sprite = Sprite::create("particlefx_01.png");
-    sprite->setScale(1.0);
+    sprite->setScale(Vec2Make(1.0));
     sprite->setAnchorPoint(Vec2Make(0.5,0.5));
     sprite->setPosition(getWindow()->getSize()/2.0);
     this->addChild(sprite);
@@ -33,38 +35,38 @@ void MyScene::setWindow(Window *window) {
 
 
 
-void MyScene::keyDown(SDL_KeyboardEvent event) {
-    if (event.keysym.sym == SDLK_LEFT) {
+void MyScene::keyDown(FEKeyCode key) {
+    if (key == FEKeyCodeLeft) {
         if (index > 1) --index;
         animateForImageIndex();
     }
-    if (event.keysym.sym == SDLK_RIGHT) {
+    if (key == FEKeyCodeRight) {
         if (index < 14) ++index;
         animateForImageIndex();
     }
     
-    if (event.keysym.sym == SDLK_f) {
+    if (key == FEKeyCodeF) {
         animationSpeed -= 0.1;
         animateForImageIndex();
     }
-    if (event.keysym.sym == SDLK_s) {
+    if (key == FEKeyCodeS) {
         animationSpeed += 0.1;
         animateForImageIndex();
     }
     
     
-    if (event.keysym.sym == SDLK_PLUS) {
-        sprite->setScale(sprite->getScale()+0.1);
+    if (key == FEKeyCodePlus) {
+        sprite->setScale(sprite->getScale()*1.1);
     }
-    if (event.keysym.sym == SDLK_MINUS) {
-        sprite->setScale(sprite->getScale()-0.1);
+    if (key == FEKeyCodeMinus) {
+        sprite->setScale(sprite->getScale()/1.1);
     }
     
-    if (event.keysym.sym == SDLK_SPACE) {
+/*    if (event.keysym.sym == SDLK_SPACE) {
         setPaused(!isPaused());
-    }
+    }*/
     
-    if (event.keysym.sym == SDLK_q) {
+    if (key == FEKeyCodeQ) {
         getWindow()->quit();
     }
 }
@@ -73,7 +75,7 @@ void MyScene::keyDown(SDL_KeyboardEvent event) {
 void MyScene::update() {
     Scene::update();
     
-    infoLabel->setText("Spritesheet: \"" + particleString(index) + "\"  |  Scale: "+std::to_string(sprite->getScale())+"x  |   Duration: "+std::to_string(animationSpeed)+"s");
+    infoLabel->setText("Spritesheet: \"" + particleString(index) + "\"  |  Scale: "+std::to_string(sprite->getScale().x)+"x  |   Duration: "+std::to_string(animationSpeed)+"s");
 }
 
 

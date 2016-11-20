@@ -7,6 +7,8 @@
 
 #include "FayEngine/FayEngine.h"
 
+using namespace FE;
+
 int main(int argc, const char * argv[]) {
     EngineHelper::getInstance()->setEnableVSync(true);
     
