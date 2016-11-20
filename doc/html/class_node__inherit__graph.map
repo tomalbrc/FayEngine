@@ -1,7 +1,0 @@
-<map id="Node" name="Node">
-<area shape="rect" id="node2" href="$class_scene.html" title="Scene Class. " alt="" coords="5,307,235,580"/>
-<area shape="rect" id="node3" href="$class_sprite.html" title="Sprite Class inherits from Node Class. " alt="" coords="260,287,399,600"/>
-<area shape="rect" id="node6" href="$class_tiled_map_node.html" title="Loads and Displays a tiled tmx map. " alt="" coords="423,347,602,540"/>
-<area shape="rect" id="node4" href="$class_label_node.html" title="Display a string using an TTF font. " alt="" coords="271,648,388,895"/>
-<area shape="rect" id="node5" href="$class_button_node.html" title="Clickable LabelNode NOTE: If there are textures for the states set, they wil be used instead of rende..." alt="" coords="256,943,403,1216"/>
-</map>

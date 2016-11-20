@@ -1,5 +1,0 @@
-<map id="RemoveFromParentAction" name="RemoveFromParentAction">
-<area shape="rect" id="node2" href="$class_action.html" title="Actions to alter properties of Nodes/Sprites, animated. " alt="" coords="29,313,187,547"/>
-<area shape="rect" id="node3" href="$struct_vec2.html" title="Vec2 with x and y values. " alt="" coords="5,79,56,165"/>
-<area shape="rect" id="node4" href="$class_node.html" title="Node Class. " alt="" coords="114,5,260,239"/>
-</map>

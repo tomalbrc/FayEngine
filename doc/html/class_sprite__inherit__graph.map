@@ -1,5 +1,0 @@
-<map id="Sprite" name="Sprite">
-<area shape="rect" id="node3" href="$class_label_node.html" title="Display a string using an TTF font. " alt="" coords="21,648,137,895"/>
-<area shape="rect" id="node2" href="$class_node.html" title="Node Class. " alt="" coords="6,5,152,239"/>
-<area shape="rect" id="node4" href="$class_button_node.html" title="Clickable LabelNode NOTE: If there are textures for the states set, they wil be used instead of rende..." alt="" coords="5,943,152,1216"/>
-</map>

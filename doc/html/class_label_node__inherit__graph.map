@@ -1,5 +1,0 @@
-<map id="LabelNode" name="LabelNode">
-<area shape="rect" id="node4" href="$class_button_node.html" title="Clickable LabelNode NOTE: If there are textures for the states set, they wil be used instead of rende..." alt="" coords="5,943,152,1216"/>
-<area shape="rect" id="node2" href="$class_sprite.html" title="Sprite Class inherits from Node Class. " alt="" coords="9,287,149,600"/>
-<area shape="rect" id="node3" href="$class_node.html" title="Node Class. " alt="" coords="6,5,152,239"/>
-</map>

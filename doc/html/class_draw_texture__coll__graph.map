@@ -1,4 +1,0 @@
-<map id="DrawTexture" name="DrawTexture">
-<area shape="rect" id="node2" href="$class_texture.html" title="This class allows to easily create SDL textures from image files or create new blank textures with a ..." alt="" coords="5,153,145,333"/>
-<area shape="rect" id="node3" href="$struct_vec2.html" title="Vec2 with x and y values. " alt="" coords="49,5,100,92"/>
-</map>
