@@ -29,7 +29,7 @@ void RepeatAction::update() {
     
     if (mTargetAction->finished) {
         mRepeatTimes--;
-        if (mForever) {
+        if (mForever || mRepeatTimes > 0) {
             mTargetAction->finished = false;
             mTargetAction->start();
         } else if (mRepeatTimes <= 0) {
