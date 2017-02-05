@@ -56,8 +56,8 @@ Color LabelNode::getTextColor() {
 
 void LabelNode::renderText() {
     if (mFont == nullptr || mText.empty()) {
-	 setTexture(NULL);
-	 return;
+        setTexture(NULL);
+        return;
     }
 
     SDL_Color c;
@@ -87,10 +87,13 @@ void LabelNode::setText(std::string text) {
 
 
 
-
 void LabelNode::setFontPath(std::string fp) {
     TTF_CloseFont(mFont);
-    if (fp != mFontPath) mFontPath = fp, mFont = TTF_OpenFont(fp.c_str(), mFontSize), renderText();
+    if (fp != mFontPath) {
+        mFontPath = fp;
+        mFont = TTF_OpenFont(fp.c_str(), mFontSize);
+        renderText();
+    }
 }
 
 void LabelNode::setFontSize(int fs) {

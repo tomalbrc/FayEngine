@@ -60,7 +60,7 @@ bool Node::hasActions() {
 
 const ActionPtr Node::getAction(std::string actionName) {
    if (actions[actionName] != nullptr && !actions[actionName]->finished) {
-        FELog(actions[actionName]);
+        //FELog(actions[actionName]);
         return actions[actionName];
     }
     else return nullptr;
@@ -230,10 +230,10 @@ void Node::render(SDL_Renderer *renderer) { // render into scene / Surface
 
 
 
-void Node::keyDown(FEKeyCode key) {
+void Node::keyDown(KeyCode key) {
     for (auto&& c : children) if (c != nullptr) c->keyDown(key);
 }
-void Node::keyUp(FEKeyCode key) {
+void Node::keyUp(KeyCode key) {
     for (auto&& c : children) if (c != nullptr) c->keyUp(key);
 }
 void Node::mouseClickBegan(SDL_MouseButtonEvent event, Vec2 coords) {

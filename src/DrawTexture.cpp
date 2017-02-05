@@ -31,7 +31,7 @@
 FE_NAMESPACE_BEGIN
 
 void dt_plot(Vec2 p, SDL_Surface *s, Color col) {
-    if ((p.x < 0 || p.y < 0) || (p.x > s->w || p.y > s->h)) return;
+    if (p.x < 0 || p.y < 0 || p.x > s->w || p.y > s->h) return;
     unsigned char* pixels = (unsigned char*)s->pixels;
     for (int c = 0; c < 4; c++) {
         pixels[int(4 * (p.y * s->w + p.x) + c)] = c == 0 ? col.b : c == 1 ? col.g : c == 2 ? col.r : col.a;

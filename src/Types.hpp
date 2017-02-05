@@ -182,14 +182,15 @@ extern Vec2 Vec2Null();
 /**
  * Some Vec2 operator to make your (and my) life easier
  */
-extern bool operator==(Vec2 lhs, const Vec2& rhs);
-extern Vec2 operator+(Vec2 lhs, const Vec2 rhs);
-extern Vec2 operator-(Vec2 lhs, const Vec2 rhs);
-extern Vec2 operator-(const Vec2 rhs);
-extern Vec2 operator/(Vec2 lhs, const Vec2 rhs);
-extern Vec2 operator/(Vec2 lhs, const double rhs);
-extern Vec2 operator*(Vec2 lhs, const Vec2 rhs);
-extern Vec2 operator*(Vec2 lhs, const float rhs);
+extern bool operator==(const Vec2& lhs, const Vec2& rhs);
+extern bool operator!=(const Vec2& lhs, const Vec2& rhs);
+extern Vec2 operator+(const Vec2& lhs, const Vec2& rhs);
+extern Vec2 operator-(const Vec2& lhs, const Vec2& rhs);
+extern Vec2 operator-(const Vec2& rhs);
+extern Vec2 operator/(const Vec2& lhs, const Vec2& rhs);
+extern Vec2 operator/(const Vec2& lhs, const double& rhs);
+extern Vec2 operator*(const Vec2& lhs, const Vec2& rhs);
+extern Vec2 operator*(const Vec2& lhs, const float& rhs);
 
 
 
@@ -219,6 +220,15 @@ extern Vec3 Vec3Make(float xyz);
  */
 extern Vec3 Vec3Null();
 
+extern bool operator==(const Vec3& lhs, const Vec3& rhs);
+extern bool operator!=(const Vec3& lhs, const Vec3& rhs);
+extern Vec3 operator+(const Vec3& lhs, const Vec3& rhs);
+extern Vec3 operator-(const Vec3& lhs, const Vec3& rhs);
+extern Vec3 operator-(const Vec3& rhs);
+extern Vec3 operator/(const Vec3& lhs, const Vec3& rhs);
+extern Vec3 operator/(const Vec3& lhs, const double& rhs);
+extern Vec3 operator*(const Vec3& lhs, const Vec3& rhs);
+extern Vec3 operator*(const Vec3& lhs, const float& rhs);
 
 
 
@@ -241,10 +251,26 @@ extern Rect RectMake(float x, float y, float w, float h);
  * Returns a new Rect with specified x,y,w,h
  */
 extern Rect RectMake(Vec2 origin, Vec2 size);
+
+/**
+ * Returns a new Rect with values set to 0.f
+ */
 extern Rect RectNull();
 
+/**
+ * Rect - Vec2 intersection check
+ */
 extern bool RectIntersectsVec2(Rect r, Vec2 v);
+
+/**
+ * Rect - rect intersection check
+ */
 extern bool RectIntersectsRect(Rect rectA, Rect rectB);
+
+/**
+ * Resulting Rect of rect - rect intersection
+ */
+extern Rect RectIntersection(Rect a, Rect b);
 
 extern Rect RectInset(Rect r, float inset);
 extern Rect RectOffset(Rect r, Vec2 offset);
@@ -260,7 +286,9 @@ extern Rect RectGetMidY(Rect r);
 extern Rect RectGetMaxY(Rect r);
 */
 
-extern Rect operator*(Rect lhs, const float rhs);
+extern Rect operator*(const Rect& lhs, const float& rhs);
+extern bool operator==(const Rect& lhs, const Rect& rhs);
+extern bool operator!=(const Rect& lhs, const Rect& rhs);
 
 
 
@@ -305,107 +333,107 @@ extern Rect RectApplyAffineTransform(Rect rect, AffineTransform transform);
  * Keycodes for input handling
  */
 typedef enum {
-    FEKeyCodeUnknown = SDLK_UNKNOWN,
-    FEKeyCodeReturn = SDLK_RETURN,
-    FEKeyCodeEscape = SDLK_ESCAPE,
-    FEKeyCodeBackspace = SDLK_BACKSPACE,
-    FEKeyCodeTab = SDLK_TAB,
-    FEKeyCodeSpace = SDLK_SPACE,
-    FEKeyCodeExclaim = SDLK_EXCLAIM,
-    FEKeyCodeQuotedBL = SDLK_QUOTEDBL,
-    FEKeyCodeHash = SDLK_HASH,
-    FEKeyCodePercent = SDLK_PERCENT,
-    FEKeyCodeDollar = SDLK_DOLLAR,
-    FEKeyCodeAmpersand = SDLK_AMPERSAND,
-    FEKeyCodeQuote = SDLK_QUOTE,
-    FEKeyCodeLeftParenthesis = SDLK_LEFTPAREN,
-    FEKeyCodeParenthesis = SDLK_RIGHTPAREN,
-    FEKeyCodeAsterisk = SDLK_ASTERISK,
-    FEKeyCodePlus = SDLK_PLUS,
-    FEKeyCodeComma = SDLK_COMMA,
-    FEKeyCodeMinus = SDLK_MINUS,
-    FEKeyCodePeriod = SDLK_PERIOD,
-    FEKeyCodeSlash = SDLK_SLASH,
-    FEKeyCode0 = SDLK_0,
-    FEKeyCode1 = SDLK_1,
-    FEKeyCode2 = SDLK_2,
-    FEKeyCode3 = SDLK_3,
-    FEKeyCode4 = SDLK_4,
-    FEKeyCode5 = SDLK_5,
-    FEKeyCode6 = SDLK_6,
-    FEKeyCode7 = SDLK_7,
-    FEKeyCode8 = SDLK_8,
-    FEKeyCode9 = SDLK_9,
-    FEKeyCodeColon = SDLK_COLON,
-    FEKeyCodeSemicolon = SDLK_SEMICOLON,
-    FEKeyCodeLess = SDLK_LESS,
-    FEKeyCodeEquals = SDLK_EQUALS,
-    FEKeyCodeGreater = SDLK_GREATER,
-    FEKeyCodeQuestion = SDLK_QUESTION,
-    FEKeyCodeAt = SDLK_AT,
+    KeyCodeUnknown = SDLK_UNKNOWN,
+    KeyCodeReturn = SDLK_RETURN,
+    KeyCodeEscape = SDLK_ESCAPE,
+    KeyCodeBackspace = SDLK_BACKSPACE,
+    KeyCodeTab = SDLK_TAB,
+    KeyCodeSpace = SDLK_SPACE,
+    KeyCodeExclaim = SDLK_EXCLAIM,
+    KeyCodeQuotedBL = SDLK_QUOTEDBL,
+    KeyCodeHash = SDLK_HASH,
+    KeyCodePercent = SDLK_PERCENT,
+    KeyCodeDollar = SDLK_DOLLAR,
+    KeyCodeAmpersand = SDLK_AMPERSAND,
+    KeyCodeQuote = SDLK_QUOTE,
+    KeyCodeLeftParenthesis = SDLK_LEFTPAREN,
+    KeyCodeParenthesis = SDLK_RIGHTPAREN,
+    KeyCodeAsterisk = SDLK_ASTERISK,
+    KeyCodePlus = SDLK_PLUS,
+    KeyCodeComma = SDLK_COMMA,
+    KeyCodeMinus = SDLK_MINUS,
+    KeyCodePeriod = SDLK_PERIOD,
+    KeyCodeSlash = SDLK_SLASH,
+    KeyCode0 = SDLK_0,
+    KeyCode1 = SDLK_1,
+    KeyCode2 = SDLK_2,
+    KeyCode3 = SDLK_3,
+    KeyCode4 = SDLK_4,
+    KeyCode5 = SDLK_5,
+    KeyCode6 = SDLK_6,
+    KeyCode7 = SDLK_7,
+    KeyCode8 = SDLK_8,
+    KeyCode9 = SDLK_9,
+    KeyCodeColon = SDLK_COLON,
+    KeyCodeSemicolon = SDLK_SEMICOLON,
+    KeyCodeLess = SDLK_LESS,
+    KeyCodeEquals = SDLK_EQUALS,
+    KeyCodeGreater = SDLK_GREATER,
+    KeyCodeQuestion = SDLK_QUESTION,
+    KeyCodeAt = SDLK_AT,
     
-    FEKeyCodeLeftBracket = SDLK_LEFTBRACKET,
-    FEKeyCodeBackslash = SDLK_BACKSLASH ,
-    FEKeyCodeRightBracket = SDLK_RIGHTBRACKET,
-    FEKeyCodeCaret = SDLK_CARET,
-    FEKeyCodeUnderscore = SDLK_UNDERSCORE,
-    FEKeyCodeBackquote = SDLK_BACKQUOTE,
-    FEKeyCodeA = SDLK_a,
-    FEKeyCodeB = SDLK_b,
-    FEKeyCodeC = SDLK_c,
-    FEKeyCodeD = SDLK_d,
-    FEKeyCodeE = SDLK_e,
-    FEKeyCodeF = SDLK_f,
-    FEKeyCodeG = SDLK_g,
-    FEKeyCodeH = SDLK_h,
-    FEKeyCodeI = SDLK_i,
-    FEKeyCodeJ = SDLK_j,
-    FEKeyCodeK = SDLK_k,
-    FEKeyCodeL = SDLK_l,
-    FEKeyCodeM = SDLK_m,
-    FEKeyCodeN = SDLK_n,
-    FEKeyCodeO = SDLK_o,
-    FEKeyCodeP = SDLK_p,
-    FEKeyCodeQ = SDLK_q,
-    FEKeyCodeR = SDLK_r,
-    FEKeyCodeS = SDLK_s,
-    FEKeyCodeT = SDLK_t,
-    FEKeyCodeU = SDLK_u,
-    FEKeyCodeV = SDLK_v,
-    FEKeyCodeW = SDLK_w,
-    FEKeyCodeX = SDLK_x,
-    FEKeyCodeY = SDLK_y,
-    FEKeyCodeZ = SDLK_z,
+    KeyCodeLeftBracket = SDLK_LEFTBRACKET,
+    KeyCodeBackslash = SDLK_BACKSLASH ,
+    KeyCodeRightBracket = SDLK_RIGHTBRACKET,
+    KeyCodeCaret = SDLK_CARET,
+    KeyCodeUnderscore = SDLK_UNDERSCORE,
+    KeyCodeBackquote = SDLK_BACKQUOTE,
+    KeyCodeA = SDLK_a,
+    KeyCodeB = SDLK_b,
+    KeyCodeC = SDLK_c,
+    KeyCodeD = SDLK_d,
+    KeyCodeE = SDLK_e,
+    KeyCodeF = SDLK_f,
+    KeyCodeG = SDLK_g,
+    KeyCodeH = SDLK_h,
+    KeyCodeI = SDLK_i,
+    KeyCodeJ = SDLK_j,
+    KeyCodeK = SDLK_k,
+    KeyCodeL = SDLK_l,
+    KeyCodeM = SDLK_m,
+    KeyCodeN = SDLK_n,
+    KeyCodeO = SDLK_o,
+    KeyCodeP = SDLK_p,
+    KeyCodeQ = SDLK_q,
+    KeyCodeR = SDLK_r,
+    KeyCodeS = SDLK_s,
+    KeyCodeT = SDLK_t,
+    KeyCodeU = SDLK_u,
+    KeyCodeV = SDLK_v,
+    KeyCodeW = SDLK_w,
+    KeyCodeX = SDLK_x,
+    KeyCodeY = SDLK_y,
+    KeyCodeZ = SDLK_z,
     
-    FEKeyCodeCapslock = SDLK_CAPSLOCK,
+    KeyCodeCapslock = SDLK_CAPSLOCK,
     
-    FEKeyCodeF1 = SDLK_F1,
-    FEKeyCodeF2 = SDLK_F2,
-    FEKeyCodeF3 = SDLK_F3,
-    FEKeyCodeF4 = SDLK_F4,
-    FEKeyCodeF5 = SDLK_F5,
-    FEKeyCodeF6 = SDLK_F6,
-    FEKeyCodeF7 = SDLK_F7,
-    FEKeyCodeF8 = SDLK_F8,
-    FEKeyCodeF9 = SDLK_F9,
-    FEKeyCodeF10 = SDLK_F10,
-    FEKeyCodeF11 = SDLK_F11,
-    FEKeyCodeF12 = SDLK_F12,
+    KeyCodeF1 = SDLK_F1,
+    KeyCodeF2 = SDLK_F2,
+    KeyCodeF3 = SDLK_F3,
+    KeyCodeF4 = SDLK_F4,
+    KeyCodeF5 = SDLK_F5,
+    KeyCodeF6 = SDLK_F6,
+    KeyCodeF7 = SDLK_F7,
+    KeyCodeF8 = SDLK_F8,
+    KeyCodeF9 = SDLK_F9,
+    KeyCodeF10 = SDLK_F10,
+    KeyCodeF11 = SDLK_F11,
+    KeyCodeF12 = SDLK_F12,
     
-    FEKeyCodePrintscreen = SDLK_PRINTSCREEN,
-    FEKeyCodeScrolllock = SDLK_SCROLLLOCK,
-    FEKeyCodePause = SDLK_PAUSE,
-    FEKeyCodeInsert = SDLK_INSERT,
-    FEKeyCodeHome = SDLK_HOME,
-    FEKeyCodePageUp = SDLK_PAGEUP,
-    FEKeyCodeDelete = SDLK_DELETE,
-    FEKeyCodeEnd = SDLK_END,
-    FEKeyCodePageDown = SDLK_PAGEDOWN,
-    FEKeyCodeRight = SDLK_RIGHT,
-    FEKeyCodeLeft = SDLK_LEFT,
-    FEKeyCodeDown = SDLK_DOWN,
-    FEKeyCodeUp = SDLK_UP,
-} FEKeyCode;
+    KeyCodePrintscreen = SDLK_PRINTSCREEN,
+    KeyCodeScrolllock = SDLK_SCROLLLOCK,
+    KeyCodePause = SDLK_PAUSE,
+    KeyCodeInsert = SDLK_INSERT,
+    KeyCodeHome = SDLK_HOME,
+    KeyCodePageUp = SDLK_PAGEUP,
+    KeyCodeDelete = SDLK_DELETE,
+    KeyCodeEnd = SDLK_END,
+    KeyCodePageDown = SDLK_PAGEDOWN,
+    KeyCodeRight = SDLK_RIGHT,
+    KeyCodeLeft = SDLK_LEFT,
+    KeyCodeDown = SDLK_DOWN,
+    KeyCodeUp = SDLK_UP,
+} KeyCode;
 
 
 FE_NAMESPACE_END

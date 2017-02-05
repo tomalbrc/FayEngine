@@ -146,16 +146,21 @@ Vec2 Vec2Null() {
     p.y = 0.f;
     return p;
 }
-bool operator==(Vec2 lhs, const Vec2& rhs) { return (lhs.x == rhs.x && lhs.y == rhs.y); }
-Vec2 operator+(Vec2 lhs, const Vec2 rhs) { return Vec2Make(lhs.x + rhs.x, lhs.y + rhs.y); }
-Vec2 operator-(Vec2 lhs, const Vec2 rhs) { return Vec2Make(lhs.x - rhs.x, lhs.y - rhs.y); }
-Vec2 operator-(const Vec2 rhs) { return Vec2Make(-rhs.x, -rhs.y); }
-Vec2 operator/(Vec2 lhs, const Vec2 rhs) { return Vec2Make(lhs.x / rhs.x, lhs.y / rhs.y); }
-Vec2 operator/(Vec2 lhs, const double rhs) { return Vec2Make(lhs.x / rhs, lhs.y / rhs); }
-Vec2 operator*(Vec2 lhs, const Vec2 rhs) { return Vec2Make(lhs.x * rhs.x, lhs.y * rhs.y); }
-Vec2 operator*(Vec2 lhs, const float rhs) { return Vec2Make((lhs.x * rhs), (lhs.y * rhs)); }
+bool operator==(const Vec2& lhs, const Vec2& rhs) { return (lhs.x == rhs.x && lhs.y == rhs.y); }
+bool operator!=(const Vec2& lhs, const Vec2& rhs) { return !(lhs == rhs); }
+Vec2 operator+(const Vec2& lhs, const Vec2& rhs) { return Vec2Make(lhs.x + rhs.x, lhs.y + rhs.y); }
+Vec2 operator-(const Vec2& lhs, const Vec2& rhs) { return Vec2Make(lhs.x - rhs.x, lhs.y - rhs.y); }
+Vec2 operator-(const Vec2& rhs) { return Vec2Make(-rhs.x, -rhs.y); }
+Vec2 operator/(const Vec2& lhs, const Vec2& rhs) { return Vec2Make(lhs.x / rhs.x, lhs.y / rhs.y); }
+Vec2 operator/(const Vec2& lhs, const double& rhs) { return Vec2Make(lhs.x / rhs, lhs.y / rhs); }
+Vec2 operator*(const Vec2& lhs, const Vec2& rhs) { return Vec2Make(lhs.x * rhs.x, lhs.y * rhs.y); }
+Vec2 operator*(const Vec2& lhs, const float& rhs) { return Vec2Make((lhs.x * rhs), (lhs.y * rhs)); }
 
 
+
+/**
+ * Vec3
+ */
 
 Vec3 Vec3Make(float x, float y, float z) {
     Vec3 p;
@@ -179,6 +184,22 @@ Vec3 Vec3Null() {
     return p;
 }
 
+bool operator==(const Vec3& lhs, const Vec3& rhs) { return (lhs.x == rhs.x && lhs.y == rhs.y); }
+bool operator!=(const Vec3& lhs, const Vec3& rhs) { return !(rhs == lhs); }
+Vec3 operator+(const Vec3& lhs, const Vec3& rhs) { return Vec3Make(lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z); }
+Vec3 operator-(const Vec3& lhs, const Vec3& rhs) { return Vec3Make(lhs.x - rhs.x, lhs.y - rhs.y, lhs.z - rhs.z); }
+Vec3 operator-(const Vec3& rhs) { return Vec3Make(-rhs.x, -rhs.y, -rhs.z); }
+Vec3 operator/(const Vec3& lhs, const Vec3& rhs) { return Vec3Make(lhs.x / rhs.x, lhs.y / rhs.y, lhs.z / rhs.z); }
+Vec3 operator/(const Vec3& lhs, const double& rhs) { return Vec3Make(lhs.x / rhs, lhs.y / rhs, lhs.z / rhs); }
+Vec3 operator*(const Vec3& lhs, const Vec3& rhs) { return Vec3Make(lhs.x * rhs.x, lhs.y * rhs.y, lhs.z * rhs.z); }
+Vec3 operator*(const Vec3& lhs, const float& rhs) { return Vec3Make((lhs.x * rhs), (lhs.y * rhs), (lhs.z * rhs)); }
+
+
+
+
+/**
+ * Rect
+ */
 
 Rect RectMake(Vec2 origin, Vec2 size) {
     return RectMake(origin.x, origin.y, size.x, size.y);
@@ -191,8 +212,13 @@ Rect RectMake(float x, float y, float w, float h) {
     p.size.y = h;
     return p;
 }
-bool RectIsNull(Rect p) {
-    return (bool)(p.origin.x == 0 && p.origin.y == 0 && p.size.x == 0 && p.size.y == 0);
+Rect RectNull() {
+    Rect p;
+    p.origin.x = 0.f;
+    p.origin.y = 0.f;
+    p.size.x = 0.f;
+    p.size.y = 0.f;
+    return p;
 }
 bool RectIntersectsVec2(Rect r, Vec2 v) {
     auto pointX = v.x;
@@ -208,6 +234,19 @@ bool RectIntersectsRect(Rect rectA, Rect rectB) {
              rectA.origin.y < rectB.origin.y + rectB.size.y && rectA.origin.y + rectA.size.y > rectB.origin.y) ;
 }
 
+
+Rect RectIntersection(Rect a, Rect b) { // DOESNT WORK
+    Rect intersection;
+    intersection = RectMake(std::max(a.origin.x,b.origin.x), std::max(a.origin.y,b.origin.y),0,0);
+    intersection.origin.x = std::min(a.origin.x+a.size.x, b.origin.x+b.size.x) - intersection.origin.x;
+    intersection.origin.y = std::min(a.origin.y+a.size.y, b.origin.y+b.size.y) - intersection.origin.y;
+    if (intersection.size == Vec2Null())
+        return RectNull();
+    else
+        return intersection;
+}
+
+
 Rect RectInset(Rect r, float inset) {
     return RectMake(r.origin.x+inset/2.0, r.origin.y+inset/2.0, r.size.x-inset, r.size.y-inset);
 }
@@ -217,8 +256,8 @@ Rect RectOffset(Rect r, Vec2 offset) {
 }
 
 
-
-Rect operator*(Rect lhs, const float rhs) { return RectMake((lhs.origin.x * rhs), (lhs.origin.y * rhs), (lhs.size.x * rhs), (lhs.size.y * rhs)); }
-
+Rect operator*(const Rect& lhs, const float& rhs) { return RectMake((lhs.origin.x * rhs), (lhs.origin.y * rhs), (lhs.size.x * rhs), (lhs.size.y * rhs)); }
+bool operator==(const Rect& lhs, const Rect& rhs) { return (lhs.origin == rhs.origin && lhs.size == rhs.size); }
+bool operator!=(const Rect& lhs, const Rect& rhs) { return !(lhs == rhs); }
 
 FE_NAMESPACE_END

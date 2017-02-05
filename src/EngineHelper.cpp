@@ -30,7 +30,6 @@ EngineHelper::~EngineHelper() {
     
     TTF_Quit();
     IMG_Quit();
-    Mix_Quit();
     SDL_Quit();
 }
 
@@ -73,16 +72,6 @@ void EngineHelper::Init() {
     
     if (IMG_Init(IMG_INIT_PNG | IMG_INIT_JPG) == -1) {
         printf("IMG_Init Error: %s\n", IMG_GetError());
-        exit(2);
-    }
-    
-    if (SDLNet_Init() == -1) {
-        printf("SDLNet_Init Error: %s\n", SDLNet_GetError());
-        exit(2);
-    }
-    
-    if (Mix_Init(MIX_INIT_MP3 | MIX_INIT_OGG) == -1) {
-        printf("Mix_Init Error: %s\n", Mix_GetError());
         exit(2);
     }
     

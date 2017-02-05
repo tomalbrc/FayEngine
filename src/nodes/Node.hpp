@@ -244,14 +244,14 @@ public:
      *
      * @param key   the key that will be pressed
      */
-    virtual void keyDown(FEKeyCode key);
+    virtual void keyDown(KeyCode key);
     
     /**
      * Keyboard key up
      *
      * @param key   the key that will be pressed
      */
-    virtual void keyUp(FEKeyCode key);
+    virtual void keyUp(KeyCode key);
     
     /**
      * Mouse pointer moved

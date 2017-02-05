@@ -170,7 +170,7 @@ void Window::startLoop() {
         */
         
         
-        if (m_currentScene == nullptr) {
+        if (m_currentScene == nullptr && m_newScene != nullptr) {
             m_currentScene = NULL;
             m_showNew = false;
             
@@ -223,10 +223,10 @@ void Window::handleEvents() {
                 FELog("Event SDL_QUIT... Bye!");
                 break;
             case SDL_KEYDOWN:
-                if (m_currentScene != nullptr) m_currentScene->keyDown(FEKeyCode(event.key.keysym.sym));
+                if (m_currentScene != nullptr) m_currentScene->keyDown(KeyCode(event.key.keysym.sym));
                 break;
             case SDL_KEYUP:
-                if (m_currentScene != nullptr) m_currentScene->keyUp(FEKeyCode(event.key.keysym.sym));
+                if (m_currentScene != nullptr) m_currentScene->keyUp(KeyCode(event.key.keysym.sym));
                 break;
             case SDL_MOUSEBUTTONDOWN:
                 if (m_currentScene != nullptr) m_currentScene->mouseClickBegan(event.button, getMouseCoords());
