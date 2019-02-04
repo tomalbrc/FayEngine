@@ -9,6 +9,7 @@
 
 #include "MyScene.hpp"
 
+
 using namespace FE;
 
 int main(int argc, const char * argv[]) {
@@ -16,6 +17,8 @@ int main(int argc, const char * argv[]) {
     
     auto scene = MyScene::create();
     scene->setBackgroundColor(ColorBlackColor());
+    
+    atan
     
     win->presentScene(scene);
     win->startLoop();
