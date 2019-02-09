@@ -1,9 +1,9 @@
 //
 //  EasingFunctions.hpp
-//  FayEngine
+//  rawket
 //
 //  Created by Tom Albrecht on 03.05.16.
-//  Copyright © 2016 Tom Albrecht. All rights reserved.
+//  
 //
 
 #ifndef EasingFunctions_hpp

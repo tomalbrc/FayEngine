@@ -1,9 +1,9 @@
 //
 //  ThreadManager.hpp
-//  FayEngine
+//  rawket
 //
 //  Created by Tom Albrecht on 12.04.16.
-//  Copyright © 2016 Tom Albrecht. All rights reserved.
+//  
 //
 
 #ifndef ThreadManager_hpp

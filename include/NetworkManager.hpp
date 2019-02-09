@@ -1,9 +1,9 @@
 //
 //  NetworkManager.hpp
-//  FayEngine
+//  rawket
 //
 //  Created by Tom Albrecht on 10.03.16.
-//  Copyright © 2016 Tom Albrecht. All rights reserved.
+//  
 //
 
 #ifndef NetworkManager_hpp

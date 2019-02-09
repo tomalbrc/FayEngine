@@ -1,7 +1,6 @@
 //
 // Sprite.hpp
 // Tom Albrecht, 06.12.15 - 01:13
-// (Copyright)
 //
 
 #ifndef SPRITE

@@ -1,8 +1,8 @@
 #include "catch.hpp"
-#include "FayEngine/FayEngine.h"
+#include "rawket/rawket.h"
 
 TEST_CASE( "Sprite positioning", "[sprite/affine_transform]" ) {
-	using namespace FE;
+	using namespace fe;
 
 	SpritePtr spr = Sprite::create();
 

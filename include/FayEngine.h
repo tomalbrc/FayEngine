@@ -1,10 +1,10 @@
 //
-// FayEngine
+// rawket
 //
 
 
-#ifndef FayEngine_h
-#define FayEngine_h
+#ifndef rawket_h
+#define rawket_h
 
 
 #include "SDL.h"
@@ -54,4 +54,4 @@
 
 #include "NetworkManager.hpp"
 
-#endif /* FayEngine_h */
+#endif /* rawket_h */

@@ -1,9 +1,9 @@
 //
 //  Types.cpp
-//  FayEngine
+//  rawket
 //
 //  Created by Tom Albrecht on 09.01.16.
-//  Copyright © 2016 Tom Albrecht. All rights reserved.
+//  
 //
 
 #include "Types.hpp"

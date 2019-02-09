@@ -1,9 +1,9 @@
 //
 //  AudioEngine.hpp
-//  FayEngine
+//  rawket
 //
 //  Created by Tom Albrecht on 16.01.16.
-//  Copyright © 2016 Tom Albrecht. All rights reserved.
+//  
 //
 
 #ifndef AudioEngine_hpp

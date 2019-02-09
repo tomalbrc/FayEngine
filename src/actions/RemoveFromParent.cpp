@@ -1,9 +1,9 @@
 //
 //  RemoveFromParent.cpp
-//  FayEngine
+//  rawket
 //
 //  Created by Tom Albrecht on 10.12.15.
-//  Copyright © 2015 Tom Albrecht. All rights reserved.
+//  
 //
 
 #include "RemoveFromParent.hpp"

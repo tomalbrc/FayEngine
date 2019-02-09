@@ -1,8 +1,8 @@
 #include "catch.hpp"
-#include "FayEngine/FayEngine.h"
+#include "rawket/rawket.h"
 
 TEST_CASE( "Matrix calculations", "[matrix]" ) {
-	using namespace FE;
+	using namespace fe;
 	
 	auto m = AffineTransformIdentity();
 

@@ -1,9 +1,9 @@
 //
 //  JumpByAction.hpp
-//  FayEngine
+//  rawket
 //
 //  Created by Tom Albrecht on 18.05.16.
-//  Copyright © 2016 Tom Albrecht. All rights reserved.
+//  
 //
 
 #ifndef JumpByAction_hpp

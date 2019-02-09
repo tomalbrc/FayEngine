@@ -2,22 +2,22 @@ cmake_minimum_required(VERSION 3.11)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake)
 set(CMAKE_CXX_STANDARD 11)
 
-project(FayEngineProj VERSION 0.9 DESCRIPTION "Game Engine lib")
+project(rawketProj VERSION 0.9 DESCRIPTION "Game Engine lib")
 
 # just glob the include files...
 file(GLOB FE_HEADER ${CMAKE_SOURCE_DIR}/include/*.h*)
 file(GLOB FE_SOURCES ${CMAKE_SOURCE_DIR}/src/*.cpp ${CMAKE_SOURCE_DIR}/src/*/*.cpp)
 
-add_library(FayEngine STATIC
+add_library(rawket STATIC
     ${FE_SOURCES}
     ${FE_HEADER}
 )
 
-set_target_properties(FayEngine PROPERTIES
+set_target_properties(rawket PROPERTIES
 	VERSION ${PROJECT_VERSION}
 )
 
-target_include_directories(FayEngine PUBLIC
+target_include_directories(rawket PUBLIC
 	$<INSTALL_INTERFACE:include>
 	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
 )
@@ -57,7 +57,7 @@ target_include_directories(testlib PRIVATE
 	${CMAKE_INSTALL_PREFIX}/include
 )
 
-target_link_libraries(testlib FayEngine
+target_link_libraries(testlib rawket
 	SDL2
 	SDL2_image
 	SDL2_net
@@ -65,15 +65,15 @@ target_link_libraries(testlib FayEngine
 	SDL2_mixer
 )
 
-add_test(FayEngine testlib)
+add_test(rawket testlib)
 
 install(
     DIRECTORY ${CMAKE_SOURCE_DIR}/include/
-    DESTINATION include/FayEngine
+    DESTINATION include/rawket
     FILES_MATCHING PATTERN "*.h*"
 )
 
-install(TARGETS FayEngine
+install(TARGETS rawket
 	LIBRARY DESTINATION lib
 	ARCHIVE DESTINATION lib
 )

@@ -1,9 +1,9 @@
 //
 //  Window.cpp
-//  FayEngine
+//  rawket
 //
 //  Created by Tom Albrecht on 12.12.15.
-//  Copyright © 2015 Tom Albrecht. All rights reserved.
+//
 //
 
 #include "Window.hpp"
@@ -79,7 +79,7 @@ int EventFilter(void* userData, SDL_Event *event) {
     return 1;
 }
 bool Window::init(std::string wname, Vec2 size, bool fullscreen, bool hidpi) {
-    FE::EngineHelper::getInstance()->Init();
+    rkt::EngineHelper::getInstance()->Init();
     
     Uint32 flags = hidpi ? SDL_WINDOW_ALLOW_HIGHDPI : 0;
     flags |= SDL_WINDOW_SHOWN;

@@ -1,9 +1,9 @@
 //
 //  DrawTexture.cpp
-//  FayEngine
+//  rawket
 //
 //  Created by Tom Albrecht on 06.03.16.
-//  Copyright © 2016 Tom Albrecht. All rights reserved.
+//  
 //
 
 #include "DrawTexture.hpp"

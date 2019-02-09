@@ -1,9 +1,9 @@
 //
 //  AffineTransform.h
-//  FayEngine
+//  rawket
 //
 //  Created by Tom Albrecht on 09.01.16.
-//  Copyright © 2016 Tom Albrecht. All rights reserved.
+//  
 //
 
 #ifndef Types_hpp
@@ -20,14 +20,21 @@
  * Explode a string. Why isn't this in std?
  */
 inline const std::vector<std::string> explode(const std::string& s, const char& c) {
-    std::string buff{""};
+    std::string buff;
     std::vector<std::string> v;
     
-    for(auto n:s) {
-        if(n != c) buff+=n; else
-            if(n == c && buff != "") { v.push_back(buff); buff = ""; }
+    for (auto& n : s) {
+        if (n != c)
+        {
+            buff += n;
+        }
+        else if (n == c && buff != "")
+        {
+            v.emplace_back(std::move(buff));
+            buff.clear();
+        }
     }
-    if(buff != "") v.push_back(buff);
+    if (!buff.empty()) v.push_back(buff);
     
     return v;
 }
@@ -41,7 +48,7 @@ inline const std::vector<std::string> explode(const std::string& s, const char& 
 /**
  * Namespace macro, to fix Xcode's annoying auto indentation
  */
-#define FE_NAMESPACE_BEGIN namespace FE {
+#define FE_NAMESPACE_BEGIN namespace rkt {
 #define FE_NAMESPACE_END }
 
 /**
@@ -60,7 +67,7 @@ inline const std::vector<std::string> explode(const std::string& s, const char& 
 /**
  * Logging
  */
-#define FELog(x)  std::cout << "[FayEngine] " << x << std::endl // Log macro
+#define FELog(x)  std::cout << "[rawket] " << x << std::endl // Log macro
 
 /**
  * Some deg to rad calculation and vice versa

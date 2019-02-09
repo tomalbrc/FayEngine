@@ -1,9 +1,9 @@
 //
 //  Window.hpp
-//  FayEngine
+//  rawket
 //
 //  Created by Tom Albrecht on 12.12.15.
-//  Copyright © 2015 Tom Albrecht. All rights reserved.
+//  
 //
 
 #ifndef Window_hpp

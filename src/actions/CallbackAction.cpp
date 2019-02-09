@@ -1,9 +1,9 @@
 //
 //  CallbackAction.cpp
-//  FayEngine
+//  rawket
 //
 //  Created by Tom Albrecht on 24.12.15.
-//  Copyright © 2015 Tom Albrecht. All rights reserved.
+//  
 //
 
 #include "CallbackAction.hpp"

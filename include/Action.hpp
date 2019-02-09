@@ -1,9 +1,9 @@
 //
 //  Action.hpp
-//  FayEngine
+//  rawket
 //
 //  Created by Tom Albrecht on 09.12.15.
-//  Copyright © 2015 Tom Albrecht. All rights reserved.
+//  
 //
 
 #ifndef Action_hpp
@@ -59,12 +59,12 @@ public:
      * Set an desired animation function for the action.
      * See EasingFunctions.h for Functions
      */
-    void setEasingFunction(FE::EasingFunction curve);
+    void setEasingFunction(rkt::EasingFunction curve);
 
     /**
      * Returns the current set animation function for the Action
      */
-    FE::EasingFunction getEasingFunction();
+    rkt::EasingFunction getEasingFunction();
     
 protected:
     bool init();
@@ -76,7 +76,7 @@ protected:
     Vec2 startVec2Value;
     Vec2 changeInVec2Value;
     
-    FE::EasingFunction m_animationCurve = FE::EasingFunctionLinear; // Default value
+    rkt::EasingFunction m_animationCurve = rkt::EasingFunctionLinear; // Default value
     
     double currentDoubleValue();
     Vec2 currentVec2Value();

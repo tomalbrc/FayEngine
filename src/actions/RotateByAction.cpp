@@ -1,9 +1,9 @@
 //
 //  RotateByAction.cpp
-//  FayEngine
+//  rawket
 //
 //  Created by Tom Albrecht on 19.02.16.
-//  Copyright © 2016 Tom Albrecht. All rights reserved.
+//  
 //
 
 #include "RotateByAction.hpp"

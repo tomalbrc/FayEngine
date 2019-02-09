@@ -1,9 +1,9 @@
 //
 //  EasingFunctions.hpp
-//  FayEngine
+//  rawket
 //
 //  Created by Tom Albrecht on 03.05.16.
-//  Copyright © 2016 Tom Albrecht. All rights reserved.
+//  
 //
 
 #ifndef EasingFunctions_hpp
@@ -11,7 +11,7 @@
 
 #include <stdio.h>
 
-namespace FE {
+namespace fe {
 
 enum EasingFunction {
     EasingFunctionLinear,
@@ -165,5 +165,5 @@ inline float animationSineEaseInOut(float t,float b , float c, float d) {
 }
 
 
-} // namespace FE
+} // namespace fe
 #endif /* EasingFunctions_hpp */

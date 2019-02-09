@@ -1,7 +1,6 @@
 //
 // Sprite.hpp
 // Tom Albrecht, 06.12.15 - 01:13
-// (Copyright)
 //
 
 #ifndef _TiledMapNode
@@ -56,7 +55,7 @@ public:
     /**
      * Sets the anchorPoint of all layers
      */
-    virtual void setAnchorPoint(FE::Vec2 ap);
+    virtual void setAnchorPoint(rkt::Vec2 ap);
     
     /**
      * Gets raw TmxMap data from tmxparser 

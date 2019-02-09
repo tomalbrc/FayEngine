@@ -1,9 +1,9 @@
 //
 //  RotateToAction.hpp
-//  FayEngine
+//  rawket
 //
 //  Created by Tom Albrecht on 25.12.15.
-//  Copyright © 2015 Tom Albrecht. All rights reserved.
+//  
 //
 
 #ifndef RotateToAction_hpp
