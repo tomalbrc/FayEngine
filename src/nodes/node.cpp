@@ -30,14 +30,14 @@ node::~node() {
 
 
 void node::runAction(action_ptr action) { // WORKS
-    std::stringstream stre("");
+    std::stringstream stre;
     stre << rand();
     runAction(std::move(action), stre.str());
 }
 void node::runAction(action_ptr action, const std::string &forKey) { // WORKS
     action->target = this;
     action->start();
-    actions[forKey] = (std::move(action));
+    actions[forKey] = std::move(action);
 }
 
 void node::removeAction(action_ptr action) { // NOT TESTED
@@ -51,16 +51,16 @@ void node::removeAction(const std::string &actionName) { // WORKS
 }
 
 void node::removeAllActions() { // NOT TESTED
-    for (auto&& a : actions) if (a.second != nullptr) a.second->finished = true;
+    for (auto& a : actions) if (a.second != nullptr) a.second->finished = true;
 }
 
 bool node::hasActions() {
     return actions.size() > 0;
 }
 
-const action_ptr node::getAction(std::string actionName) {
-   if (actions[actionName] != nullptr && !actions[actionName]->finished) {
-        //RKTLog(actions[actionName]);
+const action_ptr node::getAction(const std::string& actionName) {
+    decltype(auto) action = actions[actionName];
+    if (action && !action->finished) {
         return actions[actionName];
     }
     else return nullptr;
@@ -79,12 +79,11 @@ void node::update() {
         else i->second->update(), ++i;
     }
     for (auto&& i = children.begin(); i != children.end();) {
-        auto child = *i;
+        decltype(auto) child = *i;
         if (child == nullptr) i = children.erase(i); // remove finished actions
         else if (i != children.end()) child->update(), ++i;
     }
     
-    // this feels Inefficient :(
     if (hasDirtyZPos) sort(children), hasDirtyZPos = false;
 }
 
@@ -159,7 +158,7 @@ vec2f node::convertToWorldSpace(vec2f nodePoint) {
 
 
 
-const NodeVector &node::getChildren() {
+const node_vector &node::getChildren() {
     return children;
 }
 void node::addChild(const node_ptr& node) {
@@ -174,7 +173,7 @@ void node::removeFromParent() { // untested
 }
 
 void node::removeChild(node_ptr node) {
-    node->willMoveToParent(NULL);
+    node->willMoveToParent(nullptr);
     for (auto&& c : children) {
         if (node.get() == c.get()) {
             c.reset();
@@ -184,7 +183,7 @@ void node::removeChild(node_ptr node) {
 }
 
 
-const node_ptr node::getParent() {
+const node_ptr node::getParent() const {
     return mParent;
 }
 void node::setParent(const node_ptr& n) {
@@ -219,10 +218,8 @@ void node::setName(std::string n) {
 
 
 void node::render(SDL_Renderer *renderer) { // render into scene / Surface
-    auto childrenClone = children;
-    
-    for (auto&& s : children) {
-        if (s != nullptr) s->render(renderer);
+    for (auto& s : children) {
+        if (s) s->render(renderer);
     }
 }
 
@@ -276,7 +273,7 @@ void node::controllerAxisMotion(Sint32 controllerIndex, SDL_GameControllerAxis a
 void node::computeTransform() {
     mTransform = affine_transform_id();
     
-    auto anchorOffset = getAnchorPoint();
+    decltype(auto) anchorOffset = getAnchorPoint();
     
     mTransform = transform_multiply(mTransform, transform_make_scale(getScale().x, getScale().y));
     mTransform = transform_multiply(mTransform, transform_make_translate(anchorOffset.x, anchorOffset.y));
@@ -294,15 +291,13 @@ affine_transform node::nodeToParentTransform() {
 
 
 
-
 void node::setZPosition(float zpos) {
-    if (getParent() != nullptr && m_zPosition != zpos) getParent()->hasDirtyZPos = true;
+    if (getParent() && m_zPosition != zpos) getParent()->hasDirtyZPos = true;
     m_zPosition = zpos;
 }
 
 const float node::getZPosition() {
     return m_zPosition;
 }
-
 
 RKT_NAMESPACE_END

@@ -23,7 +23,6 @@ RKT_create_shared__ptr(rotate_to_action);
  * Rotates the target Nodes to x radians in y duration
  */
 class rotate_to_action : public action {
-    float m_radians;
 public:
     rotate_to_action(double duration, float radians);
     static rotate_to_action_ptr create(double duration, float radians);

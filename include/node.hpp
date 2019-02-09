@@ -30,9 +30,9 @@ class scene;
 class node;
 RKT_create_ptr(scene);
 RKT_create_ptr(node);
-typedef std::vector<node_ptr> NodeVector;
-typedef std::map<std::string, action_ptr> ActionMap;
-// redefvirtual inition :(
+
+using node_vector = std::vector<node_ptr>;
+using action_map = std::map<std::string, action_ptr>;
 
 /**
  * node Class
@@ -47,7 +47,7 @@ public:
     static node_ptr create();
     
     /**
-     * Deconstructor
+     * Destructor
      */
     virtual ~node();
     
@@ -90,7 +90,7 @@ public:
      *
      * @param actionName    key of the action
      */
-    virtual const action_ptr getAction(std::string actionName);
+    virtual const action_ptr getAction(const std::string& actionName);
     
     /**
      * Returns true if the node has any active actions
@@ -197,7 +197,7 @@ public:
     /**
      * Returns all children in an std::vector<node_ptr>
      */
-    virtual const NodeVector &getChildren();
+    virtual const node_vector &getChildren();
     
     /**
      * Removes the node from it's parent
@@ -214,7 +214,7 @@ public:
     /**
      * Returns the parent of the node, NULL if the node doesn't have a parent
      */
-    virtual const node_ptr getParent();
+    virtual const node_ptr getParent() const;
     
     /**
      *
@@ -391,7 +391,7 @@ private:
     vec2f position = vec2f_make(0,0);
     
     // Children of this node, vector< node* >
-    NodeVector children;  // children.clear() is in init
+    node_vector children;  // children.clear() is in init
     
     // name of the node (TODO: Add getChildNodeNamed(std::string name))
     std::string name = "";
@@ -401,7 +401,7 @@ private:
     
     
     // actions, performed in public
-    ActionMap actions;
+    action_map actions;
     
     bool isTransformDirty = true;
     affine_transform mTransform;
