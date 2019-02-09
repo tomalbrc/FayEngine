@@ -8,10 +8,10 @@
 
 #include "CallbackAction.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
-CallbackActionPtr CallbackAction::create(CallbackActionCallback callback) {
-    CallbackActionPtr p(new CallbackAction());
+CallbackAction_ptr CallbackAction::create(CallbackActionCallback callback) {
+    CallbackAction_ptr p(new CallbackAction());
     p->init(callback);
     return p;
 }
@@ -35,4 +35,4 @@ void CallbackAction::start()  {
 }
 
     
-FE_NAMESPACE_END
+RKT_NAMESPACE_END

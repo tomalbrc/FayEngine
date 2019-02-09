@@ -9,7 +9,7 @@
 #include "Action.hpp"
 #include "Node.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
 bool Action::init(){
     return true;
@@ -141,4 +141,4 @@ double Action::currentDoubleValue() {
 
 
 
-FE_NAMESPACE_END
+RKT_NAMESPACE_END

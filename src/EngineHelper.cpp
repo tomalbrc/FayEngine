@@ -15,13 +15,13 @@
 #include <fstream>
 
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
 EngineHelper::EngineHelper() {
-    FELog("EngineHelper::EngineHelper()");
+    RKTLog("EngineHelper::EngineHelper()");
 }
 EngineHelper::~EngineHelper() {
-    FELog("EngineHelper::~EngineHelper");
+    RKTLog("EngineHelper::~EngineHelper");
     SDL_JoystickClose(0);
     cleanTextureCache();
     
@@ -48,10 +48,10 @@ void EngineHelper::setRenderer(SDL_Renderer *r) {
 }
 
 
-WindowPtr EngineHelper::getMainWindow() {
+app_window_ptr EngineHelper::getMainWindow() {
     return m_mainWindow;
 }
-void EngineHelper::setMainWindow(WindowPtr window) {
+void EngineHelper::setMainWindow(app_window_ptr window) {
     m_mainWindow = window;
 }
 
@@ -98,10 +98,10 @@ Vec2 EngineHelper::getDiplaySize() {
 
 
 
-void EngineHelper::cacheTexture(TexturePtr texture, std::string key) {
+void EngineHelper::cacheTexture(Texture_ptr texture, std::string key) {
     m_textureCache[key] = texture;
 }
-void EngineHelper::cacheTextures(std::vector<TexturePtr> textures, std::vector<std::string> keys) {
+void EngineHelper::cacheTextures(std::vector<Texture_ptr> textures, std::vector<std::string> keys) {
     for (int i = 0; i < textures.size(); i++) {
         cacheTexture(textures[i], keys[i]);
     }
@@ -109,7 +109,7 @@ void EngineHelper::cacheTextures(std::vector<TexturePtr> textures, std::vector<s
 void EngineHelper::removeTextureForKey(std::string key) {
     m_textureCache.erase(key);
 }
-void EngineHelper::removeTextureFromCache(TexturePtr tex) {
+void EngineHelper::removeTextureFromCache(Texture_ptr tex) {
     for (auto&& iterator = m_textureCache.begin(); iterator != m_textureCache.end(); ++iterator) {
         if (iterator->second == tex)  {
             removeTextureForKey(iterator->first);
@@ -117,19 +117,19 @@ void EngineHelper::removeTextureFromCache(TexturePtr tex) {
         }
     }
 }
-TexturePtr EngineHelper::getTextureForKey(std::string key) {
+Texture_ptr EngineHelper::getTextureForKey(std::string key) {
     return m_textureCache[key];
 }
 void EngineHelper::cleanTextureCache() {
     for(auto&& iterator = m_textureCache.begin(); iterator != m_textureCache.end();) {
-        FELog("Cleaning up Texture named: "<<iterator->first<<"...");
+        RKTLog("Cleaning up Texture named: "<<iterator->first<<"...");
         iterator = m_textureCache.erase(iterator);
     }
 }
 
 void EngineHelper::removeUnusedTextures() {
     for(auto&& iterator = m_textureCache.begin(); iterator != m_textureCache.end();) {
-        if (iterator->second.use_count() == 1) FELog("Removed unused Texture named: "<<iterator->first), iterator = m_textureCache.erase(iterator);
+        if (iterator->second.use_count() == 1) RKTLog("Removed unused Texture named: "<<iterator->first), iterator = m_textureCache.erase(iterator);
         else ++iterator;
     }
 }
@@ -157,7 +157,7 @@ FilteringMode EngineHelper::getGlobalFilteringMode() {
 
 void EngineHelper::registerApp(std::string organizationName, std::string appName) {
     m_basePath = SDL_GetPrefPath(organizationName.c_str(), appName.c_str());
-    FELog("Registered Application: "<<appName<<", pref base path is: "<<m_basePath);
+    RKTLog("Registered Application: "<<appName<<", pref base path is: "<<m_basePath);
 }
 
 
@@ -204,4 +204,4 @@ int EngineHelper::loadInt(std::string key) {
 }
 
 
-FE_NAMESPACE_END
+RKT_NAMESPACE_END

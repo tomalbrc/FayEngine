@@ -8,10 +8,10 @@
 
 #include "RotateToAction.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
-RotateToActionPtr RotateToAction::create(double pduration, float radians) {
-    return RotateToActionPtr(new RotateToAction(pduration,radians));
+RotateToAction_ptr RotateToAction::create(double pduration, float radians) {
+    return RotateToAction_ptr(new RotateToAction(pduration,radians));
 }
 
 RotateToAction::RotateToAction(double pduration, float radians) : Action() {
@@ -32,5 +32,5 @@ void RotateToAction::start()  {
     finished = false;
 }
 
-FE_NAMESPACE_END
+RKT_NAMESPACE_END
 

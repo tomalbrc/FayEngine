@@ -18,11 +18,11 @@
 #include "tmxparser.h"
 #include "LabelNode.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
 class ButtonNode;
 #define ButtonNodeLambda [this](ButtonNode *sender)
-FE_create_Ptr(ButtonNode);
+RKT_create__ptr(ButtonNode);
 typedef std::function<void(ButtonNode*)> ButtonNodeCallback;
 
 /**
@@ -32,11 +32,11 @@ typedef std::function<void(ButtonNode*)> ButtonNodeCallback;
  */
 class ButtonNode : public LabelNode {
 public:
-    static ButtonNodePtr create();
-    static ButtonNodePtr create(std::string text, std::string fontpath, int fontSize);
-    static ButtonNodePtr create(std::string text, std::string fontpath, int fontSize, Color col);
-    static ButtonNodePtr create(TexturePtr normalTexture);
-    static ButtonNodePtr create(TexturePtr normalTexture, TexturePtr selectedTexture);
+    static ButtonNode_ptr create();
+    static ButtonNode_ptr create(std::string text, std::string fontpath, int fontSize);
+    static ButtonNode_ptr create(std::string text, std::string fontpath, int fontSize, Color col);
+    static ButtonNode_ptr create(Texture_ptr normalTexture);
+    static ButtonNode_ptr create(Texture_ptr normalTexture, Texture_ptr selectedTexture);
     ~ButtonNode();
     
     void setHoverColor(Color hoverColor);
@@ -49,14 +49,14 @@ public:
     Color getSelectedColor();
     
     
-    void setNormalTexture(TexturePtr texture);
-    TexturePtr getNormalTexture();
+    void setNormalTexture(Texture_ptr texture);
+    Texture_ptr getNormalTexture();
     
-    void setHoverTexture(TexturePtr texture);
-    TexturePtr getHoverTexture();
+    void setHoverTexture(Texture_ptr texture);
+    Texture_ptr getHoverTexture();
 
-    void setSelectedTexture(TexturePtr texture);
-    TexturePtr getSelectedTexture();
+    void setSelectedTexture(Texture_ptr texture);
+    Texture_ptr getSelectedTexture();
     
     
     void setSelected(bool selected);
@@ -80,8 +80,8 @@ public:
 private:
     bool init();
     bool init(std::string text, std::string fontpath, int fontSize, Color col);
-    bool init(TexturePtr normalTexture);
-    bool init(TexturePtr normalTexture, TexturePtr selectedTexture);
+    bool init(Texture_ptr normalTexture);
+    bool init(Texture_ptr normalTexture, Texture_ptr selectedTexture);
     
     bool m_hovered = false;
     bool m_selected = false;
@@ -90,13 +90,13 @@ private:
     Color m_SelectedColor = ColorGrayColor();
     Color m_NormalColor = ColorBlackColor();
     
-    TexturePtr m_normalTexture;
-    TexturePtr m_hoverTexture;
-    TexturePtr m_selectTexture;
+    Texture_ptr m_normalTexture;
+    Texture_ptr m_hoverTexture;
+    Texture_ptr m_selectTexture;
     
     ButtonNodeCallback m_CallbackDown = NULL;
     ButtonNodeCallback m_CallbackUp = NULL;
 };
 
-FE_NAMESPACE_END
+RKT_NAMESPACE_END
 #endif /* ButtonNode_hpp */

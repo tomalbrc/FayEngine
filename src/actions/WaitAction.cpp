@@ -8,10 +8,10 @@
 
 #include "WaitAction.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
-WaitActionPtr WaitAction::create(double dur) {
-    return WaitActionPtr(new WaitAction(dur));
+WaitAction_ptr WaitAction::create(double dur) {
+    return WaitAction_ptr(new WaitAction(dur));
 }
 
 WaitAction::WaitAction(double dur) : Action() {
@@ -29,4 +29,4 @@ void WaitAction::start()  {
 }
 
     
-FE_NAMESPACE_END
+RKT_NAMESPACE_END

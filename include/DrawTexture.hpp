@@ -12,10 +12,10 @@
 #include "Texture.hpp"
 #include "Types.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
 class DrawTexture;
-FE_create_Ptr(DrawTexture);
+RKT_create__ptr(DrawTexture);
 
 /**
  * Texture to draw! yea
@@ -30,7 +30,7 @@ public:
      * @param size	The size of the texture in pixels
      * @param color	Color used to fill the newly created texture
      */
-    static DrawTexturePtr create(Vec2 size, Color color);
+    static DrawTexture_ptr create(Vec2 size, Color color);
 
     /**
      * Destructor
@@ -82,5 +82,5 @@ template <typename T> int sign(T val) { // TODO: Do something with this, this is
     return (T(0) < val) - (val < T(0));
 }
 
-FE_NAMESPACE_END
+RKT_NAMESPACE_END
 #endif /* DrawTexture_hpp */

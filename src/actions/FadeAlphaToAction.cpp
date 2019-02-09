@@ -8,7 +8,7 @@
 
 #include "FadeAlphaToAction.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
 inline int NormalizeAlpha(int i) {
     if (i > 255)
@@ -19,8 +19,8 @@ inline int NormalizeAlpha(int i) {
 }
 
 
-FadeAlphaToActionPtr FadeAlphaToAction::create(double pduration, int dAlpha) {
-    FadeAlphaToActionPtr p(new FadeAlphaToAction());
+FadeAlphaToAction_ptr FadeAlphaToAction::create(double pduration, int dAlpha) {
+    FadeAlphaToAction_ptr p(new FadeAlphaToAction());
     p->init(pduration, dAlpha);
     return p;
 }
@@ -47,4 +47,4 @@ void FadeAlphaToAction::start()  {
 }
 
 
-FE_NAMESPACE_END
+RKT_NAMESPACE_END

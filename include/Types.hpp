@@ -40,34 +40,38 @@ inline const std::vector<std::string> explode(const std::string& s, const char& 
 }
 
 /**
- * Localization. Only available on iOS at the moment
+ * Localization. Available on iOS/macOS
  */
-#define FELocalizedString(stringDescriptor, alternative) NSLocalizedString
+#ifdef __APPLE__
+#define RKTLocalizedString(stringDescriptor, alternative) NSLocalizedString
+#else
+#define RKTLocalizedString(x,x)
+#endif
 
 
 /**
  * Namespace macro, to fix Xcode's annoying auto indentation
  */
-#define FE_NAMESPACE_BEGIN namespace rkt {
-#define FE_NAMESPACE_END }
+#define RKT_NAMESPACE_BEGIN namespace rkt {
+#define RKT_NAMESPACE_END }
 
 /**
  * A static create function which calls init on the object.
- * Mainly for the use in Scene subclasses
+ * Mainly for the use in scene subclasses
  */
-#define FE_create_FUNC(T) static std::shared_ptr<T> create() { std::shared_ptr<T> n(new T()); n->init(); return n; }
+#define RKT_create_FUNC(T) static std::shared_ptr<T> create() { std::shared_ptr<T> n(new T()); n->init(); return n; }
 
 /**
- * Usage: FE_create_Ptr(ClassName) ClassNamePtr;
+ * Usage: RKT_create__ptr(ClassName) ClassName_ptr;
  */
-#define FE_create_shared_Ptr(T) typedef std::shared_ptr<T> T ## Ptr // creates an std::shared_ptr only
-#define FE_create_weak_Ptr(T) typedef std::weak_ptr<T> T ## WeakPtr // creates an std::weak_ptr only
-#define FE_create_Ptr(T) FE_create_shared_Ptr(T); FE_create_weak_Ptr(T) // creates an std::weak_ptr AND std::shared_ptr
+#define RKT_create_shared__ptr(T) typedef std::shared_ptr<T> T ## _ptr // creates an std::shared_ptr only
+#define RKT_create_weak_ptr(T) typedef std::weak_ptr<T> T ## _weak_ptr // creates an std::weak_ptr only
+#define RKT_create__ptr(T) RKT_create_shared__ptr(T); RKT_create_weak_ptr(T) // creates an std::weak_ptr AND std::shared_ptr
 
 /**
  * Logging
  */
-#define FELog(x)  std::cout << "[rawket] " << x << std::endl // Log macro
+#define RKTLog(x)  std::cout << "[rawket] " << x << std::endl // Log macro
 
 /**
  * Some deg to rad calculation and vice versa
@@ -76,9 +80,9 @@ inline const std::vector<std::string> explode(const std::string& s, const char& 
 #define DegreesToRadians(angleDegrees) (angleDegrees * 3.1415926535 / 180.0)
 
 /**
- * Begin FE namespace
+ * Begin RKT namespace
  */
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
 /**
  * Used for mobile devices' screen orientations.
@@ -443,5 +447,5 @@ typedef enum {
 } KeyCode;
 
 
-FE_NAMESPACE_END
+RKT_NAMESPACE_END
 #endif /* Types_hpp */

@@ -16,10 +16,10 @@
 #include "Action.hpp"
 #include "Sprite.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
 class FadeAlphaToAction;
-FE_create_shared_Ptr(FadeAlphaToAction);
+RKT_create_shared__ptr(FadeAlphaToAction);
 
 /**
  * Fades the alpha value of a Node to the desired value in a specified amount of time
@@ -27,7 +27,7 @@ FE_create_shared_Ptr(FadeAlphaToAction);
 class FadeAlphaToAction : public Action {
     int m_alpha;
 public:
-    static FadeAlphaToActionPtr create(double duration, int destAlpha);
+    static FadeAlphaToAction_ptr create(double duration, int destAlpha);
     
     /**
      * Re-implementation from base class Action
@@ -43,5 +43,5 @@ protected:
     bool init(double duration, int destAlpha);
 };
 
-FE_NAMESPACE_END
+RKT_NAMESPACE_END
 #endif /* FadeAlphaToAction_hpp */

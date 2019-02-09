@@ -16,11 +16,11 @@
 #include <vector>
 #include <iostream>
 #include "tmxparser.h"
-#include "Window.hpp"
+#include "app_window.hpp"
 #include "Texture.hpp"
 #include "Types.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
 /**
  * Helper Class. Like the CCDirector in cocos2d
@@ -37,7 +37,7 @@ public:
     static EngineHelper *getInstance();
     
     /**
-     * Returns the SDL_Renderer for the Window.
+     * Returns the SDL_Renderer for the app_window.
      *
      * @return 	Pointer to an SDL_Renderer
      */
@@ -75,7 +75,7 @@ public:
      * @param	texture 	Texture to cache
      * @param	key         Key for the texture
      */
-    void cacheTexture(TexturePtr texture, std::string key);
+    void cacheTexture(Texture_ptr texture, std::string key);
     
     /**
      * Cache multiple textures for multiple keys. Both vectors should be the same size, anything else throws an exception
@@ -83,14 +83,14 @@ public:
      * @param	textures 	Textures to cache
      * @param	keys		Number of rows for the matrix
      */
-    void cacheTextures(std::vector<TexturePtr> textures, std::vector<std::string> keys);
+    void cacheTextures(std::vector<Texture_ptr> textures, std::vector<std::string> keys);
     
     /**
      * Removes a texture from the texture cache
      *
      * @param	texture		Texture to remove
      */
-    void removeTextureFromCache(TexturePtr texture);
+    void removeTextureFromCache(Texture_ptr texture);
     
     /**
      * Removes a texture for a key from the texture cache
@@ -105,7 +105,7 @@ public:
      * @param	key         Key for a Texture
      * @return 	shared pointer to a Texture instance
      */
-    TexturePtr getTextureForKey(std::string key);
+    Texture_ptr getTextureForKey(std::string key);
     
     /**
      * Removes every texture from the cache
@@ -180,24 +180,24 @@ public:
     /**
      * Sets the main window for the Application
      */
-    void setMainWindow(WindowPtr);
+    void setMainWindow(app_window_ptr);
     
     /**
      * Returns the current main window (if any) for the Application
      */
-    WindowPtr getMainWindow();
+    app_window_ptr getMainWindow();
     
 private:
-    WindowPtr m_mainWindow;
+    app_window_ptr m_mainWindow;
     std::string m_basePath;
     FilteringMode m_filteringMode = FilteringModeNearest;
     EngineHelper();
     ~EngineHelper();
     SDL_Renderer *m_gameRenderer;
-    std::map<std::string, TexturePtr> m_textureCache;
+    std::map<std::string, Texture_ptr> m_textureCache;
     
     bool m_initiated = false;
 };
 
-FE_NAMESPACE_END
+RKT_NAMESPACE_END
 #endif /* EngineHelper_hpp */

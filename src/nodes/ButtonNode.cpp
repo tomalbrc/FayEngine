@@ -8,27 +8,27 @@
 
 #include "ButtonNode.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
-ButtonNodePtr ButtonNode::create(std::string text, std::string fontpath, int fontSize) {
-    ButtonNodePtr p(new ButtonNode());
+ButtonNode_ptr ButtonNode::create(std::string text, std::string fontpath, int fontSize) {
+    ButtonNode_ptr p(new ButtonNode());
     p->init(text,fontpath,fontSize, p->m_NormalColor);
     return p;
 }
-ButtonNodePtr ButtonNode::create(std::string text, std::string fontpath, int fontSize, Color col) {
-    ButtonNodePtr p(new ButtonNode());
+ButtonNode_ptr ButtonNode::create(std::string text, std::string fontpath, int fontSize, Color col) {
+    ButtonNode_ptr p(new ButtonNode());
     p->init(text,fontpath,fontSize, col);
     return p;
 }
 
 
-ButtonNodePtr ButtonNode::create(TexturePtr normalTexture) {
-    ButtonNodePtr p(new ButtonNode());
+ButtonNode_ptr ButtonNode::create(Texture_ptr normalTexture) {
+    ButtonNode_ptr p(new ButtonNode());
     p->init(normalTexture);
     return p;
 }
-ButtonNodePtr ButtonNode::create(TexturePtr normalTexture, TexturePtr selectedTexture) {
-    ButtonNodePtr p(new ButtonNode());
+ButtonNode_ptr ButtonNode::create(Texture_ptr normalTexture, Texture_ptr selectedTexture) {
+    ButtonNode_ptr p(new ButtonNode());
     p->init(normalTexture, selectedTexture);
     return p;
 }
@@ -39,13 +39,13 @@ bool ButtonNode::init(std::string text, std::string fontpath, int fontSize, Colo
     return LabelNode::init(text,fontpath,fontSize, col);
 }
 
-bool ButtonNode::init(TexturePtr normalTexture) {
+bool ButtonNode::init(Texture_ptr normalTexture) {
     m_normalTexture = normalTexture;
     setTexture(normalTexture);
     return Sprite::init();
 }
 
-bool ButtonNode::init(TexturePtr normalTexture, TexturePtr selectedTexture) {
+bool ButtonNode::init(Texture_ptr normalTexture, Texture_ptr selectedTexture) {
     m_normalTexture = normalTexture;
     m_selectTexture = selectedTexture;
     setTexture(normalTexture);
@@ -161,33 +161,33 @@ Color ButtonNode:: getNormalColor() {
 
 
 
-void ButtonNode::setNormalTexture(TexturePtr texture) {
+void ButtonNode::setNormalTexture(Texture_ptr texture) {
     m_normalTexture = texture;
     setTexture(texture); // TODO
 }
 
-TexturePtr ButtonNode::getNormalTexture() {
+Texture_ptr ButtonNode::getNormalTexture() {
     return m_normalTexture;
 }
 
 
-void ButtonNode::setHoverTexture(TexturePtr texture) {
+void ButtonNode::setHoverTexture(Texture_ptr texture) {
     m_hoverTexture = texture;
 }
 
-TexturePtr ButtonNode::getHoverTexture() {
+Texture_ptr ButtonNode::getHoverTexture() {
     return m_hoverTexture;
 }
 
 
-void ButtonNode::setSelectedTexture(TexturePtr texture) {
+void ButtonNode::setSelectedTexture(Texture_ptr texture) {
     m_selectTexture = texture;
 }
 
-TexturePtr ButtonNode::getSelectedTexture() {
+Texture_ptr ButtonNode::getSelectedTexture() {
     return m_selectTexture;
 }
 
 
 
-FE_NAMESPACE_END
+RKT_NAMESPACE_END

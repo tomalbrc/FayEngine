@@ -8,20 +8,20 @@
 
 #include "LabelNode.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
-LabelNodePtr LabelNode::create() {
-    LabelNodePtr p(new LabelNode());
+LabelNode_ptr LabelNode::create() {
+    LabelNode_ptr p(new LabelNode());
     p->init();
     return p;
 }
-LabelNodePtr LabelNode::create(std::string text, std::string fontpath, int fontSize) {
-    LabelNodePtr p(new LabelNode());
+LabelNode_ptr LabelNode::create(std::string text, std::string fontpath, int fontSize) {
+    LabelNode_ptr p(new LabelNode());
     p->init(text, fontpath, fontSize, p->mTextColor);
     return p;
 }
-LabelNodePtr LabelNode::create(std::string text, std::string fontpath, int fontSize, Color col) {
-    LabelNodePtr p(new LabelNode());
+LabelNode_ptr LabelNode::create(std::string text, std::string fontpath, int fontSize, Color col) {
+    LabelNode_ptr p(new LabelNode());
     p->init(text, fontpath, fontSize, col);
     return p;
 }
@@ -72,7 +72,7 @@ void LabelNode::renderText() {
     this->setTexture(t);
     SDL_FreeSurface(s);
     
-    if (this->getTexture() == nullptr) FELog("LabelNode - Error: Texture is empty After new render" << SDL_GetError());
+    if (this->getTexture() == nullptr) RKTLog("LabelNode - Error: Texture is empty After new render" << SDL_GetError());
 }
 
 
@@ -105,4 +105,4 @@ int LabelNode::getFontSize() {
     return mFontSize;
 }
     
-FE_NAMESPACE_END
+RKT_NAMESPACE_END

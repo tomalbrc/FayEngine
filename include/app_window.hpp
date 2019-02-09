@@ -1,5 +1,5 @@
 //
-//  Window.hpp
+//  app_window.hpp
 //  rawket
 //
 //  Created by Tom Albrecht on 12.12.15.
@@ -17,7 +17,7 @@
 #include <memory>
 #include "Node.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
 struct SceneTransition {
     double duration = 0.17;
@@ -35,36 +35,36 @@ inline SceneTransition SceneTransitionMake(double duration, Color col, EasingFun
     return transition;
 }
 
-class Scene;
-class Window;
-FE_create_Ptr(Window);
+class scene;
+class app_window;
+RKT_create__ptr(app_window);
 
 /**
- * Window containing a Scene.
- * The Window class handles interactions and redirects them to the currently presented Scene (if available).
- * The Scene (and all other class deriving from Scene) will also call the appropriate function to it's children nodes.
+ * app_window containing a scene.
+ * The app_window class handles interactions and redirects them to the currently presented scene (if available).
+ * The scene (and all other class deriving from scene) will also call the appropriate function to it's children nodes.
  */
-class Window : public std::enable_shared_from_this<Window> { // TODO: m prefix // NAMING CONVENTION(S)  :~|
+class app_window : public std::enable_shared_from_this<app_window> { // TODO: m prefix // NAMING CONVENTION(S)  :~|
 public:
-    static WindowPtr create(std::string wname, Vec2 size);
-    static WindowPtr create(std::string wname, Vec2 size, bool fullscreen);
-    static WindowPtr create(std::string wname, Vec2 size, bool fullscreen, bool hidpi);
-    ~Window();
+    static app_window_ptr create(std::string wname, Vec2 size);
+    static app_window_ptr create(std::string wname, Vec2 size, bool fullscreen);
+    static app_window_ptr create(std::string wname, Vec2 size, bool fullscreen, bool hidpi);
+    ~app_window();
     
     /**
-     * @return the currently presented Scene
+     * @return the currently presented scene
      */
-    ScenePtr getCurrentScene();
+    scene_ptr getCurrentScene();
     
     /**
-     * Presents a new Scene with a default SceneTransition struct. update() and other interaction functions will be called on the Scene.
+     * Presents a new scene with a default SceneTransition struct. update() and other interaction functions will be called on the scene.
      */
-    void presentScene(ScenePtr newScene);
+    void presentScene(scene_ptr newScene);
     
     /**
-     * Presents a new Scene. update() and other interaction functions will be called on the Scene.
+     * Presents a new scene. update() and other interaction functions will be called on the scene.
      */
-    void presentScene(ScenePtr newScene, SceneTransition transition);
+    void presentScene(scene_ptr newScene, SceneTransition transition);
     
     
     /**
@@ -83,7 +83,7 @@ public:
     SDL_Renderer *getRenderer();
     
     /**
-     * @return the size of the Window
+     * @return the size of the app_window
      */
     Vec2 getSize();
     
@@ -113,8 +113,8 @@ private:
     bool m_showNew = false;
     SDL_Window *m_sdlWindow = NULL;
     SDL_Renderer *m_renderer = NULL;
-    ScenePtr m_currentScene = NULL;
-    ScenePtr m_newScene = NULL;
+    scene_ptr m_currentScene = NULL;
+    scene_ptr m_newScene = NULL;
     bool m_running = true;
     
     void handleEvents();
@@ -128,5 +128,5 @@ private:
     float m_screenScale = -1.f;
 };
 
-FE_NAMESPACE_END
+RKT_NAMESPACE_END
 #endif /* Window_hpp */

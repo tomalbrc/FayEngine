@@ -1,13 +1,13 @@
 //
-//  Window.cpp
+//  app_window.cpp
 //  rawket
 //
 //  Created by Tom Albrecht on 12.12.15.
 //
 //
 
-#include "Window.hpp"
-#include "Scene.hpp"
+#include "app_window.hpp"
+#include "scene.hpp"
 #include "Sprite.hpp"
 #include "SequenceAction.hpp"
 #include "WaitAction.hpp"
@@ -20,24 +20,24 @@
 
 #define CONTROLLER_AXIS_INPUT_RANGE 32767.f
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
-static bool FEWindowBackgrounded = false;
-static SpritePtr FEWindowOverlay;
+static bool RKTWindowBackgrounded = false;
+static Sprite_ptr RKTWindowOverlay;
 
-Window::~Window() {
+app_window::~app_window() {
     m_currentScene.reset();
 }
 
-WindowPtr Window::create(std::string wname, Vec2 size) {
+app_window_ptr app_window::create(std::string wname, Vec2 size) {
     return create(wname, size, false);
 }
 
-WindowPtr Window::create(std::string wname, Vec2 size, bool fullscreen) {
+app_window_ptr app_window::create(std::string wname, Vec2 size, bool fullscreen) {
     return create(wname, size, false, false);
 }
-WindowPtr Window::create(std::string wname, Vec2 size, bool fullscreen, bool hidpi) {
-    WindowPtr o(new Window());
+app_window_ptr app_window::create(std::string wname, Vec2 size, bool fullscreen, bool hidpi) {
+    app_window_ptr o(new app_window());
     o->init(wname, size, fullscreen, hidpi);
     return o;
 }
@@ -45,31 +45,31 @@ WindowPtr Window::create(std::string wname, Vec2 size, bool fullscreen, bool hid
 
 
 int EventFilter(void* userData, SDL_Event *event) {
-        Window *win = (Window* )userData;
+        app_window *win = (app_window* )userData;
         
         switch (event->type) {
             case SDL_APP_WILLENTERBACKGROUND: {
-                FEWindowBackgrounded = true;
-                FELog("Will enter background " << event->type);
+                RKTWindowBackgrounded = true;
+                RKTLog("Will enter background " << event->type);
                 if (win != NULL && win->getCurrentScene() != nullptr) win->getCurrentScene()->applicationWillEnterBackground();
                 return 0;
                 break;
             }
             case SDL_APP_WILLENTERFOREGROUND: {
-                FEWindowBackgrounded = false;
-                FELog("Will enter foreground");
+                RKTWindowBackgrounded = false;
+                RKTLog("Will enter foreground");
                 if (win != NULL && win->getCurrentScene() != nullptr) win->getCurrentScene()->applicationWillEnterForeground();
                 return 0;
                 break;
             }
             case SDL_APP_DIDENTERFOREGROUND: {
-                FEWindowBackgrounded = false;
+                RKTWindowBackgrounded = false;
                 if (win != NULL && win->getCurrentScene() != nullptr) win->getCurrentScene()->applicationDidEnterForeground();
                 return 0;
                 break;
             }
             case SDL_APP_DIDENTERBACKGROUND: {
-                FEWindowBackgrounded = true;
+                RKTWindowBackgrounded = true;
                 if (win != NULL && win->getCurrentScene() != nullptr) win->getCurrentScene()->applicationDidEnterBackground();
                 return 0;
                 break;
@@ -78,7 +78,7 @@ int EventFilter(void* userData, SDL_Event *event) {
         }
     return 1;
 }
-bool Window::init(std::string wname, Vec2 size, bool fullscreen, bool hidpi) {
+bool app_window::init(std::string wname, Vec2 size, bool fullscreen, bool hidpi) {
     rkt::EngineHelper::getInstance()->Init();
     
     Uint32 flags = hidpi ? SDL_WINDOW_ALLOW_HIGHDPI : 0;
@@ -89,7 +89,7 @@ bool Window::init(std::string wname, Vec2 size, bool fullscreen, bool hidpi) {
     if (fullscreen) flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
     m_sdlWindow = SDL_CreateWindow(wname.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, size.x, size.y, flags); // Create window with title, position & sitze
     if (m_sdlWindow == nullptr) {
-        FELog("SDL_CreateWindow Error: " << SDL_GetError());
+        RKTLog("SDL_CreateWindow Error: " << SDL_GetError());
         return false;
     }
     
@@ -115,23 +115,23 @@ inline Vec2 getMouseCoords() {
 }
 
 
-void Window::presentScene(ScenePtr pnewScene) {
+void app_window::presentScene(scene_ptr pnewScene) {
     SceneTransition trans;
     presentScene(pnewScene, trans);
 }
 
-void Window::presentScene(ScenePtr pnewScene, SceneTransition transition) {
+void app_window::presentScene(scene_ptr pnewScene, SceneTransition transition) {
     m_nextTransition = transition;
     if (m_currentScene != nullptr) m_showNew = true, m_newScene = pnewScene;
     else m_newScene = pnewScene, m_currentScene = pnewScene, pnewScene->setWindow(shared_from_this()); // looks shitty
 }
 
 
-SDL_Renderer* Window::getRenderer() {
+SDL_Renderer* app_window::getRenderer() {
     return m_renderer;
 }
 
-Vec2 Window::getSize() {
+Vec2 app_window::getSize() {
     int w,h;
     SDL_GetWindowSize(m_sdlWindow, &w, &h);
     return Vec2Make(w,h);
@@ -139,13 +139,13 @@ Vec2 Window::getSize() {
 
 
 
-ScenePtr Window::getCurrentScene() {
+scene_ptr app_window::getCurrentScene() {
     return m_currentScene;
 }
 
 
 
-void Window::startLoop() {
+void app_window::startLoop() {
     std::vector<int> countedTicks;
     int capTimer = 0;
     
@@ -153,7 +153,7 @@ void Window::startLoop() {
         capTimer = SDL_GetTicks();
         
         handleEvents();
-        if (!FEWindowBackgrounded) update(), render();
+        if (!RKTWindowBackgrounded) update(), render();
         /*
         int frameTicks = SDL_GetTicks() - capTimer;
         if (frameTicks < SCREEN_TICKS_PER_FRAME) {
@@ -177,33 +177,33 @@ void Window::startLoop() {
             m_newScene->setWindow(this->shared_from_this());
             m_currentScene = m_newScene;
             m_newScene = NULL;
-        } else if ((m_showNew && (FEWindowOverlay.get() == nullptr || (FEWindowOverlay.get() != nullptr && FEWindowOverlay->getParent() == nullptr)))) { // TODO: Add Transition between scenes
-            FEWindowOverlay.reset();
-            FEWindowOverlay = Sprite::create(Texture::create(getSize(), m_nextTransition.color));
-            FEWindowOverlay->setAlpha(0);
-            FEWindowOverlay->setZPosition(__FLT_MAX__);
-            m_currentScene->addChild(FEWindowOverlay);
+        } else if ((m_showNew && (RKTWindowOverlay.get() == nullptr || (RKTWindowOverlay.get() != nullptr && RKTWindowOverlay->getParent() == nullptr)))) { // TODO: Add Transition between scenes
+            RKTWindowOverlay.reset();
+            RKTWindowOverlay = Sprite::create(Texture::create(getSize(), m_nextTransition.color));
+            RKTWindowOverlay->setAlpha(0);
+            RKTWindowOverlay->setZPosition(__FLT_MAX__);
+            m_currentScene->addChild(RKTWindowOverlay);
             
             auto fade = FadeAlphaToAction::create(m_nextTransition.duration, 255);
             fade->setEasingFunction(m_nextTransition.startEasingFunction);
-            FEWindowOverlay->runAction(SequenceAction::create({
+            RKTWindowOverlay->runAction(SequenceAction::create({
                 fade,
             }), "o");
             
             m_showNew = false;
-        } else if (FEWindowOverlay.get() != nullptr && FEWindowOverlay->getAction("o") == nullptr && m_newScene != nullptr) {
+        } else if (RKTWindowOverlay.get() != nullptr && RKTWindowOverlay->getAction("o") == nullptr && m_newScene != nullptr) {
             
             m_currentScene.reset();
             m_currentScene = m_newScene;
             m_currentScene->setWindow(this->shared_from_this());
             m_newScene.reset();
             
-            FEWindowOverlay->removeFromParent();
-            m_currentScene->addChild(FEWindowOverlay);
+            RKTWindowOverlay->removeFromParent();
+            m_currentScene->addChild(RKTWindowOverlay);
             
             auto fade = FadeAlphaToAction::create(m_nextTransition.duration, 0);
             fade->setEasingFunction(m_nextTransition.endEasingFunction);
-            FEWindowOverlay->runAction(SequenceAction::create({
+            RKTWindowOverlay->runAction(SequenceAction::create({
                 fade,
                 RemoveFromParentAction::create(),
             }), "o2");
@@ -214,13 +214,13 @@ void Window::startLoop() {
 }
 
 
-void Window::handleEvents() {
+void app_window::handleEvents() {
     SDL_Event event;
     while(SDL_PollEvent(&event)) {
         switch (event.type) {
             case SDL_QUIT:
                 m_running = false;
-                FELog("Event SDL_QUIT... Bye!");
+                RKTLog("Event SDL_QUIT... Bye!");
                 break;
             case SDL_KEYDOWN:
                 if (m_currentScene != nullptr) m_currentScene->keyDown(KeyCode(event.key.keysym.sym));
@@ -258,7 +258,7 @@ void Window::handleEvents() {
             }
             
             case SDL_CONTROLLERDEVICEADDED:
-                FELog("CONTROLLER DEVICE ADDED");
+                RKTLog("CONTROLLER DEVICE ADDED");
                 SDL_GameControllerOpen(event.cdevice.which);
                 break;
             case SDL_CONTROLLERBUTTONDOWN: {
@@ -274,7 +274,7 @@ void Window::handleEvents() {
                 break;
             }
             case SDL_WINDOWEVENT: {
-                if (event.window.event == SDL_WINDOWEVENT_SIZE_CHANGED && m_currentScene != nullptr) m_currentScene->orientationChange(DeviceOrientationPortrait), FELog("Window data: "<<event.window.data1<<", "<<event.window.data2);
+                if (event.window.event == SDL_WINDOWEVENT_SIZE_CHANGED && m_currentScene != nullptr) m_currentScene->orientationChange(DeviceOrientationPortrait), RKTLog("app_window data: "<<event.window.data1<<", "<<event.window.data2);
                 break;
             }
             
@@ -284,14 +284,14 @@ void Window::handleEvents() {
     }
 }
 
-void Window::update() {
+void app_window::update() {
     if (m_currentScene != nullptr) m_currentScene->update();
 }
-void Window::render() {
+void app_window::render() {
     if (m_currentScene != nullptr) m_currentScene->render();
 }
 
-void Window::quit() {
+void app_window::quit() {
     m_running = false;
     
     // TODO: Check
@@ -299,12 +299,12 @@ void Window::quit() {
     //SDL_DestroyRenderer(m_renderer);
 }
 
-bool Window::isRunning() {
+bool app_window::isRunning() {
     return m_running;
 }
 
 
-double Window::screenScale() {
+double app_window::screenScale() {
     if (m_screenScale == -1.f) {
         int x,y;
         SDL_GetWindowSize(m_sdlWindow, &x, &y);
@@ -319,4 +319,4 @@ double Window::screenScale() {
 }
 
 
-FE_NAMESPACE_END
+RKT_NAMESPACE_END

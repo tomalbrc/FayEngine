@@ -14,17 +14,17 @@
 #include "Action.hpp"
 #include "Sprite.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
 class SequenceAction;
-FE_create_shared_Ptr(SequenceAction);
+RKT_create_shared__ptr(SequenceAction);
 
 /**
  * Performs a sequence of actions, one-by-one
  */
 class SequenceAction : public Action {
 public:
-    static SequenceActionPtr create(std::vector<ActionPtr> actions);
+    static SequenceAction_ptr create(std::vector<Action_ptr> actions);
     ~SequenceAction();
     
     void update();
@@ -32,12 +32,12 @@ public:
     
     
 protected:
-    bool init(std::vector<ActionPtr> actions);
+    bool init(std::vector<Action_ptr> actions);
 private:
-    std::vector<ActionPtr> mActions;
+    std::vector<Action_ptr> mActions;
     int currentIndex = 0;
     void prepareCurrentAction();
 };
 
-FE_NAMESPACE_END
+RKT_NAMESPACE_END
 #endif /* SequenceAction_hpp */

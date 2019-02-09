@@ -16,10 +16,10 @@
 #include "Texture.hpp"
 #include "EngineHelper.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
 class Sprite;
-FE_create_Ptr(Sprite);
+RKT_create__ptr(Sprite);
 
 /**
  * Sprite Class inherits from Node Class
@@ -31,28 +31,28 @@ public:
      *
      * @return s shared_ptr to the new Sprite instance
      */
-    static SpritePtr create();
+    static Sprite_ptr create();
     
     /**
      * Creates an new Sprite object with a Texture
      *
      * @return s shared_ptr to the new Sprite instance
      */
-    static SpritePtr create(TexturePtr t);
+    static Sprite_ptr create(Texture_ptr t);
     
     /**
      * Creates an new Sprite object with desired dimensions for a new Texture
      *
      * @return s shared_ptr to the new Sprite instance
      */
-    static SpritePtr create(Vec2 dimensions);
+    static Sprite_ptr create(Vec2 dimensions);
     
     /**
      * Creates an new Sprite with a Texture loaded from an image file
      *
      * @return s shared_ptr to the new Sprite instance
      */
-    static SpritePtr create(std::string filename);
+    static Sprite_ptr create(std::string filename);
     
     /**
      * Deconstructor
@@ -69,12 +69,12 @@ public:
      *
      * @param new Texture
      */
-    virtual void setTexture(TexturePtr tex);
+    virtual void setTexture(Texture_ptr tex);
     
     /**
      * @return the current Texture of the Sprite
      */
-    virtual TexturePtr getTexture();
+    virtual Texture_ptr getTexture();
     
     /**
      * The current blend mode of the Sprite
@@ -126,15 +126,15 @@ public:
 private:
     Color m_color = ColorMake(255, 255, 255, 255);
     Vec2 mSize = Vec2Null();
-    TexturePtr mTexture = NULL;
+    Texture_ptr mTexture = NULL;
     BlendMode m_blendMode = BlendModeAlpha;
 protected:
     bool init();
-    bool init(TexturePtr texture);
+    bool init(Texture_ptr texture);
     bool init(Vec2 dimensions); // empty sprite
     bool init(std::string filename); // load sprite with texture from filename
 };
 
 
-FE_NAMESPACE_END
+RKT_NAMESPACE_END
 #endif

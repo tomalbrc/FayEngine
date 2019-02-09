@@ -16,7 +16,7 @@
 #include "SDL_net.h"
 #include "Types.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
 typedef enum HTTPRequestType_t:int {
     GetRequest,
@@ -24,16 +24,16 @@ typedef enum HTTPRequestType_t:int {
 } HTTPRequestType;
 
 class NetworkManager;
-FE_create_Ptr(NetworkManager);
+RKT_create__ptr(NetworkManager);
 
 class NetworkManager {
     TCPsocket socket;
 public:
-    static NetworkManagerPtr create();
+    static NetworkManager_ptr create();
     ~NetworkManager();
     
     std::string downloadString(HTTPRequestType requestType, std::map<std::string, std::string> headers, std::string url);
 };
 
-FE_NAMESPACE_END
+RKT_NAMESPACE_END
 #endif /* NetworkManager_hpp */

@@ -19,17 +19,17 @@
 #include "Action.hpp"
 #include "Node.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
 class MoveByAction;
-FE_create_shared_Ptr(MoveByAction);
+RKT_create_shared__ptr(MoveByAction);
 
 /**
  * Moves the target Node by a specified distance in a specified duration
  */
 class MoveByAction : public Action, public std::enable_shared_from_this<MoveByAction> {
 public:
-    static MoveByActionPtr create(double duration, Vec2 offset);
+    static MoveByAction_ptr create(double duration, Vec2 offset);
     
     void update();
     void start();
@@ -37,5 +37,5 @@ protected:
     bool init(double duration, Vec2 offset);
 };
 
-FE_NAMESPACE_END
+RKT_NAMESPACE_END
 #endif /* MoveByAction_hpp */

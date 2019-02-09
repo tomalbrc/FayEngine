@@ -18,17 +18,17 @@
 #include "Action.hpp"
 #include "Sprite.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
 class RemoveFromParentAction;
-FE_create_shared_Ptr(RemoveFromParentAction);
+RKT_create_shared__ptr(RemoveFromParentAction);
 
 /**
  * Removes the target Node from parent after a specified delay or immediately
  */
 class RemoveFromParentAction : public Action {
 public:
-    static RemoveFromParentActionPtr create();
+    static RemoveFromParentAction_ptr create();
     
     void update();
     void start();
@@ -36,5 +36,5 @@ private:
     bool init();
 };
 
-FE_NAMESPACE_END
+RKT_NAMESPACE_END
 #endif /* RemoveFromParent_hpp */

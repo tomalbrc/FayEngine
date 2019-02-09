@@ -8,10 +8,10 @@
 
 #include "RotateByAction.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
-RotateByActionPtr RotateByAction::create(double pduration, double radians) {
-    return RotateByActionPtr(new RotateByAction(pduration,radians));
+RotateByAction_ptr RotateByAction::create(double pduration, double radians) {
+    return RotateByAction_ptr(new RotateByAction(pduration,radians));
 }
 
 RotateByAction::RotateByAction(double pduration, double radians) : Action() {
@@ -32,4 +32,4 @@ void RotateByAction::start()  {
 }
 
 
-FE_NAMESPACE_END
+RKT_NAMESPACE_END

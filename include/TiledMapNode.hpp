@@ -15,10 +15,10 @@
 #include "Sprite.hpp"
 #include "Types.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
 class TiledMapNode;
-FE_create_Ptr(TiledMapNode);
+RKT_create__ptr(TiledMapNode);
 
 /**
  * Loads and Displays a tiled tmx map
@@ -30,7 +30,7 @@ public:
      *
      * @return a shared_ptr to the new TiledMapNode instance
      */
-    static TiledMapNodePtr create(const std::string &filepath);
+    static TiledMapNode_ptr create(const std::string &filepath);
     
     /**
      * Deconstructor
@@ -40,10 +40,10 @@ public:
     /**
      * Returns all tile layers in a vector (as std::weak_ptr<Sprites>)
      */
-    std::vector<SpriteWeakPtr> getAllLayers();
+    std::vector<Sprite_weak_ptr> getAllLayers();
     
     /// May return NULL if not found!
-    SpritePtr getLayerNamed(std::string);
+    Sprite_ptr getLayerNamed(std::string);
     
     std::vector<tmxparser::TmxObjectGroup> getAllObjectGroups();
     
@@ -72,8 +72,8 @@ private:
     void drawTiles();
     void getObjects();
     tmxparser::TmxMap map;
-    std::vector<SpriteWeakPtr> mTileLayer;
+    std::vector<Sprite_weak_ptr> mTileLayer;
 };
 
-FE_NAMESPACE_END
+RKT_NAMESPACE_END
 #endif

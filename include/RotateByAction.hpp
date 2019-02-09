@@ -14,10 +14,10 @@
 #include "Action.hpp"
 #include "Sprite.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
 class RotateByAction;
-FE_create_shared_Ptr(RotateByAction);
+RKT_create_shared__ptr(RotateByAction);
 
 /**
  * Rotates the target Nodes by x radians in y duration
@@ -25,11 +25,11 @@ FE_create_shared_Ptr(RotateByAction);
 class RotateByAction : public Action {
 public:
     RotateByAction(double duration, double radians);
-    static RotateByActionPtr create(double duration, double radians);
+    static RotateByAction_ptr create(double duration, double radians);
     
     void update();
     void start();
 };
 
-FE_NAMESPACE_END
+RKT_NAMESPACE_END
 #endif /* RotateByAction_hpp */

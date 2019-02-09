@@ -11,7 +11,7 @@
 
 #include "Types.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
 enum EasingFunction {
     EasingFunctionLinear,
@@ -78,5 +78,5 @@ extern float animationSineEaseIn (float t,float b , float c, float d);
 extern float animationSineEaseOut(float t,float b , float c, float d);
 extern float animationSineEaseInOut(float t,float b , float c, float d);
 
-FE_NAMESPACE_END
+RKT_NAMESPACE_END
 #endif /* EasingFunctions_hpp */

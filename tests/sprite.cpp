@@ -2,16 +2,16 @@
 #include "rawket/rawket.h"
 
 TEST_CASE( "Sprite positioning", "[sprite/affine_transform]" ) {
-	using namespace fe;
+	using namespace rkt;
 
-	SpritePtr spr = Sprite::create();
+	Sprite_ptr spr = Sprite::create();
 
 	SECTION("alloc") {
 		REQUIRE(spr);
 	}
 	
 	SECTION("child") {
-		SpritePtr spr2 = Sprite::create();
+		Sprite_ptr spr2 = Sprite::create();
 		spr->addChild(spr2);
 		
 		const auto &clds = spr->getChildren();

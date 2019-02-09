@@ -26,9 +26,9 @@
 
 #include "Types.hpp"
 
-#include "Window.hpp"
+#include "app_window.hpp"
 #include "Node.hpp"
-#include "Scene.hpp"
+#include "scene.hpp"
 #include "Sprite.hpp"
 #include "LabelNode.hpp"
 #include "ButtonNode.hpp"

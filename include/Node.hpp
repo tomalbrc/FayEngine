@@ -24,14 +24,14 @@
 #include "Types.hpp"
 #include "Action.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
-class Scene;
+class scene;
 class Node;
-FE_create_Ptr(Scene);
-FE_create_Ptr(Node);
-typedef std::vector<NodePtr> NodeVector;
-typedef std::map<std::string, ActionPtr> ActionMap;
+RKT_create__ptr(scene);
+RKT_create__ptr(Node);
+typedef std::vector<Node_ptr> NodeVector;
+typedef std::map<std::string, Action_ptr> ActionMap;
 // redefvirtual inition :(
 
 /**
@@ -44,7 +44,7 @@ public:
      *
      * @return a shared_ptr to the new Node instance
      */
-    static NodePtr create();
+    static Node_ptr create();
     
     /**
      * Deconstructor
@@ -56,7 +56,7 @@ public:
      *
      * @param action    action to run
      */
-    virtual void runAction(ActionPtr action);
+    virtual void runAction(Action_ptr action);
     
     /**
      * Run an Action for a specified key
@@ -64,14 +64,14 @@ public:
      * @param action    action to run
      * @param forKey    key to run the Action for
      */
-    virtual void runAction(ActionPtr action, const std::string& forKey);
+    virtual void runAction(Action_ptr action, const std::string& forKey);
     
     /**
      * Removes a running action
      *
      * @param action    action to remove
      */
-    virtual void removeAction(ActionPtr action);
+    virtual void removeAction(Action_ptr action);
     
     /**
      * Removes a running action for a specified key
@@ -90,7 +90,7 @@ public:
      *
      * @param actionName    key of the action
      */
-    virtual const ActionPtr getAction(std::string actionName);
+    virtual const Action_ptr getAction(std::string actionName);
     
     /**
      * Returns true if the node has any active actions
@@ -107,7 +107,7 @@ public:
      *
      * @param newParent     the parent the node will be moved to
      */
-    virtual void willMoveToParent(NodePtr newParent);
+    virtual void willMoveToParent(Node_ptr newParent);
     
     /**
      * Sets the name of the node
@@ -192,10 +192,10 @@ public:
      *
      * @param Node to add
      */
-    virtual void addChild(const NodePtr& node);
+    virtual void addChild(const Node_ptr& node);
     
     /**
-     * Returns all children in an std::vector<NodePtr>
+     * Returns all children in an std::vector<Node_ptr>
      */
     virtual const NodeVector &getChildren();
     
@@ -209,23 +209,23 @@ public:
      *
      * @param node  Node to remove
      */
-    virtual void removeChild(NodePtr node);
+    virtual void removeChild(Node_ptr node);
     
     /**
      * Returns the parent of the node, NULL if the node doesn't have a parent
      */
-    virtual const NodePtr getParent();
+    virtual const Node_ptr getParent();
     
     /**
      *
      * Sets the new parent of the node
      */
-    virtual void setParent(const NodePtr& n);
+    virtual void setParent(const Node_ptr& n);
     
     /**
-     * Returns the current Scene the node is in. Returns NULL when none of the nodes in the graph is on the Scene
+     * Returns the current scene the node is in. Returns NULL when none of the nodes in the graph is on the scene
      */
-    virtual const ScenePtr getScene();
+    virtual const scene_ptr getScene();
     
     /**
      * Returns the tag of the node. int
@@ -397,7 +397,7 @@ private:
     std::string name = "";
     
     // parent of this noded
-    NodePtr mParent;
+    Node_ptr mParent;
     
     
     // actions, performed in public
@@ -415,5 +415,5 @@ private:
     float m_zPosition = 0.f;
 };
 
-FE_NAMESPACE_END
+RKT_NAMESPACE_END
 #endif /* Node_hpp */

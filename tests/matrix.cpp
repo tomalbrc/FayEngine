@@ -2,7 +2,7 @@
 #include "rawket/rawket.h"
 
 TEST_CASE( "Matrix calculations", "[matrix]" ) {
-	using namespace fe;
+	using namespace rkt;
 	
 	auto m = AffineTransformIdentity();
 

@@ -15,10 +15,10 @@
 #include "Sprite.hpp"
 #include "Types.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
 class LabelNode;
-FE_create_Ptr(LabelNode);
+RKT_create__ptr(LabelNode);
 
 /**
  * Display a string using an TTF font
@@ -28,7 +28,7 @@ public:
     /**
      * Create an empty label node, not font or text set
      */
-    static LabelNodePtr create();
+    static LabelNode_ptr create();
 
 	/**
 	 * Returns a new LabelNode with text, font and fontsize. Color is white by default
@@ -37,14 +37,14 @@ public:
 	 * @param fontpath	Path to the font file used to display the text
 	 * @param	fontSize	Size of the text
 	 */
-    static LabelNodePtr create(std::string text, std::string fontpath, int fontSize);
+    static LabelNode_ptr create(std::string text, std::string fontpath, int fontSize);
 
 	/**
 	 * See above.
 	 *
 	 * @param col color of the text
 	 */
-    static LabelNodePtr create(std::string text, std::string fontpath, int fontSize, Color col);
+    static LabelNode_ptr create(std::string text, std::string fontpath, int fontSize, Color col);
 
     ~LabelNode();
 
@@ -80,5 +80,5 @@ private:
     int mFontSize = 24;
 };
 
-FE_NAMESPACE_END
+RKT_NAMESPACE_END
 #endif /* LabelSprite_hpp */

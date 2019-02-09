@@ -24,50 +24,50 @@
 #define amask 0xff000000
 #endif
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
-TexturePtr Texture::create() {
+Texture_ptr Texture::create() {
     auto t = EngineHelper::getInstance()->getTextureForKey("empty");
     if (t == nullptr) {
-        t = TexturePtr(new Texture());
+        t = Texture_ptr(new Texture());
         EngineHelper::getInstance()->cacheTexture(t, "empty");
     }
     return t;
 }
-TexturePtr Texture::create(std::string filename) {
+Texture_ptr Texture::create(std::string filename) {
     auto t = EngineHelper::getInstance()->getTextureForKey(filename);
     if (t == nullptr) {
-        t = TexturePtr(new Texture());
+        t = Texture_ptr(new Texture());
         t ->init(filename);
         EngineHelper::getInstance()->cacheTexture(t, filename);
     }
     return t;
 }
-TexturePtr Texture::create(Vec2 size, Color col) {
+Texture_ptr Texture::create(Vec2 size, Color col) {
     std::stringstream s; s.str("");
     s << size.x << size.y << col.r << col.g << col.b << col.a;
     auto t = EngineHelper::getInstance()->getTextureForKey(s.str());
     if (t == nullptr) {
-        t = TexturePtr(new Texture());
+        t = Texture_ptr(new Texture());
         t->init(size,col);
         EngineHelper::getInstance()->cacheTexture(t, s.str());
     }
     return t;
 }
-TexturePtr Texture::create(TexturePtr source, Rect rect) {
+Texture_ptr Texture::create(Texture_ptr source, Rect rect) {
     std::stringstream s; s.str("");
     s << source << rect.origin.x << rect.origin.y << rect.size.x << rect.size.y;
     auto t = EngineHelper::getInstance()->getTextureForKey(s.str());
     if (t == nullptr) {
-        t = TexturePtr(new Texture());
+        t = Texture_ptr(new Texture());
         t->init(source,rect);
         EngineHelper::getInstance()->cacheTexture(t, s.str());
     }
     return t;
 }
 
-TexturePtr Texture::create(SDL_Surface *surface) {
-    auto t = TexturePtr(new Texture());
+Texture_ptr Texture::create(SDL_Surface *surface) {
+    auto t = Texture_ptr(new Texture());
     t->mTexture = SDL_CreateTextureFromSurface(EngineHelper::getInstance()->getRenderer(), surface);
     int w,h; SDL_QueryTexture(t->mTexture, NULL, NULL, &w, &h);
     t->mSize = Vec2Make(w, h);
@@ -98,7 +98,7 @@ bool Texture::init(Vec2 size, Color col) {
     SDL_FreeSurface(mys);
     return true;
 }
-bool Texture::init(TexturePtr source, Rect rect) {
+bool Texture::init(Texture_ptr source, Rect rect) {
     mTexture = source->mTexture;
     mSize = rect.size;
     mRenderOffset = rect.origin;
@@ -106,7 +106,7 @@ bool Texture::init(TexturePtr source, Rect rect) {
     return true;
 }
 
-bool Texture::init(TexturePtr tex) {
+bool Texture::init(Texture_ptr tex) {
     mTexture = tex->mTexture;
     return true;
 }
@@ -140,4 +140,4 @@ SDL_Texture* Texture::sdlTexture() {
 }
 
 
-FE_NAMESPACE_END
+RKT_NAMESPACE_END

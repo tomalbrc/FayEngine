@@ -16,10 +16,10 @@
 #include <iostream>
 #include "Node.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
 class Texture;
-FE_create_Ptr(Texture);
+RKT_create__ptr(Texture);
 
 /**
  * This class allows to easily create SDL textures from image files or create new blank textures with a specified size and color
@@ -31,7 +31,7 @@ public:
      *
      * @return  shared pointer to a new Texture instance
      */
-    static TexturePtr create();
+    static Texture_ptr create();
     
     /**
      * Creates a new Texture object from an image file. The file may be an PNG, JPEG or any other format SDL2_image supports
@@ -39,7 +39,7 @@ public:
      * @param   filename    Filename to an image file
      * @return 	shared pointer to a new Texture instance
      */
-    static TexturePtr create(std::string filename);
+    static Texture_ptr create(std::string filename);
     
     /**
      * Creates a new Texture object (rectangle) with Size and Color
@@ -48,7 +48,7 @@ public:
      * @param	color           Color for the new Texture
      * @return 	shared pointer to a new Texture instance
      */
-    static TexturePtr create(Vec2 size, Color color);
+    static Texture_ptr create(Vec2 size, Color color);
     
     /**
      * Creates a new Texture object from another Texture with a rect and stores a reference to the source Texture
@@ -57,7 +57,7 @@ public:
      * @param	rect            Rect to 'cut' the new Texture out
      * @return 	shared pointer to a new Texture instance
      */
-    static TexturePtr create(TexturePtr sourceTexture, Rect rect);
+    static Texture_ptr create(Texture_ptr sourceTexture, Rect rect);
     
     /**
      * Creates a new Texture object from an SDL_Surface
@@ -65,10 +65,10 @@ public:
      * @param	surface         Pointer to a valid SDL_Surface
      * @return 	shared pointer to a new Texture instance
      */
-    static TexturePtr create(SDL_Surface *surface);
+    static Texture_ptr create(SDL_Surface *surface);
     
     /**
-     * Deletes the original SDL_Texture if the Texture wasn't created using Texture::create(TexturePtr tex, Rect rect)
+     * Deletes the original SDL_Texture if the Texture wasn't created using Texture::create(Texture_ptr tex, Rect rect)
      */
     ~Texture();
     
@@ -96,15 +96,15 @@ public:
     SDL_Texture* sdlTexture();
     
 private:
-    TexturePtr mSourceTexture = NULL;
-    TexturePtr mBatchTexture;
+    Texture_ptr mSourceTexture = NULL;
+    Texture_ptr mBatchTexture;
     Vec2 mRenderOffset = Vec2Null();
     
     bool init();
     bool init(std::string filename); // load image from path
     bool init(Vec2 size, Color col);
-    bool init(TexturePtr source, Rect rect);
-    bool init(TexturePtr tex); // Passes ownership to EngineHelper
+    bool init(Texture_ptr source, Rect rect);
+    bool init(Texture_ptr tex); // Passes ownership to EngineHelper
     bool init(SDL_Surface *surface);
     
 protected:
@@ -112,5 +112,5 @@ protected:
     Vec2 mSize = Vec2Null();
 };
     
-FE_NAMESPACE_END
+RKT_NAMESPACE_END
 #endif /* Texture_hpp */

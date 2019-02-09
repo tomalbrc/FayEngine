@@ -1,52 +1,52 @@
 //
-//  Scene.cpp
+//  scene.cpp
 //  rawket
 //
 //  Created by Tom Albrecht on 12.12.15.
 //  
 //
 
-#include "Scene.hpp"
+#include "scene.hpp"
 #include "Sprite.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
-bool Scene::init() {
+bool scene::init() {
     return Node::init();
 }
 
-ScenePtr Scene::create() {
-    return ScenePtr(new Scene());
+scene_ptr scene::create() {
+    return scene_ptr(new scene());
 }
 
 
-Scene::Scene() {
+scene::scene() {
     mBackgroundColor = ColorBlackColor();
 }
 
-Scene::~Scene() {
+scene::~scene() {
     
 }
 
 
 
-void Scene::setBackgroundColor(Color backgroundColor) {
+void scene::setBackgroundColor(Color backgroundColor) {
     mBackgroundColor = backgroundColor;
 }
-Color Scene::getBackgroundColor(void) {
+Color scene::getBackgroundColor(void) {
     return mBackgroundColor;
 }
 
 
 
-void Scene::setWindow(WindowPtr win) {
+void scene::setWindow(app_window_ptr win) {
     window = win;
 }
-WindowPtr Scene::getWindow(void) {
+app_window_ptr scene::getWindow(void) {
     return window;
 }
 
-void Scene::setShowCursor(bool show) {
+void scene::setShowCursor(bool show) {
     SDL_ShowCursor(show ? SDL_ENABLE : SDL_DISABLE);
 }
 
@@ -54,11 +54,11 @@ void Scene::setShowCursor(bool show) {
 
 
 
-void Scene::update() {
+void scene::update() {
     Node::update();
 }
 
-void Scene::render() {
+void scene::render() {
     SDL_RenderClear(getWindow()->getRenderer());
     SDL_SetRenderDrawColor(getWindow()->getRenderer(), getBackgroundColor().r, getBackgroundColor().g, getBackgroundColor().b, getBackgroundColor().a);
     Node::render(getWindow()->getRenderer());
@@ -69,27 +69,27 @@ void Scene::render() {
 
 
 
-void Scene::orientationChange(DeviceOrientation newOrientation) {
+void scene::orientationChange(DeviceOrientation newOrientation) {
     
 }
 
-void Scene::applicationWillEnterForeground() {
+void scene::applicationWillEnterForeground() {
     
 }
 
-void Scene::applicationDidEnterForeground() {
+void scene::applicationDidEnterForeground() {
     
 }
 
-void Scene::applicationWillEnterBackground() {
+void scene::applicationWillEnterBackground() {
     
 }
 
-void Scene::applicationDidEnterBackground() {
+void scene::applicationDidEnterBackground() {
     
 }
 
 
 
 
-FE_NAMESPACE_END
+RKT_NAMESPACE_END

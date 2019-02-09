@@ -13,16 +13,16 @@
 #include "SDL.h"
 #include "Types.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
 class ThreadManager;
-FE_create_Ptr(ThreadManager);
+RKT_create__ptr(ThreadManager);
 
 class ThreadManager {
 protected:
     std::function<void(void)> m_target;
 public:
-    static ThreadManagerPtr getInstance();
+    static ThreadManager_ptr getInstance();
     
     int executeFunction();
     
@@ -30,5 +30,5 @@ public:
     void runThread(std::string threadName, std::function<void(void)> function, bool waitForThread);
 };
 
-FE_NAMESPACE_END
+RKT_NAMESPACE_END
 #endif /* ThreadManager_hpp */

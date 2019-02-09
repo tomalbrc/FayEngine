@@ -7,27 +7,27 @@
 //
 
 #include "Sprite.hpp"
-#include "Scene.hpp"
+#include "scene.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
-SpritePtr Sprite::create() {
-    SpritePtr ss(new Sprite());
+Sprite_ptr Sprite::create() {
+    Sprite_ptr ss(new Sprite());
     ss->init();
     return ss;
 }
-SpritePtr Sprite::create(TexturePtr s) {
-    SpritePtr ss(new Sprite());
+Sprite_ptr Sprite::create(Texture_ptr s) {
+    Sprite_ptr ss(new Sprite());
     ss->init(s);
     return ss;
 }
-SpritePtr Sprite::create(Vec2 dimensions) {
-    SpritePtr ss(new Sprite());
+Sprite_ptr Sprite::create(Vec2 dimensions) {
+    Sprite_ptr ss(new Sprite());
     ss->init(dimensions);
     return ss;
 }
-SpritePtr Sprite::create(std::string filename) {
-    SpritePtr ss(new Sprite());
+Sprite_ptr Sprite::create(std::string filename) {
+    Sprite_ptr ss(new Sprite());
     ss->init(filename);
     return ss;
 }
@@ -36,7 +36,7 @@ bool Sprite::init() {
     return Node::init();
 }
 
-bool Sprite:: init(TexturePtr s) {
+bool Sprite:: init(Texture_ptr s) {
     if (Node::init()) {
         setTexture(s);
         return true;
@@ -71,12 +71,12 @@ Vec2 Sprite::getSize() {
 }
 
 
-void Sprite::setTexture(TexturePtr tex) {
+void Sprite::setTexture(Texture_ptr tex) {
     mTexture.reset();
     mTexture = tex;
     if (tex != nullptr) mSize = tex->getSize();
 }
-TexturePtr Sprite::getTexture() {
+Texture_ptr Sprite::getTexture() {
     return mTexture;
 }
 
@@ -158,4 +158,4 @@ Color Sprite::getColor() {
 }
 
     
-FE_NAMESPACE_END
+RKT_NAMESPACE_END

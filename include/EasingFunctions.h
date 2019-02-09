@@ -11,7 +11,7 @@
 
 #include <stdio.h>
 
-namespace fe {
+namespace rkt {
 
 enum EasingFunction {
     EasingFunctionLinear,
@@ -165,5 +165,5 @@ inline float animationSineEaseInOut(float t,float b , float c, float d) {
 }
 
 
-} // namespace fe
+} // namespace rkt
 #endif /* EasingFunctions_hpp */

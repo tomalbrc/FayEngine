@@ -14,11 +14,11 @@
 #include "Types.hpp"
 #include "EasingFunctions.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
 class Node;
 class Action;
-FE_create_Ptr(Action);
+RKT_create__ptr(Action);
 
 /**
  * Actions to alter properties of Nodes/Sprites, animated
@@ -82,5 +82,5 @@ protected:
     Vec2 currentVec2Value();
 };
 
-FE_NAMESPACE_END
+RKT_NAMESPACE_END
 #endif /* Action_hpp */

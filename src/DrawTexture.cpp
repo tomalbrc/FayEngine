@@ -28,7 +28,7 @@
 #define amask 0xff000000
 #endif
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
 void dt_plot(Vec2 p, SDL_Surface *s, Color col) {
     if (p.x < 0 || p.y < 0 || p.x > s->w || p.y > s->h) return;
@@ -44,10 +44,10 @@ DrawTexture::~DrawTexture() {
     SDL_DestroyTexture(mTexture);
 }
 
-DrawTexturePtr DrawTexture::create(Vec2 size, Color col) {
+DrawTexture_ptr DrawTexture::create(Vec2 size, Color col) {
     std::stringstream s; s.str("");
     s << size.x << size.y << col.r << col.g << col.b << col.a << time(NULL) << rand();
-    auto t = DrawTexturePtr(new DrawTexture());
+    auto t = DrawTexture_ptr(new DrawTexture());
     t->init(size,col);
     return t;
 }
@@ -149,4 +149,4 @@ void DrawTexture::fillCircle(float radius, Vec2 origin, Color color) {
 }
 
     
-FE_NAMESPACE_END
+RKT_NAMESPACE_END

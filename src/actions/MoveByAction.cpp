@@ -8,10 +8,10 @@
 
 #include "MoveByAction.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
-MoveByActionPtr MoveByAction::create(double pduration, Vec2 offset) {
-    MoveByActionPtr p(new MoveByAction());
+MoveByAction_ptr MoveByAction::create(double pduration, Vec2 offset) {
+    MoveByAction_ptr p(new MoveByAction());
     p->init(pduration, offset);
     return p;
 }
@@ -35,7 +35,7 @@ void MoveByAction::start()  {
 
 }
 
-FE_NAMESPACE_END
+RKT_NAMESPACE_END
 
 
 

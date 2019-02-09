@@ -12,11 +12,11 @@
 #include "Action.hpp"
 #include "Sprite.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
 class Node;
 class RepeatAction;
-typedef std::unique_ptr<RepeatAction> RepeatActionPtr;
+typedef std::unique_ptr<RepeatAction> RepeatAction_ptr;
 
 /**
  * Repeats an action x times
@@ -24,8 +24,8 @@ typedef std::unique_ptr<RepeatAction> RepeatActionPtr;
  */
 class RepeatAction : public Action {
 public:
-    RepeatAction(ActionPtr action, int times);
-    static RepeatActionPtr create(ActionPtr action, int times); // 0 to run forever
+    RepeatAction(Action_ptr action, int times);
+    static RepeatAction_ptr create(Action_ptr action, int times); // 0 to run forever
     virtual ~RepeatAction();
     
     void update();
@@ -33,10 +33,10 @@ public:
 private:
     bool mForever;
     int mRepeatTimes = 1;
-    ActionPtr mTargetAction = NULL;
+    Action_ptr mTargetAction = NULL;
 };
 
     
-FE_NAMESPACE_END
+RKT_NAMESPACE_END
 #endif /* RepeatAction_hpp */
 

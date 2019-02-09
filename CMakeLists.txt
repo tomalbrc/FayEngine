@@ -5,12 +5,12 @@ set(CMAKE_CXX_STANDARD 11)
 project(rawketProj VERSION 0.9 DESCRIPTION "Game Engine lib")
 
 # just glob the include files...
-file(GLOB FE_HEADER ${CMAKE_SOURCE_DIR}/include/*.h*)
-file(GLOB FE_SOURCES ${CMAKE_SOURCE_DIR}/src/*.cpp ${CMAKE_SOURCE_DIR}/src/*/*.cpp)
+file(GLOB RKT_HEADER ${CMAKE_SOURCE_DIR}/include/*.h*)
+file(GLOB RKT_SOURCES ${CMAKE_SOURCE_DIR}/src/*.cpp ${CMAKE_SOURCE_DIR}/src/*/*.cpp)
 
 add_library(rawket STATIC
-    ${FE_SOURCES}
-    ${FE_HEADER}
+    ${RKT_SOURCES}
+    ${RKT_HEADER}
 )
 
 set_target_properties(rawket PROPERTIES

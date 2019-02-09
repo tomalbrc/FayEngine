@@ -8,16 +8,16 @@
 
 #include "SequenceAction.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
-SequenceActionPtr SequenceAction::create(std::vector< ActionPtr > actions) {
-    SequenceActionPtr p(new SequenceAction());
+SequenceAction_ptr SequenceAction::create(std::vector< Action_ptr > actions) {
+    SequenceAction_ptr p(new SequenceAction());
     p->init(std::move(actions));
     return p;
 }
 
 
-bool SequenceAction::init(std::vector< ActionPtr > actions) {
+bool SequenceAction::init(std::vector< Action_ptr > actions) {
     if (Action::init()) {
         mActions = std::move(actions);
         return true;
@@ -57,4 +57,4 @@ void SequenceAction::prepareCurrentAction() {
 }
 
 
-FE_NAMESPACE_END
+RKT_NAMESPACE_END

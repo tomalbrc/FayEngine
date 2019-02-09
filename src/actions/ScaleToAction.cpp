@@ -8,10 +8,10 @@
 
 #include "ScaleToAction.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
-ScaleToActionPtr ScaleToAction::create(double pduration, double destScale) {
-    return ScaleToActionPtr(new ScaleToAction(pduration,destScale));
+ScaleToAction_ptr ScaleToAction::create(double pduration, double destScale) {
+    return ScaleToAction_ptr(new ScaleToAction(pduration,destScale));
 }
 
 ScaleToAction::ScaleToAction(double pduration, double destScale) : Action() {
@@ -32,4 +32,4 @@ void ScaleToAction::start()  {
 }
 
 
-FE_NAMESPACE_END
+RKT_NAMESPACE_END

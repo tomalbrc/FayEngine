@@ -8,7 +8,7 @@
 
 #include "Types.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
 /**
  * Affine transformations
@@ -260,4 +260,4 @@ Rect operator*(const Rect& lhs, const float& rhs) { return RectMake((lhs.origin.
 bool operator==(const Rect& lhs, const Rect& rhs) { return (lhs.origin == rhs.origin && lhs.size == rhs.size); }
 bool operator!=(const Rect& lhs, const Rect& rhs) { return !(lhs == rhs); }
 
-FE_NAMESPACE_END
+RKT_NAMESPACE_END

@@ -9,7 +9,7 @@
 #include "EasingFunctions.hpp"
 #include <math.h>
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
     
 /**
@@ -66,7 +66,7 @@ float animationBackEaseInOut(float t,float b , float c, float d) {
  * Linear
  */
 float animationLinear(float time, float startValue, float changeInValue, float duration) {
-    //FELog("Linear percentage: "<<time/duration);
+    //RKTLog("Linear percentage: "<<time/duration);
     return changeInValue*time/duration + startValue;
 }
 
@@ -140,4 +140,4 @@ float animationSineEaseInOut(float t,float b , float c, float d) {
 }
 
 
-FE_NAMESPACE_END
+RKT_NAMESPACE_END

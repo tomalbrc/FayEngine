@@ -8,10 +8,10 @@
 
 #include "RemoveFromParent.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
-RemoveFromParentActionPtr RemoveFromParentAction::create() {
-    RemoveFromParentActionPtr p(new RemoveFromParentAction());
+RemoveFromParentAction_ptr RemoveFromParentAction::create() {
+    RemoveFromParentAction_ptr p(new RemoveFromParentAction());
     p->init();
     return p;
 }
@@ -33,5 +33,5 @@ void RemoveFromParentAction::start()  {
 }
 
     
-FE_NAMESPACE_END
+RKT_NAMESPACE_END
 

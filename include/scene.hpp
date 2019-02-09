@@ -1,5 +1,5 @@
 //
-//  Scene.hpp
+//  scene.hpp
 //  rawket
 //
 //  Created by Tom Albrecht on 12.12.15.
@@ -12,57 +12,57 @@
 #include "SDL.h"
 #include "Types.hpp"
 #include "Node.hpp"
-#include "Window.hpp"
+#include "app_window.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
-class Scene;
-FE_create_Ptr(Scene);
+class scene;
+RKT_create__ptr(scene);
 
 /**
- * Scene Class
+ * scene Class
  */
-class Scene : public Node {
+class scene : public Node {
 public:
     /**
-     * Creates a new Scene object
+     * Creates a new scene object
      *
-     * @return a shared_ptr to the new Scene instance
+     * @return a shared_ptr to the new scene instance
      */
-    static ScenePtr create();
+    static scene_ptr create();
     
     /**
      * Deconstructor
      */
-    virtual ~Scene();
+    virtual ~scene();
     
     /**
-     * Sets the background Color for the Scene
+     * Sets the background Color for the scene
      *
      * @param new background Color
      */
     void setBackgroundColor(Color backgroundColor);
     
     /**
-     * The current background Color for the Scene
+     * The current background Color for the scene
      *
      * @return current background Color
      */
     Color getBackgroundColor();
     
     /**
-     * Sets a new window. Normally called when presenting a new Scene
+     * Sets a new window. Normally called when presenting a new scene
      *
-     * @param window new Window
+     * @param window new app_window
      */
-    virtual void setWindow(WindowPtr window);
+    virtual void setWindow(app_window_ptr window);
     
     /**
      * The current window the scene is presented in
      *
      * @return current window
      */
-    virtual WindowPtr getWindow();
+    virtual app_window_ptr getWindow();
     
     /**
      * Re-implement the render function from Node
@@ -111,13 +111,13 @@ public:
     virtual void applicationDidEnterBackground();
     
 protected:
-    Scene();
+    scene();
     bool init();
     bool shouldBeRemoved = false;
 private:
     Color mBackgroundColor;
-    WindowPtr window;
+    app_window_ptr window;
 };
 
-FE_NAMESPACE_END
+RKT_NAMESPACE_END
 #endif /* Scene_hpp */

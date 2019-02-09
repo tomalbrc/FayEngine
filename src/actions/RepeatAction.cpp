@@ -8,13 +8,13 @@
 
 #include "RepeatAction.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
-RepeatActionPtr RepeatAction::create(ActionPtr action, int times) {
-    return RepeatActionPtr(new RepeatAction(action,times));
+RepeatAction_ptr RepeatAction::create(Action_ptr action, int times) {
+    return RepeatAction_ptr(new RepeatAction(action,times));
 }
 
-RepeatAction::RepeatAction(ActionPtr action, int times) : Action() {
+RepeatAction::RepeatAction(Action_ptr action, int times) : Action() {
     mTargetAction = action;
     mRepeatTimes = times;
     mForever = mRepeatTimes == 0;
@@ -50,4 +50,4 @@ void RepeatAction::start()  {
 }
 
 
-FE_NAMESPACE_END
+RKT_NAMESPACE_END

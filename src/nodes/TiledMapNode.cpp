@@ -20,10 +20,10 @@
 #define amask  0xff000000
 #endif
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
-TiledMapNodePtr TiledMapNode::create(const std::string &filepath) {
-    TiledMapNodePtr p(new TiledMapNode());
+TiledMapNode_ptr TiledMapNode::create(const std::string &filepath) {
+    TiledMapNode_ptr p(new TiledMapNode());
     p->init(filepath);
     return p;
 }
@@ -49,7 +49,6 @@ TiledMapNode::~TiledMapNode() {
 }
 
 
-
 tmxparser::TmxObjectGroup TiledMapNode::getObjectGroupNamed(std::string name) {
     tmxparser::TmxObjectGroup s;
     for (auto&& layer : map.objectGroupCollection) {
@@ -58,8 +57,8 @@ tmxparser::TmxObjectGroup TiledMapNode::getObjectGroupNamed(std::string name) {
     return s;
 }
 
-SpritePtr TiledMapNode::getLayerNamed(std::string name) {
-    SpritePtr s = NULL;
+Sprite_ptr TiledMapNode::getLayerNamed(std::string name) {
+    Sprite_ptr s = NULL;
     for (auto&& layer : mTileLayer) {
         if (layer.lock()->getName() == name) return layer.lock();
     }
@@ -76,9 +75,9 @@ void TiledMapNode::drawTiles() {
     Vec2 imageSize = Vec2Make(tileset.image.width, tileset.image.height);
     int tileSpacing = tileset.tileSpacingInImage;
     
-    FELog("First GID: " << tileset.firstgid);
-    FELog("Image Source: " << directory + tileset.image.source);
-    FELog("tile-size: " << imageTileSize.x << " y:" << imageTileSize.y);
+    RKTLog("First GID: " << tileset.firstgid);
+    RKTLog("Image Source: " << directory + tileset.image.source);
+    RKTLog("tile-size: " << imageTileSize.x << " y:" << imageTileSize.y);
     
     for (auto&& tileLayer : map.layerCollection) {
         
@@ -130,8 +129,7 @@ tmxparser::TmxMap TiledMapNode::getRawMap() {
     return map;
 }
 
-
-std::vector<SpriteWeakPtr> TiledMapNode::getAllLayers() {
+std::vector<Sprite_weak_ptr> TiledMapNode::getAllLayers() {
     return mTileLayer;
 }
 
@@ -148,6 +146,4 @@ const Vec2 TiledMapNode::getPosition() {
     return (Node::getPosition() - Node::getPosition()*getAnchorPoint());
 }
 
-
-
-FE_NAMESPACE_END
+RKT_NAMESPACE_END

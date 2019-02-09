@@ -8,24 +8,24 @@
 
 #include "SpriteAnimationAction.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
 SpriteAnimationAction::~SpriteAnimationAction() {
     textures.clear();
 }
 
-SpriteAnimationActionPtr SpriteAnimationAction::create(double secondsPerFrame, std::vector< TexturePtr > textures) {
+SpriteAnimationAction_ptr SpriteAnimationAction::create(double secondsPerFrame, std::vector< Texture_ptr > textures) {
     return create(secondsPerFrame, textures, true);
 }
 
-SpriteAnimationActionPtr SpriteAnimationAction::create(double secondsPerFrame, std::vector< TexturePtr > textures, bool shouldRestoreOriginal) {
-    SpriteAnimationActionPtr p(new SpriteAnimationAction());
+SpriteAnimationAction_ptr SpriteAnimationAction::create(double secondsPerFrame, std::vector< Texture_ptr > textures, bool shouldRestoreOriginal) {
+    SpriteAnimationAction_ptr p(new SpriteAnimationAction());
     p->init(secondsPerFrame, textures, shouldRestoreOriginal);
     return p;
 }
 
 
-bool SpriteAnimationAction::init(double secondsPerFrame, std::vector< TexturePtr > s, bool shouldRestoreOriginal) {
+bool SpriteAnimationAction::init(double secondsPerFrame, std::vector< Texture_ptr > s, bool shouldRestoreOriginal) {
     mShouldRestoreOriginal = shouldRestoreOriginal;
     duration = secondsPerFrame*1000;
     textures = s;
@@ -44,8 +44,8 @@ void SpriteAnimationAction::update() {
     
     double mark = 1.f/textures.size();
     int index = floor((passedTime/duration)/mark);
-    if (index < textures.size()) ((Sprite*)this->target)->setTexture(textures[index]);//, FELog("Ran texture");
-    //if (textures.size() > 1) FELog("Size of Textures size of: "<<textures.size()<<", idx: "<<index);
+    if (index < textures.size()) ((Sprite*)this->target)->setTexture(textures[index]);//, RKTLog("Ran texture");
+    //if (textures.size() > 1) RKTLog("Size of Textures size of: "<<textures.size()<<", idx: "<<index);
 }
 
 void SpriteAnimationAction::start()  {
@@ -55,4 +55,4 @@ void SpriteAnimationAction::start()  {
 }
 
     
-FE_NAMESPACE_END
+RKT_NAMESPACE_END

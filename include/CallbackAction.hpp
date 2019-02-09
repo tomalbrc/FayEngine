@@ -16,18 +16,18 @@
 #define CallbackActionLambda(x) [x]
 #define CallbackActionCallback std::function<void(void)>
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
 class Node;
 class CallbackAction;
-typedef std::unique_ptr<CallbackAction> CallbackActionPtr;
+typedef std::unique_ptr<CallbackAction> CallbackAction_ptr;
 
 /**
  * Calls a callback function after a specified amount of time
  */
 class CallbackAction : public Action {
 public:
-    static CallbackActionPtr create(CallbackActionCallback callback);
+    static CallbackAction_ptr create(CallbackActionCallback callback);
     
     /**
      * Re-implementation from base class Action
@@ -46,5 +46,5 @@ private:
 };
 
 
-FE_NAMESPACE_END
+RKT_NAMESPACE_END
 #endif /* CallbackAction_hpp */

@@ -12,29 +12,29 @@
 #include "Action.hpp"
 #include "Sprite.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
 class SpriteAnimationAction;
-FE_create_shared_Ptr(SpriteAnimationAction);
+RKT_create_shared__ptr(SpriteAnimationAction);
 
 /**
  * Animates a Sequence of Texture objects on the target Sprite
  */
 class SpriteAnimationAction : public Action {
 public:
-    static SpriteAnimationActionPtr create(double secondsPerFrame, std::vector< TexturePtr > textures, bool shouldRestoreOriginal);
-    static SpriteAnimationActionPtr create(double secondsPerFrame, std::vector< TexturePtr > textures);
+    static SpriteAnimationAction_ptr create(double secondsPerFrame, std::vector< Texture_ptr > textures, bool shouldRestoreOriginal);
+    static SpriteAnimationAction_ptr create(double secondsPerFrame, std::vector< Texture_ptr > textures);
     ~SpriteAnimationAction();
     
     void update();
     void start();
     
 private:
-    bool init(double secondsPerFrame, std::vector< TexturePtr > textures, bool shouldRestoreOriginal);
-    TexturePtr mOriginalTexture;
+    bool init(double secondsPerFrame, std::vector< Texture_ptr > textures, bool shouldRestoreOriginal);
+    Texture_ptr mOriginalTexture;
     bool mShouldRestoreOriginal = true;
-    std::vector< TexturePtr > textures;
+    std::vector< Texture_ptr > textures;
 };
 
-FE_NAMESPACE_END
+RKT_NAMESPACE_END
 #endif /* SpriteAnimationAction_hpp */

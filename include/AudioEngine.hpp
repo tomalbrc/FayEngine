@@ -14,17 +14,17 @@
 #include "SDL_mixer.h"
 #include "Types.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
 class AudioEngine;
-FE_create_Ptr(AudioEngine);
+RKT_create__ptr(AudioEngine);
 
 class AudioEngine {
 public:
     AudioEngine();
     ~AudioEngine();
     
-    static AudioEnginePtr getInstance();
+    static AudioEngine_ptr getInstance();
     
     /**
      * Pauses Music
@@ -79,5 +79,5 @@ private:
     std::map<std::string, Mix_Chunk*> m_SoundEffects;
 };
 
-FE_NAMESPACE_END
+RKT_NAMESPACE_END
 #endif /* AudioEngine_hpp */

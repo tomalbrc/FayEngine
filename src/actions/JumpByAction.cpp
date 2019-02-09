@@ -8,10 +8,10 @@
 
 #include "JumpByAction.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
-JumpByActionPtr JumpByAction::create(double pduration, Vec2 position, float height, int jumps) {
-    return JumpByActionPtr(new JumpByAction(pduration,position, height, jumps));
+JumpByAction_ptr JumpByAction::create(double pduration, Vec2 position, float height, int jumps) {
+    return JumpByAction_ptr(new JumpByAction(pduration,position, height, jumps));
 }
 
 
@@ -54,4 +54,4 @@ void JumpByAction::start()  {
 }
 
 
-FE_NAMESPACE_END
+RKT_NAMESPACE_END

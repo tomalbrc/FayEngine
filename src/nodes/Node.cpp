@@ -7,18 +7,18 @@
 //
 
 #include "Node.hpp"
-#include "Scene.hpp"
+#include "scene.hpp"
 #include "EngineHelper.hpp"
 
-FE_NAMESPACE_BEGIN
+RKT_NAMESPACE_BEGIN
 
 bool Node::init() {
     children.clear();
     return true;
 }
 
-NodePtr Node::create() {
-    return NodePtr(new Node());
+Node_ptr Node::create() {
+    return Node_ptr(new Node());
 }
 Node::~Node() {
     mParent.reset();
@@ -29,18 +29,18 @@ Node::~Node() {
 
 
 
-void Node::runAction(ActionPtr action) { // WORKS
+void Node::runAction(Action_ptr action) { // WORKS
     std::stringstream stre("");
     stre << rand();
     runAction(std::move(action), stre.str());
 }
-void Node::runAction(ActionPtr action, const std::string &forKey) { // WORKS
+void Node::runAction(Action_ptr action, const std::string &forKey) { // WORKS
     action->target = this;
     action->start();
     actions[forKey] = (std::move(action));
 }
 
-void Node::removeAction(ActionPtr action) { // NOT TESTED
+void Node::removeAction(Action_ptr action) { // NOT TESTED
     action->finished = true;
 }
 
@@ -58,9 +58,9 @@ bool Node::hasActions() {
     return actions.size() > 0;
 }
 
-const ActionPtr Node::getAction(std::string actionName) {
+const Action_ptr Node::getAction(std::string actionName) {
    if (actions[actionName] != nullptr && !actions[actionName]->finished) {
-        //FELog(actions[actionName]);
+        //RKTLog(actions[actionName]);
         return actions[actionName];
     }
     else return nullptr;
@@ -68,8 +68,8 @@ const ActionPtr Node::getAction(std::string actionName) {
 
 
 
-inline void sort(std::vector<NodePtr>& children) {
-    std::sort(children.begin( ), children.end( ), [ ]( const NodePtr& lhs, const NodePtr& rhs ) {
+inline void sort(std::vector<Node_ptr>& children) {
+    std::sort(children.begin( ), children.end( ), [ ]( const Node_ptr& lhs, const Node_ptr& rhs ) {
         return (lhs == nullptr ? 0 : lhs->getZPosition()) < (rhs == nullptr ? 0 : rhs->getZPosition());
     });
 }
@@ -89,7 +89,7 @@ void Node::update() {
 }
 
 
-void Node::willMoveToParent(NodePtr newParent) {
+void Node::willMoveToParent(Node_ptr newParent) {
     mParent = newParent;
 }
 
@@ -162,7 +162,7 @@ Vec2 Node::convertToWorldSpace(Vec2 nodePoint) {
 const NodeVector &Node::getChildren() {
     return children;
 }
-void Node::addChild(const NodePtr& node) {
+void Node::addChild(const Node_ptr& node) {
     hasDirtyZPos = true;
     node->setParent(shared_from_this());
     node->willMoveToParent(shared_from_this());
@@ -173,7 +173,7 @@ void Node::removeFromParent() { // untested
     if (getParent() != nullptr) getParent()->removeChild(this->shared_from_this()), mParent.reset();
 }
 
-void Node::removeChild(NodePtr node) {
+void Node::removeChild(Node_ptr node) {
     node->willMoveToParent(NULL);
     for (auto&& c : children) {
         if (node.get() == c.get()) {
@@ -184,16 +184,16 @@ void Node::removeChild(NodePtr node) {
 }
 
 
-const NodePtr Node::getParent() {
+const Node_ptr Node::getParent() {
     return mParent;
 }
-void Node::setParent(const NodePtr& n) {
+void Node::setParent(const Node_ptr& n) {
     if (mParent != nullptr) mParent.reset();
     mParent = n;
 }
 
 
-const ScenePtr Node::getScene() {
+const scene_ptr Node::getScene() {
     // Ugh, not sure about this
     return EngineHelper::getInstance()->getMainWindow()->getCurrentScene();
 }
@@ -305,4 +305,4 @@ const float Node::getZPosition() {
 }
 
 
-FE_NAMESPACE_END
+RKT_NAMESPACE_END
