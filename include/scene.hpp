@@ -10,19 +10,19 @@
 #define Scene_hpp
 
 #include "SDL.h"
-#include "Types.hpp"
-#include "Node.hpp"
+#include "types.hpp"
+#include "node.hpp"
 #include "app_window.hpp"
 
 RKT_NAMESPACE_BEGIN
 
 class scene;
-RKT_create__ptr(scene);
+RKT_create_ptr(scene);
 
 /**
  * scene Class
  */
-class scene : public Node {
+class scene : public node {
 public:
     /**
      * Creates a new scene object
@@ -37,18 +37,18 @@ public:
     virtual ~scene();
     
     /**
-     * Sets the background Color for the scene
+     * Sets the background color4u for the scene
      *
-     * @param new background Color
+     * @param new background color4u
      */
-    void setBackgroundColor(Color backgroundColor);
+    void setBackgroundColor(color4u backgroundColor);
     
     /**
-     * The current background Color for the scene
+     * The current background color4u for the scene
      *
-     * @return current background Color
+     * @return current background color4u
      */
-    Color getBackgroundColor();
+    color4u getBackgroundColor();
     
     /**
      * Sets a new window. Normally called when presenting a new scene
@@ -65,7 +65,7 @@ public:
     virtual app_window_ptr getWindow();
     
     /**
-     * Re-implement the render function from Node
+     * Re-implement the render function from node
      */
     virtual void render();
     
@@ -78,14 +78,14 @@ public:
     
     
     /**
-     * Re-implementation of Node::update()
+     * Re-implementation of node::update()
      */
     virtual void update();
     
     
     /**
      * Mobile device related. Gets called when the device orientation is changed.
-     * Check Types.hpp for supported 'DeviceOrientation's
+     * Check types.hpp for supported 'DeviceOrientation's
      */
     virtual void orientationChange(DeviceOrientation newOrientation);
     
@@ -115,7 +115,7 @@ protected:
     bool init();
     bool shouldBeRemoved = false;
 private:
-    Color mBackgroundColor;
+    color4u mBackgroundColor;
     app_window_ptr window;
 };
 

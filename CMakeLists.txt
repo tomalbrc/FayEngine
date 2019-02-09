@@ -17,11 +17,6 @@ set_target_properties(rawket PROPERTIES
 	VERSION ${PROJECT_VERSION}
 )
 
-target_include_directories(rawket PUBLIC
-	$<INSTALL_INTERFACE:include>
-	$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-)
-
 # sdl for target
 find_package(SDL2 REQUIRED)
 find_package(SDL2_net REQUIRED)
@@ -53,9 +48,7 @@ add_executable(testlib
     tests/matrix.cpp
 )
 
-target_include_directories(testlib PRIVATE
-	${CMAKE_INSTALL_PREFIX}/include
-)
+include_directories(include)
 
 target_link_libraries(testlib rawket
 	SDL2

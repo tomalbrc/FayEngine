@@ -17,7 +17,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+LIABILITY, WHETHER IN AN action OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
@@ -150,7 +150,7 @@ TmxReturn parseFromFile(const std::string& fileName, TmxMap* outMap, const std::
 		return TmxReturn::kErrorParsing;
 	}
 
-	// parse the map Node
+	// parse the map node
 	return _parseStart(doc.FirstChildElement("map"), outMap, tilesetPath);
 }
 
@@ -264,7 +264,7 @@ TmxReturn _parseMapNode(tinyxml2::XMLElement* element, TmxMap* outMap)
 		error = _parseTilesetNode(child, &set);
 		if (error)
 		{
-			LOGE("Error processing tileset Node...");
+			LOGE("Error processing tileset node...");
 			return error;
 		}
 
@@ -277,7 +277,7 @@ TmxReturn _parseMapNode(tinyxml2::XMLElement* element, TmxMap* outMap)
 		error = _parseLayerNode(child, outMap->tilesetCollection, &layer);
 		if (error)
 		{
-			LOGE("Error processing layer Node...");
+			LOGE("Error processing layer node...");
 			return error;
 		}
 
@@ -290,7 +290,7 @@ TmxReturn _parseMapNode(tinyxml2::XMLElement* element, TmxMap* outMap)
 		error = _parseObjectGroupNode(child, &group);
 		if (error)
 		{
-			LOGE("Error processing objectgroup Node...");
+			LOGE("Error processing objectgroup node...");
 			return error;
 		}
 
@@ -303,7 +303,7 @@ TmxReturn _parseMapNode(tinyxml2::XMLElement* element, TmxMap* outMap)
 		error = _parseImageLayerNode(child, &imageLayer);
 		if (error)
 		{
-			LOGE("Error parsing imagelayer Node...");
+			LOGE("Error parsing imagelayer node...");
 			return error;
 		}
 
@@ -377,7 +377,7 @@ TmxReturn _parseTilesetNode(tinyxml2::XMLElement* element, TmxTileset* outTilese
 		TmxReturn error = _parseImageNode(element->FirstChildElement("image"), &outTileset->image);
 		if (error)
 		{
-			LOGE("Error parsing image Node...");
+			LOGE("Error parsing image node...");
 			return error;
 		}
 
@@ -437,7 +437,7 @@ TmxReturn _parseTileDefinitionNode(tinyxml2::XMLElement* element, TmxTileDefinit
 		error = _parseObjectGroupNode(child, &group);
 		if (error)
 		{
-			LOGE("Error processing objectgroup Node...");
+			LOGE("Error processing objectgroup node...");
 			return error;
 		}
 
@@ -482,11 +482,11 @@ TmxReturn _parseLayerNode(tinyxml2::XMLElement* element, const TmxTilesetCollect
 	error = _parsePropertyNode(element->FirstChildElement("properties"), &outLayer->propertyMap);
 	if (error)
 	{
-		LOGE("Error parsing layer property Node...");
+		LOGE("Error parsing layer property node...");
 		return error;
 	}
 
-	// check data Node and type
+	// check data node and type
 	tinyxml2::XMLElement* dataElement = element->FirstChildElement("data");
 	if (dataElement != NULL)
 	{
@@ -494,7 +494,7 @@ TmxReturn _parseLayerNode(tinyxml2::XMLElement* element, const TmxTilesetCollect
 	}
 	else
 	{
-		LOGE("Layer missing data Node...");
+		LOGE("Layer missing data node...");
 		return TmxReturn::kMissingDataNode;
 	}
 
@@ -657,7 +657,7 @@ TmxReturn _parseObjectGroupNode(tinyxml2::XMLElement* element, TmxObjectGroup* o
 		error = _parseObjectNode(child, &obj);
 		if (error)
 		{
-			LOGE("Error parsing object Node...");
+			LOGE("Error parsing object node...");
 			return TmxReturn::kErrorParsing;
 		}
 		outObjectGroup->objects.push_back(obj);
@@ -832,7 +832,7 @@ tmxparser::TmxReturn _parseImageLayerNode(tinyxml2::XMLElement* element, TmxImag
 		error = _parsePropertyNode(element->FirstChildElement("properties"), &outImageLayer->propertyMap);
 		if (error != kSuccess)
 		{
-			LOGE("Error parsing image layer property Node...");
+			LOGE("Error parsing image layer property node...");
 			return error;
 		}
 	}

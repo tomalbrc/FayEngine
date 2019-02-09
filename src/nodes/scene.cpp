@@ -7,12 +7,12 @@
 //
 
 #include "scene.hpp"
-#include "Sprite.hpp"
+#include "sprite.hpp"
 
 RKT_NAMESPACE_BEGIN
 
 bool scene::init() {
-    return Node::init();
+    return node::init();
 }
 
 scene_ptr scene::create() {
@@ -30,10 +30,10 @@ scene::~scene() {
 
 
 
-void scene::setBackgroundColor(Color backgroundColor) {
+void scene::setBackgroundColor(color4u backgroundColor) {
     mBackgroundColor = backgroundColor;
 }
-Color scene::getBackgroundColor(void) {
+color4u scene::getBackgroundColor(void) {
     return mBackgroundColor;
 }
 
@@ -55,13 +55,13 @@ void scene::setShowCursor(bool show) {
 
 
 void scene::update() {
-    Node::update();
+    node::update();
 }
 
 void scene::render() {
     SDL_RenderClear(getWindow()->getRenderer());
     SDL_SetRenderDrawColor(getWindow()->getRenderer(), getBackgroundColor().r, getBackgroundColor().g, getBackgroundColor().b, getBackgroundColor().a);
-    Node::render(getWindow()->getRenderer());
+    node::render(getWindow()->getRenderer());
     SDL_RenderPresent(getWindow()->getRenderer());
 }
 

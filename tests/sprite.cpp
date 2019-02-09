@@ -1,17 +1,17 @@
 #include "catch.hpp"
-#include "rawket/rawket.h"
+#include "rawket.h"
 
-TEST_CASE( "Sprite positioning", "[sprite/affine_transform]" ) {
+TEST_CASE( "sprite positioning", "[sprite/affine_transform]" ) {
 	using namespace rkt;
 
-	Sprite_ptr spr = Sprite::create();
+	sprite_ptr spr = sprite::create();
 
 	SECTION("alloc") {
 		REQUIRE(spr);
 	}
 	
 	SECTION("child") {
-		Sprite_ptr spr2 = Sprite::create();
+		sprite_ptr spr2 = sprite::create();
 		spr->addChild(spr2);
 		
 		const auto &clds = spr->getChildren();

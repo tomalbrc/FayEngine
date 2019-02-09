@@ -8,12 +8,12 @@
 
 #include "app_window.hpp"
 #include "scene.hpp"
-#include "Sprite.hpp"
-#include "SequenceAction.hpp"
-#include "WaitAction.hpp"
-#include "FadeAlphaToAction.hpp"
-#include "RemoveFromParent.hpp"
-#include "EngineHelper.hpp"
+#include "sprite.hpp"
+#include "sequence_action.hpp"
+#include "wait_action.hpp"
+#include "fade_action.hpp"
+#include "remove_action.hpp"
+#include "engine_helper.hpp"
 
 #define SCREEN_FPS desiredFPS
 #define SCREEN_TICKS_PER_FRAME (1000/SCREEN_FPS)
@@ -23,20 +23,20 @@
 RKT_NAMESPACE_BEGIN
 
 static bool RKTWindowBackgrounded = false;
-static Sprite_ptr RKTWindowOverlay;
+static sprite_ptr RKTWindowOverlay;
 
 app_window::~app_window() {
     m_currentScene.reset();
 }
 
-app_window_ptr app_window::create(std::string wname, Vec2 size) {
+app_window_ptr app_window::create(std::string wname, vec2f size) {
     return create(wname, size, false);
 }
 
-app_window_ptr app_window::create(std::string wname, Vec2 size, bool fullscreen) {
+app_window_ptr app_window::create(std::string wname, vec2f size, bool fullscreen) {
     return create(wname, size, false, false);
 }
-app_window_ptr app_window::create(std::string wname, Vec2 size, bool fullscreen, bool hidpi) {
+app_window_ptr app_window::create(std::string wname, vec2f size, bool fullscreen, bool hidpi) {
     app_window_ptr o(new app_window());
     o->init(wname, size, fullscreen, hidpi);
     return o;
@@ -78,8 +78,8 @@ int EventFilter(void* userData, SDL_Event *event) {
         }
     return 1;
 }
-bool app_window::init(std::string wname, Vec2 size, bool fullscreen, bool hidpi) {
-    rkt::EngineHelper::getInstance()->Init();
+bool app_window::init(std::string wname, vec2f size, bool fullscreen, bool hidpi) {
+    rkt::engine_helper::getInstance()->Init();
     
     Uint32 flags = hidpi ? SDL_WINDOW_ALLOW_HIGHDPI : 0;
     flags |= SDL_WINDOW_SHOWN;
@@ -99,8 +99,8 @@ bool app_window::init(std::string wname, Vec2 size, bool fullscreen, bool hidpi)
     
     SDL_SetEventFilter(EventFilter, this);
     
-    EngineHelper::getInstance()->setRenderer(m_renderer);
-    EngineHelper::getInstance()->setMainWindow(shared_from_this());
+    engine_helper::getInstance()->setRenderer(m_renderer);
+    engine_helper::getInstance()->setMainWindow(shared_from_this());
     
     SDL_GameControllerOpen(0);
     
@@ -108,10 +108,10 @@ bool app_window::init(std::string wname, Vec2 size, bool fullscreen, bool hidpi)
 }
 
 // hacky little C helper function
-inline Vec2 getMouseCoords() {
+inline vec2f getMouseCoords() {
     int x,y;
     SDL_GetMouseState(&x, &y);
-    return Vec2Make(x,y);
+    return vec2f_make(x,y);
 }
 
 
@@ -131,10 +131,10 @@ SDL_Renderer* app_window::getRenderer() {
     return m_renderer;
 }
 
-Vec2 app_window::getSize() {
+vec2f app_window::getSize() {
     int w,h;
     SDL_GetWindowSize(m_sdlWindow, &w, &h);
-    return Vec2Make(w,h);
+    return vec2f_make(w,h);
 }
 
 
@@ -179,14 +179,14 @@ void app_window::startLoop() {
             m_newScene = NULL;
         } else if ((m_showNew && (RKTWindowOverlay.get() == nullptr || (RKTWindowOverlay.get() != nullptr && RKTWindowOverlay->getParent() == nullptr)))) { // TODO: Add Transition between scenes
             RKTWindowOverlay.reset();
-            RKTWindowOverlay = Sprite::create(Texture::create(getSize(), m_nextTransition.color));
+            RKTWindowOverlay = sprite::create(texture::create(getSize(), m_nextTransition.color));
             RKTWindowOverlay->setAlpha(0);
             RKTWindowOverlay->setZPosition(__FLT_MAX__);
             m_currentScene->addChild(RKTWindowOverlay);
             
-            auto fade = FadeAlphaToAction::create(m_nextTransition.duration, 255);
+            auto fade = fade_action::create(m_nextTransition.duration, 255);
             fade->setEasingFunction(m_nextTransition.startEasingFunction);
-            RKTWindowOverlay->runAction(SequenceAction::create({
+            RKTWindowOverlay->runAction(sequence_action::create({
                 fade,
             }), "o");
             
@@ -201,11 +201,11 @@ void app_window::startLoop() {
             RKTWindowOverlay->removeFromParent();
             m_currentScene->addChild(RKTWindowOverlay);
             
-            auto fade = FadeAlphaToAction::create(m_nextTransition.duration, 0);
+            auto fade = fade_action::create(m_nextTransition.duration, 0);
             fade->setEasingFunction(m_nextTransition.endEasingFunction);
-            RKTWindowOverlay->runAction(SequenceAction::create({
+            RKTWindowOverlay->runAction(sequence_action::create({
                 fade,
-                RemoveFromParentAction::create(),
+                remove_action::create(),
             }), "o2");
             
             m_showNew = false;
@@ -245,15 +245,15 @@ void app_window::handleEvents() {
                 break;
             }
             case SDL_FINGERDOWN: {
-                if (m_currentScene != nullptr) m_currentScene->touchBegan(event.tfinger, Vec2Make(event.tfinger.x, event.tfinger.y)*getSize());
+                if (m_currentScene != nullptr) m_currentScene->touchBegan(event.tfinger, vec2f_make(event.tfinger.x, event.tfinger.y)*getSize());
                 break;
             }
             case SDL_FINGERMOTION: {
-                if (m_currentScene != nullptr) m_currentScene->touchMoved(event.tfinger, Vec2Make(event.tfinger.x, event.tfinger.y)*getSize());
+                if (m_currentScene != nullptr) m_currentScene->touchMoved(event.tfinger, vec2f_make(event.tfinger.x, event.tfinger.y)*getSize());
                 break;
             }
             case SDL_FINGERUP: {
-                if (m_currentScene != nullptr) m_currentScene->touchEnded(event.tfinger, Vec2Make(event.tfinger.x, event.tfinger.y)*getSize());
+                if (m_currentScene != nullptr) m_currentScene->touchEnded(event.tfinger, vec2f_make(event.tfinger.x, event.tfinger.y)*getSize());
                 break;
             }
             

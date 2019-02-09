@@ -15,18 +15,18 @@
 #include <vector>
 #include <iostream>
 #include <memory>
-#include "Node.hpp"
+#include "node.hpp"
 
 RKT_NAMESPACE_BEGIN
 
 struct SceneTransition {
     double duration = 0.17;
-    Color color = ColorBlackColor();
+    color4u color = ColorBlackColor();
     EasingFunction startEasingFunction = EasingFunctionQuadEaseOut;
     EasingFunction endEasingFunction = EasingFunctionQuadEaseIn;
 };
 
-inline SceneTransition SceneTransitionMake(double duration, Color col, EasingFunction startEasingFunction, EasingFunction endEasingFunction) {
+inline SceneTransition SceneTransitionMake(double duration, color4u col, EasingFunction startEasingFunction, EasingFunction endEasingFunction) {
     SceneTransition transition;
     transition.color = col;
     transition.duration = duration;
@@ -37,7 +37,7 @@ inline SceneTransition SceneTransitionMake(double duration, Color col, EasingFun
 
 class scene;
 class app_window;
-RKT_create__ptr(app_window);
+RKT_create_ptr(app_window);
 
 /**
  * app_window containing a scene.
@@ -46,9 +46,9 @@ RKT_create__ptr(app_window);
  */
 class app_window : public std::enable_shared_from_this<app_window> { // TODO: m prefix // NAMING CONVENTION(S)  :~|
 public:
-    static app_window_ptr create(std::string wname, Vec2 size);
-    static app_window_ptr create(std::string wname, Vec2 size, bool fullscreen);
-    static app_window_ptr create(std::string wname, Vec2 size, bool fullscreen, bool hidpi);
+    static app_window_ptr create(std::string wname, vec2f size);
+    static app_window_ptr create(std::string wname, vec2f size, bool fullscreen);
+    static app_window_ptr create(std::string wname, vec2f size, bool fullscreen, bool hidpi);
     ~app_window();
     
     /**
@@ -85,7 +85,7 @@ public:
     /**
      * @return the size of the app_window
      */
-    Vec2 getSize();
+    vec2f getSize();
     
     /**
      * Starts the main Game-Loop (handle events,update,render, repeat until isRunning == false)
@@ -108,7 +108,7 @@ public:
     double screenScale();
     
 protected:
-    bool init(std::string wname, Vec2 size, bool fullscreen, bool hidpi);
+    bool init(std::string wname, vec2f size, bool fullscreen, bool hidpi);
 private:
     bool m_showNew = false;
     SDL_Window *m_sdlWindow = NULL;
@@ -121,7 +121,7 @@ private:
     void update();
     void render();
     
-    Vec3 m_accelData = Vec3Null();
+    vec3f m_accelData = Vec3Null();
     
     SceneTransition m_nextTransition;
     
