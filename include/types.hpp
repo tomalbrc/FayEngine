@@ -12,8 +12,10 @@
 #include <stdio.h>
 #include <math.h>
 #include <iostream>
+#include <iomanip>
 #include <vector>
 #include <memory>
+#include <sstream>
 #include "SDL.h"
 
 /**
@@ -62,7 +64,7 @@ inline const std::vector<std::string> explode(const std::string& s, const char& 
 #define RKT_create_FUNC(T) static std::shared_ptr<T> create() { std::shared_ptr<T> n(new T()); n->init(); return n; }
 
 /**
- * Usage: RKT_create_ptr(ClassName) ClassName_ptr;
+ * Usage: rkt_create_ptr(ClassName) ClassName_ptr;
  */
 #define rkt_create_shared_ptr(T) typedef std::shared_ptr<T> T ## _ptr // creates an std::shared_ptr only
 #define rkt_create_weak_ptr(T) typedef std::weak_ptr<T> T ## _weak_ptr // creates an std::weak_ptr only
@@ -83,7 +85,7 @@ inline void debug_log(const T& t)
 		std::stringstream ss;
 		ss << std::put_time(std::localtime(&in_time_t), "%Y-%m-%d %H:%M:%S");
 		return ss.str();
-	}
+	};
 	std::cout << "[rawket " << time_and_date() << "] " << t << std::endl;
 }
 

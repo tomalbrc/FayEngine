@@ -15,7 +15,7 @@
 RKT_NAMESPACE_BEGIN
 
 class jump_by_action;
-RKT_create_ptr(jump_by_action);
+rkt_create_ptr(jump_by_action);
 
 class jump_by_action: public action {
     float m_height;

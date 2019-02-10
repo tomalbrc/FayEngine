@@ -55,6 +55,8 @@ color4u label_node::getTextColor() {
 
 
 void label_node::renderText() {
+    using namespace std::literals::string_literals;
+    
     if (mFont == nullptr || mText.empty()) {
         setTexture(NULL);
         return;
@@ -72,7 +74,10 @@ void label_node::renderText() {
     this->setTexture(t);
     SDL_FreeSurface(s);
     
-    if (this->getTexture() == nullptr) RKTLog("label_node - Error: texture is empty After new render" << SDL_GetError());
+    if (this->getTexture() == nullptr) {
+        debug_log("label_node - Error: texture is empty After new render (SDL ERROR:)"s +
+                  std::string{SDL_GetError()});
+    }
 }
 
 

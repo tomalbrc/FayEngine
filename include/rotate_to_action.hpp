@@ -17,7 +17,7 @@
 RKT_NAMESPACE_BEGIN
 
 class rotate_to_action;
-RKT_create_shared__ptr(rotate_to_action);
+rkt_create_shared_ptr(rotate_to_action);
 
 /**
  * Rotates the target Nodes to x radians in y duration

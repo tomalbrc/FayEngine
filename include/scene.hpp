@@ -17,7 +17,7 @@
 RKT_NAMESPACE_BEGIN
 
 class scene;
-RKT_create_ptr(scene);
+rkt_create_ptr(scene);
 
 /**
  * scene Class

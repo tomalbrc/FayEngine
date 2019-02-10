@@ -19,7 +19,7 @@
 RKT_NAMESPACE_BEGIN
 
 class tiled_map2;
-RKT_create_ptr(tiled_map2);
+rkt_create_ptr(tiled_map2);
 typedef std::vector< rectangle > RectVector;
 
 /**

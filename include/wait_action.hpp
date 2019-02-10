@@ -17,7 +17,7 @@
 RKT_NAMESPACE_BEGIN
 
 class wait_action;
-RKT_create_shared__ptr(wait_action);
+rkt_create_shared_ptr(wait_action);
 
 /**
  * Waits for a specified time

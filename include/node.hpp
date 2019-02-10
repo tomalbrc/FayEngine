@@ -28,8 +28,8 @@ RKT_NAMESPACE_BEGIN
 
 class scene;
 class node;
-RKT_create_ptr(scene);
-RKT_create_ptr(node);
+rkt_create_ptr(scene);
+rkt_create_ptr(node);
 
 using node_vector = std::vector<node_ptr>;
 using action_map = std::map<std::string, action_ptr>;

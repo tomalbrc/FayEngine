@@ -19,7 +19,7 @@
 RKT_NAMESPACE_BEGIN
 
 class fade_action;
-RKT_create_shared__ptr(fade_action);
+rkt_create_shared_ptr(fade_action);
 
 /**
  * Fades the alpha value of a node to the desired value in a specified amount of time

@@ -37,7 +37,7 @@ inline SceneTransition SceneTransitionMake(double duration, color4u col, EasingF
 
 class scene;
 class app_window;
-RKT_create_ptr(app_window);
+rkt_create_ptr(app_window);
 
 /**
  * app_window containing a scene.

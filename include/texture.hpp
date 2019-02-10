@@ -19,7 +19,7 @@
 RKT_NAMESPACE_BEGIN
 
 class texture;
-RKT_create_ptr(texture);
+rkt_create_ptr(texture);
 
 /**
  * This class allows to easily create SDL textures from image files or create new blank textures with a specified size and color

@@ -18,7 +18,7 @@ RKT_NAMESPACE_BEGIN
 
 class node;
 class action;
-RKT_create_ptr(action);
+rkt_create_ptr(action);
 
 /**
  * Actions to alter properties of Nodes/Sprites, animated

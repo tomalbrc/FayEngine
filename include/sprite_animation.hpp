@@ -15,7 +15,7 @@
 RKT_NAMESPACE_BEGIN
 
 class sprite_animation_action;
-RKT_create_shared__ptr(sprite_animation_action);
+rkt_create_shared_ptr(sprite_animation_action);
 
 /**
  * Animates a Sequence of texture objects on the target sprite

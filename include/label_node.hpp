@@ -18,7 +18,7 @@
 RKT_NAMESPACE_BEGIN
 
 class label_node;
-RKT_create_ptr(label_node);
+rkt_create_ptr(label_node);
 
 /**
  * Display a string using an TTF font

@@ -18,7 +18,7 @@
 RKT_NAMESPACE_BEGIN
 
 class tiled_map;
-RKT_create_ptr(tiled_map);
+rkt_create_ptr(tiled_map);
 
 /**
  * Loads and Displays a tiled tmx map

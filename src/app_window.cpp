@@ -45,37 +45,38 @@ app_window_ptr app_window::create(std::string wname, vec2f size, bool fullscreen
 
 
 int EventFilter(void* userData, SDL_Event *event) {
-        app_window *win = (app_window* )userData;
-        
-        switch (event->type) {
-            case SDL_APP_WILLENTERBACKGROUND: {
-                RKTWindowBackgrounded = true;
-                RKTLog("Will enter background " << event->type);
-                if (win != NULL && win->getCurrentScene() != nullptr) win->getCurrentScene()->applicationWillEnterBackground();
-                return 0;
-                break;
-            }
-            case SDL_APP_WILLENTERFOREGROUND: {
-                RKTWindowBackgrounded = false;
-                RKTLog("Will enter foreground");
-                if (win != NULL && win->getCurrentScene() != nullptr) win->getCurrentScene()->applicationWillEnterForeground();
-                return 0;
-                break;
-            }
-            case SDL_APP_DIDENTERFOREGROUND: {
-                RKTWindowBackgrounded = false;
-                if (win != NULL && win->getCurrentScene() != nullptr) win->getCurrentScene()->applicationDidEnterForeground();
-                return 0;
-                break;
-            }
-            case SDL_APP_DIDENTERBACKGROUND: {
-                RKTWindowBackgrounded = true;
-                if (win != NULL && win->getCurrentScene() != nullptr) win->getCurrentScene()->applicationDidEnterBackground();
-                return 0;
-                break;
-            }
-            default: break;
+    using namespace std::literals::string_literals;
+    app_window *win = (app_window* )userData;
+    
+    switch (event->type) {
+        case SDL_APP_WILLENTERBACKGROUND: {
+            RKTWindowBackgrounded = true;
+            debug_log("Will enter background "s + std::to_string(event->type));
+            if (win != NULL && win->getCurrentScene() != nullptr) win->getCurrentScene()->applicationWillEnterBackground();
+            return 0;
+            break;
         }
+        case SDL_APP_WILLENTERFOREGROUND: {
+            RKTWindowBackgrounded = false;
+            debug_log("Will enter foreground");
+            if (win != NULL && win->getCurrentScene() != nullptr) win->getCurrentScene()->applicationWillEnterForeground();
+            return 0;
+            break;
+        }
+        case SDL_APP_DIDENTERFOREGROUND: {
+            RKTWindowBackgrounded = false;
+            if (win != NULL && win->getCurrentScene() != nullptr) win->getCurrentScene()->applicationDidEnterForeground();
+            return 0;
+            break;
+        }
+        case SDL_APP_DIDENTERBACKGROUND: {
+            RKTWindowBackgrounded = true;
+            if (win != NULL && win->getCurrentScene() != nullptr) win->getCurrentScene()->applicationDidEnterBackground();
+            return 0;
+            break;
+        }
+        default: break;
+    }
     return 1;
 }
 bool app_window::init(std::string wname, vec2f size, bool fullscreen, bool hidpi) {
@@ -89,7 +90,7 @@ bool app_window::init(std::string wname, vec2f size, bool fullscreen, bool hidpi
     if (fullscreen) flags |= SDL_WINDOW_FULLSCREEN_DESKTOP;
     m_sdlWindow = SDL_CreateWindow(wname.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, size.x, size.y, flags); // Create window with title, position & sitze
     if (m_sdlWindow == nullptr) {
-        RKTLog("SDL_CreateWindow Error: " << SDL_GetError());
+        debug_log("SDL_CreateWindow Error: "+std::string{SDL_GetError()});
         return false;
     }
     
@@ -155,20 +156,19 @@ void app_window::startLoop() {
         handleEvents();
         if (!RKTWindowBackgrounded) update(), render();
         /*
-        int frameTicks = SDL_GetTicks() - capTimer;
-        if (frameTicks < SCREEN_TICKS_PER_FRAME) {
-            SDL_Delay(SCREEN_TICKS_PER_FRAME - frameTicks);
-        }
-        
-        countedTicks.push_back(SDL_GetTicks() - capTimer);
-        if (countedTicks.size() >= 30) //
-            countedTicks.erase(std::remove(countedTicks.begin(), countedTicks.end(), countedTicks[0]), countedTicks.end());
-        
-        int avgFPS = 0;
-        for (int n : countedTicks) avgFPS += n;
-        framerate = 1000.0/(avgFPS/(double)countedTicks.size());
-        */
-        
+         int frameTicks = SDL_GetTicks() - capTimer;
+         if (frameTicks < SCREEN_TICKS_PER_FRAME) {
+         SDL_Delay(SCREEN_TICKS_PER_FRAME - frameTicks);
+         }
+         
+         countedTicks.push_back(SDL_GetTicks() - capTimer);
+         if (countedTicks.size() >= 30) //
+         countedTicks.erase(std::remove(countedTicks.begin(), countedTicks.end(), countedTicks[0]), countedTicks.end());
+         
+         int avgFPS = 0;
+         for (int n : countedTicks) avgFPS += n;
+         framerate = 1000.0/(avgFPS/(double)countedTicks.size());
+         */
         
         if (m_currentScene == nullptr && m_newScene != nullptr) {
             m_currentScene = NULL;
@@ -215,12 +215,14 @@ void app_window::startLoop() {
 
 
 void app_window::handleEvents() {
+    using namespace std::literals::string_literals;
+    
     SDL_Event event;
     while(SDL_PollEvent(&event)) {
         switch (event.type) {
             case SDL_QUIT:
                 m_running = false;
-                RKTLog("Event SDL_QUIT... Bye!");
+                debug_log("Event SDL_QUIT... Bye!");
                 break;
             case SDL_KEYDOWN:
                 if (m_currentScene != nullptr) m_currentScene->keyDown(KeyCode(event.key.keysym.sym));
@@ -256,9 +258,9 @@ void app_window::handleEvents() {
                 if (m_currentScene != nullptr) m_currentScene->touchEnded(event.tfinger, vec2f_make(event.tfinger.x, event.tfinger.y)*getSize());
                 break;
             }
-            
+                
             case SDL_CONTROLLERDEVICEADDED:
-                RKTLog("CONTROLLER DEVICE ADDED");
+                debug_log("CONTROLLER DEVICE ADDED");
                 SDL_GameControllerOpen(event.cdevice.which);
                 break;
             case SDL_CONTROLLERBUTTONDOWN: {
@@ -274,11 +276,18 @@ void app_window::handleEvents() {
                 break;
             }
             case SDL_WINDOWEVENT: {
-                if (event.window.event == SDL_WINDOWEVENT_SIZE_CHANGED && m_currentScene != nullptr) m_currentScene->orientationChange(DeviceOrientationPortrait), RKTLog("app_window data: "<<event.window.data1<<", "<<event.window.data2);
+                if (event.window.event == SDL_WINDOWEVENT_SIZE_CHANGED && m_currentScene != nullptr)
+                {
+                    m_currentScene->orientationChange(DeviceOrientationPortrait);
+                    debug_log("app_window data: "s +
+                              std::to_string(event.window.data1) +
+                              ", "s +
+                              std::to_string(event.window.data2));
+                }
                 break;
             }
-            
-            
+                
+                
             default: break;
         }
     }
@@ -314,9 +323,10 @@ double app_window::screenScale() {
         
         m_screenScale = w/double(x);
     }
-
+    
     return m_screenScale;
 }
 
 
 RKT_NAMESPACE_END
+

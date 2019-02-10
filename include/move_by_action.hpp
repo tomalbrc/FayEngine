@@ -22,7 +22,7 @@
 RKT_NAMESPACE_BEGIN
 
 class move_by_action;
-RKT_create_shared__ptr(move_by_action);
+rkt_create_shared_ptr(move_by_action);
 
 /**
  * Moves the target node by a specified distance in a specified duration

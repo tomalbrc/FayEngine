@@ -17,7 +17,7 @@
 RKT_NAMESPACE_BEGIN
 
 class sequence_action;
-RKT_create_shared__ptr(sequence_action);
+rkt_create_shared_ptr(sequence_action);
 
 /**
  * Performs a sequence of actions, one-by-one

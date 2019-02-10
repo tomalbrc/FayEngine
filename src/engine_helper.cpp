@@ -18,10 +18,10 @@
 RKT_NAMESPACE_BEGIN
 
 engine_helper::engine_helper() {
-    RKTLog("engine_helper::engine_helper()");
+    debug_log("engine_helper::engine_helper()");
 }
 engine_helper::~engine_helper() {
-    RKTLog("engine_helper::~engine_helper");
+    debug_log("engine_helper::~engine_helper");
     SDL_JoystickClose(0);
     cleanTextureCache();
     
@@ -122,14 +122,14 @@ texture_ptr engine_helper::getTextureForKey(std::string key) {
 }
 void engine_helper::cleanTextureCache() {
     for(auto&& iterator = m_textureCache.begin(); iterator != m_textureCache.end();) {
-        RKTLog("Cleaning up texture named: "<<iterator->first<<"...");
+        debug_log("Cleaning up texture named: "+iterator->first+"...");
         iterator = m_textureCache.erase(iterator);
     }
 }
 
 void engine_helper::removeUnusedTextures() {
     for(auto&& iterator = m_textureCache.begin(); iterator != m_textureCache.end();) {
-        if (iterator->second.use_count() == 1) RKTLog("Removed unused texture named: "<<iterator->first), iterator = m_textureCache.erase(iterator);
+        if (iterator->second.use_count() == 1) debug_log("Removed unused texture named: "+iterator->first), iterator = m_textureCache.erase(iterator);
         else ++iterator;
     }
 }
@@ -157,7 +157,7 @@ FilteringMode engine_helper::getGlobalFilteringMode() {
 
 void engine_helper::registerApp(std::string organizationName, std::string appName) {
     m_basePath = SDL_GetPrefPath(organizationName.c_str(), appName.c_str());
-    RKTLog("Registered Application: "<<appName<<", pref base path is: "<<m_basePath);
+    debug_log("Registered Application: " + appName + ", pref base path is: " + m_basePath);
 }
 
 

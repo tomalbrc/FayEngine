@@ -19,7 +19,7 @@
 RKT_NAMESPACE_BEGIN
 
 class sprite;
-RKT_create_ptr(sprite);
+rkt_create_ptr(sprite);
 
 /**
  * sprite Class inherits from node Class

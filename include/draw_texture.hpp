@@ -15,7 +15,7 @@
 RKT_NAMESPACE_BEGIN
 
 class draw_texture;
-RKT_create_ptr(draw_texture);
+rkt_create_ptr(draw_texture);
 
 /**
  * texture to draw! yea

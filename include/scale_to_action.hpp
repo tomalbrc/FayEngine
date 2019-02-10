@@ -17,7 +17,7 @@
 RKT_NAMESPACE_BEGIN
 
 class scale_to_action;
-RKT_create_shared__ptr(scale_to_action);
+rkt_create_shared_ptr(scale_to_action);
 
 /**
  * Scales the target Nodes by x in y duration

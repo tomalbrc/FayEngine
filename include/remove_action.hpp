@@ -21,7 +21,7 @@
 RKT_NAMESPACE_BEGIN
 
 class remove_action;
-RKT_create_shared__ptr(remove_action);
+rkt_create_shared_ptr(remove_action);
 
 /**
  * Removes the target node from parent after a specified delay or immediately

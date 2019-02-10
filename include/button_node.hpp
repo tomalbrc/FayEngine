@@ -22,7 +22,7 @@ RKT_NAMESPACE_BEGIN
 
 class button_node;
 #define ButtonNodeLambda [this](button_node *sender)
-RKT_create_ptr(button_node);
+rkt_create_ptr(button_node);
 
 /**
  * Clickable label_node

@@ -75,9 +75,9 @@ void tiled_map::drawTiles() {
     vec2f imageSize = vec2f_make(tileset.image.width, tileset.image.height);
     int tileSpacing = tileset.tileSpacingInImage;
     
-    RKTLog("First GID: " << tileset.firstgid);
-    RKTLog("Image Source: " << directory + tileset.image.source);
-    RKTLog("tile-size: " << imageTileSize.x << " y:" << imageTileSize.y);
+    debug_log("First GID: " + std::to_string(tileset.firstgid));
+    debug_log("Image Source: " + directory + tileset.image.source);
+    debug_log("tile-size: " + std::to_string(imageTileSize.x) + " y:" + std::to_string(imageTileSize.y));
     
     for (auto&& tileLayer : map.layerCollection) {
         
