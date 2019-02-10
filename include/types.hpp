@@ -64,14 +64,28 @@ inline const std::vector<std::string> explode(const std::string& s, const char& 
 /**
  * Usage: RKT_create_ptr(ClassName) ClassName_ptr;
  */
-#define RKT_create_shared__ptr(T) typedef std::shared_ptr<T> T ## _ptr // creates an std::shared_ptr only
-#define RKT_create_weak_ptr(T) typedef std::weak_ptr<T> T ## _weak_ptr // creates an std::weak_ptr only
-#define RKT_create_ptr(T) RKT_create_shared__ptr(T); RKT_create_weak_ptr(T) // creates an std::weak_ptr AND std::shared_ptr
+#define rkt_create_shared_ptr(T) typedef std::shared_ptr<T> T ## _ptr // creates an std::shared_ptr only
+#define rkt_create_weak_ptr(T) typedef std::weak_ptr<T> T ## _weak_ptr // creates an std::weak_ptr only
+#define rkt_create_ptr(T) rkt_create_shared_ptr(T); rkt_create_weak_ptr(T) // creates an std::weak_ptr AND std::shared_ptr
 
 /**
  * Logging
+ * T needs operator<<
  */
-#define RKTLog(x)  std::cout << "[rawket] " << x << std::endl // Log macro
+template <class T>
+inline void debug_log(const T& t)
+{
+	auto time_and_date = []() -> std::string
+	{
+		auto now = std::chrono::system_clock::now();
+		auto in_time_t = std::chrono::system_clock::to_time_t(now);
+
+		std::stringstream ss;
+		ss << std::put_time(std::localtime(&in_time_t), "%Y-%m-%d %H:%M:%S");
+		return ss.str();
+	}
+	std::cout << "[rawket " << time_and_date() << "] " << t << std::endl;
+}
 
 /**
  * Some deg to rad calculation and vice versa
