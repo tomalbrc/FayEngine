@@ -26,4 +26,5 @@ script:
 - mkdir build
 - cd build 
 - cmake .. 
-- make; fi
+- make -j8
+- fi
