@@ -4,25 +4,25 @@ dist: xenial
 
 # sdl2
 before_install:
- - sudo add-apt-repository -y ppa:team-xbmc/ppa
- - sudo apt-get update -qq
- - sudo apt-get install -y libsdl2-dev libsdl2-ttf-dev libsdl2-image-dev
+- sudo add-apt-repository -y ppa:team-xbmc/ppa
+- sudo apt-get update -qq
+- sudo apt-get install -y libsdl2-dev libsdl2-ttf-dev libsdl2-image-dev
 
 # safelist
 branches:
   only:
-   - master
-   - stable
+  - master
+  - stable
 
 
 os:
- - linux
+- linux
 
 # compilers to test against
 compiler: 
- - clang
+- clang
 
 
 script:
-- if [ $TRAVIS_OS_NAME == linux ]; then mkdir build && cmake .. && make;
+if [ $TRAVIS_OS_NAME == linux ]; then mkdir build && cmake .. && make;
 fi
