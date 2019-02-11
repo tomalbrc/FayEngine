@@ -16,6 +16,7 @@
 #include <vector>
 #include <memory>
 #include <sstream>
+#include <chrono>
 #include "SDL.h"
 
 /**
