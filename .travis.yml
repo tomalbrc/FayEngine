@@ -26,5 +26,5 @@ script:
 - mkdir build
 - cd build 
 - cmake .. 
-- CXXFLAGS=-std=c++14 make -j8
+- CXXFLAGS=-std=c++11 make -j8
 - fi
