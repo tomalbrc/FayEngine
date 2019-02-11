@@ -1,5 +1,7 @@
 # rawket documentation
 
+[![Build Status](https://travis-ci.org/tomalbrc/rawket-engine.svg?branch=master)](https://travis-ci.org/tomalbrc/rawket-engine)
+
 * [Documentation](https://defense2000x.com/rawket/) for rawket
 
 * This Project uses CMake to generate project files / build the library.
