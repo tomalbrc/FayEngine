@@ -19,11 +19,10 @@ os:
 - linux
 
 # compilers to test against
-compiler: clang
+compiler: clang++
 
 script: 
 - if [ $TRAVIS_OS_NAME == linux ]; then 
-- export CXX=clang++-5.0
 - mkdir build
 - cd build 
 - cmake .. 
