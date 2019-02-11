@@ -47,7 +47,7 @@ inline const std::vector<std::string> explode(const std::string& s, const char& 
 #ifdef __APPLE__
 #define RKTLocalizedString(stringDescriptor, alternative) NSLocalizedString
 #else
-#define RKTLocalizedString(x,x)
+#define RKTLocalizedString(x,y)
 #endif
 
 
