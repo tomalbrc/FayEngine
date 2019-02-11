@@ -8,8 +8,6 @@
 
 #include "engine_helper.hpp"
 #include "SDL_ttf.h"
-#include "SDL_mixer.h"
-#include "SDL_net.h"
 #include "texture.hpp"
 #include "types.hpp" 
 #include <fstream>
