@@ -1,19 +1,19 @@
-language: cpp
+language: generic
 
 dist: trusty
 sudo: required
 
 matrix:
-    include:
-    - os: linux
-      compiler: gcc
-      env: GCC_VERSION=7
-        - CC=gcc-7
-        - CXX=g++-7
-      addons:
-        apt:
-          sources: ['ubuntu-toolchain-r-test']
-          packages: ['g++-7']
+	include:
+		- os: linux
+  	  compiler: gcc
+  		env: GCC_VERSION=7
+  	 	- CC=gcc-7
+  		- CXX=g++-7
+  addons:
+   apt:
+     sources: ['ubuntu-toolchain-r-test']
+     packages: ['g++-7', 'libsdl2-dev', 'libsdl2-image-dev', 'libsdl2-ttf-dev']
 
     - os: linux
       compiler: gcc
@@ -23,7 +23,7 @@ matrix:
       addons:
         apt:
           sources: ['ubuntu-toolchain-r-test']
-          packages: ['g++-6']
+          packages: ['g++-6', 'libsdl2-dev', 'libsdl2-image-dev', 'libsdl2-ttf-dev']
 
     - os: linux
       compiler: gcc
@@ -33,7 +33,7 @@ matrix:
       addons:
         apt:
           sources: ['ubuntu-toolchain-r-test']
-          packages: ['g++-5']
+          packages: ['g++-5', 'libsdl2-dev', 'libsdl2-image-dev', 'libsdl2-ttf-dev']
 
     - os: linux
       compiler: clang
@@ -43,7 +43,7 @@ matrix:
       addons:
         apt:
           sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-trusty-5.0']
-          packages: ['clang-5.0', 'g++-6']
+          packages: ['clang-5.0', 'g++-6', 'libsdl2-dev', 'libsdl2-image-dev', 'libsdl2-ttf-dev']
 
     - os: linux
       compiler: clang
@@ -53,7 +53,7 @@ matrix:
       addons:
         apt:
           sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-trusty-4.0']
-          packages: ['clang-4.0', 'g++-6']
+          packages: ['clang-4.0', 'g++-6', 'libsdl2-dev', 'libsdl2-image-dev', 'libsdl2-ttf-dev']
 
     - os: linux
       compiler: clang
@@ -63,7 +63,7 @@ matrix:
       addons:
         apt:
           sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-trusty-3.9']
-          packages: ['clang-3.9', 'g++-6']
+          packages: ['clang-3.9', 'g++-6', 'libsdl2-dev', 'libsdl2-image-dev', 'libsdl2-ttf-dev']
 
     - os: linux
       compiler: clang
@@ -73,7 +73,7 @@ matrix:
       addons:
         apt:
           sources: ['ubuntu-toolchain-r-test', 'llvm-toolchain-trusty-3.8']
-          packages: ['clang-3.8', 'g++-6']
+          packages: ['clang-3.8', 'g++-6', 'libsdl2-dev', 'libsdl2-image-dev', 'libsdl2-ttf-dev']
 
 before_install:
   - wget https://raw.githubusercontent.com/onqtam/doctest/master/doctest/doctest.h
@@ -96,9 +96,9 @@ before_install:
 
 install:
   - mkdir -p build && cd build
-  - cmake ..
+  - cmake .. -DUNITTEST=ON
 
 script:
   - which $CXX
   - $CXX --version
-  - cmake --build . --config Release -- -j4
+  - cmake --build . --target unittest --config Release -- -j4
