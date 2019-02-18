@@ -39,7 +39,7 @@ public:
     /**
      * Sets the background color4u for the scene
      *
-     * @param new background color4u
+	 * @param backgroundColor new background color4u
      */
     void setBackgroundColor(color4u backgroundColor);
     
@@ -66,29 +66,30 @@ public:
     
     /**
      * Re-implement the render function from node
+	 *
+	 * TODO: Documentation is lacking
      */
-    virtual void render();
+    virtual void render(SDL_Renderer *renderer = nullptr) override;
     
     /**
      * Set if the cursor should be shown or not
      *
-     * @param flag to set wether to show or hide the cursor
+     * @param show	flag to set wether to show or hide the cursor
+	 *
+	 * TODO: Documentation is lacking
      */
     virtual void setShowCursor(bool show);
-    
-    
+	
     /**
      * Re-implementation of node::update()
      */
-    virtual void update();
-    
-    
+    virtual void update() override;
+	
     /**
      * Mobile device related. Gets called when the device orientation is changed.
      * Check types.hpp for supported 'DeviceOrientation's
      */
     virtual void orientationChange(DeviceOrientation newOrientation);
-    
     
     /**
      * iOS, Android and WinRT related

@@ -16,7 +16,6 @@
 #include <vector>
 #include <memory>
 #include <sstream>
-#include <chrono>
 #include "SDL.h"
 
 /**
@@ -48,7 +47,7 @@ inline const std::vector<std::string> explode(const std::string& s, const char& 
 #ifdef __APPLE__
 #define RKTLocalizedString(stringDescriptor, alternative) NSLocalizedString
 #else
-#define RKTLocalizedString(x,y)
+#define RKTLocalizedString(x,x)
 #endif
 
 

@@ -58,7 +58,7 @@ void scene::update() {
     node::update();
 }
 
-void scene::render() {
+void scene::render(SDL_Renderer *renderer) {
     SDL_RenderClear(getWindow()->getRenderer());
     SDL_SetRenderDrawColor(getWindow()->getRenderer(), getBackgroundColor().r, getBackgroundColor().g, getBackgroundColor().b, getBackgroundColor().a);
     node::render(getWindow()->getRenderer());
