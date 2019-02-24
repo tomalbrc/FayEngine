@@ -42,16 +42,6 @@ inline const std::vector<std::string> explode(const std::string& s, const char& 
 }
 
 /**
- * Localization. Available on iOS/macOS
- */
-#ifdef __APPLE__
-#define RKTLocalizedString(stringDescriptor, alternative) NSLocalizedString
-#else
-#define RKTLocalizedString(x,x)
-#endif
-
-
-/**
  * Namespace macro, to fix Xcode's annoying auto indentation
  */
 #define RKT_NAMESPACE_BEGIN namespace rkt {
@@ -61,7 +51,7 @@ inline const std::vector<std::string> explode(const std::string& s, const char& 
  * A static create function which calls init on the object.
  * Mainly for the use in scene subclasses
  */
-#define RKT_create_FUNC(T) static std::shared_ptr<T> create() { std::shared_ptr<T> n(new T()); n->init(); return n; }
+#define rkt_create_func(T) static std::shared_ptr<T> create() { std::shared_ptr<T> n(new T()); n->init(); return n; }
 
 /**
  * Usage: rkt_create_ptr(ClassName) ClassName_ptr;

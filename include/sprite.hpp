@@ -67,7 +67,7 @@ public:
     /**
      * Gives the sprite a new texture 
      *
-     * @param new texture
+     * @param tex 	new texture
      */
     virtual void setTexture(texture_ptr tex);
     
@@ -87,7 +87,7 @@ public:
      * Sets the blend mode for the sprite.
      * See types.hpp for details
      *
-     * @param new blend mode
+     * @param mode	the new blend mode
      */
     virtual void setBlendMode(BlendMode mode);
     
@@ -114,7 +114,7 @@ public:
      * Sets the color to use for color mod using Formula (via SDL):
      * srcC = srcC * (color / 255)
      *
-     * @param   color4u   Alpha Channel is ignored
+     * @param color 	Alpha Channel is ignored
      */
     virtual void setColor(color4u color);
     
